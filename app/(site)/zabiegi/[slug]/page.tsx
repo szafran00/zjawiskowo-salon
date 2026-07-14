@@ -2,24 +2,12 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { PortableText } from '@portabletext/react'
 import { sanityFetch } from '@/sanity/lib/fetch'
-import { TREATMENT_QUERY, TREATMENT_SLUGS_QUERY } from '@/sanity/lib/queries'
+import { TREATMENT_QUERY } from '@/sanity/lib/queries'
 import type { Treatment } from '@/app/lib/types'
 import { fallbackTreatments, STOCK } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
 
 /* eslint-disable @next/next/no-img-element */
-
-export const revalidate = 60
-
-export async function generateStaticParams() {
-  try {
-    const slugs = await sanityFetch<{ slug: string }[]>(TREATMENT_SLUGS_QUERY)
-    if (slugs && slugs.length) return slugs.map((s) => ({ slug: s.slug }))
-  } catch {
-    // fall through to fallback
-  }
-  return fallbackTreatments.map((t) => ({ slug: t.slug as string }))
-}
 
 export default async function TreatmentPage({
   params,

@@ -4,7 +4,6 @@ import type { Settings } from '@/app/lib/types'
 import { fallbackSettings } from '@/app/lib/fallback'
 import ContactForm from '@/app/components/ContactForm'
 
-export const revalidate = 60
 
 export const metadata = {
   title: 'Kontakt — ZJAWISKOWO Krzeszowice',

@@ -6,7 +6,6 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import RevealInit from '@/app/components/RevealInit'
 
-export const revalidate = 60
 
 export default async function SiteLayout({
   children,

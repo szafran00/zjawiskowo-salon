@@ -7,7 +7,6 @@ import { imgUrl } from '@/app/lib/img'
 
 /* eslint-disable @next/next/no-img-element */
 
-export const revalidate = 60
 
 export const metadata = {
   title: 'Zabiegi — ZJAWISKOWO Krzeszowice',

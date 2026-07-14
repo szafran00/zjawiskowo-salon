@@ -4,7 +4,6 @@ import { PRICELIST_QUERY } from '@/sanity/lib/queries'
 import type { Pricelist } from '@/app/lib/types'
 import { fallbackPricelist } from '@/app/lib/fallback'
 
-export const revalidate = 60
 
 export const metadata = {
   title: 'Cennik — ZJAWISKOWO Krzeszowice',

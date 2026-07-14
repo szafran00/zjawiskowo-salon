@@ -16,7 +16,6 @@ import Faq from '@/app/components/Faq'
 
 /* eslint-disable @next/next/no-img-element */
 
-export const revalidate = 60
 
 export default async function HomePage() {
   let data: HomeData = {}
