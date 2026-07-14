@@ -36,5 +36,11 @@ Zmienne w `.env.local` (projectId/dataset są też domyślne w kodzie, więc bui
 - [ ] Podpiąć domenę zjawiskowo.com.pl.
 - [ ] Zaprosić Martę do projektu Sanity (konto + rola editor).
 
+## Testy
+`npm test` (plik `tests/smoke.mjs`) — przy działającym serwerze (`npm run start` lub `npm run dev`). Sprawdza: integralność danych w Sanity, wszystkie trasy (200), 404 dla nieistniejącego zabiegu, treść stron oraz spójność Sanity↔strona (promo, zabiegi, każda pozycja cennika). 49 asercji.
+
+## Świeżość danych (CMS)
+Strony treści renderują się dynamicznie z `cache: 'no-store'` — po **Publish** w panelu zmiana jest widoczna od razu (bez laga). Kompromis: każde wejście odpytuje Sanity (dla salonu ruch znikomy, więc OK). Jeśli w przyszłości ruch wzrośnie, można wrócić do cache + **webhook Sanity → on-demand revalidation** (`revalidateTag`), żeby mieć i szybkość, i natychmiastowe aktualizacje.
+
 ## Makieta poglądowa (3 warianty)
 Statyczny podgląd dla klientki: https://szafran00.github.io/zjawiskowo-salon/ (folder `docs/`).
