@@ -2,27 +2,33 @@ import { defineType, defineField } from 'sanity'
 
 export const service = defineType({
   name: 'service',
-  title: 'Usługa (filar)',
+  title: 'Zabieg',
   type: 'document',
   fields: [
     defineField({
-      name: 'kicker',
-      title: 'Nadtytuł (mała etykieta)',
-      type: 'string',
-      validation: (r) => r.required(),
-    }),
-    defineField({
       name: 'title',
-      title: 'Tytuł sekcji',
+      title: 'Nazwa zabiegu',
       type: 'string',
       validation: (r) => r.required(),
     }),
     defineField({
-      name: 'anchor',
-      title: 'Kotwica (do menu)',
+      name: 'kicker',
+      title: 'Nadtytuł / kategoria',
+      type: 'string',
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Adres podstrony (slug)',
       type: 'slug',
-      options: { source: 'kicker' },
-      description: 'Np. „laser" albo „twarz" — używane w linkach menu.',
+      options: { source: 'title' },
+      validation: (r) => r.required(),
+      description: 'Np. „laser" → /zabiegi/laser',
+    }),
+    defineField({
+      name: 'excerpt',
+      title: 'Krótki opis (na kartę)',
+      type: 'text',
+      rows: 2,
     }),
     defineField({
       name: 'image',
@@ -38,13 +44,13 @@ export const service = defineType({
     }),
     defineField({
       name: 'description',
-      title: 'Pełny opis (opcjonalny)',
+      title: 'Pełny opis',
       type: 'array',
       of: [{ type: 'block' }],
     }),
     defineField({
-      name: 'reverse',
-      title: 'Zdjęcie po prawej stronie',
+      name: 'featured',
+      title: 'Wyróżniony na stronie głównej',
       type: 'boolean',
       initialValue: false,
     }),
@@ -65,6 +71,6 @@ export const service = defineType({
     { title: 'Kolejność', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'title', subtitle: 'kicker' },
+    select: { title: 'title', subtitle: 'kicker', media: 'image' },
   },
 })

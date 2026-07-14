@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function RevealInit() {
+  const pathname = usePathname()
   useEffect(() => {
     document.documentElement.classList.add('reveal-ready')
     const io = new IntersectionObserver(
@@ -16,9 +18,14 @@ export default function RevealInit() {
       },
       { threshold: 0.12 }
     )
-    const els = document.querySelectorAll('.reveal:not(.in)')
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [])
+    // let the new route paint before observing
+    const id = window.setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.in)').forEach((el) => io.observe(el))
+    }, 40)
+    return () => {
+      window.clearTimeout(id)
+      io.disconnect()
+    }
+  }, [pathname])
   return null
 }

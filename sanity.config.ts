@@ -25,8 +25,16 @@ export default defineConfig({
               .title('Ustawienia salonu')
               .id('siteSettings')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.listItem()
+              .title('O salonie')
+              .id('aboutPage')
+              .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+            S.listItem()
+              .title('Cennik')
+              .id('pricelist')
+              .child(S.document().schemaType('pricelist').documentId('pricelist')),
             S.divider(),
-            S.documentTypeListItem('service').title('Usługi (filary)'),
+            S.documentTypeListItem('service').title('Zabiegi'),
             S.documentTypeListItem('trustBadge').title('Odznaki zaufania'),
             S.documentTypeListItem('review').title('Opinie'),
             S.documentTypeListItem('faqItem').title('FAQ'),

@@ -1,6 +1,7 @@
 import type { Image } from 'sanity'
 
 export type SanityImage = Image & { alt?: string }
+export type PortableBlock = { _type: string; [key: string]: unknown }
 
 export interface Settings {
   salonName?: string
@@ -24,15 +25,17 @@ export interface Settings {
   heroSlides?: SanityImage[]
 }
 
-export interface Service {
-  kicker?: string
+export interface Treatment {
   title?: string
-  anchor?: string
+  kicker?: string
+  slug?: string
+  excerpt?: string
   image?: SanityImage
   atuty?: string[]
-  description?: unknown[]
-  reverse?: boolean
+  description?: PortableBlock[]
+  featured?: boolean
   ctaLabel?: string
+  order?: number
 }
 
 export interface Review {
@@ -51,9 +54,32 @@ export interface GalleryImg {
   caption?: string
 }
 
+export interface About {
+  heading?: string
+  lead?: string
+  body?: PortableBlock[]
+  image?: SanityImage
+}
+
+export interface PriceItem {
+  name?: string
+  price?: string
+  note?: string
+}
+
+export interface PriceGroup {
+  title?: string
+  items?: PriceItem[]
+}
+
+export interface Pricelist {
+  intro?: string
+  groups?: PriceGroup[]
+}
+
 export interface HomeData {
   settings?: Settings | null
-  services?: Service[]
+  treatments?: Treatment[]
   badges?: { text: string }[]
   reviews?: Review[]
   faqs?: Faq[]

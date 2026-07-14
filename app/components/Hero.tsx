@@ -1,23 +1,36 @@
+import Link from 'next/link'
 import { imgUrl } from '../lib/img'
 import { STOCK } from '../lib/fallback'
-import type { Settings } from '../lib/types'
+import type { Settings, Treatment } from '../lib/types'
 
 /* eslint-disable @next/next/no-img-element */
-export default function Hero({ s }: { s: Settings }) {
+export default function Hero({
+  s,
+  featured,
+}: {
+  s: Settings
+  featured: Treatment[]
+}) {
   const theme = s.theme || 'gold'
-  const face = imgUrl(s.heroFaceImage, STOCK.face)
-  const laser = imgUrl(s.heroLaserImage, STOCK.laser)
-  const main = imgUrl(s.heroMainImage, STOCK.main, 1600)
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
   const cta = `Umów się: ${s.phone}`
+
+  const twarz = featured.find((t) => t.slug === 'twarz') || featured[1] || featured[0]
+  const laser = featured.find((t) => t.slug === 'laser') || featured[0]
+
+  const faceImg = imgUrl(twarz?.image || s.heroFaceImage, STOCK.face)
+  const laserImg = imgUrl(laser?.image || s.heroLaserImage, STOCK.laser)
+  const mainImg = imgUrl(s.heroMainImage, STOCK.main, 1600)
+  const twarzHref = `/zabiegi/${twarz?.slug || 'twarz'}`
+  const laserHref = `/zabiegi/${laser?.slug || 'laser'}`
+  const twarzCap = twarz?.kicker || 'Kosmetyka twarzy'
+  const laserCap = laser?.kicker || 'Depilacja laserowa'
 
   if (theme === 'lavender') {
     const fallbackSlides = [STOCK.slide1, STOCK.slide2, STOCK.slide3]
     const slides =
       s.heroSlides && s.heroSlides.length
-        ? s.heroSlides
-            .slice(0, 3)
-            .map((im, i) => imgUrl(im, fallbackSlides[i % 3], 1400))
+        ? s.heroSlides.slice(0, 3).map((im, i) => imgUrl(im, fallbackSlides[i % 3], 1400))
         : fallbackSlides
     return (
       <section className="hero hero-b">
@@ -39,12 +52,14 @@ export default function Hero({ s }: { s: Settings }) {
               {cta}
             </a>
             <div className="pillar-chips">
-              <a href="#twarz" className="chip">
-                <b></b>Kosmetyka twarzy
-              </a>
-              <a href="#laser" className="chip">
-                <b></b>Depilacja laserowa
-              </a>
+              <Link href={twarzHref} className="chip">
+                <b></b>
+                {twarzCap}
+              </Link>
+              <Link href={laserHref} className="chip">
+                <b></b>
+                {laserCap}
+              </Link>
             </div>
           </div>
         </div>
@@ -57,7 +72,7 @@ export default function Hero({ s }: { s: Settings }) {
       <section className="hero hero-c">
         <div className="wrap">
           <div className="ph hero-c-img">
-            <img src={main} alt={s.salonName || 'Salon'} />
+            <img src={mainImg} alt={s.salonName || 'Salon'} />
           </div>
           <div className="hero-c-body">
             <p className="kicker">{s.heroKicker}</p>
@@ -68,18 +83,18 @@ export default function Hero({ s }: { s: Settings }) {
             </a>
           </div>
           <div className="hero-c-tiles">
-            <a href="#twarz" className="svc-tile">
+            <Link href={twarzHref} className="svc-tile">
               <div className="ph">
-                <img src={face} alt="Kosmetyka twarzy" />
+                <img src={faceImg} alt={twarzCap} />
               </div>
-              <div className="tile-cap">Kosmetyka twarzy</div>
-            </a>
-            <a href="#laser" className="svc-tile">
+              <div className="tile-cap">{twarzCap}</div>
+            </Link>
+            <Link href={laserHref} className="svc-tile">
               <div className="ph">
-                <img src={laser} alt="Depilacja laserowa" />
+                <img src={laserImg} alt={laserCap} />
               </div>
-              <div className="tile-cap">Depilacja laserowa</div>
-            </a>
+              <div className="tile-cap">{laserCap}</div>
+            </Link>
           </div>
         </div>
       </section>
@@ -89,12 +104,12 @@ export default function Hero({ s }: { s: Settings }) {
   // gold (default)
   return (
     <section className="hero hero-a">
-      <a href="#twarz" className="hero-tile">
+      <Link href={twarzHref} className="hero-tile">
         <div className="ph">
-          <img src={face} alt="Kosmetyka twarzy" />
+          <img src={faceImg} alt={twarzCap} />
         </div>
-        <div className="tile-cap">Kosmetyka twarzy</div>
-      </a>
+        <div className="tile-cap">{twarzCap}</div>
+      </Link>
       <div className="hero-center">
         <p className="kicker">{s.heroKicker}</p>
         <h1 className="h1">{s.tagline}</h1>
@@ -103,12 +118,12 @@ export default function Hero({ s }: { s: Settings }) {
           {cta}
         </a>
       </div>
-      <a href="#laser" className="hero-tile">
+      <Link href={laserHref} className="hero-tile">
         <div className="ph">
-          <img src={laser} alt="Depilacja laserowa" />
+          <img src={laserImg} alt={laserCap} />
         </div>
-        <div className="tile-cap">Depilacja laserowa</div>
-      </a>
+        <div className="tile-cap">{laserCap}</div>
+      </Link>
     </section>
   )
 }

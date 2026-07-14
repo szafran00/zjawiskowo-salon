@@ -1,14 +1,15 @@
 'use client'
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 const LINKS: [string, string][] = [
-  ['#start', 'Start'],
-  ['#laser', 'Depilacja laserowa'],
-  ['#twarz', 'Kosmetyka twarzy'],
-  ['#opinie', 'Opinie'],
-  ['#faq', 'FAQ'],
-  ['#kontakt', 'Kontakt'],
+  ['/', 'Strona główna'],
+  ['/o-salonie', 'O salonie'],
+  ['/zabiegi', 'Zabiegi'],
+  ['/cennik', 'Cennik'],
+  ['/kontakt', 'Kontakt'],
 ]
 
 export default function Header({
@@ -19,18 +20,26 @@ export default function Header({
   salonName: string
 }) {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
   const tel = 'tel:' + phone.replace(/\s/g, '')
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
   return (
-    <header className="hdr" id="start">
+    <header className="hdr">
       <div className="wrap hdr-in">
-        <a href="#start" className="logo" onClick={() => setOpen(false)}>
+        <Link href="/" className="logo" onClick={() => setOpen(false)}>
           {salonName}
-        </a>
+        </Link>
         <nav className={`nav ${open ? 'open' : ''}`}>
           {LINKS.map(([href, label]) => (
-            <a key={href} href={href} onClick={() => setOpen(false)}>
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className={isActive(href) ? 'active' : undefined}
+            >
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="hdr-right">
