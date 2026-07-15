@@ -63,7 +63,11 @@ export default async function KontaktPage() {
               </a>
             </div>
           </div>
-          <ContactForm />
+          <ContactForm
+            endpoint={s.formEndpoint}
+            email={s.contactEmail}
+            phone={s.phone}
+          />
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import { groq } from 'next-sanity'
 const settingsProjection = `{
   salonName, theme, heroKicker, tagline, heroLead, phone,
   showPromo, promoText, address, hours, facebookUrl, instagramUrl,
-  googleMapsEmbedUrl, domain, footerNote,
+  googleMapsEmbedUrl, contactEmail, formEndpoint, domain, footerNote,
   heroFaceImage, heroLaserImage, heroMainImage, heroSlides
 }`
 

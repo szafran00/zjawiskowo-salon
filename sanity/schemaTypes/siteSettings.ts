@@ -133,6 +133,20 @@ export const siteSettings = defineType({
       group: 'contact',
     }),
     defineField({
+      name: 'contactEmail',
+      title: 'E-mail kontaktowy (na który idą wiadomości z formularza)',
+      type: 'string',
+      group: 'contact',
+    }),
+    defineField({
+      name: 'formEndpoint',
+      title: 'Formularz — adres Formspree',
+      type: 'url',
+      description:
+        'Załóż darmowy formularz na formspree.io (przekierowany na e-mail powyżej) i wklej tu adres, np. https://formspree.io/f/xxxxxx. Pusty = formularz kieruje do kontaktu telefonicznego.',
+      group: 'contact',
+    }),
+    defineField({
       name: 'domain',
       title: 'Domena',
       type: 'string',

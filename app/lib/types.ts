@@ -17,6 +17,8 @@ export interface Settings {
   facebookUrl?: string
   instagramUrl?: string
   googleMapsEmbedUrl?: string
+  contactEmail?: string
+  formEndpoint?: string
   domain?: string
   footerNote?: string
   heroFaceImage?: SanityImage
