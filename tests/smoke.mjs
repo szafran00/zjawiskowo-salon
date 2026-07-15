@@ -49,7 +49,7 @@ async function main() {
   check('aboutPage istnieje', counts.about >= 1)
 
   console.log('\n=== 2. HTTP: trasy zwracaja 200 ===')
-  const routes = ['/', '/o-salonie', '/zabiegi', '/cennik', '/kontakt', '/studio', ...services.map((s) => `/zabiegi/${s.slug}`)]
+  const routes = ['/', '/o-salonie', '/zabiegi', '/cennik', '/kontakt', '/polityka-prywatnosci', '/studio', ...services.map((s) => `/zabiegi/${s.slug}`)]
   const html = {}
   for (const r of routes) {
     const { status, text } = await getHtml(r)

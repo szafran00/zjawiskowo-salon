@@ -17,6 +17,7 @@ export default function Footer({ s }: { s: Settings }) {
           <Link href="/zabiegi">Zabiegi</Link>
           <Link href="/cennik">Cennik</Link>
           <Link href="/kontakt">Kontakt</Link>
+          <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
         </nav>
         <div style={{ fontSize: 13, lineHeight: 1.9 }}>
           <a href={tel} style={{ textDecoration: 'none' }}>

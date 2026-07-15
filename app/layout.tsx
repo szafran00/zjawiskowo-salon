@@ -1,5 +1,10 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
+
+// Cookiebot (zgoda na cookies) — aktywuje się dopiero po ustawieniu ID domeny
+// w zmiennej NEXT_PUBLIC_COOKIEBOT_ID. Tryb "auto" blokuje cookies do zgody.
+const cookiebotId = process.env.NEXT_PUBLIC_COOKIEBOT_ID
 
 export const metadata: Metadata = {
   title: 'ZJAWISKOWO — salon kosmetyczny · Krzeszowice',
@@ -23,6 +28,15 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <head>
+        {cookiebotId && (
+          <Script
+            id="Cookiebot"
+            src="https://consent.cookiebot.com/uc.js"
+            data-cbid={cookiebotId}
+            data-blockingmode="auto"
+            strategy="beforeInteractive"
+          />
+        )}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
