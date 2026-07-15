@@ -5,6 +5,7 @@ import { fallbackSettings } from '@/app/lib/fallback'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import RevealInit from '@/app/components/RevealInit'
+import CookieConsent from '@/app/components/CookieConsent'
 
 
 export default async function SiteLayout({
@@ -32,6 +33,7 @@ export default async function SiteLayout({
       )}
       {children}
       <Footer s={s} />
+      <CookieConsent />
     </div>
   )
 }

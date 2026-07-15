@@ -52,6 +52,15 @@ test('FAQ rozwija kolejne pytanie', async ({ page }) => {
   await expect(page.locator('.faq-a').nth(1)).toHaveClass(/open/)
 })
 
+test('banner cookies widoczny i znika po akceptacji', async ({ page }, info) => {
+  await page.goto('/', { waitUntil: 'load' })
+  const banner = page.locator('.cookie-banner')
+  await banner.waitFor({ state: 'visible', timeout: 5000 })
+  await page.screenshot({ path: `${DIR}/${info.project.name}-cookie-banner.png` })
+  await page.getByRole('button', { name: 'Akceptuję wszystkie' }).click()
+  await expect(banner).toHaveCount(0)
+})
+
 test('nawigacja z hero do podstrony zabiegu', async ({ page }) => {
   await page.goto('/', { waitUntil: 'load' })
   await page.locator('a.hero-tile, a.svc-tile, a.chip').first().click()

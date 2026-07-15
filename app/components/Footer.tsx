@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Settings } from '../lib/types'
+import CookieSettings from './CookieSettings'
 
 export default function Footer({ s }: { s: Settings }) {
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
@@ -18,6 +19,7 @@ export default function Footer({ s }: { s: Settings }) {
           <Link href="/cennik">Cennik</Link>
           <Link href="/kontakt">Kontakt</Link>
           <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
+          <CookieSettings />
         </nav>
         <div style={{ fontSize: 13, lineHeight: 1.9 }}>
           <a href={tel} style={{ textDecoration: 'none' }}>

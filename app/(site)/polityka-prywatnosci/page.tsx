@@ -1,5 +1,3 @@
-import CookieSettings from '@/app/components/CookieSettings'
-
 export const metadata = {
   title: 'Polityka prywatności i cookies — ZJAWISKOWO',
 }
@@ -44,12 +42,10 @@ export default function PrivacyPage() {
           <h3>4. Pliki cookies</h3>
           <p>
             Strona używa niezbędnych plików cookies zapewniających jej poprawne
-            działanie. Cookies analityczne lub pochodzące z osadzonych treści
-            (np. mapa Google) uruchamiane są dopiero po wyrażeniu zgody w oknie
-            zgody. Zgodę możesz w każdej chwili zmienić:
-          </p>
-          <p>
-            <CookieSettings />
+            działanie. Treści zewnętrzne ustawiające cookies (np. mapa Google)
+            oraz ewentualne statystyki uruchamiają się dopiero po wyrażeniu zgody.
+            Zgodę możesz w każdej chwili zmienić przez „Ustawienia cookies" w
+            stopce strony.
           </p>
 
           <h3>5. Okres przechowywania</h3>
