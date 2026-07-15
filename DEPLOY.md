@@ -29,7 +29,7 @@ Zmienne w `.env.local` (projectId/dataset są też domyślne w kodzie, więc bui
 
 ## Do dokończenia (pozostałe ~20%)
 - [ ] Deploy na Vercel (krok wyżej — wymaga logowania Franka do Vercel).
-- [ ] Podłączyć wysyłkę formularza kontaktowego (teraz pokazuje podziękowanie, nie wysyła). Opcje: Formspree / Resend / webhook n8n.
+- [x] Formularz kontaktowy przez **Formspree** (jak na kolpanowicz.pl). **Aktywacja:** załóż darmowy formularz na [formspree.io](https://formspree.io) (przekierowany na e-mail salonu) → wklej adres `https://formspree.io/f/xxxxxx` w panelu **Sanity → Ustawienia salonu → „Formularz — adres Formspree"** oraz e-mail w „E-mail kontaktowy". Bez tego formularz kieruje do kontaktu telefonicznego (Marta i tak woli telefon).
 - [ ] Prawdziwe zdjęcia i filmiki od Marty (wgrywa w panelu).
 - [ ] Prawdziwe opinie z wizytówki Google + dopracowane FAQ.
 - [ ] Adres, godziny otwarcia, linki FB/IG, embed mapy Google.
