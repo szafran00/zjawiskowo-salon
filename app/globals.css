@@ -102,6 +102,8 @@ html{scroll-behavior:smooth}
 .info-row a:hover{color:var(--accent-deep)}
 .map .ph{height:220px}
 .map iframe{width:100%;height:220px;border:0;border-radius:14px;display:block}
+.map-consent{flex-direction:column;gap:12px;text-align:center;padding:18px}
+.map-consent p{margin:0;font-size:13px;color:var(--muted);max-width:80%}
 .socials{display:flex;gap:12px}
 .soc{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:.2s}
 .soc:hover{border-color:var(--accent);color:var(--accent-deep)}

@@ -3,6 +3,7 @@ import { SETTINGS_QUERY } from '@/sanity/lib/queries'
 import type { Settings } from '@/app/lib/types'
 import { fallbackSettings } from '@/app/lib/fallback'
 import ContactForm from '@/app/components/ContactForm'
+import MapEmbed from '@/app/components/MapEmbed'
 
 
 export const metadata = {
@@ -46,13 +47,7 @@ export default async function KontaktPage() {
               <span className="val">{s.hours}</span>
             </div>
             <div className="map">
-              <div className="ph">
-                {s.googleMapsEmbedUrl ? (
-                  <iframe src={s.googleMapsEmbedUrl} loading="lazy" title="Mapa Google" />
-                ) : (
-                  <span>osadzona mapa Google: [do wklejenia]</span>
-                )}
-              </div>
+              <MapEmbed embedUrl={s.googleMapsEmbedUrl} />
             </div>
             <div className="socials">
               <a className="soc" href={s.facebookUrl || '#'} target="_blank" rel="noopener">
