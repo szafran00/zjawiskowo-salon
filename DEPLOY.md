@@ -30,6 +30,8 @@ Zmienne w `.env.local` (projectId/dataset są też domyślne w kodzie, więc bui
 ## Do dokończenia (pozostałe ~20%)
 - [ ] Deploy na Vercel (krok wyżej — wymaga logowania Franka do Vercel).
 - [x] Formularz kontaktowy przez **Formspree** (jak na kolpanowicz.pl). **Aktywacja:** załóż darmowy formularz na [formspree.io](https://formspree.io) (przekierowany na e-mail salonu) → wklej adres `https://formspree.io/f/xxxxxx` w panelu **Sanity → Ustawienia salonu → „Formularz — adres Formspree"** oraz e-mail w „E-mail kontaktowy". Bez tego formularz kieruje do kontaktu telefonicznego (Marta i tak woli telefon).
+- [x] **Polityka prywatności/cookies** — strona `/polityka-prywatnosci` (szablon RODO, uzupełnić dane administratora: nazwa/adres/NIP/e-mail) + link w stopce.
+- [ ] **Cookiebot** (zgoda cookies) — wpięty, aktywacja przez env `NEXT_PUBLIC_COOKIEBOT_ID` (ID grupy domen z panelu Cookiebot). Potrzebny dopiero gdy dojdzie **mapa Google lub analityka** — wtedy tryb auto blokuje trackery do zgody. Teraz strona nie ustawia trackujących cookies, więc banner nie jest wymagany.
 - [ ] Prawdziwe zdjęcia i filmiki od Marty (wgrywa w panelu).
 - [ ] Prawdziwe opinie z wizytówki Google + dopracowane FAQ.
 - [ ] Adres, godziny otwarcia, linki FB/IG, embed mapy Google.
