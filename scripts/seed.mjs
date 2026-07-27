@@ -104,6 +104,24 @@ c.faqs.forEach((f, i) => {
   )
 })
 
+c.badges.forEach((b, i) => {
+  documents.push(
+    clean({ _id: `badge-${i + 1}`, _type: 'trustBadge', ...b, order: b.order ?? i })
+  )
+})
+
+c.reviews.forEach((r, i) => {
+  documents.push(
+    clean({
+      _id: `review-${i + 1}`,
+      _type: 'review',
+      hidden: false,
+      ...r,
+      order: r.order ?? i,
+    })
+  )
+})
+
 if (dryRun) {
   for (const d of documents) {
     const size = JSON.stringify(d).length

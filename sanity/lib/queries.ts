@@ -3,6 +3,8 @@ import { groq } from 'next-sanity'
 const settingsProjection = `{
   salonName, salonSubtitle, theme, heroKicker, tagline, heroLead, phone,
   pillarsKicker, pillarsHeading, pillarsLead,
+  trustKicker, trustHeading, showTrust,
+  reviewsKicker, reviewsHeading, showReviews, googleReviewUrl,
   galleryKicker, galleryHeading, showGallery, showFaq,
   ctaHeading, ctaLead,
   showPromo, promoText, address, hours, contactNotes, facebookUrl, instagramUrl,
@@ -36,7 +38,9 @@ export const HOME_QUERY = groq`{
   "treatments": *[_type == "service"] | order(order asc)${treatmentProjection},
   "voucher": *[_type == "voucherPage"][0]${voucherProjection},
   "faqs": *[_type == "faqItem"] | order(order asc){ question, answer },
-  "gallery": *[_type == "galleryItem"] | order(order asc){ image, caption }
+  "gallery": *[_type == "galleryItem"] | order(order asc){ image, caption, videoUrl },
+  "badges": *[_type == "trustBadge"] | order(order asc){ text },
+  "reviews": *[_type == "review" && hidden != true] | order(order asc){ quote, author, rating }
 }`
 
 export const TREATMENTS_QUERY = groq`*[_type == "service"] | order(order asc)${treatmentProjection}`

@@ -8,11 +8,15 @@ import {
   fallbackTreatments,
   fallbackFaqs,
   fallbackVoucher,
+  fallbackBadges,
+  fallbackReviews,
 } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
+import { embedUrl } from '@/app/lib/video'
 import Hero from '@/app/components/Hero'
 import Faq from '@/app/components/Faq'
 import PhoneCta from '@/app/components/PhoneCta'
+import ReviewsCarousel from '@/app/components/ReviewsCarousel'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -32,17 +36,48 @@ export default async function HomePage() {
   const faqs = data.faqs && data.faqs.length ? data.faqs : fallbackFaqs
   const gallery = data.gallery && data.gallery.length ? data.gallery : []
   const voucher: Voucher = data.voucher || fallbackVoucher
+  const badges = data.badges && data.badges.length ? data.badges : fallbackBadges
+  const reviews = data.reviews && data.reviews.length ? data.reviews : fallbackReviews
 
   const galleryImages = gallery.length
     ? gallery.map((g, i) => ({
         src: imgUrl(g.image, STOCK.gal[i % STOCK.gal.length], 900),
         cap: g.caption,
+        video: embedUrl(g.videoUrl),
       }))
-    : STOCK.gal.map((src) => ({ src, cap: undefined as string | undefined }))
+    : STOCK.gal.map((src) => ({
+        src,
+        cap: undefined as string | undefined,
+        video: undefined as string | undefined,
+      }))
 
   return (
     <>
       <Hero s={s} featured={featured} />
+
+      {/* „Dlaczego ZJAWISKOWO” — punkty wyróżniające, edytowalne w panelu. */}
+      {s.showTrust !== false && badges.length > 0 && (
+        <section className="trust reveal" id="dlaczego">
+          <div className="wrap sec" style={{ paddingTop: 56, paddingBottom: 56 }}>
+            {(s.trustKicker || s.trustHeading) && (
+              <div className="page-head" style={{ marginBottom: 36 }}>
+                {s.trustKicker && <p className="kicker">{s.trustKicker}</p>}
+                {s.trustHeading && <h2 className="h2">{s.trustHeading}</h2>}
+              </div>
+            )}
+            <div className="trust-grid">
+              {badges.map((b, i) => (
+                <div className="badge" key={i}>
+                  <div className="crest" aria-hidden="true">
+                    ✦
+                  </div>
+                  <p>{b.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Dwa filary salonu: depilacja laserowa i pielęgnacja twarzy. */}
       <section className="sec reveal" id="zabiegi">
@@ -138,6 +173,15 @@ export default async function HomePage() {
         </section>
       )}
 
+      {s.showReviews !== false && (
+        <ReviewsCarousel
+          reviews={reviews}
+          kicker={s.reviewsKicker}
+          heading={s.reviewsHeading}
+          googleReviewUrl={s.googleReviewUrl}
+        />
+      )}
+
       {s.showFaq !== false && <Faq faqs={faqs} />}
 
       {s.showGallery !== false && (
@@ -148,11 +192,23 @@ export default async function HomePage() {
               <h2 className="h2">{s.galleryHeading}</h2>
             </div>
             <div className="gal">
-              {galleryImages.map((g, i) => (
-                <div className="ph" key={i}>
-                  <img src={g.src} alt={g.cap || ''} />
-                </div>
-              ))}
+              {galleryImages.map((g, i) =>
+                g.video ? (
+                  <div className="ph gal-video" key={i}>
+                    <iframe
+                      src={g.video}
+                      title={g.cap || `Film ${i + 1}`}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <div className="ph" key={i}>
+                    <img src={g.src} alt={g.cap || ''} />
+                  </div>
+                )
+              )}
             </div>
           </div>
         </section>

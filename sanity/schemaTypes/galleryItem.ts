@@ -2,15 +2,23 @@ import { defineType, defineField } from 'sanity'
 
 export const galleryItem = defineType({
   name: 'galleryItem',
-  title: 'Zdjęcie w galerii',
+  title: 'Zdjęcie lub film w galerii',
   type: 'document',
   fields: [
     defineField({
       name: 'image',
       title: 'Zdjęcie',
+      description:
+        'Przy filmie z YouTube lub Vimeo zdjęcie służy jako miniatura (opcjonalnie).',
       type: 'image',
       options: { hotspot: true },
-      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'videoUrl',
+      title: 'Film (adres z YouTube lub Vimeo)',
+      description:
+        'Wklej adres filmu. Gdy pole jest wypełnione, zamiast zdjęcia pokaże się odtwarzacz.',
+      type: 'url',
     }),
     defineField({
       name: 'caption',
@@ -28,7 +36,11 @@ export const galleryItem = defineType({
     { title: 'Kolejność', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'caption', media: 'image' },
-    prepare: ({ title, media }) => ({ title: title || 'Zdjęcie', media }),
+    select: { title: 'caption', media: 'image', videoUrl: 'videoUrl' },
+    prepare: ({ title, media, videoUrl }) => ({
+      title: title || (videoUrl ? 'Film' : 'Zdjęcie'),
+      subtitle: videoUrl || undefined,
+      media,
+    }),
   },
 })

@@ -14,6 +14,13 @@ export interface Settings {
   pillarsKicker?: string
   pillarsHeading?: string
   pillarsLead?: string
+  trustKicker?: string
+  trustHeading?: string
+  showTrust?: boolean
+  reviewsKicker?: string
+  reviewsHeading?: string
+  showReviews?: boolean
+  googleReviewUrl?: string
   galleryKicker?: string
   galleryHeading?: string
   showGallery?: boolean
@@ -67,6 +74,11 @@ export interface Faq {
 export interface GalleryImg {
   image?: SanityImage
   caption?: string
+  videoUrl?: string
+}
+
+export interface Badge {
+  text?: string
 }
 
 export interface About {
@@ -146,4 +158,6 @@ export interface HomeData {
   voucher?: Voucher | null
   faqs?: Faq[]
   gallery?: GalleryImg[]
+  badges?: Badge[]
+  reviews?: Review[]
 }

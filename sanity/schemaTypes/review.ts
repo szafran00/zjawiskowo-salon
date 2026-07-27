@@ -25,6 +25,14 @@ export const review = defineType({
       validation: (r) => r.min(1).max(5),
     }),
     defineField({
+      name: 'hidden',
+      title: 'Ukryj tę opinię',
+      description:
+        'Zaznacz, aby opinia zniknęła ze strony. Dokument zostaje w panelu, więc możesz ją później przywrócić.',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'order',
       title: 'Kolejność',
       type: 'number',
@@ -35,6 +43,10 @@ export const review = defineType({
     { title: 'Kolejność', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] },
   ],
   preview: {
-    select: { title: 'author', subtitle: 'quote' },
+    select: { title: 'author', subtitle: 'quote', hidden: 'hidden' },
+    prepare: ({ title, subtitle, hidden }) => ({
+      title: (hidden ? 'UKRYTA — ' : '') + (title || 'Opinia'),
+      subtitle,
+    }),
   },
 })

@@ -126,11 +126,23 @@ async function main() {
   check('/regulamin: naglowek', (html['/regulamin'] || '').includes('Regulamin'))
   check('/regulamin: odnosnik do polityki prywatnosci', (html['/regulamin'] || '').includes('/polityka-prywatnosci'))
 
-  console.log('\n=== 5. Zakres wycofany przez klientke ===')
-  check('home: brak karuzeli opinii', !home.includes('class="rev-grid"'))
-  check('home: brak sekcji opinii Google', !home.includes('wizytówki Google'))
-  check('home: brak sekcji odznak zaufania', !home.includes('class="trust-grid"'))
-  check('home: brak kafla na film', !home.includes('class="video"'))
+  console.log('\n=== 5. Pelny zakres z oferty ===')
+  check('home: karuzela opinii', home.includes('rev-carousel'))
+  check('home: opinie przesuwaja sie pojedynczo', (home.match(/rev-slide/g) || []).length >= 2)
+  check('home: kropki nawigacji karuzeli', home.includes('rev-dot'))
+  check('home: nota o opiniach z wizytowki Google', home.includes('wizytówki Google'))
+  check('home: sekcja Dlaczego ZJAWISKOWO', home.includes('trust-grid') && /Dlaczego ZJAWISKOWO/i.test(home))
+  check('home: sekcja voucherow', home.includes('id="vouchery"'))
+  check('home: sekcja FAQ', home.includes('faq'))
+  check('home: galeria', home.includes('class="gal"'))
+  check('home: bezplatna konsultacja jako zachet', /bezpłatn/i.test(home))
+
+  const reviewsLive = await sanityQuery(`count(*[_type=="review" && hidden != true])`)
+  check('Sanity: sa opinie do pokazania', typeof reviewsLive === 'number' && reviewsLive > 0, `${reviewsLive}`)
+  const badgesLive = await sanityQuery(`count(*[_type=="trustBadge"])`)
+  check('Sanity: sa punkty Dlaczego ZJAWISKOWO', typeof badgesLive === 'number' && badgesLive > 0, `${badgesLive}`)
+  const hideable = await sanityQuery(`count(*[_type=="review" && defined(hidden)])`)
+  check('Sanity: opinie maja przelacznik ukrywania', typeof hideable === 'number' && hideable > 0, `${hideable}`)
 
   console.log('\n=== 6. Spojnosc Sanity <-> strona ===')
   if (settings.showPromo && settings.promoText) {

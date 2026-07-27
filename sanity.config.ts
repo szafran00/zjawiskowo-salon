@@ -18,7 +18,6 @@ export default defineConfig({
   plugins: [
     structureTool({
       // Kolejność jak w menu strony: O mnie → Zabiegi → Cennik → Vouchery → Regulamin → Kontakt.
-      // „Odznaki zaufania” i „Opinie” celowo pominięte — sekcje wycofane z zakresu.
       structure: (S) =>
         S.list()
           .title('Treść strony')
@@ -45,8 +44,10 @@ export default defineConfig({
               .child(S.document().schemaType('termsPage').documentId('termsPage')),
             S.divider(),
             S.documentTypeListItem('service').title('Zabiegi'),
+            S.documentTypeListItem('trustBadge').title('Dlaczego ZJAWISKOWO'),
+            S.documentTypeListItem('review').title('Opinie'),
             S.documentTypeListItem('faqItem').title('FAQ'),
-            S.documentTypeListItem('galleryItem').title('Galeria'),
+            S.documentTypeListItem('galleryItem').title('Galeria (zdjęcia i filmy)'),
           ]),
     }),
     visionTool({ defaultApiVersion: apiVersion }),

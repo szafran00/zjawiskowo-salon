@@ -40,6 +40,12 @@ export const STOCK = {
 export const settings = {
   salonName: 'ZJAWISKOWO',
   salonSubtitle: 'Salon kosmetyczny · Depilacja laserowa',
+  trustKicker: 'Dlaczego ZJAWISKOWO',
+  trustHeading: 'Co wyróżnia mój salon',
+  showTrust: true,
+  reviewsKicker: 'Opinie klientek',
+  reviewsHeading: 'Co mówią klientki',
+  showReviews: true,
   theme: 'gold',
   heroKicker: 'Salon kosmetyczny · Depilacja laserowa · Krzeszowice',
   tagline: 'Piękno zaczyna się tutaj',
@@ -142,7 +148,7 @@ export const treatments = [
       'Laser na miejscu w Krzeszowicach, dostępny każdego dnia pracy salonu',
       'Kolejne zabiegi serii w dogodnym terminie, bez przerw wymuszonych dostępnością sprzętu',
       'Pełna seria to zwykle około ośmiu zabiegów, z odstępami dobranymi do partii ciała',
-      'Konsultacja i próba na niewielkim obszarze przed pierwszym zabiegiem',
+      'Bezpłatna konsultacja i próba laserowa na niewielkim obszarze przed pierwszym zabiegiem',
       'Pakiety obejmujące kilka partii, z ceną niższą niż suma pojedynczych zabiegów',
       'Zapomnij o maszynce i wosku między wizytami: między zabiegami wolno golić',
     ],
@@ -160,7 +166,7 @@ export const treatments = [
     pricelistAnchor: 'pielegnacja-twarzy',
     order: 1,
     atuty: [
-      'Konsultacja i ocena skóry przed każdym zabiegiem',
+      'Bezpłatna konsultacja i ocena skóry przed każdym zabiegiem',
       'Protokół dobierany pod bieżący stan cery, nie pod nazwę usługi z cennika',
       'Zabiegi oczyszczające, złuszczające, nawilżające i ujędrniające',
       'Rabat na serię pięciu zabiegów oraz na dwa zabiegi podczas jednej wizyty',
@@ -421,13 +427,49 @@ export const terms = {
   ]),
 }
 
-/* ── Wycofane z zakresu (schematy zostają, treść nieużywana) ─────────── */
+/* ── Dlaczego ZJAWISKOWO ─────────────────────────────────────────────── */
 
 export const badges = [
-  { text: 'Kameralny salon, jedna klientka w danym czasie' },
-  { text: 'Laser na miejscu, dostępny każdego dnia pracy salonu' },
-  { text: 'Konsultacja i wywiad przed pierwszym zabiegiem' },
-  { text: 'Dobór pielęgnacji domowej po zabiegu' },
+  { text: 'Kameralny salon, jedna klientka w danym czasie', order: 1 },
+  { text: 'Laser na miejscu, dostępny każdego dnia pracy salonu', order: 2 },
+  { text: 'Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem', order: 3 },
+  { text: 'Dobór pielęgnacji domowej po zabiegu', order: 4 },
 ]
 
-export const reviews = []
+/* ── Opinie ──────────────────────────────────────────────────────────────
+   Treść przykładowa. Klientka podmienia na własne opinie z wizytówki Google.
+   Celowo mówią o atmosferze, obsłudze i komforcie, a nie o efektach zabiegu:
+   opinia obiecująca konkretny rezultat byłaby dla salonu ryzykowna prawnie. */
+
+export const reviews = [
+  {
+    quote: 'Świetna atmosfera i pełen profesjonalizm. Czuję się tu zaopiekowana od progu.',
+    author: 'Anna K.',
+    rating: 5,
+    order: 1,
+  },
+  {
+    quote: 'Dobrze wykonany zabieg i spokojna, rzeczowa rozmowa. Wszystko wytłumaczone krok po kroku.',
+    author: 'Magda W.',
+    rating: 5,
+    order: 2,
+  },
+  {
+    quote: 'Czysto, elegancko i zawsze punktualnie. Doceniam, że nikt się nie spieszy.',
+    author: 'Joanna R.',
+    rating: 5,
+    order: 3,
+  },
+  {
+    quote: 'Terminy dopasowane do mojego grafiku, bez czekania miesiąc na kolejną wizytę.',
+    author: 'Ewelina S.',
+    rating: 5,
+    order: 4,
+  },
+  {
+    quote: 'Miła obsługa i dokładna konsultacja przed zabiegiem. Polecam każdej znajomej.',
+    author: 'Karolina P.',
+    rating: 5,
+    order: 5,
+  },
+]
