@@ -17,12 +17,19 @@ export const service = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'navLabel',
+      title: 'Nazwa w menu',
+      type: 'string',
+      description:
+        'Krótka nazwa w rozwijanym menu „Zabiegi”, np. „Depilacja laserowa”. Puste pole = użyta zostanie kategoria, a w dalszej kolejności nazwa zabiegu.',
+    }),
+    defineField({
       name: 'slug',
       title: 'Adres podstrony (slug)',
       type: 'slug',
       options: { source: 'title' },
       validation: (r) => r.required(),
-      description: 'Np. „laser" → /zabiegi/laser',
+      description: 'Np. „depilacja-laserowa” → /zabiegi/depilacja-laserowa',
     }),
     defineField({
       name: 'excerpt',
@@ -47,6 +54,13 @@ export const service = defineType({
       title: 'Pełny opis',
       type: 'array',
       of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'pricelistAnchor',
+      title: 'Odnośnik do sekcji cennika',
+      type: 'string',
+      description:
+        'Identyfikator grupy w cenniku, np. „depilacja-laserowa”. Dodaje na podstronie przycisk prowadzący prosto do właściwej części cennika.',
     }),
     defineField({
       name: 'featured',

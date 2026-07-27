@@ -10,10 +10,20 @@ export interface Settings {
   tagline?: string
   heroLead?: string
   phone?: string
+  pillarsKicker?: string
+  pillarsHeading?: string
+  pillarsLead?: string
+  galleryKicker?: string
+  galleryHeading?: string
+  showGallery?: boolean
+  showFaq?: boolean
+  ctaHeading?: string
+  ctaLead?: string
   showPromo?: boolean
   promoText?: string
   address?: string
   hours?: string
+  contactNotes?: string[]
   facebookUrl?: string
   instagramUrl?: string
   googleMapsEmbedUrl?: string
@@ -30,11 +40,13 @@ export interface Settings {
 export interface Treatment {
   title?: string
   kicker?: string
+  navLabel?: string
   slug?: string
   excerpt?: string
   image?: SanityImage
   atuty?: string[]
   description?: PortableBlock[]
+  pricelistAnchor?: string
   featured?: boolean
   ctaLabel?: string
   order?: number
@@ -57,9 +69,11 @@ export interface GalleryImg {
 }
 
 export interface About {
+  kicker?: string
   heading?: string
   lead?: string
   body?: PortableBlock[]
+  atuty?: string[]
   image?: SanityImage
 }
 
@@ -71,19 +85,64 @@ export interface PriceItem {
 
 export interface PriceGroup {
   title?: string
+  anchor?: string
+  showInMenu?: boolean
+  note?: string
   items?: PriceItem[]
 }
 
 export interface Pricelist {
   intro?: string
+  outro?: string
   groups?: PriceGroup[]
+}
+
+export interface Voucher {
+  kicker?: string
+  heading?: string
+  lead?: string
+  body?: PortableBlock[]
+  bullets?: string[]
+  image?: SanityImage
+  ctaLabel?: string
+  showOnHome?: boolean
+}
+
+export interface Terms {
+  kicker?: string
+  heading?: string
+  lead?: string
+  notice?: string
+  body?: PortableBlock[]
+  privacyIntro?: string
+  updatedAt?: string
+}
+
+/** Pozycja rozwijanego menu „Zabiegi”. */
+export interface NavTreatment {
+  title?: string
+  kicker?: string
+  navLabel?: string
+  slug?: string
+}
+
+/** Pozycja rozwijanego menu „Cennik”. */
+export interface NavPriceGroup {
+  title?: string
+  anchor?: string
+  showInMenu?: boolean
+}
+
+export interface LayoutData {
+  settings?: Settings | null
+  navTreatments?: NavTreatment[] | null
+  navPriceGroups?: NavPriceGroup[] | null
 }
 
 export interface HomeData {
   settings?: Settings | null
   treatments?: Treatment[]
-  badges?: { text: string }[]
-  reviews?: Review[]
+  voucher?: Voucher | null
   faqs?: Faq[]
   gallery?: GalleryImg[]
 }

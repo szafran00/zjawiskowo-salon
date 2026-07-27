@@ -12,11 +12,16 @@ export default function Footer({ s }: { s: Settings }) {
           <p style={{ margin: '10px 0 0', fontSize: 13, opacity: 0.8 }}>
             Salon kosmetyczny · Krzeszowice
           </p>
+          {s.address && (
+            <p style={{ margin: '6px 0 0', fontSize: 13, opacity: 0.8 }}>{s.address}</p>
+          )}
         </div>
         <nav className="footer-nav">
-          <Link href="/o-salonie">O salonie</Link>
+          <Link href="/o-mnie">O mnie</Link>
           <Link href="/zabiegi">Zabiegi</Link>
           <Link href="/cennik">Cennik</Link>
+          <Link href="/vouchery">Vouchery</Link>
+          <Link href="/regulamin">Regulamin</Link>
           <Link href="/kontakt">Kontakt</Link>
           <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
           <CookieSettings />

@@ -7,9 +7,10 @@ import { imgUrl } from '@/app/lib/img'
 
 /* eslint-disable @next/next/no-img-element */
 
-
 export const metadata = {
   title: 'Zabiegi — ZJAWISKOWO Krzeszowice',
+  description:
+    'Depilacja laserowa i pielęgnacja twarzy w kameralnym salonie ZJAWISKOWO w Krzeszowicach.',
 }
 
 export default async function ZabiegiPage() {
@@ -28,20 +29,21 @@ export default async function ZabiegiPage() {
           <p className="kicker">Nasza oferta</p>
           <h1 className="h2">Zabiegi</h1>
           <p className="lead" style={{ maxWidth: 640, margin: '4px auto 0' }}>
-            Depilacja laserowa i kosmetyka twarzy w kameralnym salonie w Krzeszowicach.
+            Depilacja laserowa i pielęgnacja twarzy w kameralnym salonie w
+            Krzeszowicach.
           </p>
         </div>
         <div className="zabieg-grid">
           {treatments.map((t, i) => {
-            const img = imgUrl(t.image, t.slug === 'twarz' ? STOCK.face : STOCK.laserWide, 900)
+            const img = imgUrl(t.image, i === 0 ? STOCK.laserWide : STOCK.face, 900)
             return (
-              <Link href={`/zabiegi/${t.slug}`} className="zabieg-card" key={i}>
+              <Link href={`/zabiegi/${t.slug}`} className="zabieg-card" key={t.slug || i}>
                 <div className="ph">
                   <img src={img} alt={t.title || ''} />
                 </div>
                 <div className="zabieg-card-body">
                   <p className="kicker">{t.kicker}</p>
-                  <h3 className="zabieg-card-title">{t.title}</h3>
+                  <h2 className="zabieg-card-title">{t.title}</h2>
                   {t.excerpt && <p className="zabieg-card-ex">{t.excerpt}</p>}
                   <span className="zabieg-more">Dowiedz się więcej →</span>
                 </div>

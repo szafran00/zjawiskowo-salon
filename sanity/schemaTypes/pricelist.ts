@@ -23,6 +23,26 @@ export const pricelist = defineType({
           fields: [
             defineField({ name: 'title', title: 'Nazwa grupy', type: 'string' }),
             defineField({
+              name: 'anchor',
+              title: 'Identyfikator sekcji (do menu)',
+              type: 'string',
+              description:
+                'Bez spacji i polskich znaków, np. „depilacja-laserowa”. Pozwala wejść prosto w tę część cennika z rozwijanego menu „Cennik”.',
+            }),
+            defineField({
+              name: 'showInMenu',
+              title: 'Pokaż w rozwijanym menu „Cennik”',
+              type: 'boolean',
+              initialValue: true,
+            }),
+            defineField({
+              name: 'note',
+              title: 'Adnotacja pod nazwą grupy',
+              type: 'text',
+              rows: 2,
+              description: 'Np. informacja o promocji na serię zabiegów.',
+            }),
+            defineField({
               name: 'items',
               title: 'Pozycje',
               type: 'array',
@@ -41,9 +61,16 @@ export const pricelist = defineType({
               ],
             }),
           ],
-          preview: { select: { title: 'title' } },
+          preview: { select: { title: 'title', subtitle: 'anchor' } },
         }),
       ],
+    }),
+    defineField({
+      name: 'outro',
+      title: 'Nota pod cennikiem',
+      type: 'text',
+      rows: 3,
+      description: 'Np. informacja, że ceny mają charakter orientacyjny.',
     }),
   ],
   preview: { prepare: () => ({ title: 'Cennik' }) },

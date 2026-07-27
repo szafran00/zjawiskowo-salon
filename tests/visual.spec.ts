@@ -3,10 +3,13 @@ import fs from 'node:fs'
 
 const PAGES: [string, string][] = [
   ['home', '/'],
-  ['o-salonie', '/o-salonie'],
+  ['o-mnie', '/o-mnie'],
   ['zabiegi', '/zabiegi'],
-  ['zabieg-laser', '/zabiegi/laser'],
+  ['zabieg-laser', '/zabiegi/depilacja-laserowa'],
+  ['zabieg-twarz', '/zabiegi/pielegnacja-twarzy'],
   ['cennik', '/cennik'],
+  ['vouchery', '/vouchery'],
+  ['regulamin', '/regulamin'],
   ['kontakt', '/kontakt'],
 ]
 
@@ -36,13 +39,48 @@ for (const [name, path] of PAGES) {
   })
 }
 
-test('mobilne menu otwiera się', async ({ page }, info) => {
+test('menu: rozwijana lista „Zabiegi" pokazuje się dopiero po najechaniu', async ({
+  page,
+}, info) => {
+  test.skip(info.project.name !== 'desktop', 'rozwijane menu działa na desktopie')
+  await page.goto('/', { waitUntil: 'load' })
+  const sub = page.locator('.nav-item.has-sub').first().locator('.nav-sub')
+  await expect(sub).toBeHidden()
+  await page.locator('.nav-item.has-sub').first().hover()
+  await expect(sub).toBeVisible()
+  // przejście trwa 0.18 s — czekamy na pełne odsłonięcie, żeby zrzut był stabilny
+  await expect
+    .poll(() => sub.evaluate((el) => getComputedStyle(el).opacity))
+    .toBe('1')
+  await expect(sub.getByRole('link', { name: 'Depilacja laserowa' })).toBeVisible()
+  await expect(sub.getByRole('link', { name: 'Pielęgnacja twarzy' })).toBeVisible()
+  await page.screenshot({ path: `${DIR}/desktop-menu-dropdown.png` })
+})
+
+test('menu: Cennik prowadzi do właściwej sekcji cennika', async ({ page }, info) => {
+  test.skip(info.project.name !== 'desktop', 'rozwijane menu działa na desktopie')
+  await page.goto('/', { waitUntil: 'load' })
+  await page.locator('.nav-item.has-sub').nth(1).hover()
+  await page.locator('.nav-sub a[href="/cennik#pielegnacja-twarzy"]').click()
+  await expect(page).toHaveURL(/\/cennik#pielegnacja-twarzy$/)
+  await expect(page.locator('#pielegnacja-twarzy')).toBeVisible()
+})
+
+test('mobilne menu otwiera się wraz z podpozycjami', async ({ page }, info) => {
   test.skip(info.project.name !== 'mobile', 'tylko mobile')
   await page.goto('/', { waitUntil: 'load' })
   await page.getByRole('button', { name: 'Menu' }).click()
   await page.waitForTimeout(400)
   await expect(page.locator('nav.nav.open')).toBeVisible()
+  await expect(
+    page.locator('.nav-sub a[href="/zabiegi/depilacja-laserowa"]')
+  ).toBeVisible()
   await page.screenshot({ path: `${DIR}/mobile-menu-open.png` })
+})
+
+test('stara trasa /o-salonie przekierowuje na /o-mnie', async ({ page }) => {
+  await page.goto('/o-salonie', { waitUntil: 'load' })
+  await expect(page).toHaveURL(/\/o-mnie$/)
 })
 
 test('FAQ rozwija kolejne pytanie', async ({ page }) => {
@@ -65,4 +103,11 @@ test('nawigacja z hero do podstrony zabiegu', async ({ page }) => {
   await page.goto('/', { waitUntil: 'load' })
   await page.locator('a.hero-tile, a.svc-tile, a.chip').first().click()
   await expect(page).toHaveURL(/\/zabiegi\//)
+})
+
+test('duży przycisk telefonu prowadzi do numeru', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'load' })
+  const phone = page.locator('a.btn-phone').first()
+  await expect(phone).toBeVisible()
+  await expect(phone).toHaveAttribute('href', /^tel:\d+$/)
 })

@@ -1,21 +1,21 @@
 import { defineType, defineField } from 'sanity'
 
-export const aboutPage = defineType({
-  name: 'aboutPage',
-  title: 'O mnie',
+export const voucherPage = defineType({
+  name: 'voucherPage',
+  title: 'Vouchery',
   type: 'document',
   fields: [
     defineField({
       name: 'kicker',
       title: 'Nadtytuł',
       type: 'string',
-      initialValue: 'Salon',
+      initialValue: 'Prezent',
     }),
     defineField({
       name: 'heading',
       title: 'Nagłówek',
       type: 'string',
-      initialValue: 'O mnie',
+      initialValue: 'Vouchery podarunkowe',
     }),
     defineField({
       name: 'lead',
@@ -30,10 +30,11 @@ export const aboutPage = defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
-      name: 'atuty',
-      title: 'Punkty wyróżniające (lista)',
+      name: 'bullets',
+      title: 'Punkty (lista)',
       type: 'array',
       of: [{ type: 'string' }],
+      description: 'Krótkie informacje praktyczne, np. termin ważności, sposób zakupu.',
     }),
     defineField({
       name: 'image',
@@ -41,6 +42,18 @@ export const aboutPage = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
+    defineField({
+      name: 'ctaLabel',
+      title: 'Tekst przycisku',
+      type: 'string',
+      initialValue: 'Zapytaj o voucher',
+    }),
+    defineField({
+      name: 'showOnHome',
+      title: 'Pokaż sekcję voucherów na stronie głównej',
+      type: 'boolean',
+      initialValue: true,
+    }),
   ],
-  preview: { prepare: () => ({ title: 'O mnie' }) },
+  preview: { prepare: () => ({ title: 'Vouchery' }) },
 })

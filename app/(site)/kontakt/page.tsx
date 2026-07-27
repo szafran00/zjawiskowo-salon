@@ -5,9 +5,10 @@ import { fallbackSettings } from '@/app/lib/fallback'
 import ContactForm from '@/app/components/ContactForm'
 import MapEmbed from '@/app/components/MapEmbed'
 
-
 export const metadata = {
   title: 'Kontakt — ZJAWISKOWO Krzeszowice',
+  description:
+    'Salon kosmetyczny ZJAWISKOWO, ul. 3 Maja w Krzeszowicach. Bezpłatny parking, budynek przy automyjni. Wizyty umawiamy telefonicznie.',
 }
 
 export default async function KontaktPage() {
@@ -19,6 +20,7 @@ export default async function KontaktPage() {
   }
   const s: Settings = { ...fallbackSettings, ...(settings || {}) }
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
+  const notes = s.contactNotes && s.contactNotes.length ? s.contactNotes : []
 
   return (
     <section className="sec reveal">
@@ -28,7 +30,7 @@ export default async function KontaktPage() {
           style={{ alignItems: 'flex-start', textAlign: 'left' }}
         >
           <p className="kicker">Kontakt</p>
-          <h1 className="h2">Odwiedź nas w Krzeszowicach</h1>
+          <h1 className="h2">Odwiedź mnie w Krzeszowicach</h1>
         </div>
         <div className="contact-grid">
           <div className="contact-info">
@@ -46,6 +48,16 @@ export default async function KontaktPage() {
               <span className="lbl">Godziny otwarcia</span>
               <span className="val">{s.hours}</span>
             </div>
+            {notes.length > 0 && (
+              <div className="info-row">
+                <span className="lbl">Jak trafić</span>
+                <ul className="contact-notes">
+                  {notes.map((n, i) => (
+                    <li key={i}>{n}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="map">
               <MapEmbed embedUrl={s.googleMapsEmbedUrl} />
             </div>
