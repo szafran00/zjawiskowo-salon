@@ -48,6 +48,7 @@ export default async function SiteLayout({
       <Header
         phone={s.phone || ''}
         salonName={s.salonName || 'ZJAWISKOWO'}
+        salonSubtitle={s.salonSubtitle || ''}
         treatments={navTreatments}
         priceGroups={navPriceGroups}
       />

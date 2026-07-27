@@ -26,7 +26,7 @@ async function getHtml(path) {
 async function main() {
   console.log('\n=== 1. Sanity: integralność danych ===')
   const settings = await sanityQuery(
-    `*[_type=="siteSettings"][0]{salonName,tagline,phone,promoText,showPromo,address,hours,contactNotes,googleMapsEmbedUrl}`
+    `*[_type=="siteSettings"][0]{salonName,salonSubtitle,heroKicker,tagline,phone,promoText,showPromo,address,hours,contactNotes,googleMapsEmbedUrl}`
   )
   check('siteSettings istnieje', !!settings)
   check('settings.salonName', !!settings?.salonName)
@@ -90,6 +90,14 @@ async function main() {
   console.log('\n=== 4. Menu i tresc stron ===')
   const home = html['/'] || ''
   check('home: haslo hero z Sanity', settings.tagline ? home.includes(settings.tagline) : false)
+
+  // Wymog klientki: "depilacja laserowa" widoczna na pierwszy rzut oka, obok "salon kosmetyczny".
+  const headMatch = home.match(/<header[\s\S]*?<\/header>/)
+  const head = headMatch ? headMatch[0] : ''
+  const hasBoth = (s) => /depilacj/i.test(s) && /salon kosmetyczn/i.test(s)
+  check('home: podpis pod logo ma depilacje laserowa i salon kosmetyczny', hasBoth(head))
+  check('home: nadtytul hero ma depilacje laserowa', settings.heroKicker ? /depilacj/i.test(settings.heroKicker) && home.includes(settings.heroKicker) : false)
+  check('home: tytul strony ma depilacje laserowa', /<title>[^<]*depilacj/i.test(home))
 
   const navMatch = home.match(/<nav[\s\S]*?<\/nav>/)
   const nav = navMatch ? navMatch[0] : ''

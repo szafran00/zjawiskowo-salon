@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity'
 
 const settingsProjection = `{
-  salonName, theme, heroKicker, tagline, heroLead, phone,
+  salonName, salonSubtitle, theme, heroKicker, tagline, heroLead, phone,
   pillarsKicker, pillarsHeading, pillarsLead,
   galleryKicker, galleryHeading, showGallery, showFaq,
   ctaHeading, ctaLead,

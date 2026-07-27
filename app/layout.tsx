@@ -7,12 +7,12 @@ import './globals.css'
 const cookiebotId = process.env.NEXT_PUBLIC_COOKIEBOT_ID
 
 export const metadata: Metadata = {
-  title: 'ZJAWISKOWO — salon kosmetyczny · Krzeszowice',
+  title: 'ZJAWISKOWO Krzeszowice · Depilacja laserowa i salon kosmetyczny',
   description:
     'Salon kosmetyczny ZJAWISKOWO w Krzeszowicach: depilacja laserowa i pielęgnacja twarzy. Laser na miejscu, dostępny każdego dnia pracy salonu. Umów wizytę: 517 899 229.',
   metadataBase: new URL('https://zjawiskowo.com.pl'),
   openGraph: {
-    title: 'ZJAWISKOWO — salon kosmetyczny · Krzeszowice',
+    title: 'ZJAWISKOWO Krzeszowice · Depilacja laserowa i salon kosmetyczny',
     description:
       'Depilacja laserowa i pielęgnacja twarzy w Krzeszowicach. Umów wizytę: 517 899 229.',
     locale: 'pl_PL',

@@ -39,8 +39,9 @@ export const STOCK = {
 
 export const settings = {
   salonName: 'ZJAWISKOWO',
+  salonSubtitle: 'Salon kosmetyczny · Depilacja laserowa',
   theme: 'gold',
-  heroKicker: 'Salon kosmetyczny · Krzeszowice',
+  heroKicker: 'Salon kosmetyczny · Depilacja laserowa · Krzeszowice',
   tagline: 'Piękno zaczyna się tutaj',
   heroLead:
     'Kameralny salon w Krzeszowicach, w którym depilacja laserowa spotyka się ze spokojną, dobrze dobraną pielęgnacją twarzy. Prowadzę go sama, więc od konsultacji po ostatni zabieg w serii jesteś w tych samych rękach.',

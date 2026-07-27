@@ -11,11 +11,13 @@ type NavItem = { href: string; label: string; sub?: SubLink[] }
 export default function Header({
   phone,
   salonName,
+  salonSubtitle,
   treatments,
   priceGroups,
 }: {
   phone: string
   salonName: string
+  salonSubtitle?: string
   treatments: NavTreatment[]
   priceGroups: NavPriceGroup[]
 }) {
@@ -50,8 +52,9 @@ export default function Header({
   return (
     <header className="hdr">
       <div className="wrap hdr-in">
-        <Link href="/" className="logo" onClick={() => setOpen(false)}>
-          {salonName}
+        <Link href="/" className="logo-lockup" onClick={() => setOpen(false)}>
+          <span className="logo">{salonName}</span>
+          {salonSubtitle && <span className="logo-sub">{salonSubtitle}</span>}
         </Link>
         <nav className={`nav ${open ? 'open' : ''}`} aria-label="Menu główne">
           {items.map((item) =>

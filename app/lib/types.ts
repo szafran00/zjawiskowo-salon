@@ -5,6 +5,7 @@ export type PortableBlock = { _type: string; [key: string]: unknown }
 
 export interface Settings {
   salonName?: string
+  salonSubtitle?: string
   theme?: 'gold' | 'lavender' | 'white'
   heroKicker?: string
   tagline?: string

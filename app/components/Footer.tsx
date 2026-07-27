@@ -9,9 +9,10 @@ export default function Footer({ s }: { s: Settings }) {
       <div className="wrap footer-in">
         <div>
           <div className="logo">{s.salonName}</div>
-          <p style={{ margin: '10px 0 0', fontSize: 13, opacity: 0.8 }}>
-            Salon kosmetyczny · Krzeszowice
+          <p className="footer-sub">
+            {s.salonSubtitle || 'Salon kosmetyczny · Depilacja laserowa'}
           </p>
+          <p style={{ margin: '4px 0 0', fontSize: 13, opacity: 0.8 }}>Krzeszowice</p>
           {s.address && (
             <p style={{ margin: '6px 0 0', fontSize: 13, opacity: 0.8 }}>{s.address}</p>
           )}

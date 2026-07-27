@@ -20,6 +20,15 @@ export const siteSettings = defineType({
       initialValue: 'ZJAWISKOWO',
     }),
     defineField({
+      name: 'salonSubtitle',
+      title: 'Podpis pod nazwą (nagłówek i stopka)',
+      description:
+        'Widoczny pod logo w nagłówku i w stopce. Tu trafia informacja o depilacji laserowej.',
+      type: 'string',
+      group: 'general',
+      initialValue: 'Salon kosmetyczny · Depilacja laserowa',
+    }),
+    defineField({
       name: 'theme',
       title: 'Wariant kolorystyczny',
       type: 'string',
@@ -39,7 +48,7 @@ export const siteSettings = defineType({
       title: 'Nadtytuł',
       type: 'string',
       group: 'hero',
-      initialValue: 'Salon kosmetyczny · Krzeszowice',
+      initialValue: 'Salon kosmetyczny · Depilacja laserowa · Krzeszowice',
     }),
     defineField({
       name: 'tagline',
