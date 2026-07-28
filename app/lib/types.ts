@@ -20,6 +20,7 @@ export interface Settings {
   reviewsKicker?: string
   reviewsHeading?: string
   showReviews?: boolean
+  reviewsNote?: string
   googleReviewUrl?: string
   galleryKicker?: string
   galleryHeading?: string

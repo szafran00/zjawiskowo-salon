@@ -153,10 +153,20 @@ export const siteSettings = defineType({
     defineField({
       name: 'showReviews',
       title: 'Pokaż karuzelę opinii',
-      description: 'Opinie dodajesz i ukrywasz pojedynczo w panelu, w sekcji „Opinie”.',
+      description:
+        'Wyłączenie ukrywa całą sekcję z opiniami, bez kasowania czegokolwiek. Opinie NIE pobierają się automatycznie z wizytówki Google — dodajesz je ręcznie w sekcji „Opinie”, a pojedynczą ukrywasz przełącznikiem przy niej.',
       type: 'boolean',
       group: 'home',
       initialValue: true,
+    }),
+    defineField({
+      name: 'reviewsNote',
+      title: 'Dopisek pod opiniami',
+      type: 'string',
+      group: 'home',
+      description:
+        'Zostaw „Opinie pochodzą z wizytówki Google” tylko wtedy, gdy faktycznie przepisujesz opinie z Google. Jeśli wpisujesz własne, wyczyść to pole — inaczej strona twierdzi coś nieprawdziwego.',
+      initialValue: 'Opinie pochodzą z wizytówki Google',
     }),
     defineField({
       name: 'googleReviewUrl',
@@ -288,6 +298,8 @@ export const siteSettings = defineType({
     defineField({
       name: 'showPromo',
       title: 'Pokaż pasek promocji',
+      description:
+        'Wyłączenie chowa złoty pasek pod menu na wszystkich stronach. Treść zostaje zapisana, więc możesz go włączyć z powrotem przy kolejnej promocji.',
       type: 'boolean',
       group: 'promo',
       initialValue: true,
@@ -297,6 +309,7 @@ export const siteSettings = defineType({
       title: 'Treść promocji',
       type: 'string',
       group: 'promo',
+      description: 'Pasek nie pokaże się, dopóki to pole jest puste.',
     }),
     defineField({
       name: 'contactKicker',

@@ -17,7 +17,18 @@ export const metadata: Metadata = {
       'Depilacja laserowa i pielęgnacja twarzy w Krzeszowicach. Umów wizytę: 517 899 229.',
     locale: 'pl_PL',
     type: 'website',
+    // Bez tego odnośnik wysłany na Messengerze czy WhatsAppie pokazuje pustą
+    // kartę, a to główny kanał polecania salonu.
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'ZJAWISKOWO — salon kosmetyczny i depilacja laserowa w Krzeszowicach',
+      },
+    ],
   },
+  twitter: { card: 'summary_large_image' },
 }
 
 export default function RootLayout({

@@ -69,17 +69,40 @@ export default function ContactForm({
         value="Wiadomość ze strony ZJAWISKOWO"
       />
       {noteText && <p className="form-note">{noteText}</p>}
+      {/* id + htmlFor: bez tego kliknięcie w etykietę nie ustawia fokusu,
+          a czytnik ekranu nie odczyta nazwy pola. */}
       <div className="field">
-        <label>Imię</label>
-        <input type="text" name="name" placeholder="Twoje imię" required />
+        <label htmlFor="pole-imie">Imię</label>
+        <input
+          id="pole-imie"
+          type="text"
+          name="name"
+          autoComplete="given-name"
+          placeholder="Twoje imię"
+          required
+        />
       </div>
       <div className="field">
-        <label>Telefon</label>
-        <input type="tel" name="phone" placeholder="Numer telefonu" required />
+        <label htmlFor="pole-telefon">Telefon</label>
+        <input
+          id="pole-telefon"
+          type="tel"
+          name="phone"
+          autoComplete="tel"
+          inputMode="tel"
+          pattern="[0-9 ()+\-]{9,}"
+          title="Podaj numer telefonu, np. 517 899 229"
+          placeholder="Numer telefonu"
+          required
+        />
       </div>
       <div className="field">
-        <label>Wiadomość</label>
-        <textarea name="message" placeholder="W czym możemy pomóc?" />
+        <label htmlFor="pole-wiadomosc">Wiadomość</label>
+        <textarea
+          id="pole-wiadomosc"
+          name="message"
+          placeholder="W czym możemy pomóc?"
+        />
       </div>
       <button
         type="submit"
@@ -93,19 +116,19 @@ export default function ContactForm({
         Wysyłając formularz, akceptujesz{' '}
         <Link href="/polityka-prywatnosci">politykę prywatności</Link>.
       </p>
-      {status === 'ok' && (
-        <p className="form-done">
-          Dziękujemy! Odezwiemy się najszybciej jak to możliwe.
-        </p>
-      )}
-      {status === 'error' && (
-        <p className="form-done">
-          {endpoint || email
-            ? 'Nie udało się wysłać. '
-            : 'Najprościej skontaktować się telefonicznie. '}
-          {phone ? `Zadzwoń: ${phone}.` : ''}
-        </p>
-      )}
+      {/* role="status" ogłasza wynik wysyłki czytnikowi ekranu. */}
+      <p className="form-done" role="status" aria-live="polite">
+        {status === 'ok' &&
+          (endpoint
+            ? 'Dziękujemy! Odezwiemy się najszybciej jak to możliwe.'
+            : 'Otworzyliśmy Twój program pocztowy. Wyślij wiadomość, żeby dokończyć.')}
+        {status === 'error' &&
+          `${
+            endpoint || email
+              ? 'Nie udało się wysłać. '
+              : 'Najprościej skontaktować się telefonicznie. '
+          }${phone ? `Zadzwoń: ${phone}.` : ''}`}
+      </p>
     </form>
   )
 }

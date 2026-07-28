@@ -10,6 +10,8 @@ export const review = defineType({
       title: 'Treść opinii',
       type: 'text',
       rows: 3,
+      description:
+        'Opinie wpisujesz ręcznie — strona nie pobiera ich automatycznie z wizytówki Google. Najprościej skopiować treść z Google i wkleić tutaj.',
       validation: (r) => r.required(),
     }),
     defineField({

@@ -187,6 +187,7 @@ export default async function HomePage() {
           reviews={reviews}
           kicker={s.reviewsKicker}
           heading={s.reviewsHeading}
+          note={s.reviewsNote}
           googleReviewUrl={s.googleReviewUrl}
         />
       )}

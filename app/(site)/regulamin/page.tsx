@@ -90,9 +90,14 @@ export default async function RegulaminPage() {
                 value={body as any}
                 components={{
                   block: {
+                    // Nagłówki regulaminu to sekcje najwyższego poziomu tego
+                    // dokumentu, więc renderujemy je jako h2 — inaczej po h1
+                    // szłoby od razu h3, z przeskokiem poziomu.
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     h3: ({ children, value }: any) => (
-                      <h3 id={slugifyPl(blockText(value))}>{children}</h3>
+                      <h2 className="prose-h" id={slugifyPl(blockText(value))}>
+                        {children}
+                      </h2>
                     ),
                   },
                 }}

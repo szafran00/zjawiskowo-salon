@@ -133,6 +133,44 @@ Poza stanami menu i fokusem opisanymi wyżej:
 - Karuzela opinii: `aria-live`, kropki jako `role="tab"` z `aria-selected`,
   nieaktywne opinie ukryte przed czytnikiem.
 
+## Poprawki po raporcie testów (`RAPORT-BUGOW-2026-07-28.md`)
+
+Raport z niezależnej sesji testowej na commicie `23df3bf`. Zweryfikowany krytycznie —
+jedno ustalenie okazało się nieścisłe (S1 twierdził, że karuzeli nie da się zatrzymać
+najechaniem ani fokusem; oba działały), ale sedno zarzutu było słuszne, bo na ekranie
+dotykowym nie ma ani najechania, ani fokusu.
+
+Naprawione:
+
+- **Strona 404 była domyślna i angielska**, bez żadnego wyjścia. Jest polska,
+  z odnośnikami do strony głównej, cennika, kontaktu i klikalnym numerem.
+- **Pola formularza nie miały dostępnej nazwy** — brakowało `id` i `htmlFor`, więc
+  kliknięcie w etykietę nie ustawiało fokusu, a czytnik ekranu nie odczytywał nazwy pola.
+- **Wynik wysyłki formularza nie był ogłaszany** — doszedł obszar `role="status"`.
+  Przy wariancie `mailto:` komunikat nie kłamie już, że wiadomość poszła.
+- **53 elementy dotykowe poniżej progu** — zostało zero (poza odnośnikami wplecionymi
+  w zdanie, które norma wyłącza). Hamburger ma 44 × 44, kropki karuzeli 28 × 28,
+  odnośniki w stopce, okruszki i spis treści po 24.
+- **Karuzela przewijała się sama** co 6,5 s, bez sposobu zatrzymania na dotyku.
+  Automatyczne przewijanie usunięte — projekt go nie zakładał, a przy okazji znika
+  naruszenie WCAG 2.2.2.
+- **Kropki karuzeli udawały zakładki** (`role="tab"` bez `tabpanel`). Teraz to zwykłe
+  przyciski z `aria-current`.
+- **Brakowało `og:image`** — odnośnik wysłany na Messengerze pokazywał pustą kartę.
+  Wpięty kadr 1200 × 630 z projektu.
+- **Przeskok poziomu nagłówka na `/regulamin`** — sekcje dokumentu renderują się jako
+  `h2`, więc po `h1` nie idzie od razu `h3`.
+
+Zgłoszone, a świadomie **niezrobione** (do decyzji, bo to osobny zakres):
+
+| Punkt | Dlaczego odłożone |
+| --- | --- |
+| W2 — pułapka fokusu i `role="dialog"` w menu mobilnym | działa Escape i `aria-controls`; pełna pułapka fokusu to osobna zmiana |
+| S5 — walidacja numeru telefonu | pole ma `pattern` i `inputmode`, mocniejsza walidacja bywa uciążliwa |
+| S6, S7 — adres kanoniczny, `robots.txt`, `sitemap.xml` | pakiet SEO, jedna sesja pracy |
+| S8 — dane strukturalne `LocalBusiness` | wymaga prawdziwego adresu i NIP, dziś wpisalibyśmy w nie placeholdery |
+| S9, S10 — `next/image`, `next/font` | realna poprawa szybkości, ale to przepisanie warstwy zasobów |
+
 ## Kotwice i rytm przewijania
 
 - `[id]{scroll-margin-top:96px}` — nagłówek ma 70 px, zostaje 26 px zapasu.

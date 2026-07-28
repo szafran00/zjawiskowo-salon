@@ -4,7 +4,7 @@ const settingsProjection = `{
   salonName, salonSubtitle, theme, heroKicker, tagline, heroLead, phone,
   pillarsKicker, pillarsHeading, pillarsLead,
   trustKicker, trustHeading, showTrust,
-  reviewsKicker, reviewsHeading, showReviews, googleReviewUrl,
+  reviewsKicker, reviewsHeading, showReviews, reviewsNote, googleReviewUrl,
   galleryKicker, galleryHeading, showGallery,
   showFaq, faqKicker, faqHeading, faqCtaLabel,
   priceTeaserKicker, priceTeaserHeading,

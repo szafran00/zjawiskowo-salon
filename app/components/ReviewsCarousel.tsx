@@ -1,26 +1,31 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import type { Review } from '../lib/types'
-
-const AUTO_MS = 6500
 
 // Karuzela opinii: przesuwa się pojedynczo (strzałki, kropki, gest na ekranie
 // dotykowym). Pojedyncze opinie ukrywa się w panelu — odfiltrowuje je zapytanie
 // do Sanity, więc tutaj wystarczy wyświetlić to, co przyszło.
+//
+// Bez automatycznego przewijania — tak jest w projekcie, a przy okazji znika
+// problem z WCAG 2.2.2: na ekranie dotykowym nie ma najechania ani fokusu,
+// więc samoprzesuwającej się karuzeli nie dałoby się zatrzymać.
 export default function ReviewsCarousel({
   reviews,
   kicker,
   heading,
+  note,
   googleReviewUrl,
 }: {
   reviews: Review[]
   kicker?: string
   heading?: string
+  /** Puste = dopisek pod opiniami się nie pokazuje. */
+  note?: string | null
   googleReviewUrl?: string
 }) {
+  const noteText = note ?? 'Opinie pochodzą z wizytówki Google'
   const [i, setI] = useState(0)
-  const [paused, setPaused] = useState(false)
   const count = reviews.length
   const touchX = useRef<number | null>(null)
 
@@ -29,29 +34,10 @@ export default function ReviewsCarousel({
     [count]
   )
 
-  // Automatyczne przewijanie zatrzymuje się przy najechaniu myszą, fokusie
-  // klawiatury oraz gdy system prosi o ograniczenie animacji.
-  useEffect(() => {
-    if (count < 2 || paused) return
-    const reduce =
-      typeof window !== 'undefined' &&
-      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-    if (reduce) return
-    const t = setInterval(() => setI((p) => (p + 1) % count), AUTO_MS)
-    return () => clearInterval(t)
-  }, [count, paused])
-
   if (!count) return null
 
   return (
-    <section
-      className="reviews reveal"
-      id="opinie"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
-    >
+    <section className="reviews reveal" id="opinie">
       <div className="wrap sec">
         <div className="rev-head">
           <p className="kicker">{kicker || 'Opinie klientek'}</p>
@@ -109,15 +95,16 @@ export default function ReviewsCarousel({
           )}
         </div>
 
+        {/* Zwykłe przyciski, nie role="tab": zakładki bez powiązanych paneli
+            czytnik ekranu ogłasza jako „zakładka 1 z 5”, która donikąd nie prowadzi. */}
         {count > 1 && (
-          <div className="dots" role="tablist" aria-label="Wybierz opinię">
+          <div className="dots">
             {reviews.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
-                role="tab"
-                aria-selected={idx === i}
-                aria-label={`Opinia ${idx + 1} z ${count}`}
+                aria-current={idx === i ? 'true' : undefined}
+                aria-label={`Pokaż opinię ${idx + 1} z ${count}`}
                 className={`dot ${idx === i ? 'on' : ''}`}
                 onClick={() => go(idx)}
               />
@@ -125,17 +112,19 @@ export default function ReviewsCarousel({
           </div>
         )}
 
-        <div className="google-note">
-          <span>Opinie pochodzą z wizytówki Google</span>
-          {googleReviewUrl && (
-            <>
-              <span aria-hidden="true">·</span>
-              <a href={googleReviewUrl} target="_blank" rel="noopener noreferrer">
-                Wystaw opinię
-              </a>
-            </>
-          )}
-        </div>
+        {(noteText || googleReviewUrl) && (
+          <div className="google-note">
+            {noteText && <span>{noteText}</span>}
+            {googleReviewUrl && (
+              <>
+                {noteText && <span aria-hidden="true">·</span>}
+                <a href={googleReviewUrl} target="_blank" rel="noopener noreferrer">
+                  Wystaw opinię
+                </a>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </section>
   )

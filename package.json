@@ -9,6 +9,7 @@
     "lint": "eslint",
     "seed": "node scripts/seed.mjs",
     "test": "node tests/smoke.mjs",
+    "check:tresc": "node scripts/sprawdz-tresc.mjs",
     "test:visual": "playwright test",
     "qr": "node scripts/qr.mjs"
   },
