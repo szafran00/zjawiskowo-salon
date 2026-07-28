@@ -117,6 +117,22 @@ Spis treści regulaminu **generuje się z treści w panelu**: z nagłówków `h3
 Text, z identyfikatorami z transliteracji polskich znaków. Nowa sekcja dodana przez
 klientkę pojawi się w spisie sama.
 
+## Dostępność
+
+Poza stanami menu i fokusem opisanymi wyżej:
+
+- Każda strona ma znacznik `<main id="tresc">`. Wcześniej nie miała żadnego, więc
+  czytnik ekranu nie potrafił przeskoczyć do treści.
+- Pierwszym przystankiem klawiatury jest odnośnik „Przejdź do treści”, niewidoczny
+  do momentu wejścia w niego Tabem.
+- Hamburger wskazuje menu przez `aria-controls`, a stan otwarcia przez `aria-expanded`.
+- Odnośnik „Zobacz ceny →” w skrócie cennika dostał wysokość pola dotyku 24 px
+  (sam wiersz tekstu miał 16 px).
+- Akordeon FAQ: `aria-expanded` na pytaniu, `aria-controls` i `role="region"`
+  z nazwą na odpowiedzi.
+- Karuzela opinii: `aria-live`, kropki jako `role="tab"` z `aria-selected`,
+  nieaktywne opinie ukryte przed czytnikiem.
+
 ## Kotwice i rytm przewijania
 
 - `[id]{scroll-margin-top:96px}` — nagłówek ma 70 px, zostaje 26 px zapasu.
@@ -148,6 +164,42 @@ zweryfikować.
 
 Zachowane zostały wszystkie trzy warianty kolorystyczne (`gold`, `lavender`, `white`),
 bo pole `theme` nadal jest w panelu. Domyślny i zaakceptowany to „złota elegancja”.
+
+## Wszystko, co dołożył redesign, jest edytowalne w panelu
+
+Redesign dorzucił sporo nowych nagłówków, nadtytułów i sekcji z telefonem. Żaden
+z tych tekstów nie został w kodzie na stałe — każdy ma swoje pole w panelu, a kod
+trzyma tylko wartość zapasową. Dopóki klientka niczego nie wpisze, strona wygląda
+identycznie; gdy wpisze, zmiana jest widoczna po opublikowaniu.
+
+Wymagało to rozszerzenia schematów Sanity, projekcji GROQ i typów, czyli wyjścia poza
+pierwotne „nie zmieniaj”. `sanity/seed/content.mjs` pozostał nietknięty: wartości
+domyślne siedzą jako `initialValue` w schematach i jako zapasy w kodzie, nie w treści
+seedu.
+
+| Dokument w panelu | Nowe pola |
+| --- | --- |
+| Ustawienia salonu → Strona główna | nadtytuł i nagłówek FAQ, przycisk pod pytaniami, nadtytuł i nagłówek „Cennik w skrócie”, nadtytuł sekcji z telefonem, dopisek pod numerem |
+| Ustawienia salonu → Podstrony | nagłówek strony „Zabiegi”, nadtytuł i nagłówek jej sekcji z telefonem |
+| Ustawienia salonu → Kontakt | nadtytuł, nagłówek i wprowadzenie strony Kontakt, dopisek nad formularzem |
+| Cennik | nadtytuł i nagłówek strony, nadtytuł i nagłówek sekcji z telefonem |
+| Zabieg | nagłówek bloku z atutami, nadtytuł i nagłówek sekcji z pełnym opisem, nadtytuł i nagłówek sekcji z telefonem |
+| O mnie | nadtytuł i nagłówek bloku z treścią, nagłówek nad punktami wyróżniającymi, nadtytuł i nagłówek sekcji z telefonem |
+| Vouchery | nadtytuł i nagłówek bloku z punktami, nadtytuł i nagłówek sekcji z warunkami, nadtytuł, nagłówek i opis sekcji z telefonem |
+| Regulamin | nadtytuł i nagłówek strony „Polityka prywatności” |
+
+Pola opcjonalne rozróżniają **niewypełnione** od **celowo wyczyszczonego**: puste pole
+„Przycisk pod pytaniami”, „Dopisek pod numerem telefonu” czy „Dopisek nad formularzem”
+ukrywa dany element, zamiast wracać do wartości zapasowej.
+
+W kodzie celowo zostały etykiety interfejsu, które opisują strukturę, a nie ofertę:
+pozycje menu i okruszki, napisy na przyciskach nawigacyjnych („Poznaj zabieg”,
+„Zobacz ceny”), nazwy kolumn w stopce, etykiety pól formularza i treść paska zgody na
+cookies. Gdyby i one miały trafić do panelu, jest to prosta kontynuacja tego samego
+wzorca.
+
+Treść samej polityki prywatności pozostaje w kodzie, bo nie ma dla niej typu dokumentu
+i wymaga weryfikacji prawnej. Edytowalny jest jej nagłówek.
 
 ## Testy
 
@@ -209,8 +261,13 @@ strony w `app/(site)/`, `app/components/` (`Header`, `Footer`, `Hero`, `Faq`,
 **Nowe:** `app/components/PageHead.tsx`, `app/components/CallFab.tsx`,
 `app/components/WhySection.tsx`, `design/2026-07-28/` (rozpakowany projekt).
 
-**Nietknięte, zgodnie z zakresem:** `sanity/schemaTypes/`, `sanity/lib/queries.ts`,
-`sanity/seed/content.mjs`, `app/lib/types.ts`, `scripts/`, `app/layout.tsx`.
+**Rozszerzone w drugim kroku** (żeby wszystko, co dołożył redesign, dało się edytować
+w panelu): `sanity/schemaTypes/siteSettings.ts`, `pricelist.ts`, `service.ts`,
+`aboutPage.ts`, `voucherPage.ts`, `termsPage.ts`, `sanity/lib/queries.ts`,
+`app/lib/types.ts`. Wyłącznie nowe pola tekstowe — nic nie zostało usunięte ani
+przemianowane, więc dotychczasowe dokumenty w bazie działają bez migracji.
+
+**Nietknięte:** `sanity/seed/content.mjs`, `scripts/`, `app/layout.tsx`.
 
 Plik `Zjawiskowo salon kosmetyczny.zip` w katalogu głównym został rozpakowany do
 `design/2026-07-28/` i celowo nie trafił do repozytorium (to samo w dwóch miejscach).

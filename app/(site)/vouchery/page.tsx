@@ -46,8 +46,10 @@ export default async function VoucheryPage() {
         <div className="wrap">
           <div className="vouch-grid">
             <div className="vouch-body">
-              <p className="kicker">Jak to działa</p>
-              <h2 className="h2">Prezent, który sprawia radość</h2>
+              <p className="kicker">{voucher.introKicker || 'Jak to działa'}</p>
+              <h2 className="h2">
+                {voucher.introHeading || 'Prezent, który sprawia radość'}
+              </h2>
               {voucher.bullets && voucher.bullets.length > 0 && (
                 <ul className="atuty">
                   {voucher.bullets.map((b, i) => (
@@ -78,8 +80,8 @@ export default async function VoucheryPage() {
         <section className="sec reveal" style={{ background: 'var(--bg2)' }}>
           <div className="wrap">
             <div className="faq-head">
-              <p className="kicker">Warunki</p>
-              <h2 className="h2">Dobrze wiedzieć</h2>
+              <p className="kicker">{voucher.termsKicker || 'Warunki'}</p>
+              <h2 className="h2">{voucher.termsHeading || 'Dobrze wiedzieć'}</h2>
             </div>
             <div className="prose" style={{ margin: '0 auto' }}>
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -91,9 +93,12 @@ export default async function VoucheryPage() {
 
       <PhoneCta
         phone={s.phone || ''}
-        kicker="Zamów voucher"
-        heading="Zadzwoń, przygotuję go dla Ciebie"
-        lead="Ustalimy kwotę albo zabieg, a voucher przygotuję do odbioru w salonie."
+        kicker={voucher.ctaKicker || 'Zamów voucher'}
+        heading={voucher.ctaHeading || 'Zadzwoń, przygotuję go dla Ciebie'}
+        lead={
+          voucher.ctaLead ||
+          'Ustalimy kwotę albo zabieg, a voucher przygotuję do odbioru w salonie.'
+        }
       />
     </>
   )

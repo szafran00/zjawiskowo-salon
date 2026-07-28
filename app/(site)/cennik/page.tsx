@@ -32,8 +32,8 @@ export default async function CennikPage() {
     <>
       <PageHead
         crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Cennik' }]}
-        kicker="Cennik"
-        title="Cennik zabiegów"
+        kicker={pl.pageKicker || 'Cennik'}
+        title={pl.pageHeading || 'Cennik zabiegów'}
         lead={pl.intro}
       />
 
@@ -77,8 +77,8 @@ export default async function CennikPage() {
 
       <PhoneCta
         phone={s.phone || ''}
-        kicker="Masz pytania o ceny?"
-        heading="Zadzwoń — dobierzemy pakiet"
+        kicker={pl.ctaKicker || 'Masz pytania o ceny?'}
+        heading={pl.ctaHeading || 'Zadzwoń — dobierzemy pakiet'}
         lead={s.ctaLead}
       />
     </>

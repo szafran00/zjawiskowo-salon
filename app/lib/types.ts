@@ -25,8 +25,22 @@ export interface Settings {
   galleryHeading?: string
   showGallery?: boolean
   showFaq?: boolean
+  faqKicker?: string
+  faqHeading?: string
+  faqCtaLabel?: string
+  priceTeaserKicker?: string
+  priceTeaserHeading?: string
+  ctaKicker?: string
   ctaHeading?: string
   ctaLead?: string
+  ctaHint?: string
+  treatmentsHeading?: string
+  treatmentsCtaKicker?: string
+  treatmentsCtaHeading?: string
+  contactKicker?: string
+  contactHeading?: string
+  contactLead?: string
+  formNote?: string
   showPromo?: boolean
   promoText?: string
   address?: string
@@ -53,10 +67,15 @@ export interface Treatment {
   excerpt?: string
   image?: SanityImage
   atuty?: string[]
+  introHeading?: string
   description?: PortableBlock[]
+  detailsKicker?: string
+  detailsHeading?: string
   pricelistAnchor?: string
   featured?: boolean
   ctaLabel?: string
+  ctaKicker?: string
+  ctaHeading?: string
   order?: number
 }
 
@@ -85,9 +104,14 @@ export interface About {
   kicker?: string
   heading?: string
   lead?: string
+  introKicker?: string
+  introHeading?: string
   body?: PortableBlock[]
   atuty?: string[]
+  whyHeading?: string
   image?: SanityImage
+  ctaKicker?: string
+  ctaHeading?: string
 }
 
 export interface PriceItem {
@@ -105,8 +129,12 @@ export interface PriceGroup {
 }
 
 export interface Pricelist {
+  pageKicker?: string
+  pageHeading?: string
   intro?: string
   outro?: string
+  ctaKicker?: string
+  ctaHeading?: string
   groups?: PriceGroup[]
 }
 
@@ -114,11 +142,18 @@ export interface Voucher {
   kicker?: string
   heading?: string
   lead?: string
+  introKicker?: string
+  introHeading?: string
+  termsKicker?: string
+  termsHeading?: string
   body?: PortableBlock[]
   bullets?: string[]
   image?: SanityImage
   ctaLabel?: string
   showOnHome?: boolean
+  ctaKicker?: string
+  ctaHeading?: string
+  ctaLead?: string
 }
 
 export interface Terms {
@@ -128,6 +163,8 @@ export interface Terms {
   notice?: string
   body?: PortableBlock[]
   privacyIntro?: string
+  privacyKicker?: string
+  privacyHeading?: string
   updatedAt?: string
 }
 

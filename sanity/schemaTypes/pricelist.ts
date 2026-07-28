@@ -6,10 +6,23 @@ export const pricelist = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'pageKicker',
+      title: 'Nadtytuł strony',
+      type: 'string',
+      initialValue: 'Cennik',
+    }),
+    defineField({
+      name: 'pageHeading',
+      title: 'Nagłówek strony',
+      type: 'string',
+      initialValue: 'Cennik zabiegów',
+    }),
+    defineField({
       name: 'intro',
       title: 'Wstęp (opcjonalny)',
       type: 'text',
       rows: 2,
+      description: 'Widoczny pod nagłówkiem strony oraz w skrócie cennika na stronie głównej.',
     }),
     defineField({
       name: 'groups',
@@ -71,6 +84,18 @@ export const pricelist = defineType({
       type: 'text',
       rows: 3,
       description: 'Np. informacja, że ceny mają charakter orientacyjny.',
+    }),
+    defineField({
+      name: 'ctaKicker',
+      title: 'Nadtytuł sekcji z telefonem',
+      type: 'string',
+      initialValue: 'Masz pytania o ceny?',
+    }),
+    defineField({
+      name: 'ctaHeading',
+      title: 'Nagłówek sekcji z telefonem',
+      type: 'string',
+      initialValue: 'Zadzwoń — dobierzemy pakiet',
     }),
   ],
   preview: { prepare: () => ({ title: 'Cennik' }) },

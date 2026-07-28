@@ -84,7 +84,7 @@ export default async function TreatmentPage({
               </div>
             </div>
             <div className="svc-body">
-              <h2 className="h2">Na czym polega</h2>
+              <h2 className="h2">{t.introHeading || 'Na czym polega'}</h2>
               {t.atuty && t.atuty.length > 0 && (
                 <ul className="atuty">
                   {t.atuty.map((a, j) => (
@@ -112,8 +112,8 @@ export default async function TreatmentPage({
         <section className="sec reveal" style={{ background: 'var(--bg2)' }}>
           <div className="wrap">
             <div className="faq-head">
-              <p className="kicker">Szczegóły</p>
-              <h2 className="h2">Więcej o zabiegu</h2>
+              <p className="kicker">{t.detailsKicker || 'Szczegóły'}</p>
+              <h2 className="h2">{t.detailsHeading || 'Więcej o zabiegu'}</h2>
             </div>
             <div className="prose" style={{ margin: '0 auto' }}>
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
@@ -125,8 +125,8 @@ export default async function TreatmentPage({
 
       <PhoneCta
         phone={s.phone || ''}
-        kicker="Pierwszy krok jest bezpłatny"
-        heading="Umów konsultację"
+        kicker={t.ctaKicker || 'Pierwszy krok jest bezpłatny'}
+        heading={t.ctaHeading || 'Umów konsultację'}
         lead={s.ctaLead}
       />
     </>

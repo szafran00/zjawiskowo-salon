@@ -123,8 +123,8 @@ export default async function HomePage() {
         <section className="pricing sec reveal">
           <div className="wrap">
             <div className="faq-head" style={{ marginBottom: 8 }}>
-              <p className="kicker">Cennik w skrócie</p>
-              <h2 className="h2">Ceny i pakiety</h2>
+              <p className="kicker">{s.priceTeaserKicker || 'Cennik w skrócie'}</p>
+              <h2 className="h2">{s.priceTeaserHeading || 'Ceny i pakiety'}</h2>
               {pl.intro && (
                 <p className="lead" style={{ maxWidth: 660 }}>
                   {pl.intro}
@@ -191,7 +191,14 @@ export default async function HomePage() {
         />
       )}
 
-      {s.showFaq !== false && <Faq faqs={faqs} />}
+      {s.showFaq !== false && (
+        <Faq
+          faqs={faqs}
+          kicker={s.faqKicker}
+          heading={s.faqHeading}
+          ctaLabel={s.faqCtaLabel}
+        />
+      )}
 
       {s.showGallery !== false && (
         <section className="sec reveal" id="galeria">
@@ -225,10 +232,10 @@ export default async function HomePage() {
 
       <PhoneCta
         phone={s.phone || ''}
-        kicker="Rezerwacja tylko telefoniczna"
+        kicker={s.ctaKicker || 'Rezerwacja tylko telefoniczna'}
         heading={s.ctaHeading || 'Umów wizytę'}
         lead={s.ctaLead}
-        hint="Nie odbieram, gdy trwa zabieg. Oddzwonię, gdy tylko skończę."
+        hint={s.ctaHint ?? 'Nie odbieram, gdy trwa zabieg. Oddzwonię, gdy tylko skończę.'}
       />
     </>
   )

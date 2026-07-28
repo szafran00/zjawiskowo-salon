@@ -27,9 +27,12 @@ export default async function KontaktPage() {
     <>
       <PageHead
         crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Kontakt' }]}
-        kicker="Kontakt"
-        title="Odwiedź mnie w Krzeszowicach"
-        lead="Rezerwacja wyłącznie telefoniczna — zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd."
+        kicker={s.contactKicker || 'Kontakt'}
+        title={s.contactHeading || 'Odwiedź mnie w Krzeszowicach'}
+        lead={
+          s.contactLead ||
+          'Rezerwacja wyłącznie telefoniczna — zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd.'
+        }
       />
 
       <section className="contact reveal">
@@ -86,6 +89,7 @@ export default async function KontaktPage() {
               endpoint={s.formEndpoint}
               email={s.contactEmail}
               phone={s.phone}
+              note={s.formNote}
             />
           </div>
         </div>

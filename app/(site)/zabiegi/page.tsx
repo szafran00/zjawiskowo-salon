@@ -35,7 +35,7 @@ export default async function ZabiegiPage() {
       <PageHead
         crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Zabiegi' }]}
         kicker={s.pillarsKicker || 'Oferta salonu'}
-        title="Moje zabiegi"
+        title={s.treatmentsHeading || 'Moje zabiegi'}
         lead={s.pillarsLead}
       />
 
@@ -76,8 +76,8 @@ export default async function ZabiegiPage() {
 
       <PhoneCta
         phone={s.phone || ''}
-        kicker="Nie wiesz, co wybrać?"
-        heading="Zadzwoń — doradzę podczas konsultacji"
+        kicker={s.treatmentsCtaKicker || 'Nie wiesz, co wybrać?'}
+        heading={s.treatmentsCtaHeading || 'Zadzwoń — doradzę podczas konsultacji'}
         lead={s.ctaLead}
       />
     </>

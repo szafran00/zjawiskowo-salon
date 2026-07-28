@@ -50,10 +50,28 @@ export const service = defineType({
       of: [{ type: 'string' }],
     }),
     defineField({
+      name: 'introHeading',
+      title: 'Nagłówek bloku z atutami',
+      type: 'string',
+      initialValue: 'Na czym polega',
+    }),
+    defineField({
       name: 'description',
       title: 'Pełny opis',
       type: 'array',
       of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'detailsKicker',
+      title: 'Nadtytuł sekcji z pełnym opisem',
+      type: 'string',
+      initialValue: 'Szczegóły',
+    }),
+    defineField({
+      name: 'detailsHeading',
+      title: 'Nagłówek sekcji z pełnym opisem',
+      type: 'string',
+      initialValue: 'Więcej o zabiegu',
     }),
     defineField({
       name: 'pricelistAnchor',
@@ -73,6 +91,18 @@ export const service = defineType({
       title: 'Tekst przycisku',
       type: 'string',
       initialValue: 'Umów wizytę',
+    }),
+    defineField({
+      name: 'ctaKicker',
+      title: 'Nadtytuł sekcji z telefonem',
+      type: 'string',
+      initialValue: 'Pierwszy krok jest bezpłatny',
+    }),
+    defineField({
+      name: 'ctaHeading',
+      title: 'Nagłówek sekcji z telefonem',
+      type: 'string',
+      initialValue: 'Umów konsultację',
     }),
     defineField({
       name: 'order',

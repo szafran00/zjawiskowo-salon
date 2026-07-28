@@ -118,6 +118,7 @@ export default function Header({
 
         <nav
           ref={navRef}
+          id="menu-glowne"
           className={`nav ${menuOpen ? 'open' : ''}`}
           aria-label="Menu główne"
         >
@@ -173,6 +174,7 @@ export default function Header({
           <button
             className="burger"
             aria-label="Menu"
+            aria-controls="menu-glowne"
             aria-expanded={menuOpen}
             onClick={toggleMenu}
           >

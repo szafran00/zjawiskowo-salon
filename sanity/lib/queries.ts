@@ -5,24 +5,33 @@ const settingsProjection = `{
   pillarsKicker, pillarsHeading, pillarsLead,
   trustKicker, trustHeading, showTrust,
   reviewsKicker, reviewsHeading, showReviews, googleReviewUrl,
-  galleryKicker, galleryHeading, showGallery, showFaq,
-  ctaHeading, ctaLead,
+  galleryKicker, galleryHeading, showGallery,
+  showFaq, faqKicker, faqHeading, faqCtaLabel,
+  priceTeaserKicker, priceTeaserHeading,
+  ctaKicker, ctaHeading, ctaLead, ctaHint,
+  treatmentsHeading, treatmentsCtaKicker, treatmentsCtaHeading,
+  contactKicker, contactHeading, contactLead, formNote,
   showPromo, promoText, address, hours, contactNotes, facebookUrl, instagramUrl,
   googleMapsEmbedUrl, contactEmail, formEndpoint, domain, footerNote,
   heroFaceImage, heroLaserImage, heroMainImage, heroSlides
 }`
 
 const treatmentProjection = `{
-  title, kicker, navLabel, "slug": slug.current, excerpt, image, atuty, description,
-  pricelistAnchor, featured, ctaLabel, order
+  title, kicker, navLabel, "slug": slug.current, excerpt, image, atuty,
+  introHeading, description, detailsKicker, detailsHeading,
+  pricelistAnchor, featured, ctaLabel, ctaKicker, ctaHeading, order
 }`
 
 const pricelistProjection = `{
-  intro, outro,
+  pageKicker, pageHeading, intro, outro, ctaKicker, ctaHeading,
   groups[]{ title, anchor, showInMenu, note, items[]{ name, price, note } }
 }`
 
-const voucherProjection = `{ kicker, heading, lead, body, bullets, image, ctaLabel, showOnHome }`
+const voucherProjection = `{
+  kicker, heading, lead, introKicker, introHeading,
+  termsKicker, termsHeading, body, bullets, image, ctaLabel, showOnHome,
+  ctaKicker, ctaHeading, ctaLead
+}`
 
 export const SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]${settingsProjection}`
 
@@ -49,12 +58,16 @@ export const TREATMENT_QUERY = groq`*[_type == "service" && slug.current == $slu
 
 export const TREATMENT_SLUGS_QUERY = groq`*[_type == "service" && defined(slug.current)]{ "slug": slug.current }`
 
-export const ABOUT_QUERY = groq`*[_type == "aboutPage"][0]{ kicker, heading, lead, body, atuty, image }`
+export const ABOUT_QUERY = groq`*[_type == "aboutPage"][0]{
+  kicker, heading, lead, introKicker, introHeading, body, atuty, whyHeading, image,
+  ctaKicker, ctaHeading
+}`
 
 export const PRICELIST_QUERY = groq`*[_type == "pricelist"][0]${pricelistProjection}`
 
 export const VOUCHER_QUERY = groq`*[_type == "voucherPage"][0]${voucherProjection}`
 
 export const TERMS_QUERY = groq`*[_type == "termsPage"][0]{
-  kicker, heading, lead, notice, body, privacyIntro, updatedAt
+  kicker, heading, lead, notice, body, privacyIntro,
+  privacyKicker, privacyHeading, updatedAt
 }`

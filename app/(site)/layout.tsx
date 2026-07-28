@@ -46,6 +46,10 @@ export default async function SiteLayout({
   return (
     <div className={`shell theme-${theme}`}>
       <RevealInit />
+      {/* Pierwszy przystanek klawiatury: pozwala ominąć menu i wejść w treść. */}
+      <a href="#tresc" className="skip-link">
+        Przejdź do treści
+      </a>
       <Header
         phone={s.phone || ''}
         salonName={s.salonName || 'ZJAWISKOWO'}
@@ -58,7 +62,7 @@ export default async function SiteLayout({
           <b>{s.promoText}</b>
         </div>
       )}
-      {children}
+      <main id="tresc">{children}</main>
       <Footer s={s} />
       <CallFab phone={s.phone || ''} />
       <CookieConsent />

@@ -57,8 +57,8 @@ export default async function AboutPage() {
               </div>
             </div>
             <div className="svc-body">
-              <p className="kicker">Kilka słów</p>
-              <h2 className="h2">{s.tagline}</h2>
+              <p className="kicker">{a.introKicker || 'Kilka słów'}</p>
+              <h2 className="h2">{a.introHeading || s.tagline}</h2>
               <div className="prose">
                 {hasBody ? (
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,12 +85,15 @@ export default async function AboutPage() {
 
       {/* Bez nadtytułu: treść „O mnie” z panelu ma już własny śródtytuł
           „Jak pracuję”, a dwa takie same napisy obok siebie wyglądają na błąd. */}
-      <WhySection heading="Co mnie wyróżnia" items={a.atuty || []} />
+      <WhySection
+        heading={a.whyHeading || 'Co mnie wyróżnia'}
+        items={a.atuty || []}
+      />
 
       <PhoneCta
         phone={s.phone || ''}
-        kicker="Poznajmy się"
-        heading="Zapraszam na bezpłatną konsultację"
+        kicker={a.ctaKicker || 'Poznajmy się'}
+        heading={a.ctaHeading || 'Zapraszam na bezpłatną konsultację'}
         lead={s.ctaLead}
       />
     </>

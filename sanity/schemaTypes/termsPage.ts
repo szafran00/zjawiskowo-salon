@@ -45,6 +45,20 @@ export const termsPage = defineType({
         'Krótki akapit nad odnośnikiem do pełnej polityki prywatności i cookies.',
     }),
     defineField({
+      name: 'privacyKicker',
+      title: 'Polityka prywatności — nadtytuł strony',
+      type: 'string',
+      initialValue: 'Dokumenty',
+    }),
+    defineField({
+      name: 'privacyHeading',
+      title: 'Polityka prywatności — nagłówek strony',
+      type: 'string',
+      description:
+        'Sama treść dokumentu jest w kodzie, bo wymaga weryfikacji prawnej. Tutaj ustawiasz jego nagłówek.',
+      initialValue: 'Polityka prywatności i plików cookies',
+    }),
+    defineField({
       name: 'updatedAt',
       title: 'Data ostatniej aktualizacji',
       type: 'string',

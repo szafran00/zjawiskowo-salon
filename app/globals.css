@@ -67,6 +67,10 @@ html{scroll-behavior:smooth}
 a{color:var(--accent-deep)}
 a:hover{color:var(--accent)}
 
+/* Odnośnik pomijający menu — widoczny dopiero po wejściu w niego klawiaturą. */
+.skip-link{position:fixed;top:8px;left:-9999px;z-index:100;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px 20px;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.skip-link:focus{left:8px}
+
 /* ---- przyciski ---- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:14px;letter-spacing:.02em;padding:15px 28px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s,filter .2s,border-color .2s,color .2s;white-space:nowrap}
 .btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
@@ -283,7 +287,8 @@ a:hover{color:var(--accent)}
 .pkg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;position:relative}
 .pkg-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--text);margin:0}
 .pkg-note{margin:0;font-size:13.5px;line-height:1.55;color:var(--muted);flex:1}
-.pkg-link{margin-top:auto;font-size:13px;font-weight:700;color:var(--accent-deep);text-decoration:none}
+/* padding, żeby pole dotyku miało sensowną wysokość, a nie sam wiersz tekstu */
+.pkg-link{margin-top:auto;display:inline-flex;align-items:center;min-height:24px;padding:4px 0;font-size:13px;font-weight:700;color:var(--accent-deep);text-decoration:none}
 .pkg-link:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* pasek zachęt (gratisy, rabaty) */

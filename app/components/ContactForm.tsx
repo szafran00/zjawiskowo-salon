@@ -11,12 +11,16 @@ export default function ContactForm({
   endpoint,
   email,
   phone,
+  note,
 }: {
   endpoint?: string
   email?: string
   phone?: string
+  /** Puste = dopisek nad formularzem się nie pokazuje. */
+  note?: string | null
 }) {
   const [status, setStatus] = useState<Status>('idle')
+  const noteText = note ?? 'Preferuję kontakt telefoniczny. Ten formularz jest pomocniczy.'
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -64,9 +68,7 @@ export default function ContactForm({
         name="_subject"
         value="Wiadomość ze strony ZJAWISKOWO"
       />
-      <p className="form-note">
-        Preferuję kontakt telefoniczny. Ten formularz jest pomocniczy.
-      </p>
+      {noteText && <p className="form-note">{noteText}</p>}
       <div className="field">
         <label>Imię</label>
         <input type="text" name="name" placeholder="Twoje imię" required />

@@ -6,14 +6,23 @@ import type { Faq as FaqType } from '../lib/types'
 
 export default function Faq({
   faqs,
-  kicker = 'Najczęstsze pytania',
-  heading = 'FAQ',
+  kicker,
+  heading,
+  ctaLabel,
 }: {
   faqs: FaqType[]
-  kicker?: string
-  heading?: string
+  kicker?: string | null
+  heading?: string | null
+  /** Puste = przycisk pod pytaniami się nie pokazuje. */
+  ctaLabel?: string | null
 }) {
   const [openIdx, setOpenIdx] = useState<number | null>(0)
+
+  // Pole niewypełnione w panelu przychodzi z Sanity jako null, więc `??`:
+  // brak wartości bierze zapas, a celowo wyczyszczone pole zostaje puste.
+  const kickerText = kicker || 'Najczęstsze pytania'
+  const headingText = heading || 'FAQ'
+  const ctaText = ctaLabel ?? 'Masz inne pytanie? Napisz do mnie'
 
   if (!faqs.length) return null
 
@@ -21,8 +30,8 @@ export default function Faq({
     <section className="sec reveal" id="faq" style={{ background: 'var(--bg2)' }}>
       <div className="wrap">
         <div className="faq-head">
-          <p className="kicker">{kicker}</p>
-          <h2 className="h2">{heading}</h2>
+          <p className="kicker">{kickerText}</p>
+          <h2 className="h2">{headingText}</h2>
         </div>
         <div className="faq">
           {faqs.map((f, i) => {
@@ -56,11 +65,13 @@ export default function Faq({
             )
           })}
         </div>
-        <div className="btn-row" style={{ justifyContent: 'center', marginTop: 36 }}>
-          <Link href="/kontakt" className="btn btn-ghost">
-            Masz inne pytanie? Napisz do mnie
-          </Link>
-        </div>
+        {ctaText && (
+          <div className="btn-row" style={{ justifyContent: 'center', marginTop: 36 }}>
+            <Link href="/kontakt" className="btn btn-ghost">
+              {ctaText}
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   )

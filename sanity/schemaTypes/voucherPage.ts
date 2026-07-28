@@ -24,6 +24,30 @@ export const voucherPage = defineType({
       rows: 3,
     }),
     defineField({
+      name: 'introKicker',
+      title: 'Nadtytuł bloku z punktami',
+      type: 'string',
+      initialValue: 'Jak to działa',
+    }),
+    defineField({
+      name: 'introHeading',
+      title: 'Nagłówek bloku z punktami',
+      type: 'string',
+      initialValue: 'Prezent, który sprawia radość',
+    }),
+    defineField({
+      name: 'termsKicker',
+      title: 'Nadtytuł sekcji z treścią',
+      type: 'string',
+      initialValue: 'Warunki',
+    }),
+    defineField({
+      name: 'termsHeading',
+      title: 'Nagłówek sekcji z treścią',
+      type: 'string',
+      initialValue: 'Dobrze wiedzieć',
+    }),
+    defineField({
       name: 'body',
       title: 'Treść',
       type: 'array',
@@ -53,6 +77,26 @@ export const voucherPage = defineType({
       title: 'Pokaż sekcję voucherów na stronie głównej',
       type: 'boolean',
       initialValue: true,
+    }),
+    defineField({
+      name: 'ctaKicker',
+      title: 'Nadtytuł sekcji z telefonem',
+      type: 'string',
+      initialValue: 'Zamów voucher',
+    }),
+    defineField({
+      name: 'ctaHeading',
+      title: 'Nagłówek sekcji z telefonem',
+      type: 'string',
+      initialValue: 'Zadzwoń, przygotuję go dla Ciebie',
+    }),
+    defineField({
+      name: 'ctaLead',
+      title: 'Opis sekcji z telefonem',
+      type: 'text',
+      rows: 2,
+      initialValue:
+        'Ustalimy kwotę albo zabieg, a voucher przygotuję do odbioru w salonie.',
     }),
   ],
   preview: { prepare: () => ({ title: 'Vouchery' }) },

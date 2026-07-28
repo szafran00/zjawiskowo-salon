@@ -1,4 +1,7 @@
 import Link from 'next/link'
+import { sanityFetch } from '@/sanity/lib/fetch'
+import { TERMS_QUERY } from '@/sanity/lib/queries'
+import type { Terms } from '@/app/lib/types'
 import PageHead from '@/app/components/PageHead'
 
 export const metadata = {
@@ -19,7 +22,16 @@ const SECTIONS = [
   { id: 'kontakt', title: '7. Kontakt' },
 ]
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  // Sama treść dokumentu zostaje w kodzie (wymaga weryfikacji prawnej),
+  // ale jej nagłówek jest edytowalny w panelu, w dokumencie „Regulamin”.
+  let t: Terms | null = null
+  try {
+    t = await sanityFetch<Terms>(TERMS_QUERY)
+  } catch {
+    t = null
+  }
+
   return (
     <>
       <PageHead
@@ -27,8 +39,8 @@ export default function PrivacyPage() {
           { label: 'Strona główna', href: '/' },
           { label: 'Polityka prywatności' },
         ]}
-        kicker="Dokumenty"
-        title="Polityka prywatności i plików cookies"
+        kicker={t?.privacyKicker || 'Dokumenty'}
+        title={t?.privacyHeading || 'Polityka prywatności i plików cookies'}
       />
 
       <section className="sec">
