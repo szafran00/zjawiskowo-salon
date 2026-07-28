@@ -30,8 +30,8 @@ export default function Hero({
   const laserCap = laser?.navLabel || laser?.kicker || 'Depilacja laserowa'
 
   const phoneBtn = (
-    <a href={tel} className="btn btn-cta btn-phone">
-      Zadzwoń <span className="tel-num">{s.phone}</span>
+    <a href={tel} className="btn btn-cta">
+      Umów się: <span className="tel-num">{s.phone}</span>
     </a>
   )
 
@@ -43,7 +43,7 @@ export default function Hero({
         : fallbackSlides
     return (
       <section className="hero hero-b">
-        <div className="slider">
+        <div className="slider" aria-hidden="true">
           {slides.map((src, i) => (
             <div className="slide" key={i}>
               <div className="ph">
@@ -60,11 +60,11 @@ export default function Hero({
             {phoneBtn}
             <div className="pillar-chips">
               <Link href={laserHref} className="chip">
-                <b></b>
+                <b />
                 {laserCap}
               </Link>
               <Link href={twarzHref} className="chip">
-                <b></b>
+                <b />
                 {twarzCap}
               </Link>
             </div>
@@ -106,7 +106,7 @@ export default function Hero({
     )
   }
 
-  // złota elegancja (domyślny wariant zaakceptowany przez klientkę)
+  // Złota elegancja — wariant zaakceptowany przez klientkę.
   return (
     <section className="hero hero-a">
       <Link href={laserHref} className="hero-tile">

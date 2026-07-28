@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { CONSENT_KEY } from './CookieConsent'
 
 // Mapa Google odporna na RODO: iframe (ustawiający cookies Google) ładuje się
-// dopiero po zgodzie (własny popup lub Cookiebot) albo po kliknięciu „Pokaż mapę".
+// dopiero po zgodzie (własny pasek lub Cookiebot) albo po kliknięciu w kadr.
 export default function MapEmbed({ embedUrl }: { embedUrl?: string }) {
   const [show, setShow] = useState(false)
 
@@ -41,20 +41,17 @@ export default function MapEmbed({ embedUrl }: { embedUrl?: string }) {
 
   if (!embedUrl) {
     return (
-      <div className="ph">
-        <span>osadzona mapa Google: [do wklejenia]</span>
+      <div className="ph" style={{ height: 300 }}>
+        <span>osadzona mapa Google: [do wklejenia w panelu]</span>
       </div>
     )
   }
 
   if (!show) {
     return (
-      <div className="ph map-consent">
-        <p>Mapa Google używa plików cookies Google.</p>
-        <button type="button" className="btn btn-ghost" onClick={() => setShow(true)}>
-          Pokaż mapę
-        </button>
-      </div>
+      <button type="button" className="ph mapbtn" onClick={() => setShow(true)}>
+        <span>Mapa Google — kliknij, aby wczytać (zgoda na treść zewnętrzną)</span>
+      </button>
     )
   }
 

@@ -5,8 +5,9 @@ import Link from 'next/link'
 
 export const CONSENT_KEY = 'zjw-cookie-consent'
 
-// Własny popup zgody na cookies. Chowa się, jeśli skonfigurowany jest Cookiebot
+// Własny pasek zgody na cookies. Chowa się, jeśli skonfigurowany jest Cookiebot
 // (wtedy zgodę obsługuje Cookiebot). Wybór zapamiętywany w localStorage.
+// Mapa Google ładuje się dopiero po zgodzie — zob. MapEmbed.
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false)
 
@@ -31,21 +32,19 @@ export default function CookieConsent() {
   if (!visible) return null
 
   return (
-    <div className="cookie-banner" role="dialog" aria-label="Zgoda na pliki cookies">
-      <div className="cookie-banner-in">
-        <p className="cookie-banner-text">
-          Używamy plików cookies niezbędnych do działania strony. Za Twoją zgodą
-          włączymy też treści zewnętrzne (np. mapę Google).{' '}
-          <Link href="/polityka-prywatnosci">Polityka prywatności</Link>.
-        </p>
-        <div className="cookie-banner-actions">
-          <button className="btn btn-ghost" onClick={() => choose('necessary')}>
-            Tylko niezbędne
-          </button>
-          <button className="btn btn-cta" onClick={() => choose('all')}>
-            Akceptuję wszystkie
-          </button>
-        </div>
+    <div className="cookie" role="dialog" aria-label="Zgoda na pliki cookies">
+      <p>
+        Używamy plików cookies niezbędnych do działania strony. Mapa Google
+        wczytuje się dopiero po Twojej zgodzie.{' '}
+        <Link href="/polityka-prywatnosci">Więcej</Link>
+      </p>
+      <div className="c-actions">
+        <button className="btn btn-ghost" onClick={() => choose('necessary')}>
+          Tylko niezbędne
+        </button>
+        <button className="btn btn-cta" onClick={() => choose('all')}>
+          Akceptuję
+        </button>
       </div>
     </div>
   )

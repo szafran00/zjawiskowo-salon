@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="ZJAWISKOWO — Salon kosmetyczny · Depilacja laserowa · Krzeszowice">
+<meta property="og:description" content="Depilacja laserowa na miejscu, dostępna każdego dnia pracy salonu, oraz kosmetyka twarzy. Piękno zaczyna się tutaj.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+*{box-sizing:border-box}
+.shell{--bg:#FBF7EF;--bg2:#F3E9D6;--surface:#FFFFFF;--text:#2B2620;--muted:#6B6357;--accent:#B8912F;--accent-deep:#846514;--line:rgba(132,101,20,.28);--hero-scrim:linear-gradient(180deg,rgba(43,38,32,.15),rgba(43,38,32,.55));font-family:'Montserrat',system-ui,sans-serif;color:var(--text);background:var(--bg);min-height:100vh;overflow-x:hidden}
+.shell.theme-lavender{--bg:#F4EFFA;--bg2:#E7DEF4;--surface:#FFFFFF;--text:#332B3D;--muted:#6E6579;--accent:#B8912F;--accent-deep:#7d5f14;--line:rgba(132,101,20,.26);--hero-scrim:linear-gradient(180deg,rgba(72,58,96,.2),rgba(72,58,96,.5))}
+.shell.theme-white{--bg:#FFFFFF;--bg2:#F7F6F2;--surface:#FFFFFF;--text:#242220;--muted:#6A655C;--accent:#B0892A;--accent-deep:#7d6016;--line:rgba(125,96,22,.34);--hero-scrim:linear-gradient(180deg,rgba(36,34,32,.12),rgba(36,34,32,.5))}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.sec{padding:84px 0;scroll-margin-top:84px}
+[id]{scroll-margin-top:84px}
+.serif{font-family:'Playfair Display',serif}
+.kicker{font-weight:600;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent-deep);margin:0}
+.h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(40px,6.2vw,74px);line-height:1.04;margin:0;color:var(--text)}
+.h2{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(30px,4vw,48px);line-height:1.1;margin:0;color:var(--text)}
+.h3{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(22px,2.4vw,28px);line-height:1.2;margin:0;color:var(--text)}
+.lead{font-size:clamp(15px,1.6vw,18px);color:var(--muted);line-height:1.65;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:14px;letter-spacing:.02em;padding:15px 28px;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s,filter .2s,border-color .2s,color .2s;white-space:nowrap}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+.btn-cta{background:linear-gradient(135deg,#EBD494,var(--accent));color:#2B2620;box-shadow:0 8px 22px rgba(132,101,20,.22)}
+.btn-cta:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-deep)}
+.ph{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px;border:1px solid var(--line);background-image:repeating-linear-gradient(135deg,var(--bg2) 0 14px,var(--surface) 14px 28px)}
+.ph span{font-family:'Courier New',monospace;font-size:12px;letter-spacing:.03em;text-align:center;color:var(--muted);padding:9px 14px;background:rgba(255,255,255,.82);border-radius:8px;border:1px solid var(--line);max-width:82%}
+.placeholder-note{font-family:'Courier New',monospace;font-size:12px;color:var(--muted);background:var(--bg2);border:1px dashed var(--line);border-radius:8px;padding:12px 14px}
+/* topbar */
+.topbar{background:var(--text);color:#F4EEE2;font-size:12px}
+.topbar-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:9px 24px;max-width:1180px;margin:0 auto}
+.note{opacity:.8;letter-spacing:.02em}
+.switch{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.05em;padding:7px 13px;border-radius:999px;border:1px solid rgba(244,238,226,.3);background:transparent;color:#F4EEE2;cursor:pointer;transition:.2s;white-space:nowrap}
+.pill:hover{border-color:var(--accent)}
+.pill.on{background:linear-gradient(135deg,#EBD494,var(--accent));color:#2B2620;border-color:transparent}
+/* header */
+.hdr{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}
+.logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:1}
+.logo b{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;letter-spacing:.14em;color:var(--text)}
+.logo small{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.25s}
+/* nav + dropdown */
+.nav{display:flex;align-items:center;gap:2px}
+.navitem{position:relative;display:flex}
+.navlink,.navtrigger{font-family:inherit;font-size:13.5px;font-weight:500;color:var(--text);text-decoration:none;letter-spacing:.02em;background:none;border:none;cursor:pointer;padding:10px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:7px;transition:color .2s,background .2s;white-space:nowrap}
+.navlink:hover,.navtrigger:hover,.navitem:hover .navtrigger,.navitem:focus-within .navtrigger{color:var(--accent-deep)}
+.caret{width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.navitem:hover .caret,.navitem:focus-within .caret{transform:rotate(225deg) translateY(1px)}
+.submenu{position:absolute;top:calc(100% - 2px);left:0;min-width:224px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.13);padding:14px 8px 8px;display:flex;flex-direction:column;gap:2px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s;z-index:80}
+.navitem:hover .submenu,.navitem:focus-within .submenu{opacity:1;visibility:visible;transform:none}
+.submenu a{font-size:13.5px;padding:11px 12px;border-radius:8px;color:var(--text);text-decoration:none;transition:.15s}
+.submenu a:hover{background:var(--bg2);color:var(--accent-deep)}
+/* promo */
+.promo{background:linear-gradient(135deg,var(--accent-deep),var(--accent));color:#FFF9EC;text-align:center;font-weight:600;font-size:14px;letter-spacing:.03em;padding:12px 20px}
+.promo b{font-family:'Playfair Display',serif;font-weight:600}
+/* hero shared */
+.hero{position:relative}
+.hero-body .lead{max-width:520px}
+.pillar-chips{display:flex;gap:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:600;color:var(--text);text-decoration:none;transition:.2s}
+.chip:hover{border-color:var(--accent);color:var(--accent-deep)}
+.chip b{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:600;color:var(--accent-deep)}
+.hero-badge .st{color:var(--accent);letter-spacing:2px}
+/* hero A */
+.hero-a{display:grid;grid-template-columns:1fr minmax(300px,440px) 1fr;align-items:stretch;gap:0;min-height:min(78vh,680px)}
+.hero-tile{position:relative;text-decoration:none;overflow:hidden}
+.hero-tile .ph{height:100%;border-radius:0;border:none}
+.tile-cap{position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(180deg,transparent,rgba(43,38,32,.62));color:#fff;font-family:'Playfair Display',serif;font-size:24px;font-weight:600}
+.tile-cap.strong::after{content:'Priorytet';display:block;font-family:'Montserrat';font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#F1DFA6;margin-top:4px;font-weight:700}
+.hero-center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:18px;padding:48px 30px;background:var(--bg)}
+.hero-center .h1{font-size:clamp(34px,4vw,54px)}
+/* hero B */
+.hero-b{min-height:min(88vh,760px);overflow:hidden}
+.slider{position:absolute;inset:0}
+.slide{position:absolute;inset:0;opacity:0;animation:cf 18s infinite}
+.slide .ph{height:100%;border-radius:0;border:none}
+.slide:nth-child(1){animation-delay:0s}.slide:nth-child(2){animation-delay:6s}.slide:nth-child(3){animation-delay:12s}
+@keyframes cf{0%{opacity:0}4%{opacity:1}28%{opacity:1}33%{opacity:0}100%{opacity:0}}
+.hero-overlay{position:relative;z-index:2;min-height:inherit;display:flex;flex-direction:column;justify-content:center;gap:20px;padding:60px 24px;background:var(--hero-scrim)}
+.hero-overlay .h1,.hero-overlay .lead{color:#fff}
+.hero-overlay .kicker{color:#F1DFA6}
+.hero-overlay .chip{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff}
+.hero-overlay .hero-badge{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);color:#fff}
+/* hero C */
+.hero-c{padding-top:38px}
+.hero-c-img{height:min(56vh,480px)}
+.hero-c-body{display:flex;flex-direction:column;gap:16px;text-align:center;align-items:center;padding:36px 0 28px}
+.hero-c-body .lead{max-width:620px}
+.hero-c-tiles{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.svc-tile{position:relative;text-decoration:none;overflow:hidden;border-radius:16px;border:1px solid var(--line)}
+.svc-tile .ph{height:260px;border-radius:0;border:none}
+/* stat bar */
+.stats{background:var(--bg2)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.stat{text-align:center;display:flex;flex-direction:column;gap:7px;align-items:center}
+.stat .big{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,38px);font-weight:600;color:var(--accent-deep);line-height:1}
+.stat .small{font-size:12.5px;font-weight:500;letter-spacing:.04em;color:var(--muted);line-height:1.4;max-width:180px}
+/* why us */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:44px}
+.why-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;gap:14px}
+.why-num{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-deep);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px}
+.why-card p{margin:0;font-size:14.5px;line-height:1.55;color:var(--text)}
+/* incentive band */
+.inc-band{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.inc{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(135deg,var(--bg2),var(--surface));border:1px solid var(--line);border-radius:16px;padding:24px}
+.inc .tag{flex:none;background:linear-gradient(135deg,#EBD494,var(--accent));color:#2B2620;font-size:11px;font-weight:700;letter-spacing:.06em;padding:6px 12px;border-radius:999px;text-transform:uppercase}
+.inc h3{margin:0 0 6px;font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--text)}
+.inc p{margin:0;font-size:14px;line-height:1.55;color:var(--muted)}
+/* service section */
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.svc.rev-order .svc-media{order:2}
+.svc-media .ph{height:min(62vh,520px)}
+.svc-body{display:flex;flex-direction:column;gap:20px}
+.atuty{list-style:none;margin:0;padding:0;display:grid;gap:13px}
+.atuty li{position:relative;padding-left:30px;font-size:14.5px;line-height:1.5;color:var(--text)}
+.atuty li::before{content:'✓';position:absolute;left:0;top:0;color:var(--accent-deep);font-weight:700}
+/* about */
+.about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center}
+.about-grid .ph{height:min(56vh,460px)}
+/* reviews carousel */
+.reviews{background:var(--bg2)}
+.rev-head{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;margin-bottom:20px}
+.rev-score{display:inline-flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:600;color:var(--text)}
+.rev-score .st{color:var(--accent);letter-spacing:2px;font-size:16px}
+.rev-score .num{font-family:'Playfair Display',serif;font-size:20px;color:var(--accent-deep)}
+.carousel{max-width:760px;margin:34px auto 0;display:flex;align-items:center;gap:14px}
+.car-btn{flex:none;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--accent-deep);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.car-btn:hover{border-color:var(--accent);background:var(--bg2)}
+.car-view{flex:1;overflow:hidden}
+.rev-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:38px 34px;display:flex;flex-direction:column;gap:16px;text-align:center;align-items:center;min-height:220px;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.stars{color:var(--accent);letter-spacing:3px;font-size:16px}
+.rev-q{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(18px,2.2vw,23px);line-height:1.5;color:var(--text);margin:0}
+.rev-name{font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--muted);margin:0}
+.dots{display:flex;gap:9px;justify-content:center;margin-top:22px}
+.dot{width:9px;height:9px;border-radius:50%;border:none;background:var(--line);cursor:pointer;padding:0;transition:.2s}
+.dot.on{background:var(--accent);transform:scale(1.25)}
+.google-note{display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:center;margin-top:26px;font-size:13px;color:var(--muted)}
+.google-note a{font-weight:600}
+/* faq */
+.faq-head{text-align:center;margin-bottom:40px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.faq{max-width:800px;margin:0 auto;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:22px 4px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Playfair Display',serif;font-size:19px;color:var(--text)}
+.faq-sign{color:var(--accent-deep);font-size:26px;line-height:1;flex:none}
+.faq-a{overflow:hidden;max-height:0;transition:max-height .32s ease,padding .32s ease;padding:0 4px;color:var(--muted);font-size:14.5px;line-height:1.65}
+.faq-a.open{max-height:360px;padding:0 4px 24px}
+/* pricing */
+.pricing{background:var(--bg)}
+.price-block{margin-top:52px}
+.price-block:first-of-type{margin-top:40px}
+.pb-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;padding-bottom:8px;border-bottom:2px solid var(--accent);margin-bottom:8px}
+.pb-head h3{margin:0}
+.pb-head .pb-sub{font-size:13px;color:var(--muted)}
+.price-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.prow{display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.prow .pn{font-size:14.5px;color:var(--text)}
+.prow .dots-l{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px);min-width:16px}
+.prow .pp{font-weight:700;color:var(--accent-deep);white-space:nowrap;font-variant-numeric:tabular-nums;font-size:14.5px}
+.prow .pt{font-size:12px;color:var(--muted);white-space:nowrap}
+.grp{grid-column:1/-1;margin-top:22px}
+.grp-name{font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--text);margin:0 0 2px;padding-top:8px}
+.pkg-lead{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin:34px 0 18px}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.pkg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;position:relative}
+.pkg-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--text)}
+.gratis{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;background:linear-gradient(135deg,#EBD494,var(--accent));color:#2B2620;font-size:11px;font-weight:800;letter-spacing:.08em;padding:5px 12px;border-radius:999px;text-transform:uppercase}
+.pkg-price{display:flex;align-items:baseline;gap:10px;margin-top:auto}
+.pkg-now{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--text)}
+.pkg-was{font-size:15px;color:var(--muted);text-decoration:line-through}
+.pkg-save{font-size:12.5px;font-weight:700;color:var(--accent-deep)}
+.pkg-save b{font-size:14px}
+.face-promo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 8px}
+.fp{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,var(--bg2),var(--surface));border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.fp .pct{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--accent-deep);line-height:1;flex:none}
+.fp p{margin:0;font-size:14px;line-height:1.5;color:var(--text)}
+/* vouchers */
+.vouchers{background:var(--bg2)}
+.vouch-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.vouch-grid .ph{height:min(52vh,420px)}
+.vouch-body{display:flex;flex-direction:column;gap:20px}
+/* phone bar */
+.phonebar{background:linear-gradient(135deg,var(--accent-deep),var(--accent))}
+.phonebar .h2{color:#fff}
+.phonebar .kicker{color:#F6E7BC}
+.phone-num{background:#fff;color:var(--accent-deep);font-size:22px;padding:18px 42px;margin-top:6px;letter-spacing:.02em}
+.phone-num:hover{transform:translateY(-2px);filter:none}
+/* contact */
+.contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.contact-info{display:flex;flex-direction:column;gap:22px}
+.info-row{display:flex;flex-direction:column;gap:4px}
+.info-row .lbl{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-deep)}
+.info-row .val{font-size:16px;color:var(--text)}
+.info-row a{color:var(--text);text-decoration:none}
+.info-row a:hover{color:var(--accent-deep)}
+.map .ph{height:220px}
+.mapbtn{cursor:pointer}
+.socials{display:flex;gap:12px;flex-wrap:wrap}
+.soc{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:.2s}
+.soc:hover{border-color:var(--accent);color:var(--accent-deep)}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column;gap:16px}
+.form-note{font-size:12px;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field input,.field textarea{font-family:inherit;font-size:15px;padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:110px}
+/* regulamin */
+.reg-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.reg-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px}
+.reg-card h3{margin:0 0 10px;font-size:16px;font-family:'Playfair Display',serif;font-weight:600}
+.reg-card p{margin:0;font-size:13.5px;line-height:1.6;color:var(--muted)}
+/* footer */
+.footer{background:var(--text);color:#E9E1D2;padding:52px 0 30px}
+.footer-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-start}
+.footer .logo b{color:#F4EEE2}
+.footer .logo small{color:rgba(233,225,210,.7)}
+.footer small.copy{display:block;margin-top:28px;font-size:11.5px;opacity:.6;line-height:1.7}
+.footer a{color:#E9E1D2}
+/* sticky mobile call */
+.callfab{position:fixed;left:16px;right:16px;bottom:16px;z-index:58;display:none;font-size:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+a{color:var(--accent-deep)}a:hover{color:var(--accent)}
+/* cookie bar */
+.cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:90;background:var(--text);color:#F4EEE2;border-radius:14px;padding:18px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:16px;box-shadow:0 16px 44px rgba(0,0,0,.3);max-width:720px;margin:0 auto}
+.cookie p{margin:0;font-size:13px;line-height:1.5;flex:1;min-width:220px}
+.cookie .c-actions{display:flex;gap:10px}
+.cookie a{color:#F1DFA6}
+/* responsive */
+@media(max-width:1040px){
+.nav{position:fixed;top:0;right:0;bottom:0;width:min(84vw,340px);background:var(--surface);flex-direction:column;align-items:stretch;justify-content:flex-start;gap:2px;padding:80px 24px 40px;transform:translateX(100%);transition:transform .3s ease;box-shadow:-12px 0 40px rgba(0,0,0,.14);z-index:70;overflow-y:auto}
+.nav.open{transform:none}
+.navitem{width:100%;flex-direction:column;align-items:stretch}
+.navlink,.navtrigger{font-size:16px;padding:14px 6px;justify-content:space-between;width:100%}
+.navtrigger .caret{transform:rotate(45deg)}
+.navitem.open .navtrigger .caret{transform:rotate(225deg) translateY(-2px)}
+.submenu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;background:transparent;padding:0 0 6px 14px;min-width:0;max-height:0;overflow:hidden;transition:max-height .28s ease}
+.navitem.open .submenu{max-height:220px}
+.submenu a{font-size:15px}
+.burger{display:flex}
+.hero-a{grid-template-columns:1fr;min-height:auto}
+.hero-tile .ph{height:300px}
+.svc,.contact-grid,.about-grid,.vouch-grid{grid-template-columns:1fr;gap:32px}
+.svc.rev-order .svc-media,.about-grid .about-media{order:0}
+.stat-grid,.why-grid{grid-template-columns:1fr 1fr;gap:28px}
+.inc-band,.face-promo{grid-template-columns:1fr}
+.reg-cols{grid-template-columns:1fr}
+.price-list{grid-template-columns:1fr}
+.hide-sm{display:none}
+.callfab{display:flex}
+.footer{padding-bottom:96px}
+}
+@media(max-width:560px){
+.sec{padding:60px 0}
+.hero-c-tiles{grid-template-columns:1fr}
+.stat-grid,.why-grid{grid-template-columns:1fr}
+.topbar-in{justify-content:center;text-align:center}
+.carousel{gap:6px}
+.car-btn{width:42px;height:42px}
+.rev-card{padding:28px 20px}
+}
+</style>
+</helmet>
+<div class="shell {{shellCls}}">
+<div class="topbar"><div class="topbar-in"><span class="note">Makieta poglądowa — zdjęcia i część treści przykładowe</span><div class="switch"><button class="pill {{goldOn}}" onClick="{{setGold}}">Złota elegancja</button><button class="pill {{lavOn}}" onClick="{{setLav}}">Lawendowy blask</button><button class="pill {{whiteOn}}" onClick="{{setWhite}}">Świetlista biel</button></div></div></div>
+
+<!-- LOGO: sterowane propem `logoText` (panel Tweaks) — łatwa podmiana zanim logo zostanie wybrane.
+     Aby użyć logo graficznego: zamień <b>/<small> na <img src="logo.png" ...>. -->
+<header class="hdr" id="start"><div class="wrap hdr-in"><a href="#start" class="logo" onClick="{{closeMenu}}"><b>{{ logoText }}</b><small>Salon kosmetyczny · Depilacja laserowa</small></a><nav class="nav {{navOpen}}" aria-label="Menu główne"><sc-for list="{{navItems}}" as="n" hint-placeholder-count="6"><div class="navitem {{ n.openCls }}"><sc-if value="{{ n.hasSub }}" hint-placeholder-val="{{ false }}"><button class="navtrigger" onClick="{{ n.toggle }}" aria-expanded="{{ n.expanded }}">{{ n.label }}<i class="caret"></i></button><div class="submenu"><sc-for list="{{ n.sub }}" as="s" hint-placeholder-count="2"><a href="{{ s.href }}" onClick="{{ closeMenu }}">{{ s.label }}</a></sc-for></div></sc-if><sc-if value="{{ n.noSub }}" hint-placeholder-val="{{ true }}"><a class="navlink" href="{{ n.href }}" onClick="{{ closeMenu }}">{{ n.label }}</a></sc-if></div></sc-for></nav><div class="hdr-right"><a href="tel:517899229" class="btn btn-cta hide-sm">Umów wizytę · 517 899 229</a><button class="burger" onClick="{{toggleMenu}}" aria-label="Menu" aria-expanded="{{ menuExpanded }}"><span></span><span></span><span></span></button></div></div></header>
+
+<!-- EDYTOWALNE: pasek promocji (prop promoText / showPromo) -->
+<sc-if value="{{ showPromo }}" hint-placeholder-val="{{ true }}"><div class="promo"><b>{{ promoText }}</b></div></sc-if>
+
+<!-- ===================== HERO ===================== -->
+<sc-if value="{{ isGold }}" hint-placeholder-val="{{ true }}">
+<section class="hero hero-a"><a href="#laser" class="hero-tile"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-a-laser" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="depilacja laserowa — pion 4:5" hint-size="100%,100%"></x-import></div><div class="tile-cap strong">Depilacja laserowa</div></a><div class="hero-center"><div class="hero-badge"><span class="st">★★★★★</span> 5,0 · 91 opinii w Google</div><p class="kicker">Salon kosmetyczny · Depilacja laserowa · Krzeszowice</p><h1 class="h1">Piękno zaczyna się tutaj</h1><p class="lead">Laser stoi u nas na miejscu i jest dostępny każdego dnia pracy salonu — całą serię zabiegów przechodzisz w jednym, kameralnym miejscu.</p><a href="tel:517899229" class="btn btn-cta">Umów się: 517 899 229</a></div><a href="#twarz" class="hero-tile"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-a-twarz" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="kosmetyka twarzy — pion 4:5" hint-size="100%,100%"></x-import></div><div class="tile-cap">Kosmetyka twarzy</div></a></section>
+</sc-if>
+<sc-if value="{{ isLav }}" hint-placeholder-val="{{ false }}">
+<section class="hero hero-b"><div class="slider"><div class="slide"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-b-1" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="depilacja laserowa · poziom 16:9" hint-size="100%,100%"></x-import></div></div><div class="slide"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-b-2" src="https://images.pexels.com/photos/7031707/pexels-photo-7031707.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="wnętrze salonu · poziom 16:9" hint-size="100%,100%"></x-import></div></div><div class="slide"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-b-3" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="kosmetyka twarzy · poziom 16:9" hint-size="100%,100%"></x-import></div></div></div><div class="hero-overlay"><div class="wrap" style="display:flex;flex-direction:column;gap:20px"><div class="hero-badge"><span class="st">★★★★★</span> 5,0 · 91 opinii w Google</div><p class="kicker">Salon kosmetyczny · Depilacja laserowa · Krzeszowice</p><h1 class="h1">Piękno zaczyna się tutaj</h1><p class="lead">Laser na miejscu, dostępny każdego dnia pracy salonu. Całą serię zabiegów przechodzisz w jednym miejscu.</p><a href="tel:517899229" class="btn btn-cta" style="align-self:flex-start">Umów się: 517 899 229</a><div class="pillar-chips"><a href="#laser" class="chip"><b></b>Depilacja laserowa</a><a href="#twarz" class="chip"><b></b>Kosmetyka twarzy</a></div></div></div></section>
+</sc-if>
+<sc-if value="{{ isWhite }}" hint-placeholder-val="{{ false }}">
+<section class="hero hero-c"><div class="wrap"><div class="ph hero-c-img"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-c-main" src="https://images.pexels.com/photos/6899550/pexels-photo-6899550.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="duże eleganckie zdjęcie — poziom 16:9" hint-size="100%,100%"></x-import></div><div class="hero-c-body"><div class="hero-badge"><span class="st">★★★★★</span> 5,0 · 91 opinii w Google</div><p class="kicker">Salon kosmetyczny · Depilacja laserowa · Krzeszowice</p><h1 class="h1">Piękno zaczyna się tutaj</h1><p class="lead">Laser na miejscu, dostępny każdego dnia pracy salonu, oraz kosmetyka twarzy. Dwa filary, jedno kameralne miejsce.</p><a href="tel:517899229" class="btn btn-cta">Umów się: 517 899 229</a></div><div class="hero-c-tiles"><a href="#laser" class="svc-tile"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-c-laser" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="depilacja laserowa — pion 4:5" hint-size="100%,100%"></x-import></div><div class="tile-cap strong">Depilacja laserowa</div></a><a href="#twarz" class="svc-tile"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-c-twarz" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="kosmetyka twarzy — pion 4:5" hint-size="100%,100%"></x-import></div><div class="tile-cap">Kosmetyka twarzy</div></a></div></div></section>
+</sc-if>
+
+<!-- ===================== PASEK ZAUFANIA (liczby z wizytówki Google) ===================== -->
+<section class="stats reveal"><div class="wrap" style="padding:52px 0"><div class="stat-grid"><sc-for list="{{stats}}" as="s" hint-placeholder-count="4"><div class="stat"><div class="big">{{ s.big }}</div><div class="small">{{ s.small }}</div></div></sc-for></div></div></section>
+
+<!-- ===================== O MNIE ===================== -->
+<section class="sec reveal" id="o-mnie"><div class="wrap"><div class="about-grid"><div class="about-media"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="about-img" src="https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" fit="cover" shape="rect" placeholder="zdjęcie właścicielki / wnętrza — pion 4:5" hint-size="100%,100%"></x-import></div></div><div class="svc-body"><p class="kicker">O mnie</p><h2 class="h2">Salon prowadzony osobiście</h2><p class="lead">ZJAWISKOWO to kameralny salon w Krzeszowicach, w którym przyjmuję jedną klientkę w danym czasie — spokojnie, bez pośpiechu i z pełną uwagą.</p><!-- EDYTOWALNE: droga zawodowa, szkolenia, od kiedy salon działa --><p class="placeholder-note">[O mnie — do uzupełnienia: droga zawodowa, ukończone szkolenia, od kiedy działa salon]</p><div><a href="tel:517899229" class="btn btn-ghost">Umów wizytę</a></div></div></div></div></section>
+
+<!-- ===================== DLACZEGO ZJAWISKOWO ===================== -->
+<section class="sec reveal" id="dlaczego" style="background:var(--bg2)"><div class="wrap"><div class="faq-head" style="margin-bottom:0"><p class="kicker">Dlaczego ZJAWISKOWO</p><h2 class="h2">Kameralnie, blisko i na miejscu</h2></div><div class="why-grid"><sc-for list="{{why}}" as="w" hint-placeholder-count="4"><div class="why-card"><div class="why-num">{{ w.n }}</div><p>{{ w.t }}</p></div></sc-for></div><div class="inc-band"><sc-for list="{{incentives}}" as="i" hint-placeholder-count="2"><div class="inc"><span class="tag">{{ i.tag }}</span><div><h3>{{ i.title }}</h3><p>{{ i.text }}</p></div></div></sc-for></div></div></section>
+
+<!-- ===================== DEPILACJA LASEROWA ===================== -->
+<section class="sec reveal" id="laser"><div class="wrap"><div class="svc rev-order"><div class="svc-media"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="sec-laser" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="depilacja laserowa — pion 4:5" hint-size="100%,100%"></x-import></div></div><div class="svc-body"><p class="kicker">Depilacja laserowa</p><h2 class="h2">Depilacja laserowa na miejscu w Krzeszowicach</h2><ul class="atuty"><sc-for list="{{depAtuty}}" as="a" hint-placeholder-count="6"><li>{{ a }}</li></sc-for></ul><div style="display:flex;gap:12px;flex-wrap:wrap"><a href="tel:517899229" class="btn btn-cta">Umów wizytę</a><a href="#cennik-laser" class="btn btn-ghost">Zobacz cennik</a></div></div></div></div></section>
+
+<!-- ===================== KOSMETYKA TWARZY ===================== -->
+<section class="sec reveal" id="twarz" style="background:var(--bg2)"><div class="wrap"><div class="svc"><div class="svc-media"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="sec-twarz" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="kosmetyka twarzy — pion 4:5" hint-size="100%,100%"></x-import></div></div><div class="svc-body"><p class="kicker">Kosmetyka twarzy</p><h2 class="h2">Kosmetyka twarzy</h2><ul class="atuty"><sc-for list="{{kosAtuty}}" as="a" hint-placeholder-count="5"><li>{{ a }}</li></sc-for></ul><!-- EDYTOWALNE: pełny opis kosmetyki twarzy --><p class="placeholder-note">[pełny opis kosmetyki twarzy — do uzupełnienia]</p><div style="display:flex;gap:12px;flex-wrap:wrap"><a href="tel:517899229" class="btn btn-cta">Umów wizytę</a><a href="#cennik-twarz" class="btn btn-ghost">Zobacz cennik</a></div></div></div></div></section>
+
+<!-- ===================== VOUCHERY ===================== -->
+<section class="vouchers reveal" id="vouchery"><div class="wrap sec"><div class="vouch-grid"><div class="vouch-body"><p class="kicker">Vouchery</p><h2 class="h2">Podaruj chwilę dla siebie</h2><p class="lead">Voucher podarunkowy na wybrany zabieg lub kwotę to elegancki pomysł na prezent. Wystawiamy go od ręki podczas wizyty.</p><!-- EDYTOWALNE: warunki voucherów — termin ważności, formy płatności --><p class="placeholder-note">[Warunki voucherów — do uzupełnienia: termin ważności, formy płatności, sposób realizacji]</p><div><a href="tel:517899229" class="btn btn-cta">Zapytaj o voucher: 517 899 229</a></div></div><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="vouch-img" src="https://images.pexels.com/photos/5240623/pexels-photo-5240623.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" fit="cover" shape="rect" placeholder="voucher / elegancki detal — poziom 3:2" hint-size="100%,100%"></x-import></div></div></div></section>
+
+<!-- ===================== OPINIE (karuzela) ===================== -->
+<section class="reviews reveal" id="opinie"><div class="wrap sec"><div class="rev-head"><p class="kicker">Opinie klientek</p><h2 class="h2">Co mówią klientki</h2><div class="rev-score"><span class="st">★★★★★</span><span class="num">5,0</span><span>91 opinii w Google</span></div></div><!-- EDYTOWALNE: opinie do podmiany prawdziwymi z wizytówki Google (o atmosferze i obsłudze) --><div class="carousel"><button class="car-btn" onClick="{{ revPrev }}" aria-label="Poprzednia opinia">‹</button><div class="car-view" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}"><div class="rev-card"><div class="stars">★★★★★</div><p class="rev-q">{{ currentReview.q }}</p><p class="rev-name">{{ currentReview.name }}</p></div></div><button class="car-btn" onClick="{{ revNext }}" aria-label="Następna opinia">›</button></div><div class="dots"><sc-for list="{{revDots}}" as="d" hint-placeholder-count="5"><button class="dot {{ d.cls }}" onClick="{{ d.go }}" aria-label="{{ d.aria }}"></button></sc-for></div><div class="google-note"><span>Opinie pochodzą z wizytówki Google</span><span>·</span><a href="#" target="_blank" rel="noopener">Wystaw opinię</a></div></div></section>
+
+<!-- ===================== CENNIK ===================== -->
+<section class="pricing sec reveal" id="cennik"><div class="wrap"><div class="faq-head" style="margin-bottom:8px"><p class="kicker">Cennik</p><h2 class="h2">Ceny zabiegów</h2></div>
+
+<!-- DEPILACJA -->
+<div class="price-block" id="cennik-laser"><div class="pb-head"><h3 class="h3">Depilacja laserowa</h3><span class="pb-sub">cena za obszar na jednej wizycie</span></div><div class="price-list"><sc-for list="{{depPrices}}" as="p" hint-placeholder-count="12"><div class="prow"><span class="pn">{{ p.n }}</span><span class="dots-l"></span><span class="pp">{{ p.p }}</span></div></sc-for></div>
+
+<p class="pkg-lead">Pakiety depilacji — oszczędność do 1200 zł przy serii 8 zabiegów</p><div class="pkg-grid"><sc-for list="{{depPkgs}}" as="k" hint-placeholder-count="6"><div class="pkg"><div class="pkg-name">{{ k.name }}</div><sc-if value="{{ k.hasGratis }}" hint-placeholder-val="{{ false }}"><span class="gratis">{{ k.gratis }}</span></sc-if><div class="pkg-price"><span class="pkg-now">{{ k.now }}</span><sc-if value="{{ k.hasWas }}" hint-placeholder-val="{{ false }}"><span class="pkg-was">{{ k.was }}</span></sc-if></div><sc-if value="{{ k.hasSave }}" hint-placeholder-val="{{ false }}"><span class="pkg-save">oszczędność <b>{{ k.save }}</b></span></sc-if></div></sc-for></div></div>
+
+<!-- PIELĘGNACJA TWARZY -->
+<div class="price-block" id="cennik-twarz"><div class="pb-head"><h3 class="h3">Pielęgnacja twarzy</h3><span class="pb-sub">cena i czas trwania zabiegu</span></div><div class="face-promo"><div class="fp"><span class="pct">−20%</span><p>na serię 5 zabiegów co 2–3 tygodnie — albo szósty zabieg gratis</p></div><div class="fp"><span class="pct">−20%</span><p>przy dwóch różnych zabiegach na jednej wizycie</p></div></div><div class="price-list"><sc-for list="{{facePrices}}" as="g" hint-placeholder-count="10"><div class="grp"><p class="grp-name">{{ g.g }}</p><sc-for list="{{ g.variants }}" as="v" hint-placeholder-count="2"><div class="prow"><span class="pn">{{ v.label }}</span><span class="dots-l"></span><span class="pp">{{ v.price }}</span><sc-if value="{{ v.hasTime }}" hint-placeholder-val="{{ false }}"><span class="pt">{{ v.time }}</span></sc-if></div></sc-for></div></sc-for></div></div>
+</div></section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec reveal" id="faq" style="background:var(--bg2)"><div class="wrap"><div class="faq-head"><p class="kicker">Najczęstsze pytania</p><h2 class="h2">FAQ</h2></div><!-- EDYTOWALNE: pytania i odpowiedzi --><div class="faq"><sc-for list="{{faqs}}" as="f" hint-placeholder-count="6"><div class="faq-item"><button class="faq-q" onClick="{{ f.toggle }}" aria-expanded="{{ f.expanded }}">{{ f.q }}<span class="faq-sign">{{ f.sign }}</span></button><div class="faq-a {{ f.openCls }}">{{ f.a }}</div></div></sc-for></div></div></section>
+
+<!-- ===================== GALERIA ===================== -->
+<section class="sec reveal" id="galeria"><div class="wrap"><div class="faq-head"><p class="kicker">Galeria</p><h2 class="h2">Wnętrze salonu i atmosfera</h2></div><div class="gal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"><sc-for list="{{gallery}}" as="g" hint-placeholder-count="8"><div class="ph" style="height:220px"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="gal-{{ $index }}" src="{{ g.src }}" fit="cover" shape="rect" placeholder="{{ g.label }}" hint-size="100%,100%"></x-import></div></sc-for><div class="ph" style="grid-column:span 2;height:220px"><span>filmik 9:16 (pionowy) — krótkie wideo z atmosfery salonu, do 30 s</span></div></div></div></section>
+
+<!-- ===================== PASEK Z TELEFONEM ===================== -->
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Umów wizytę</p><h2 class="h2">Zadzwoń — ustalimy dogodny termin</h2><p style="color:rgba(255,255,255,.88);max-width:520px;margin:0;line-height:1.6">Telefon to jedyny sposób rezerwacji. Oddzwaniamy, jeśli nie odbierzemy.</p><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<!-- ===================== KONTAKT ===================== -->
+<section class="contact reveal" id="kontakt"><div class="wrap sec"><div class="faq-head" style="align-items:flex-start;text-align:left;margin-bottom:36px"><p class="kicker">Kontakt</p><h2 class="h2">Odwiedź nas w Krzeszowicach</h2></div><div class="contact-grid"><div class="contact-info"><div class="info-row"><span class="lbl">Adres</span><span class="val">ul. 3 Maja [nr budynku], 32-065 Krzeszowice</span><span class="pt" style="font-size:13px;color:var(--muted)">Budynek przy automyjni · wejście od strony parkingu · parter · bezpłatny parking</span></div><div class="info-row"><span class="lbl">Telefon</span><a class="val" href="tel:517899229">517 899 229</a></div><div class="info-row"><span class="lbl">Godziny otwarcia</span><span class="val">pon.–pt. 9:00–19:00 · sob. 9:00–14:00 <em style="color:var(--muted);font-style:normal;font-size:13px">[do potwierdzenia]</em></span></div><div class="map"><sc-if value="{{ mapOn }}" hint-placeholder-val="{{ false }}"><div class="ph"><span>[tu osadzona mapa Google — placeholder]</span></div></sc-if><sc-if value="{{ mapOff }}" hint-placeholder-val="{{ true }}"><button class="ph mapbtn" onClick="{{ loadMap }}" style="width:100%;border-style:dashed"><span>Mapa Google — kliknij, aby wczytać (zgoda na treść zewnętrzną)</span></button></sc-if></div><div class="socials"><a class="soc" href="#" target="_blank" rel="noopener">Facebook [link]</a><a class="soc" href="#" target="_blank" rel="noopener">Instagram [link]</a></div></div><form class="form" onSubmit="{{ onSubmit }}"><p class="form-note">Preferujemy kontakt telefoniczny. Ten formularz jest pomocniczy.</p><div class="field"><label>Imię</label><input type="text" placeholder="Twoje imię" required=""></div><div class="field"><label>Telefon</label><input type="tel" placeholder="Numer telefonu" required=""></div><div class="field"><label>Wiadomość</label><textarea placeholder="W czym możemy pomóc?"></textarea></div><button type="submit" class="btn btn-cta" style="width:100%">Wyślij zapytanie</button></form></div></div></section>
+
+<!-- ===================== REGULAMIN / DOKUMENTY ===================== -->
+<section class="sec reveal" id="regulamin" style="background:var(--bg2)"><div class="wrap"><div class="faq-head" style="align-items:flex-start;text-align:left;margin-bottom:0"><p class="kicker">Dokumenty</p><h2 class="h2">Regulamin i prywatność</h2></div><div class="reg-cols"><div class="reg-card"><h3>Regulamin salonu</h3><p>[Treść regulaminu do uzupełnienia — zasady wizyt, odwołania, przygotowanie do zabiegu, dane działalności.]</p></div><div class="reg-card"><h3>Polityka prywatności</h3><p>[Informacja o przetwarzaniu danych i plikach cookies — do uzupełnienia.]</p></div><div class="reg-card"><h3>Dane działalności</h3><p>[Nazwa firmy, NIP, adres do korespondencji — do uzupełnienia.]</p></div></div></div></section>
+
+<!-- ===================== STOPKA ===================== -->
+<footer class="footer"><div class="wrap footer-in"><div><div class="logo"><b>{{ logoText }}</b><small>Salon kosmetyczny · Depilacja laserowa</small></div><p style="margin:14px 0 0;font-size:13px;opacity:.8">Krzeszowice · ul. 3 Maja [nr]</p></div><div style="font-size:13px;line-height:1.9"><a href="tel:517899229" style="text-decoration:none">517 899 229</a><br><a href="https://zjawiskowo.com.pl" style="text-decoration:none">zjawiskowo.com.pl</a><br><a href="#regulamin" style="text-decoration:none">Regulamin i prywatność</a></div></div><div class="wrap"><small class="copy">© ZJAWISKOWO, Krzeszowice. Wszelkie prawa zastrzeżone. Godziny otwarcia i numer budynku — do potwierdzenia.</small></div></footer>
+
+<!-- sticky mobile call -->
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+
+<!-- cookie consent -->
+<sc-if value="{{ showCookie }}" hint-placeholder-val="{{ true }}"><div class="cookie"><p>Używamy plików cookies, aby strona działała poprawnie. Mapa Google wczytuje się dopiero po Twojej zgodzie. <a href="#regulamin">Więcej</a></p><div class="c-actions"><button class="btn btn-ghost" style="border-color:rgba(244,238,226,.4);color:#F4EEE2" onClick="{{ dismissCookie }}">Tylko niezbędne</button><button class="btn btn-cta" onClick="{{ dismissCookie }}">Akceptuję</button></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;gold&quot;,&quot;lavender&quot;,&quot;white&quot;],&quot;default&quot;:&quot;gold&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Wygląd&quot;},&quot;logoText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ZJAWISKOWO&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Wygląd&quot;},&quot;showPromo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Treść&quot;},&quot;promoText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rezerwacja pakietu jesiennego do końca sierpnia&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Treść&quot;}}">
+class Component extends DCLogic {
+  state = { theme: null, menuOpen: false, faqOpen: 0, openSub: null, revIdx: 0, cookie: true, mapOn: false };
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+    this._tx = 0;
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    const t = this.state.theme || this.props.defaultTheme || 'gold';
+    const set = (x) => () => this.setState({ theme: x, menuOpen: false });
+
+    const nav = [
+      { label: 'O mnie', href: '#o-mnie' },
+      { label: 'Zabiegi', sub: [{ label: 'Depilacja laserowa', href: '#laser' }, { label: 'Kosmetyka twarzy', href: '#twarz' }] },
+      { label: 'Cennik', sub: [{ label: 'Depilacja laserowa', href: '#cennik-laser' }, { label: 'Kosmetyka twarzy', href: '#cennik-twarz' }] },
+      { label: 'Vouchery', href: '#vouchery' },
+      { label: 'Regulamin', href: '#regulamin' },
+      { label: 'Kontakt', href: '#kontakt' },
+    ];
+    const navItems = nav.map((n, i) => {
+      const hasSub = !!n.sub;
+      const open = this.state.openSub === i;
+      return {
+        label: n.label, href: n.href || '#', hasSub, noSub: !hasSub,
+        sub: n.sub || [], openCls: open ? 'open' : '', expanded: open ? 'true' : 'false',
+        toggle: () => this.setState(s => ({ openSub: s.openSub === i ? null : i })),
+      };
+    });
+
+    const depAreas = [
+      ['Łydki, stopy i palce', 250], ['Uda i kolana', 300], ['Całe nogi', 450], ['Bikini płytkie', 200],
+      ['Bikini średnie', 250], ['Bikini głębokie', 300], ['Okolice bikini', 150], ['Przestrzeń międzypośladkowa', 100],
+      ['Pośladki', 200], ['Linia biała', 100], ['Pachy', 150], ['Wąsik', 100], ['Broda', 150],
+      ['Twarz, baki i policzki', 200], ['Kark', 150], ['Plecy', 350], ['Ramiona', 200], ['Przedramiona', 200],
+      ['Dłonie i palce', 100], ['Całe ręce', 350], ['Klatka piersiowa', 250], ['Brzuch', 200],
+    ].map(([n, p]) => ({ n, p: p + ' zł' }));
+
+    const pkgRaw = [
+      { n: 'Łydki i bikini płytkie', g: 'pachy gratis', now: 450, was: 600, save: 1200 },
+      { n: 'Łydki i bikini średnie', g: 'pachy gratis', now: 500, was: 650, save: 1200 },
+      { n: 'Łydki i bikini głębokie', g: 'pachy gratis', now: 550, was: 700, save: 1200 },
+      { n: 'Pośladki i przestrzeń międzypośladkowa', now: 250, was: 300, save: 400 },
+      { n: 'Pachy — sześć zabiegów', g: 'dwa gratis', now: 150, save: 300 },
+      { n: 'Plecy', g: 'kark gratis', now: 350, was: 500, save: 1200 },
+      { n: 'Plecy i kark', g: 'pachy gratis', now: 500, was: 650, save: 1200 },
+      { n: 'Klatka piersiowa i brzuch', now: 350, was: 450, save: 800 },
+      { n: 'Wąsik i broda', now: 200, was: 250, save: 400 },
+      { n: 'Broda i twarz', g: 'wąsik gratis', now: 350, was: 450, save: 800 },
+      { n: 'Pakiet na start — całe nogi i pachy', now: 500, was: 600 },
+    ];
+    const depPkgs = pkgRaw.map(k => ({
+      name: k.n, gratis: k.g || '', hasGratis: !!k.g,
+      now: k.now + ' zł', was: k.was ? k.was + ' zł' : '', hasWas: !!k.was,
+      save: k.save ? k.save + ' zł' : '', hasSave: !!k.save,
+    }));
+
+    const faceRaw = [
+      { g: 'Oczyszczanie wodorowe premium', v: [['twarz', '240 zł', '90 min'], ['twarz, szyja i dekolt', '290 zł', '120 min']] },
+      { g: 'Peeling kawitacyjny z terapią LED', v: [['twarz', '140 zł', '45 min'], ['twarz, szyja i dekolt', '170 zł', '60 min']] },
+      { g: 'Mikrodermabrazja diamentowa', v: [['twarz', '190 zł', '60 min'], ['twarz, szyja i dekolt', '230 zł', '90 min']] },
+      { g: 'Oczyszczanie manualne', v: [['', '250 zł', '120–180 min']] },
+      { g: 'Mezoterapia bezigłowa REVITAL 20+ i 30+', v: [['twarz', '280 zł', '70 min'], ['szyja i dekolt', '320 zł', '90 min']] },
+      { g: 'Mezoterapia bezigłowa — odmładzanie 40+', v: [['twarz', '280 zł', ''], ['szyja i dekolt', '320 zł', '']] },
+      { g: 'Mezoterapia bezigłowa — lifting 45+', v: [['twarz', '280 zł', ''], ['szyja i dekolt', '320 zł', '']] },
+      { g: 'Mezoterapia bezigłowa — skóra naczyniowa', v: [['', '280 zł', '']] },
+      { g: 'Mezoterapia bezigłowa — skóra skłonna do niedoskonałości', v: [['', '280 zł', '']] },
+      { g: 'Radiofrekwencja', v: [['lifting okolic oka', '120 zł', '40 min'], ['lifting twarzy', '160 zł', '60 min'], ['cała twarz', '250 zł', '70 min'], ['twarz, szyja i dekolt', '290 zł', '90 min']] },
+      { g: 'Ultradźwięki', v: [['twarz', '210 zł', '70 min'], ['twarz, szyja i dekolt', '240 zł', '90 min']] },
+      { g: 'Sonoforeza', v: [['twarz', '150 zł', '70 min'], ['twarz, szyja i dekolt', '180 zł', '90 min']] },
+      { g: 'Stylizacja oprawy oka', v: [['regulacja brwi', '30 zł', ''], ['koloryzacja rzęs', '40 zł', ''], ['koloryzacja brwi z peelingiem i regulacją', '70 zł', ''], ['koloryzacja brwi i rzęs', '100 zł', '']] },
+      { g: 'Dodatki', v: [['ampułka', '30 zł', ''], ['maska algowa', '20 zł', '']] },
+    ];
+    const facePrices = faceRaw.map(f => ({
+      g: f.g,
+      variants: f.v.map(([label, price, time]) => ({ label, price, time, hasTime: !!time })),
+    }));
+
+    const reviews = [
+      { q: 'Kameralnie, spokojnie i bez pośpiechu. Czuję się tu naprawdę zaopiekowana.', name: 'Anna K.' },
+      { q: 'Miła obsługa, czysto i elegancko. Zawsze na czas, zawsze z uśmiechem.', name: 'Magda W.' },
+      { q: 'Pani właścicielka wszystko dokładnie tłumaczy i odpowiada na każde pytanie. Pełen profesjonalizm.', name: 'Ewelina S.' },
+      { q: 'Przyjemna atmosfera i dbałość o komfort w każdym szczególe. Chętnie wracam.', name: 'Karolina P.' },
+      { q: 'Najmilszy salon w Krzeszowicach. Zawsze wychodzę w dobrym nastroju.', name: 'Joanna R.' },
+    ];
+    const ri = ((this.state.revIdx % reviews.length) + reviews.length) % reviews.length;
+    const goRev = (d) => () => this.setState(s => ({ revIdx: s.revIdx + d }));
+    const revDots = reviews.map((_, i) => ({
+      cls: i === ri ? 'on' : '', aria: 'Opinia ' + (i + 1),
+      go: () => this.setState({ revIdx: i }),
+    }));
+
+    const faqData = [
+      { q: 'Jak umówić wizytę?', a: 'Wizyty umawiamy telefonicznie pod numerem 517 899 229. To jedyny kanał rezerwacji — nie prowadzimy zapisów online ani przez e-mail.' },
+      { q: 'Jak wygląda pierwsza wizyta na depilacji laserowej?', a: 'Zaczynamy od bezpłatnej konsultacji i próby laserowej, podczas której omawiamy przebieg zabiegu i dobieramy jego parametry indywidualnie.' },
+      { q: 'Ile zabiegów obejmuje seria depilacji?', a: 'Depilacja laserowa to seria zabiegów wykonywanych w odstępach kilku tygodni, najczęściej około ośmiu. Ponieważ laser jest u nas na miejscu każdego dnia pracy, całą serię przechodzisz w jednym miejscu.' },
+      { q: 'Jak przygotować się do zabiegu depilacji?', a: 'Na kilka dni przed wizytą prosimy o wygolenie okolicy oraz unikanie opalania. Szczegóły przekazujemy przy zapisie.' },
+      { q: 'Czy są przeciwwskazania do zabiegów?', a: 'Możliwe przeciwwskazania weryfikujemy zawsze podczas bezpłatnej konsultacji przed pierwszym zabiegiem.' },
+      { q: 'Jakie formy płatności akceptujecie?', a: 'Przyjmujemy płatność gotówką oraz kartą. Dostępne są także pakiety oraz vouchery podarunkowe.' },
+    ];
+
+    return {
+      shellCls: 'theme-' + t,
+      isGold: t === 'gold', isLav: t === 'lavender', isWhite: t === 'white',
+      goldOn: t === 'gold' ? 'on' : '', lavOn: t === 'lavender' ? 'on' : '', whiteOn: t === 'white' ? 'on' : '',
+      setGold: set('gold'), setLav: set('lavender'), setWhite: set('white'),
+      navOpen: this.state.menuOpen ? 'open' : '',
+      menuExpanded: this.state.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false, openSub: null }),
+      navItems,
+      logoText: this.props.logoText ?? 'ZJAWISKOWO',
+      showPromo: this.props.showPromo ?? true,
+      promoText: this.props.promoText ?? 'Rezerwacja pakietu jesiennego do końca sierpnia',
+      stats: [
+        { big: '★ 5,0', small: 'średnia ocena w wizytówce Google' },
+        { big: '90+', small: 'opinii wystawionych przez klientki' },
+        { big: 'Laser', small: 'zawsze na miejscu' },
+        { big: '1:1', small: 'jedna klientka w danym czasie' },
+      ],
+      why: [
+        { n: '1', t: 'Kameralny salon, jedna klientka w danym czasie.' },
+        { n: '2', t: 'Laser na miejscu, dostępny każdego dnia pracy salonu.' },
+        { n: '3', t: 'Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem.' },
+        { n: '4', t: 'Dobór pielęgnacji domowej po zabiegu.' },
+      ],
+      incentives: [
+        { tag: 'Depilacja', title: 'Bezpłatna konsultacja i próba laserowa', text: 'Przed pierwszym zabiegiem depilacji spokojnie omawiamy przebieg i wykonujemy próbę laserową — bez zobowiązań.' },
+        { tag: 'Twarz', title: 'Bezpłatna konsultacja pielęgnacyjna', text: 'Przy zabiegu twarzy dobieramy plan pielęgnacji do potrzeb Twojej skóry.' },
+      ],
+      depAtuty: [
+        'Laser na miejscu, dostępny każdego dnia pracy salonu.',
+        'Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem.',
+        'Parametry zabiegu dobierane indywidualnie podczas konsultacji.',
+        'Cała seria zabiegów w jednym, kameralnym miejscu.',
+        'Pakiety dopasowane do wybranych obszarów ciała.',
+        'Dobór pielęgnacji domowej po zabiegu.',
+      ],
+      kosAtuty: [
+        'Szeroki wybór zabiegów: oczyszczanie, mikrodermabrazja, mezoterapia bezigłowa, radiofrekwencja i inne.',
+        'Zabieg dobrany do potrzeb Twojej skóry.',
+        'Bezpłatna konsultacja pielęgnacyjna.',
+        'Dobór pielęgnacji domowej po zabiegu.',
+        'Rabaty na serie zabiegów oraz zabiegi łączone.',
+      ],
+      depPrices: depAreas, depPkgs, facePrices,
+      currentReview: reviews[ri],
+      revPrev: goRev(-1), revNext: goRev(1), revDots,
+      onTouchStart: (e) => { this._tx = e.changedTouches[0].clientX; },
+      onTouchEnd: (e) => { const dx = e.changedTouches[0].clientX - this._tx; if (Math.abs(dx) > 40) this.setState(s => ({ revIdx: s.revIdx + (dx < 0 ? 1 : -1) })); },
+      faqs: faqData.map((f, i) => ({ q: f.q, a: f.a, openCls: this.state.faqOpen === i ? 'open' : '', sign: this.state.faqOpen === i ? '–' : '+', expanded: this.state.faqOpen === i ? 'true' : 'false', toggle: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? null : i })) })),
+      gallery: [
+        { src: 'https://images.pexels.com/photos/6899550/pexels-photo-6899550.jpeg?auto=compress&cs=tinysrgb&w=900', label: 'Wnętrze gabinetu — poziom 3:2' },
+        { src: 'https://images.pexels.com/photos/7031707/pexels-photo-7031707.jpeg?auto=compress&cs=tinysrgb&w=900', label: 'Strefa relaksu — poziom 3:2' },
+        { src: 'https://images.pexels.com/photos/7031704/pexels-photo-7031704.jpeg?auto=compress&cs=tinysrgb&w=900', label: 'Wnętrze salonu — poziom 3:2' },
+        { src: 'https://images.pexels.com/photos/5240623/pexels-photo-5240623.jpeg?auto=compress&cs=tinysrgb&w=900', label: 'Kosmetyki — detal' },
+        { src: 'https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&cs=tinysrgb&w=900', label: 'Kosmetyka twarzy — kadr' },
+        { src: 'https://images.pexels.com/photos/7750099/pexels-photo-7750099.jpeg?auto=compress&cs=tinysrgb&w=900', label: 'Poczekalnia — poziom 3:2' },
+      ],
+      mapOn: this.state.mapOn, mapOff: !this.state.mapOn,
+      loadMap: () => this.setState({ mapOn: true }),
+      showCookie: this.state.cookie,
+      dismissCookie: () => this.setState({ cookie: false }),
+      onSubmit: (e) => { e.preventDefault(); alert('Dziękujemy! To makieta poglądowa — formularz nie wysyła wiadomości. Prosimy o kontakt telefoniczny: 517 899 229.'); },
+    };
+  }
+}
+</script>
+</body>
+</html>

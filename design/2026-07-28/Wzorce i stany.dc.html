@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><span class="cur">Wzorce i stany</span></nav><p class="kicker">Dokumentacja projektu</p><h1 class="h1">Wzorce i stany</h1><p class="lead">Strona pomocnicza dla wdrożenia: wspólny nagłówek podstron, stany menu oraz stan pusty i przeciążony treścią. Nie jest częścią nawigacji publicznej.</p></div></section>
+
+<!-- 1. NAGŁÓWEK STRONY WEWNĘTRZNEJ -->
+<section class="sec"><div class="wrap">
+<span class="state-label">Wzorzec · nagłówek podstrony</span>
+<h2 class="h2" style="margin-bottom:8px">Nagłówek strony wewnętrznej</h2>
+<p class="lead" style="max-width:760px;margin-bottom:26px">Wspólny blok pod menu na każdej podstronie: okruszki (breadcrumbs) → kicker → tytuł H1 → lead. Tło <code>--bg2</code>, delikatna poświata w rogu, ten sam rytm na wszystkich stronach.</p>
+<div class="state-demo"><section class="pagehead" style="border-radius:10px"><div class="pagehead-deco"></div><div class="pagehead-in" style="padding:40px 32px"><nav class="crumbs"><a href="#">Strona główna</a><span class="sep">›</span><a href="#">Zabiegi</a><span class="sep">›</span><span class="cur">Depilacja laserowa</span></nav><p class="kicker">Kicker sekcji</p><h1 class="h1" style="font-size:clamp(32px,4vw,52px)">Tytuł podstrony (H1)</h1><p class="lead">Lead — jedno–dwa zdania wprowadzenia. Maksymalna szerokość 640 px dla dobrej czytelności.</p></div></section></div>
+<p style="font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.6"><strong>Decyzja:</strong> breadcrumbs zawsze pokazują ścieżkę i dają szybki powrót o poziom wyżej; H1 jest jedno na stronę (SEO + czytnik ekranu); lead ograniczony szerokością, żeby wiersz nie był za długi.</p>
+</div></section>
+
+<!-- 2. STANY MENU -->
+<section class="sec" style="background:var(--bg2)"><div class="wrap">
+<span class="state-label">Wzorzec · nawigacja</span>
+<h2 class="h2" style="margin-bottom:26px">Stany menu</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+<div>
+<span class="state-label">A · stan spoczynku</span>
+<div class="state-demo" style="padding:20px"><div style="display:flex;gap:2px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px"><a class="navlink" href="#">O mnie</a><span class="navtrigger">Zabiegi<i class="caret"></i></span><span class="navtrigger">Cennik<i class="caret"></i></span><a class="navlink" href="#">Vouchery</a><a class="navlink" href="#">Regulamin</a><a class="navlink" href="#">Kontakt</a></div></div>
+<p style="font-size:13px;color:var(--muted);margin-top:10px">Waga 500, kolor tekstu podstawowy. Pozycje z listą rozwijaną mają karetkę skierowaną w dół.</p>
+</div>
+
+<div>
+<span class="state-label">B · najechanie / rozwinięte</span>
+<div class="state-demo" style="padding:20px"><div style="display:flex;gap:2px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px;position:relative"><a class="navlink" href="#">O mnie</a><span class="navtrigger" style="color:var(--accent-deep)">Zabiegi<i class="caret" style="transform:rotate(225deg) translateY(1px)"></i></span><span class="navtrigger">Cennik<i class="caret"></i></span><a class="navlink" href="#">Vouchery</a></div><div class="submenu" style="position:static;opacity:1;visibility:visible;transform:none;margin-top:10px;box-shadow:0 12px 30px rgba(0,0,0,.10)"><a href="#">Wszystkie zabiegi</a><a href="#">Depilacja laserowa</a><a href="#">Pielęgnacja twarzy</a></div></div>
+<p style="font-size:13px;color:var(--muted);margin-top:10px">Najechanie i fokus podnoszą kolor na złoto (<code>--accent-deep</code>), karetka obraca się o 180°, lista rozwija się w warstwie <code>absolute</code> — <strong>bez przesuwania treści pod spodem</strong>.</p>
+</div>
+
+<div>
+<span class="state-label">C · fokus klawiatury</span>
+<div class="state-demo" style="padding:20px"><div style="display:flex;gap:2px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px"><a class="navlink" href="#">O mnie</a><span class="navtrigger">Zabiegi<i class="caret"></i></span><a class="navlink" href="#" style="outline:2px solid var(--accent-deep);outline-offset:2px">Cennik</a><a class="navlink" href="#">Vouchery</a></div></div>
+<p style="font-size:13px;color:var(--muted);margin-top:10px">Wyraźny pierścień fokusa (<code>:focus-visible</code>) na każdej pozycji, przyciskach i polach — nawigacja Tab działa, listę rozwija też <code>:focus-within</code>.</p>
+</div>
+
+<div>
+<span class="state-label">D · strona aktywna</span>
+<div class="state-demo" style="padding:20px"><div style="display:flex;gap:2px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px"><a class="navlink" href="#">O mnie</a><span class="navtrigger">Zabiegi<i class="caret"></i></span><span class="navtrigger active">Cennik<i class="caret"></i></span><a class="navlink" href="#">Vouchery</a></div></div>
+<p style="font-size:13px;color:var(--muted);margin-top:10px">Aktywna pozycja: waga 600, kolor złoty i cienka kreska pod spodem. Dla podstron zabiegu/cennika podświetla się nadrzędna pozycja z listy, a wewnątrz — konkretna podpozycja i <code>aria-current="page"</code>.</p>
+</div>
+
+</div>
+
+<div style="margin-top:28px">
+<span class="state-label">E · menu mobilne otwarte (z rozwiniętą podpozycją)</span>
+<div class="state-demo" style="padding:20px;display:flex;justify-content:center"><div style="width:320px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.12);padding:22px 18px;display:flex;flex-direction:column;gap:4px">
+<a class="navlink" href="#" style="justify-content:space-between">O mnie</a>
+<div><div class="navtrigger active" style="justify-content:space-between">Zabiegi<i class="caret" style="transform:rotate(225deg) translateY(-2px)"></i></div><div style="padding:0 0 8px 14px;display:flex;flex-direction:column"><a href="#" style="padding:11px 6px;font-size:15px;color:var(--text);text-decoration:none">Wszystkie zabiegi</a><a href="#" style="padding:11px 6px;font-size:15px;color:var(--accent-deep);text-decoration:none;font-weight:600">Depilacja laserowa</a><a href="#" style="padding:11px 6px;font-size:15px;color:var(--text);text-decoration:none">Pielęgnacja twarzy</a></div></div>
+<div class="navtrigger" style="justify-content:space-between">Cennik<i class="caret"></i></div>
+<a class="navlink" href="#">Vouchery</a><a class="navlink" href="#">Regulamin</a><a class="navlink" href="#">Kontakt</a>
+</div></div>
+<p style="font-size:13px;color:var(--muted);margin-top:10px;max-width:760px"><strong>Decyzja:</strong> na telefonie menu wysuwa się z prawej jako panel; podpozycje rozwijają się w miejscu animacją <code>max-height</code> (nie <code>display</code>), więc <strong>lista nie „przeskakuje"</strong>. Hamburger zmienia się w krzyżyk, tło strony pozostaje pod panelem.</p>
+</div>
+</div></section>
+
+<!-- 3. STAN PUSTY -->
+<section class="sec"><div class="wrap">
+<span class="state-label">Stan · pusty (blok bez zdjęcia)</span>
+<h2 class="h2" style="margin-bottom:8px">Blok bez zdjęcia</h2>
+<p class="lead" style="max-width:760px;margin-bottom:26px">Gdy klientka edytuje treść i nie doda zdjęcia, blok nie może zostawić pustego, poszarpanego kadru. Zamienia się w elegancki blok tekstowy na całej szerokości, z ozdobnym inicjałem zamiast obrazu.</p>
+<div class="state-demo"><div class="svc no-img" style="margin:8px auto"><div class="svc-body dropcap"><p class="kicker">Depilacja laserowa</p><h3 class="h3">Kameralnie, w serii, na miejscu</h3><p style="font-size:15px;line-height:1.7;color:var(--text);margin:0">Depilacja laserowa to seria zabiegów wykonywanych w odstępach kilku tygodni. Laser jest u nas dostępny każdego dnia pracy salonu, więc całą serię przechodzisz w jednym, kameralnym miejscu — bez dojazdów do innego gabinetu. Przed pierwszym zabiegiem wykonujemy bezpłatną konsultację i próbę laserową.</p><div class="btn-row" style="margin-top:6px"><a href="#" class="btn btn-cta">Umów konsultację</a></div></div></div></div>
+<p style="font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.6"><strong>Decyzja:</strong> układ dwukolumnowy zwija się do jednej kolumny o ograniczonej szerokości (820 px), tekst dostaje kartę z tłem i inicjał w kolorze złota — pusty kadr nigdy się nie pokazuje.</p>
+</div></section>
+
+<!-- 4. STAN PRZECIĄŻONY -->
+<section class="sec" style="background:var(--bg2)"><div class="wrap">
+<span class="state-label">Stan · przeciążony (tekst 2× dłuższy)</span>
+<h2 class="h2" style="margin-bottom:8px">Więcej treści niż w makiecie</h2>
+<p class="lead" style="max-width:760px;margin-bottom:26px">Test odporności układu: opis i lista dłuższe około dwukrotnie względem wzorca. Kolumny nie rozjeżdżają się, zdjęcie i tekst pozostają wyrównane, przyciski zostają na dole.</p>
+<div class="state-demo"><div class="svc" style="margin:8px 0"><div class="svc-media"><div class="ph" style="height:100%;min-height:360px"><span>ZDJĘCIE ZABIEGU: skóra — bez sprzętu</span></div></div><div class="svc-body clamp"><p class="kicker">Kosmetyka twarzy</p><h3 class="h3">Zabieg dobrany do Twojej skóry</h3><p style="font-size:15px;line-height:1.7;color:var(--text);margin:0">Podczas bezpłatnej konsultacji pielęgnacyjnej dokładnie omawiamy potrzeby i kondycję Twojej skóry, a następnie dobieramy odpowiedni zabieg oraz plan pielęgnacji domowej. Pracujemy spokojnie, bez pośpiechu, przyjmując jedną klientkę w danym czasie. Tłumaczymy każdy krok, odpowiadamy na pytania i wspólnie ustalamy realny harmonogram, jeśli zabieg wchodzi w skład serii. Zależy nam, żeby każda wizyta była komfortowa, bezpieczna i dopasowana do Ciebie — a nie do sztywnego schematu. Po zabiegu dostajesz jasne wskazówki, jak zadbać o skórę w domu.</p><ul class="atuty"><li>Szeroki wybór zabiegów: oczyszczanie, mikrodermabrazja, mezoterapia bezigłowa, radiofrekwencja, ultradźwięki i sonoforeza.</li><li>Każdy zabieg dobrany indywidualnie do potrzeb i kondycji Twojej skóry, a nie do gotowego pakietu.</li><li>Bezpłatna konsultacja pielęgnacyjna przed pierwszym zabiegiem i przy zmianie planu.</li><li>Dobór pielęgnacji domowej oraz jasne zalecenia po zabiegu.</li><li>Rabaty na serie zabiegów oraz na dwa różne zabiegi wykonane na jednej wizycie.</li></ul><div class="btn-row"><a href="#" class="btn btn-cta">Umów konsultację</a><a href="#" class="btn btn-ghost">Zobacz cennik</a></div></div></div></div>
+<p style="font-size:13.5px;color:var(--muted);margin-top:14px;line-height:1.6"><strong>Decyzja:</strong> kolumny są równej wagi i wyrównane do środka w pionie; obraz wypełnia wysokość kolumny (<code>height:100%</code>), więc dłuższy tekst rozciąga sekcję symetrycznie. Zawijanie wierszy (<code>overflow-wrap</code>) chroni przed rozpychaniem długimi słowami.</p>
+</div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}"></script>
+</body>
+</html>

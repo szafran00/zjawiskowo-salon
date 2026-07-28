@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/fetch'
-import { HOME_QUERY } from '@/sanity/lib/queries'
-import type { HomeData, Settings, Voucher } from '@/app/lib/types'
+import { HOME_QUERY, PRICELIST_QUERY } from '@/sanity/lib/queries'
+import type { HomeData, Pricelist, Settings, Voucher } from '@/app/lib/types'
 import {
   STOCK,
   fallbackSettings,
@@ -10,6 +10,7 @@ import {
   fallbackVoucher,
   fallbackBadges,
   fallbackReviews,
+  fallbackPricelist,
 } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
 import { embedUrl } from '@/app/lib/video'
@@ -17,15 +18,21 @@ import Hero from '@/app/components/Hero'
 import Faq from '@/app/components/Faq'
 import PhoneCta from '@/app/components/PhoneCta'
 import ReviewsCarousel from '@/app/components/ReviewsCarousel'
+import WhySection from '@/app/components/WhySection'
 
 /* eslint-disable @next/next/no-img-element */
 
 export default async function HomePage() {
   let data: HomeData = {}
+  let price: Pricelist | null = null
   try {
-    data = await sanityFetch<HomeData>(HOME_QUERY)
+    ;[data, price] = await Promise.all([
+      sanityFetch<HomeData>(HOME_QUERY),
+      sanityFetch<Pricelist>(PRICELIST_QUERY),
+    ])
   } catch {
     data = {}
+    price = null
   }
 
   const s: Settings = { ...fallbackSettings, ...(data.settings || {}) }
@@ -38,6 +45,8 @@ export default async function HomePage() {
   const voucher: Voucher = data.voucher || fallbackVoucher
   const badges = data.badges && data.badges.length ? data.badges : fallbackBadges
   const reviews = data.reviews && data.reviews.length ? data.reviews : fallbackReviews
+  const pl = price && price.groups && price.groups.length ? price : fallbackPricelist
+  const priceGroups = (pl.groups || []).filter((g) => g.anchor)
 
   const galleryImages = gallery.length
     ? gallery.map((g, i) => ({
@@ -45,7 +54,7 @@ export default async function HomePage() {
         cap: g.caption,
         video: embedUrl(g.videoUrl),
       }))
-    : STOCK.gal.map((src) => ({
+    : STOCK.gal.slice(0, 6).map((src) => ({
         src,
         cap: undefined as string | undefined,
         video: undefined as string | undefined,
@@ -56,33 +65,19 @@ export default async function HomePage() {
       <Hero s={s} featured={featured} />
 
       {/* „Dlaczego ZJAWISKOWO” — punkty wyróżniające, edytowalne w panelu. */}
-      {s.showTrust !== false && badges.length > 0 && (
-        <section className="trust reveal" id="dlaczego">
-          <div className="wrap sec" style={{ paddingTop: 56, paddingBottom: 56 }}>
-            {(s.trustKicker || s.trustHeading) && (
-              <div className="page-head" style={{ marginBottom: 36 }}>
-                {s.trustKicker && <p className="kicker">{s.trustKicker}</p>}
-                {s.trustHeading && <h2 className="h2">{s.trustHeading}</h2>}
-              </div>
-            )}
-            <div className="trust-grid">
-              {badges.map((b, i) => (
-                <div className="badge" key={i}>
-                  <div className="crest" aria-hidden="true">
-                    ✦
-                  </div>
-                  <p>{b.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+      {s.showTrust !== false && (
+        <WhySection
+          id="dlaczego"
+          kicker={s.trustKicker}
+          heading={s.trustHeading}
+          items={badges.map((b) => b.text || '').filter(Boolean)}
+        />
       )}
 
       {/* Dwa filary salonu: depilacja laserowa i pielęgnacja twarzy. */}
       <section className="sec reveal" id="zabiegi">
         <div className="wrap">
-          <div className="page-head">
+          <div className="faq-head" style={{ marginBottom: 0 }}>
             <p className="kicker">{s.pillarsKicker}</p>
             <h2 className="h2">{s.pillarsHeading}</h2>
             {s.pillarsLead && (
@@ -91,82 +86,96 @@ export default async function HomePage() {
               </p>
             )}
           </div>
-          <div className="pillars">
-            {featured.map((t, i) => {
-              const img = imgUrl(
-                t.image,
-                i === 0 ? STOCK.laserWide : STOCK.face,
-                1200
-              )
-              return (
-                <div className={`svc ${i % 2 ? 'rev-order' : ''}`} key={t.slug || i}>
-                  <div className="svc-media">
-                    <div className="ph">
-                      <img src={img} alt={t.title || ''} />
-                    </div>
-                  </div>
-                  <div className="svc-body">
-                    <p className="kicker">{t.kicker}</p>
-                    <h3 className="h2" style={{ fontSize: 'clamp(26px,3vw,36px)' }}>
-                      {t.title}
-                    </h3>
-                    {t.excerpt && <p className="lead">{t.excerpt}</p>}
-                    {t.atuty && t.atuty.length > 0 && (
-                      <ul className="atuty pillar-atuty">
-                        {t.atuty.slice(0, 5).map((a, j) => (
-                          <li key={j}>{a}</li>
-                        ))}
-                      </ul>
-                    )}
-                    <div className="pillar-links">
-                      <Link href={`/zabiegi/${t.slug}`} className="btn btn-cta">
-                        Poznaj zabieg
-                      </Link>
-                      {t.pricelistAnchor && (
-                        <Link
-                          href={`/cennik#${t.pricelistAnchor}`}
-                          className="btn btn-ghost"
-                        >
-                          Zobacz ceny
-                        </Link>
-                      )}
-                    </div>
+          <div className="pillar-teasers">
+            {featured.map((t, i) => (
+              <div className="teaser" key={t.slug || i}>
+                <div className="ph">
+                  <img
+                    src={imgUrl(t.image, i === 0 ? STOCK.laserWide : STOCK.face, 1200)}
+                    alt={t.title || ''}
+                  />
+                </div>
+                <div className="teaser-body">
+                  <h3 className="h3">{t.title}</h3>
+                  {t.excerpt && <p>{t.excerpt}</p>}
+                  <div className="btn-row">
+                    <Link href={`/zabiegi/${t.slug}`} className="btn btn-cta">
+                      Poznaj zabieg
+                    </Link>
+                    <Link
+                      href={
+                        t.pricelistAnchor ? `/cennik#${t.pricelistAnchor}` : '/cennik'
+                      }
+                      className="btn btn-ghost"
+                    >
+                      Zobacz ceny
+                    </Link>
                   </div>
                 </div>
-              )
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {voucher.showOnHome !== false && (
-        <section className="voucher reveal" id="vouchery">
-          <div className="wrap sec">
-            <div className="voucher-grid">
-              <div className="voucher-media">
-                <div className="ph">
-                  <img
-                    src={imgUrl(voucher.image, STOCK.voucher)}
-                    alt={voucher.heading || 'Vouchery'}
-                  />
+      {/* Cennik w skrócie: karty grup prowadzą prosto w odpowiednią sekcję cennika. */}
+      {priceGroups.length > 0 && (
+        <section className="pricing sec reveal">
+          <div className="wrap">
+            <div className="faq-head" style={{ marginBottom: 8 }}>
+              <p className="kicker">Cennik w skrócie</p>
+              <h2 className="h2">Ceny i pakiety</h2>
+              {pl.intro && (
+                <p className="lead" style={{ maxWidth: 660 }}>
+                  {pl.intro}
+                </p>
+              )}
+            </div>
+            <div className="pkg-grid" style={{ marginTop: 36 }}>
+              {priceGroups.map((g, i) => (
+                <div className="pkg" key={g.anchor || i}>
+                  <h3 className="pkg-name">{g.title}</h3>
+                  {g.note && <p className="pkg-note">{g.note}</p>}
+                  <Link href={`/cennik#${g.anchor}`} className="pkg-link">
+                    Zobacz ceny →
+                  </Link>
                 </div>
-              </div>
-              <div className="voucher-body">
+              ))}
+            </div>
+            <div
+              className="btn-row"
+              style={{ justifyContent: 'center', marginTop: 36 }}
+            >
+              <Link href="/cennik" className="btn btn-cta">
+                Zobacz pełny cennik
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {voucher.showOnHome !== false && (
+        <section className="vouchers reveal" id="vouchery">
+          <div className="wrap sec">
+            <div className="vouch-grid">
+              <div className="vouch-body">
                 <p className="kicker">{voucher.kicker}</p>
                 <h2 className="h2">{voucher.heading}</h2>
                 {voucher.lead && <p className="lead">{voucher.lead}</p>}
-                {voucher.bullets && voucher.bullets.length > 0 && (
-                  <ul className="atuty">
-                    {voucher.bullets.slice(0, 4).map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                )}
-                <div className="pillar-links">
+                <div className="btn-row">
                   <Link href="/vouchery" className="btn btn-cta">
                     {voucher.ctaLabel || 'Zapytaj o voucher'}
                   </Link>
+                  <Link href="/cennik" className="btn btn-ghost">
+                    Zobacz cennik
+                  </Link>
                 </div>
+              </div>
+              <div className="ph">
+                <img
+                  src={imgUrl(voucher.image, STOCK.voucher)}
+                  alt={voucher.heading || 'Vouchery'}
+                />
               </div>
             </div>
           </div>
@@ -187,7 +196,7 @@ export default async function HomePage() {
       {s.showGallery !== false && (
         <section className="sec reveal" id="galeria">
           <div className="wrap">
-            <div className="page-head">
+            <div className="faq-head">
               <p className="kicker">{s.galleryKicker}</p>
               <h2 className="h2">{s.galleryHeading}</h2>
             </div>
@@ -216,8 +225,10 @@ export default async function HomePage() {
 
       <PhoneCta
         phone={s.phone || ''}
+        kicker="Rezerwacja tylko telefoniczna"
         heading={s.ctaHeading || 'Umów wizytę'}
         lead={s.ctaLead}
+        hint="Nie odbieram, gdy trwa zabieg. Oddzwonię, gdy tylko skończę."
       />
     </>
   )

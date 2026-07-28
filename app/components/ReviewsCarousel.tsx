@@ -5,6 +5,9 @@ import type { Review } from '../lib/types'
 
 const AUTO_MS = 6500
 
+// Karuzela opinii: przesuwa się pojedynczo (strzałki, kropki, gest na ekranie
+// dotykowym). Pojedyncze opinie ukrywa się w panelu — odfiltrowuje je zapytanie
+// do Sanity, więc tutaj wystarczy wyświetlić to, co przyszło.
 export default function ReviewsCarousel({
   reviews,
   kicker,
@@ -26,8 +29,8 @@ export default function ReviewsCarousel({
     [count]
   )
 
-  // Automatyczne przewijanie zatrzymuje się, gdy ktoś najedzie myszą,
-  // ustawi fokus klawiaturą albo gdy system prosi o ograniczenie animacji.
+  // Automatyczne przewijanie zatrzymuje się przy najechaniu myszą, fokusie
+  // klawiatury oraz gdy system prosi o ograniczenie animacji.
   useEffect(() => {
     if (count < 2 || paused) return
     const reduce =
@@ -56,7 +59,7 @@ export default function ReviewsCarousel({
         </div>
 
         <div
-          className="rev-carousel"
+          className="carousel"
           onTouchStart={(e) => {
             touchX.current = e.touches[0].clientX
           }}
@@ -70,7 +73,7 @@ export default function ReviewsCarousel({
           {count > 1 && (
             <button
               type="button"
-              className="rev-arrow rev-prev"
+              className="car-btn"
               aria-label="Poprzednia opinia"
               onClick={() => go(i - 1)}
             >
@@ -78,11 +81,11 @@ export default function ReviewsCarousel({
             </button>
           )}
 
-          <div className="rev-viewport" aria-live="polite">
+          <div className="car-view" aria-live="polite">
             {reviews.map((r, idx) => (
               <figure
                 key={idx}
-                className={`rev rev-slide ${idx === i ? 'is-active' : ''}`}
+                className={`rev-card ${idx === i ? 'is-active' : ''}`}
                 aria-hidden={idx === i ? undefined : true}
               >
                 <div className="stars" aria-label={`Ocena ${r.rating || 5} na 5`}>
@@ -97,7 +100,7 @@ export default function ReviewsCarousel({
           {count > 1 && (
             <button
               type="button"
-              className="rev-arrow rev-next"
+              className="car-btn"
               aria-label="Następna opinia"
               onClick={() => go(i + 1)}
             >
@@ -107,7 +110,7 @@ export default function ReviewsCarousel({
         </div>
 
         {count > 1 && (
-          <div className="rev-dots" role="tablist" aria-label="Wybierz opinię">
+          <div className="dots" role="tablist" aria-label="Wybierz opinię">
             {reviews.map((_, idx) => (
               <button
                 key={idx}
@@ -115,7 +118,7 @@ export default function ReviewsCarousel({
                 role="tab"
                 aria-selected={idx === i}
                 aria-label={`Opinia ${idx + 1} z ${count}`}
-                className={`rev-dot ${idx === i ? 'is-active' : ''}`}
+                className={`dot ${idx === i ? 'on' : ''}`}
                 onClick={() => go(idx)}
               />
             ))}
@@ -123,17 +126,14 @@ export default function ReviewsCarousel({
         )}
 
         <div className="google-note">
-          <span aria-hidden="true">★</span>
           <span>Opinie pochodzą z wizytówki Google</span>
           {googleReviewUrl && (
-            <a
-              href={googleReviewUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rev-google-link"
-            >
-              Wystaw opinię
-            </a>
+            <>
+              <span aria-hidden="true">·</span>
+              <a href={googleReviewUrl} target="_blank" rel="noopener noreferrer">
+                Wystaw opinię
+              </a>
+            </>
           )}
         </div>
       </div>

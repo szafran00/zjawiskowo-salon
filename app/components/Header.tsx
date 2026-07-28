@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { NavTreatment, NavPriceGroup } from '../lib/types'
 
-type SubLink = { href: string; label: string }
-type NavItem = { href: string; label: string; sub?: SubLink[] }
+type SubLink = { href: string; label: string; active: boolean }
+type NavItem = { href: string; label: string; active: boolean; sub?: SubLink[] }
 
 export default function Header({
   phone,
@@ -21,69 +21,143 @@ export default function Header({
   treatments: NavTreatment[]
   priceGroups: NavPriceGroup[]
 }) {
-  const [open, setOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [openSub, setOpenSub] = useState<number | null>(null)
+  const navRef = useRef<HTMLElement | null>(null)
   const pathname = usePathname()
   const tel = 'tel:' + phone.replace(/\s/g, '')
 
-  const treatmentSub: SubLink[] = treatments
-    .filter((t) => t.slug)
-    .map((t) => ({
-      href: `/zabiegi/${t.slug}`,
-      label: t.navLabel || t.kicker || t.title || '',
-    }))
+  const closeAll = () => {
+    setMenuOpen(false)
+    setOpenSub(null)
+  }
 
-  const priceSub: SubLink[] = priceGroups
-    .filter((g) => g.anchor && g.showInMenu !== false)
-    .map((g) => ({ href: `/cennik#${g.anchor}`, label: g.title || '' }))
+  // Zamknięcie panelu zwija też rozwiniętą podlistę — inaczej po ponownym
+  // otwarciu menu wita nas stan sprzed chwili.
+  const toggleMenu = () => {
+    if (menuOpen) closeAll()
+    else setMenuOpen(true)
+  }
+
+  // Zmiana trasy zamyka menu — inaczej panel zostaje otwarty nad nową stroną.
+  useEffect(() => {
+    closeAll()
+  }, [pathname])
+
+  // Escape zamyka, klik poza nagłówkiem zwija rozwiniętą listę.
+  useEffect(() => {
+    if (!menuOpen && openSub === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeAll()
+    }
+    const onDown = (e: MouseEvent) => {
+      if (!navRef.current?.parentElement?.contains(e.target as Node)) closeAll()
+    }
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('mousedown', onDown)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('mousedown', onDown)
+    }
+  }, [menuOpen, openSub])
+
+  // Otwarty panel na telefonie blokuje przewijanie tła.
+  useEffect(() => {
+    if (!menuOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [menuOpen])
+
+  const onPath = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
+
+  // Rozwijane listy budują się z treści w panelu; pierwsza pozycja prowadzi
+  // do strony nadrzędnej, bo pozycja z listą sama w sobie nie jest odnośnikiem.
+  const treatmentSub: SubLink[] = [
+    { href: '/zabiegi', label: 'Wszystkie zabiegi', active: pathname === '/zabiegi' },
+    ...treatments
+      .filter((t) => t.slug)
+      .map((t) => ({
+        href: `/zabiegi/${t.slug}`,
+        label: t.navLabel || t.kicker || t.title || '',
+        active: pathname === `/zabiegi/${t.slug}`,
+      })),
+  ]
+
+  const priceSub: SubLink[] = [
+    { href: '/cennik', label: 'Pełny cennik', active: pathname === '/cennik' },
+    ...priceGroups
+      .filter((g) => g.anchor && g.showInMenu !== false)
+      .map((g) => ({
+        href: `/cennik#${g.anchor}`,
+        label: g.title || '',
+        active: false,
+      })),
+  ]
 
   // Kolejność ustalona z klientką: Kontakt zawsze na końcu.
   const items: NavItem[] = [
-    { href: '/o-mnie', label: 'O mnie' },
-    { href: '/zabiegi', label: 'Zabiegi', sub: treatmentSub },
-    { href: '/cennik', label: 'Cennik', sub: priceSub },
-    { href: '/vouchery', label: 'Vouchery' },
-    { href: '/regulamin', label: 'Regulamin' },
-    { href: '/kontakt', label: 'Kontakt' },
+    { href: '/o-mnie', label: 'O mnie', active: onPath('/o-mnie') },
+    { href: '/zabiegi', label: 'Zabiegi', active: onPath('/zabiegi'), sub: treatmentSub },
+    { href: '/cennik', label: 'Cennik', active: onPath('/cennik'), sub: priceSub },
+    { href: '/vouchery', label: 'Vouchery', active: onPath('/vouchery') },
+    { href: '/regulamin', label: 'Regulamin', active: onPath('/regulamin') },
+    { href: '/kontakt', label: 'Kontakt', active: onPath('/kontakt') },
   ]
-
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
     <header className="hdr">
       <div className="wrap hdr-in">
-        <Link href="/" className="logo-lockup" onClick={() => setOpen(false)}>
-          <span className="logo">{salonName}</span>
-          {salonSubtitle && <span className="logo-sub">{salonSubtitle}</span>}
+        <Link href="/" className="logo" onClick={closeAll}>
+          <b>{salonName}</b>
+          {salonSubtitle && <small>{salonSubtitle}</small>}
         </Link>
-        <nav className={`nav ${open ? 'open' : ''}`} aria-label="Menu główne">
-          {items.map((item) =>
+
+        <nav
+          ref={navRef}
+          className={`nav ${menuOpen ? 'open' : ''}`}
+          aria-label="Menu główne"
+        >
+          {items.map((item, i) =>
             item.sub && item.sub.length ? (
-              <div className="nav-item has-sub" key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={isActive(item.href) ? 'active' : undefined}
+              <div
+                className={`navitem has-sub ${openSub === i ? 'open' : ''}`}
+                key={item.href}
+              >
+                <button
+                  type="button"
+                  className={`navtrigger ${item.active ? 'active' : ''}`}
+                  aria-expanded={openSub === i}
+                  aria-current={item.active ? 'page' : undefined}
+                  onClick={() => setOpenSub((v) => (v === i ? null : i))}
                 >
                   {item.label}
-                  <span className="nav-caret" aria-hidden="true">
-                    ▾
-                  </span>
-                </Link>
-                <div className="nav-sub">
+                  <i className="caret" aria-hidden="true" />
+                </button>
+                <div className="submenu">
                   {item.sub.map((s) => (
-                    <Link key={s.href} href={s.href} onClick={() => setOpen(false)}>
+                    <Link
+                      key={s.href}
+                      href={s.href}
+                      className={s.active ? 'active' : undefined}
+                      aria-current={s.active ? 'page' : undefined}
+                      onClick={closeAll}
+                    >
                       {s.label}
                     </Link>
                   ))}
                 </div>
               </div>
             ) : (
-              <div className="nav-item" key={item.href}>
+              <div className="navitem" key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={isActive(item.href) ? 'active' : undefined}
+                  className={`navlink ${item.active ? 'active' : ''}`}
+                  aria-current={item.active ? 'page' : undefined}
+                  onClick={closeAll}
                 >
                   {item.label}
                 </Link>
@@ -91,15 +165,16 @@ export default function Header({
             )
           )}
         </nav>
+
         <div className="hdr-right">
           <a href={tel} className="btn btn-cta hide-sm">
-            {phone ? `Zadzwoń ${phone}` : 'Umów wizytę'}
+            {phone ? `Umów wizytę · ${phone}` : 'Umów wizytę'}
           </a>
           <button
             className="burger"
             aria-label="Menu"
-            aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
+            aria-expanded={menuOpen}
+            onClick={toggleMenu}
           >
             <span />
             <span />

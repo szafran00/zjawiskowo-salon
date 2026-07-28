@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="topbar"><div class="topbar-in"><span class="note">Makieta poglądowa — zdjęcia i część treści przykładowe</span><span class="note" style="opacity:.7">Krzeszowice · ul. 3 Maja 4 · 517 899 229</span></div></div>
+<header class="hdr"><div class="wrap hdr-in"><a href="Strona główna.dc.html" class="logo"><b>{{ logoText }}</b><small>Salon kosmetyczny · Depilacja laserowa</small></a><nav class="nav {{navOpen}}" aria-label="Menu główne"><sc-for list="{{navItems}}" as="n" hint-placeholder-count="6"><div class="navitem {{ n.openCls }}"><sc-if value="{{ n.hasSub }}" hint-placeholder-val="{{ false }}"><button class="navtrigger {{ n.activeCls }}" onClick="{{ n.toggle }}" aria-expanded="{{ n.expanded }}" aria-current="{{ n.ariaCur }}">{{ n.label }}<i class="caret"></i></button><div class="submenu"><sc-for list="{{ n.sub }}" as="s" hint-placeholder-count="3"><a href="{{ s.href }}" class="{{ s.activeCls }}" aria-current="{{ s.ariaCur }}">{{ s.label }}</a></sc-for></div></sc-if><sc-if value="{{ n.noSub }}" hint-placeholder-val="{{ true }}"><a class="navlink {{ n.activeCls }}" href="{{ n.href }}" aria-current="{{ n.ariaCur }}">{{ n.label }}</a></sc-if></div></sc-for></nav><div class="hdr-right"><a href="tel:517899229" class="btn btn-cta hide-sm">Umów wizytę · 517 899 229</a><button class="burger" onClick="{{toggleMenu}}" aria-label="Menu" aria-expanded="{{ menuExpanded }}"><span></span><span></span><span></span></button></div></div></header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:110},&quot;active&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;logoText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ZJAWISKOWO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, openSub: null };
+  renderVals() {
+    const active = this.props.active || '';
+    const mk = (isOn) => ({ activeCls: isOn ? 'active' : '', ariaCur: isOn ? 'page' : 'false' });
+
+    const nav = [
+      { label: 'O mnie', href: 'O mnie.dc.html', on: active === 'o-mnie' },
+      { label: 'Zabiegi', on: ['zabiegi', 'laser', 'twarz'].includes(active), sub: [
+        { label: 'Wszystkie zabiegi', href: 'Zabiegi.dc.html', on: active === 'zabiegi' },
+        { label: 'Depilacja laserowa', href: 'Depilacja laserowa.dc.html', on: active === 'laser' },
+        { label: 'Pielęgnacja twarzy', href: 'Pielęgnacja twarzy.dc.html', on: active === 'twarz' },
+      ] },
+      { label: 'Cennik', on: active === 'cennik', sub: [
+        { label: 'Pełny cennik', href: 'Cennik.dc.html', on: false },
+        { label: 'Depilacja laserowa', href: 'Cennik.dc.html#cennik-laser', on: false },
+        { label: 'Pielęgnacja twarzy', href: 'Cennik.dc.html#cennik-twarz', on: false },
+      ] },
+      { label: 'Vouchery', href: 'Vouchery.dc.html', on: active === 'vouchery' },
+      { label: 'Regulamin', href: 'Regulamin.dc.html', on: active === 'regulamin' },
+      { label: 'Kontakt', href: 'Kontakt.dc.html', on: active === 'kontakt' },
+    ];
+    const navItems = nav.map((n, i) => {
+      const hasSub = !!n.sub;
+      const open = this.state.openSub === i;
+      return {
+        label: n.label, href: n.href || '#', hasSub, noSub: !hasSub,
+        ...mk(n.on),
+        sub: (n.sub || []).map(s => ({ label: s.label, href: s.href, ...mk(s.on) })),
+        openCls: open ? 'open' : '', expanded: open ? 'true' : 'false',
+        toggle: () => this.setState(s => ({ openSub: s.openSub === i ? null : i })),
+      };
+    });
+
+    return {
+      logoText: this.props.logoText || 'ZJAWISKOWO',
+      navItems,
+      navOpen: this.state.menuOpen ? 'open' : '',
+      menuExpanded: this.state.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+    };
+  }
+}
+</script>
+</body>
+</html>

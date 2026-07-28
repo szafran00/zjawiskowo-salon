@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/fetch'
 import { PRICELIST_QUERY, SETTINGS_QUERY } from '@/sanity/lib/queries'
 import type { Pricelist, Settings } from '@/app/lib/types'
 import { fallbackPricelist, fallbackSettings } from '@/app/lib/fallback'
+import PageHead from '@/app/components/PageHead'
 import PhoneCta from '@/app/components/PhoneCta'
 
 export const metadata = {
@@ -26,68 +26,59 @@ export default async function CennikPage() {
   const pl = p && p.groups && p.groups.length ? p : fallbackPricelist
   const s: Settings = { ...fallbackSettings, ...(settings || {}) }
   const groups = pl.groups || []
+  const anchored = groups.filter((g) => g.anchor)
 
   return (
     <>
-      <section className="sec reveal">
-        <div className="wrap">
-          <div className="page-head">
-            <p className="kicker">Cennik</p>
-            <h1 className="h2">Cennik usług</h1>
-            {pl.intro && (
-              <p className="lead" style={{ maxWidth: 660, margin: '4px auto 0' }}>
-                {pl.intro}
-              </p>
-            )}
-          </div>
+      <PageHead
+        crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Cennik' }]}
+        kicker="Cennik"
+        title="Cennik zabiegów"
+        lead={pl.intro}
+      />
 
-          {groups.length > 1 && (
-            <nav className="cennik-nav" aria-label="Skróty do sekcji cennika">
-              {groups
-                .filter((g) => g.anchor)
-                .map((g, i) => (
-                  <a className="chip" href={`#${g.anchor}`} key={i}>
-                    <b></b>
-                    {g.title}
-                  </a>
-                ))}
-            </nav>
-          )}
-
-          <div className="cennik">
-            {groups.map((g, i) => (
-              <div className="cennik-group" id={g.anchor || undefined} key={i}>
-                <h2 className="cennik-group-title">{g.title}</h2>
-                {g.note && <p className="cennik-group-note">{g.note}</p>}
-                <div className="cennik-list">
-                  {g.items?.map((it, j) => (
-                    <div className="cennik-row" key={j}>
-                      <span className="cennik-name">
-                        {it.name}
-                        {it.note && <em className="cennik-note"> · {it.note}</em>}
-                      </span>
-                      <span className="cennik-dots" />
-                      <span className="cennik-price">{it.price}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* Przyklejone kotwice — bez nich długi cennik jest nie do przejścia na telefonie. */}
+      {anchored.length > 1 && (
+        <nav className="price-nav" aria-label="Sekcje cennika">
+          <div className="price-nav-in">
+            {anchored.map((g, i) => (
+              <a href={`#${g.anchor}`} key={g.anchor || i}>
+                {g.title}
+              </a>
             ))}
           </div>
+        </nav>
+      )}
 
-          {pl.outro && <p className="cennik-outro">{pl.outro}</p>}
+      <section className="pricing">
+        <div className="wrap sec" style={{ paddingTop: 56 }}>
+          {groups.map((g, i) => (
+            <div className="price-block" id={g.anchor || undefined} key={i}>
+              <div className="pb-head">
+                <h2 className="h3">{g.title}</h2>
+                {g.note && <span className="pb-sub">{g.note}</span>}
+              </div>
+              <div className="price-list">
+                {g.items?.map((it, j) => (
+                  <div className="prow" key={j}>
+                    <span className="pn">{it.name}</span>
+                    <span className="dots-l" aria-hidden="true" />
+                    <span className="pp">{it.price}</span>
+                    {it.note && <span className="pt">{it.note}</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
 
-          <div style={{ textAlign: 'center', marginTop: 36 }}>
-            <Link href="/vouchery" className="btn btn-ghost">
-              Vouchery podarunkowe
-            </Link>
-          </div>
+          {pl.outro && <p className="price-note">{pl.outro}</p>}
         </div>
       </section>
 
       <PhoneCta
         phone={s.phone || ''}
-        heading={s.ctaHeading || 'Umów wizytę'}
+        kicker="Masz pytania o ceny?"
+        heading="Zadzwoń — dobierzemy pakiet"
         lead={s.ctaLead}
       />
     </>

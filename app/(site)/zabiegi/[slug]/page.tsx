@@ -6,6 +6,7 @@ import { TREATMENT_QUERY, SETTINGS_QUERY } from '@/sanity/lib/queries'
 import type { Treatment, Settings } from '@/app/lib/types'
 import { fallbackTreatments, fallbackSettings, STOCK } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
+import PageHead from '@/app/components/PageHead'
 import PhoneCta from '@/app/components/PhoneCta'
 
 /* eslint-disable @next/next/no-img-element */
@@ -57,24 +58,33 @@ export default async function TreatmentPage({
   const isFace = (t.slug || '').includes('twarz')
   const img = imgUrl(t.image, isFace ? STOCK.face : STOCK.laserWide)
   const hasBody = Array.isArray(t.description) && t.description.length > 0
+  const priceHref = t.pricelistAnchor ? `/cennik#${t.pricelistAnchor}` : '/cennik'
 
   return (
     <>
+      {/* Nadtytuł nazywa dział, nie zabieg: pole „Nadtytuł” w panelu bywa równe
+          tytułowi, a powtórzona nazwa tuż nad H1 wygląda jak pomyłka. */}
+      <PageHead
+        crumbs={[
+          { label: 'Strona główna', href: '/' },
+          { label: 'Zabiegi', href: '/zabiegi' },
+          { label: t.title || 'Zabieg' },
+        ]}
+        kicker="Zabiegi"
+        title={t.title || 'Zabieg'}
+        lead={t.excerpt}
+      />
+
       <section className="sec reveal">
         <div className="wrap">
-          <div className="breadcrumb">
-            <Link href="/zabiegi">← Wszystkie zabiegi</Link>
-          </div>
-          <div className="svc">
+          <div className={`svc ${isFace ? '' : 'rev-order'}`}>
             <div className="svc-media">
               <div className="ph">
                 <img src={img} alt={t.title || ''} />
               </div>
             </div>
             <div className="svc-body">
-              <p className="kicker">{t.kicker}</p>
-              <h1 className="h2">{t.title}</h1>
-              {t.excerpt && <p className="lead">{t.excerpt}</p>}
+              <h2 className="h2">Na czym polega</h2>
               {t.atuty && t.atuty.length > 0 && (
                 <ul className="atuty">
                   {t.atuty.map((a, j) => (
@@ -82,32 +92,41 @@ export default async function TreatmentPage({
                   ))}
                 </ul>
               )}
-              <div className="pillar-links">
-                <Link href="/kontakt" className="btn btn-cta">
-                  {t.ctaLabel || 'Umów wizytę'}
-                </Link>
-                <Link
-                  href={t.pricelistAnchor ? `/cennik#${t.pricelistAnchor}` : '/cennik'}
-                  className="btn btn-ghost"
+              <div className="btn-row">
+                <a
+                  href={'tel:' + (s.phone || '').replace(/\s/g, '')}
+                  className="btn btn-cta"
                 >
-                  Zobacz ceny
+                  {t.ctaLabel || 'Umów wizytę'}: {s.phone}
+                </a>
+                <Link href={priceHref} className="btn btn-ghost">
+                  Zobacz cennik
                 </Link>
               </div>
             </div>
           </div>
-
-          {hasBody && (
-            <div className="svc-desc" style={{ maxWidth: 820, margin: '56px auto 0' }}>
-              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              <PortableText value={t.description as any} />
-            </div>
-          )}
         </div>
       </section>
 
+      {hasBody && (
+        <section className="sec reveal" style={{ background: 'var(--bg2)' }}>
+          <div className="wrap">
+            <div className="faq-head">
+              <p className="kicker">Szczegóły</p>
+              <h2 className="h2">Więcej o zabiegu</h2>
+            </div>
+            <div className="prose" style={{ margin: '0 auto' }}>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              <PortableText value={t.description as any} />
+            </div>
+          </div>
+        </section>
+      )}
+
       <PhoneCta
         phone={s.phone || ''}
-        heading={s.ctaHeading || 'Umów wizytę'}
+        kicker="Pierwszy krok jest bezpłatny"
+        heading="Umów konsultację"
         lead={s.ctaLead}
       />
     </>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZJAWISKOWO — zdjęcia stockowe (zapas) i licencje</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0}
+  body{font-family:'Montserrat',sans-serif;background:#FBF7EF;color:#2B2620;line-height:1.55;padding:40px 20px}
+  .wrap{max-width:1080px;margin:0 auto}
+  h1{font-family:'Playfair Display',serif;font-size:34px;color:#846514;margin-bottom:6px}
+  h2{font-family:'Playfair Display',serif;font-size:24px;margin:44px 0 8px}
+  p.lead{color:#6B6357;max-width:720px}
+  .note{background:#F3E9D6;border:1px solid rgba(132,101,20,.3);border-radius:12px;padding:16px 18px;margin:22px 0;font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin-top:18px}
+  .card{background:#fff;border:1px solid rgba(132,101,20,.2);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .card img{width:100%;height:180px;object-fit:cover;display:block;background:#eee}
+  .card .body{padding:12px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
+  .cat{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#846514}
+  .au{font-size:13px;font-weight:600}
+  .li{font-size:12px;color:#6B6357}
+  .card a{margin-top:auto;font-size:13px;font-weight:600;color:#846514;text-decoration:none;padding-top:8px}
+  .card a:hover{color:#B8912F}
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+  td,th{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(132,101,20,.18);vertical-align:top}
+  th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#846514}
+  td a{color:#846514}
+  small{color:#6B6357}
+</style></head>
+<body><div class="wrap">
+<h1>ZJAWISKOWO — zdjęcia stockowe i licencje</h1>
+<p class="lead">Zestaw zdjęć do salonu (depilacja i pielęgnacja twarzy). Wszystkie z serwisu <b>Pexels</b> na <b>licencji Pexels</b> — bezpłatne do użytku komercyjnego, bez obowiązku podawania autora.</p>
+<div class="note" style="background:#F7E9CF;border-color:rgba(132,101,20,.4)"><b>Zaktualizowana zasada doboru:</b> wyłącznie <b>zdjęcia zabiegów i skóry</b> — zbliżenia gładkiej skóry, dłonie na skórze, kosmetyk/serum, detale. <b>Bez wnętrz salonu</b> (to nie jest ten salon) i <b>bez widocznego sprzętu</b> (laserów, aparatury). Poprzednie kadry wnętrz i gabinetów zostały usunięte z tej listy.</div>
+<div class="note"><b>Uwaga:</b> na stronie www sloty na zdjęcia są teraz <b>puste (placeholdery z opisem)</b> i czekają, aż wgrasz własne zdjęcia zabiegów. Poniższy zapas to bezpieczne kadry do pobrania w razie potrzeby.</div>
+
+<div class="note">
+  <b>Uwaga o zapisie plików:</b> nie mam dostępu do Twojego dysku Google (<code>H:\My Drive\...\Zjawiskowo\Zdjecia stockowe</code>).
+  Ta strona to Twój „zapas" — każde zdjęcie ma link „Pobierz oryginał (Pexels)". Otwórz linki i zapisz pliki bezpośrednio do tego folderu.
+</div>
+
+<h2>Zapas — 10 zdjęć do wyboru</h2>
+<div class="grid" id="reserve"></div>
+
+<h2>Zdjęcia użyte na stronie</h2>
+<table>
+  <tr><th>Kategoria</th><th>Autor</th><th>Licencja</th><th>Link</th></tr>
+  <tbody id="used"></tbody>
+</table>
+<p style="margin-top:26px"><small>Licencja Pexels: <a href="https://www.pexels.com/license/">pexels.com/license</a>. Podanie autora nie jest wymagane, ale mile widziane.</small></p>
+</div>
+<script>
+const big = id => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?cs=srgb&fm=jpg&w=1600`;
+const th = id => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600`;
+// TYLKO zabiegi i skóra — bez wnętrz, bez sprzętu. Wszystkie zweryfikowane (żywe na Pexels).
+const reserve = [
+  [4672470,'Gładka skóra nóg (depilacja)','Pexels'],
+  [3762564,'Pielęgnacja twarzy — nakładanie maski','Shiny Diamond'],
+  [3762562,'Pielęgnacja twarzy — maska','Shiny Diamond'],
+  [3762563,'Pielęgnacja twarzy — portret z maską','Shiny Diamond'],
+  [3762553,'Zabieg pielęgnacyjny twarzy','Shiny Diamond'],
+  [3762554,'Maska na twarz (tło pomarańczowe)','Shiny Diamond'],
+  [3762555,'Maska w płacie — uśmiech','Shiny Diamond'],
+  [3762462,'Oczyszczanie twarzy — piana','Shiny Diamond'],
+  [16574941,'Nakładanie kosmetyku na twarz','Vlad Deep'],
+  [9774972,'Maska w płacie (folia)','Shvets Production'],
+  [6543159,'Maska w płacie — różowe tło','Polina Kovaleva'],
+  [6543171,'Maska w płacie','Polina Kovaleva'],
+  [6543173,'Zbliżenie — maska w płacie','Polina Kovaleva'],
+  [6663388,'Relaks — maska, opaska','Arina Krasnikova'],
+  [5240623,'Kosmetyki / serum (flatlay)','Anete Lusina'],
+  [34939742,'Pielęgnacja twarzy (flatlay)','Daniel & Hannah Snipes'],
+];
+// Zdjęcia wpięte na stronie wielostronicowej (skóra + zabiegi twarzy, bez sprzętu i wnętrz).
+const used = [
+  [4672470,'Hero / Zabiegi / Depilacja / galeria — gładka skóra nóg','Pexels'],
+  [6187298,'Hero twarz / Zabiegi / Pielęgnacja / O mnie / galeria — zabieg twarzy (dłonie)','Tima Miroshnichenko'],
+  [5240623,'Vouchery / galeria — kosmetyki / serum','Anete Lusina'],
+  [34939742,'Galeria — pielęgnacja (flatlay)','Daniel & Hannah Snipes'],
+];
+const r = document.getElementById('reserve');
+reserve.forEach(([id,cat,au])=>{
+  const d=document.createElement('div');d.className='card';
+  d.innerHTML=`<img loading="lazy" src="${th(id)}"><div class="body"><span class="cat">${cat}</span><span class="au">${au}</span><span class="li">Pexels License — użytek komercyjny</span><a href="${big(id)}" target="_blank" rel="noopener">Pobierz oryginał (Pexels) →</a></div>`;
+  r.appendChild(d);
+});
+const u = document.getElementById('used');
+used.forEach(([id,cat,au])=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${cat}</td><td>${au}</td><td>Pexels License</td><td><a href="${big(id)}" target="_blank" rel="noopener">otwórz</a></td>`;
+  u.appendChild(tr);
+});
+</script>
+</body></html>

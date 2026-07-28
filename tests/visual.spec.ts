@@ -44,9 +44,9 @@ test('menu: rozwijana lista „Zabiegi" pokazuje się dopiero po najechaniu', as
 }, info) => {
   test.skip(info.project.name !== 'desktop', 'rozwijane menu działa na desktopie')
   await page.goto('/', { waitUntil: 'load' })
-  const sub = page.locator('.nav-item.has-sub').first().locator('.nav-sub')
+  const sub = page.locator('.navitem.has-sub').first().locator('.submenu')
   await expect(sub).toBeHidden()
-  await page.locator('.nav-item.has-sub').first().hover()
+  await page.locator('.navitem.has-sub').first().hover()
   await expect(sub).toBeVisible()
   // przejście trwa 0.18 s — czekamy na pełne odsłonięcie, żeby zrzut był stabilny
   await expect
@@ -60,8 +60,8 @@ test('menu: rozwijana lista „Zabiegi" pokazuje się dopiero po najechaniu', as
 test('menu: Cennik prowadzi do właściwej sekcji cennika', async ({ page }, info) => {
   test.skip(info.project.name !== 'desktop', 'rozwijane menu działa na desktopie')
   await page.goto('/', { waitUntil: 'load' })
-  await page.locator('.nav-item.has-sub').nth(1).hover()
-  await page.locator('.nav-sub a[href="/cennik#pielegnacja-twarzy"]').click()
+  await page.locator('.navitem.has-sub').nth(1).hover()
+  await page.locator('.submenu a[href="/cennik#pielegnacja-twarzy"]').click()
   await expect(page).toHaveURL(/\/cennik#pielegnacja-twarzy$/)
   await expect(page.locator('#pielegnacja-twarzy')).toBeVisible()
 })
@@ -72,8 +72,12 @@ test('mobilne menu otwiera się wraz z podpozycjami', async ({ page }, info) => 
   await page.getByRole('button', { name: 'Menu' }).click()
   await page.waitForTimeout(400)
   await expect(page.locator('nav.nav.open')).toBeVisible()
+  // Na telefonie podlista rozwija się dopiero po dotknięciu pozycji „Zabiegi”
+  // (animacja max-height, więc nic pod spodem nie przeskakuje).
+  await page.locator('.navitem.has-sub .navtrigger').first().click()
+  await page.waitForTimeout(400)
   await expect(
-    page.locator('.nav-sub a[href="/zabiegi/depilacja-laserowa"]')
+    page.locator('.submenu a[href="/zabiegi/depilacja-laserowa"]')
   ).toBeVisible()
   await page.screenshot({ path: `${DIR}/mobile-menu-open.png` })
 })
@@ -92,10 +96,10 @@ test('FAQ rozwija kolejne pytanie', async ({ page }) => {
 
 test('banner cookies widoczny i znika po akceptacji', async ({ page }, info) => {
   await page.goto('/', { waitUntil: 'load' })
-  const banner = page.locator('.cookie-banner')
+  const banner = page.locator('.cookie')
   await banner.waitFor({ state: 'visible', timeout: 5000 })
   await page.screenshot({ path: `${DIR}/${info.project.name}-cookie-banner.png` })
-  await page.getByRole('button', { name: 'Akceptuję wszystkie' }).click()
+  await page.getByRole('button', { name: 'Akceptuję', exact: true }).click()
   await expect(banner).toHaveCount(0)
 })
 

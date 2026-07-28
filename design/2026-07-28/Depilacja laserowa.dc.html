@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="laser" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><a href="Zabiegi.dc.html">Zabiegi</a><span class="sep">›</span><span class="cur">Depilacja laserowa</span></nav><p class="kicker">Depilacja laserowa</p><h1 class="h1">Depilacja laserowa w Krzeszowicach</h1><p class="lead">Laser stoi u nas na miejscu i jest dostępny każdego dnia pracy salonu. Całą serię zabiegów przechodzisz w jednym, kameralnym miejscu — a zaczynamy zawsze od bezpłatnej konsultacji i próby laserowej.</p></div></section>
+
+<!-- INTRO -->
+<section class="sec reveal"><div class="wrap"><div class="svc rev-order"><div class="svc-media"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="laser-hero" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: zbliżenie gładkiej skóry nóg / bikini — bez sprzętu, bez wnętrza · pion 4:5" hint-size="100%,100%"></x-import></div></div><div class="svc-body"><p class="kicker">Na czym polega</p><h2 class="h2">Kameralnie, w serii, na miejscu</h2><p class="lead">Depilacja laserowa to seria zabiegów wykonywanych w odstępach kilku tygodni. U nas laser jest dostępny codziennie, więc harmonogram układamy wygodnie dla Ciebie — bez dojazdów do innego gabinetu.</p><ul class="atuty"><sc-for list="{{atuty}}" as="a" hint-placeholder-count="6"><li>{{ a }}</li></sc-for></ul><div class="btn-row"><a href="tel:517899229" class="btn btn-cta">Umów konsultację: 517 899 229</a><a href="Cennik.dc.html#cennik-laser" class="btn btn-ghost">Zobacz cennik</a></div></div></div></div></section>
+
+<!-- ROZWIJANE BLOKI -->
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head"><p class="kicker">Przygotowanie i zalecenia</p><h2 class="h2">Zanim przyjdziesz i po zabiegu</h2></div><div class="faq"><sc-for list="{{blocks}}" as="b" hint-placeholder-count="3"><div class="faq-item"><button class="faq-q" onClick="{{ b.toggle }}" aria-expanded="{{ b.expanded }}">{{ b.q }}<span class="faq-sign">{{ b.sign }}</span></button><div class="faq-a {{ b.openCls }}" dangerouslySetInnerHTML="{{ b.html }}"></div></div></sc-for></div></div></section>
+
+<!-- FAQ ZABIEGU -->
+<section class="sec reveal"><div class="wrap"><div class="faq-head"><p class="kicker">FAQ zabiegu</p><h2 class="h2">Depilacja laserowa — pytania</h2></div><div class="faq"><sc-for list="{{faqs}}" as="f" hint-placeholder-count="4"><div class="faq-item"><button class="faq-q" onClick="{{ f.toggle }}" aria-expanded="{{ f.expanded }}">{{ f.q }}<span class="faq-sign">{{ f.sign }}</span></button><div class="faq-a {{ f.openCls }}" dangerouslySetInnerHTML="{{ f.html }}"></div></div></sc-for></div></div></section>
+
+<!-- CENY -->
+<section class="pricing sec reveal" id="ceny"><div class="wrap"><div class="faq-head" style="margin-bottom:8px"><p class="kicker">Ceny — depilacja laserowa</p><h2 class="h2">Pakiety i cena za obszar</h2></div><p class="pkg-lead" style="justify-content:center;text-align:center">Seria 8 zabiegów <span class="save-badge">oszczędność do 1200 zł</span></p><div class="pkg-grid"><sc-for list="{{pkgs}}" as="k" hint-placeholder-count="6"><div class="pkg"><div class="pkg-name">{{ k.name }}</div><sc-if value="{{ k.hasGratis }}" hint-placeholder-val="{{ false }}"><span class="gratis">{{ k.gratis }}</span></sc-if><div class="pkg-price"><span class="pkg-now">{{ k.now }}</span><sc-if value="{{ k.hasWas }}" hint-placeholder-val="{{ false }}"><span class="pkg-was">{{ k.was }}</span></sc-if></div><sc-if value="{{ k.hasSave }}" hint-placeholder-val="{{ false }}"><span class="pkg-save">oszczędność <b>{{ k.save }}</b></span></sc-if></div></sc-for></div><div class="btn-row" style="justify-content:center;margin-top:36px"><a href="Cennik.dc.html#cennik-laser" class="btn btn-cta">Pełny cennik depilacji (obszary)</a></div></div></section>
+
+<!-- CTA -->
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Pierwszy krok jest bezpłatny</p><h2 class="h2">Umów konsultację i próbę laserową</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { accOpen: 0, faqOpen: null };
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    const blockData = [
+      { q: 'Przygotowanie do zabiegu', a: '<ul><li>Na 2–3 tygodnie przed zabiegiem unikaj opalania i samoopalaczy.</li><li>Okolicę zabiegu wygol maszynką dzień przed wizytą — nie wyrywaj i nie woskuj.</li><li>Na kilka dni odstaw silne kwasy i retinol w miejscu zabiegu.</li><li>Przyjdź z czystą skórą, bez balsamów, olejków i makijażu w tej okolicy.</li></ul>' },
+      { q: 'Zalecenia po zabiegu', a: '<ul><li>Przez kilka dni unikaj słońca, sauny, basenu i gorących kąpieli.</li><li>Nawilżaj skórę i stosuj krem z filtrem SPF.</li><li>Między zabiegami włoski możesz golić — nie wyrywaj i nie woskuj.</li><li>Zachowaj odstępy między zabiegami ustalone podczas konsultacji.</li></ul>' },
+      { q: 'Przeciwwskazania', a: 'Część przeciwwskazań weryfikujemy zawsze indywidualnie podczas bezpłatnej konsultacji przed pierwszym zabiegiem. Należą do nich m.in. ciąża i karmienie piersią, świeża opalenizna, przyjmowanie leków światłouczulających oraz niektóre choroby skóry w miejscu zabiegu. Jeśli masz wątpliwości — <a href="tel:517899229">zadzwoń</a>, spokojnie wszystko omówimy.' },
+    ];
+    const faqData = [
+      { q: 'Czy zabieg boli?', a: 'Odczucia są indywidualne. Parametry dobieramy podczas konsultacji tak, aby zabieg był komfortowy.' },
+      { q: 'Ile trwa pojedynczy zabieg?', a: 'Zależnie od obszaru — od kilku do kilkudziesięciu minut. Czas omawiamy przy zapisie.' },
+      { q: 'Co ile odbywają się zabiegi?', a: 'Zwykle co kilka tygodni. Dokładny harmonogram serii ustalamy indywidualnie na konsultacji.' },
+      { q: 'Czy mogę przyjść latem?', a: 'Tak, przy zachowaniu zaleceń — przede wszystkim unikaj opalania okolicy zabiegu. Szczegóły przekazujemy na konsultacji.' },
+    ];
+    const pkgRaw = [
+      { n: 'Łydki i bikini płytkie', g: 'pachy gratis', now: 450, was: 600, save: 1200 },
+      { n: 'Łydki i bikini średnie', g: 'pachy gratis', now: 500, was: 650, save: 1200 },
+      { n: 'Łydki i bikini głębokie', g: 'pachy gratis', now: 550, was: 700, save: 1200 },
+      { n: 'Pośladki i przestrzeń międzypośladkowa', now: 250, was: 300, save: 400 },
+      { n: 'Pachy — sześć zabiegów', g: 'dwa gratis', now: 150, save: 300 },
+      { n: 'Plecy', g: 'kark gratis', now: 350, was: 500, save: 1200 },
+      { n: 'Plecy i kark', g: 'pachy gratis', now: 500, was: 650, save: 1200 },
+      { n: 'Klatka piersiowa i brzuch', now: 350, was: 450, save: 800 },
+      { n: 'Wąsik i broda', now: 200, was: 250, save: 400 },
+      { n: 'Broda i twarz', g: 'wąsik gratis', now: 350, was: 450, save: 800 },
+      { n: 'Pakiet na start — całe nogi i pachy', g: 'pachy gratis', now: 500, was: 600 },
+    ];
+    return {
+      atuty: [
+        'Laser na miejscu, dostępny każdego dnia pracy salonu.',
+        'Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem.',
+        'Parametry zabiegu dobierane indywidualnie podczas konsultacji.',
+        'Cała seria zabiegów w jednym, kameralnym miejscu.',
+        'Pakiety dopasowane do wybranych obszarów ciała.',
+        'Dobór pielęgnacji domowej po zabiegu.',
+      ],
+      blocks: blockData.map((b, i) => ({ q: b.q, html: { __html: b.a }, openCls: this.state.accOpen === i ? 'open' : '', sign: this.state.accOpen === i ? '–' : '+', expanded: this.state.accOpen === i ? 'true' : 'false', toggle: () => this.setState(s => ({ accOpen: s.accOpen === i ? null : i })) })),
+      faqs: faqData.map((f, i) => ({ q: f.q, html: { __html: f.a }, openCls: this.state.faqOpen === i ? 'open' : '', sign: this.state.faqOpen === i ? '–' : '+', expanded: this.state.faqOpen === i ? 'true' : 'false', toggle: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? null : i })) })),
+      pkgs: pkgRaw.map(k => ({ name: k.n, gratis: k.g || '', hasGratis: !!k.g, now: k.now + ' zł', was: k.was ? k.was + ' zł' : '', hasWas: !!k.was, save: k.save ? k.save + ' zł' : '', hasSave: !!k.save })),
+    };
+  }
+}
+</script>
+</body>
+</html>

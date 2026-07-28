@@ -127,11 +127,13 @@ async function main() {
   check('/regulamin: odnosnik do polityki prywatnosci', (html['/regulamin'] || '').includes('/polityka-prywatnosci'))
 
   console.log('\n=== 5. Pelny zakres z oferty ===')
-  check('home: karuzela opinii', home.includes('rev-carousel'))
-  check('home: opinie przesuwaja sie pojedynczo', (home.match(/rev-slide/g) || []).length >= 2)
-  check('home: kropki nawigacji karuzeli', home.includes('rev-dot'))
+  // Selektory zgodne z redesignem 2026-07-28 (design/2026-07-28/styles.css):
+  // karuzela .carousel > .rev-card + .dots > .dot, wyróżniki .why-grid > .why-card.
+  check('home: karuzela opinii', home.includes('class="carousel"'))
+  check('home: opinie przesuwaja sie pojedynczo', (home.match(/class="rev-card/g) || []).length >= 2)
+  check('home: kropki nawigacji karuzeli', home.includes('class="dots"') && /class="dot[ "]/.test(home))
   check('home: nota o opiniach z wizytowki Google', home.includes('wizytówki Google'))
-  check('home: sekcja Dlaczego ZJAWISKOWO', home.includes('trust-grid') && /Dlaczego ZJAWISKOWO/i.test(home))
+  check('home: sekcja Dlaczego ZJAWISKOWO', home.includes('why-grid') && /Dlaczego ZJAWISKOWO/i.test(home))
   check('home: sekcja voucherow', home.includes('id="vouchery"'))
   check('home: sekcja FAQ', home.includes('faq'))
   check('home: galeria', home.includes('class="gal"'))

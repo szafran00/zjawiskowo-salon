@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="kontakt" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><span class="cur">Kontakt</span></nav><p class="kicker">Kontakt</p><h1 class="h1">Odwiedź nas w Krzeszowicach</h1><p class="lead">Rezerwacja wyłącznie telefoniczna — zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd.</p></div></section>
+
+<section class="contact reveal"><div class="wrap sec"><div class="contact-grid"><div class="contact-info">
+<div class="info-row"><span class="lbl">Adres</span><span class="val">ul. 3 Maja 4, 32-065 Krzeszowice</span><span style="font-size:13px;color:var(--muted)">Parter · wejście od strony parkingu · bezpłatny parking przy budynku</span></div>
+<div class="info-row"><span class="lbl">Telefon</span><a class="val" href="tel:517899229">517 899 229</a><span style="font-size:13px;color:var(--muted)">Rezerwacja wyłącznie telefoniczna</span></div>
+<div class="info-row"><span class="lbl">Godziny otwarcia</span><span class="val">pon.–pt. 9:00–19:00 · sob. 9:00–14:00</span></div>
+<div class="map"><sc-if value="{{ mapOn }}" hint-placeholder-val="{{ false }}"><div class="ph"><span>[tu osadzona mapa Google — ul. 3 Maja 4, Krzeszowice]</span></div></sc-if><sc-if value="{{ mapOff }}" hint-placeholder-val="{{ true }}"><button class="ph mapbtn" onClick="{{ loadMap }}" style="width:100%;border-style:dashed"><span>Mapa Google — kliknij, aby wczytać (zgoda na treść zewnętrzną)</span></button></sc-if></div>
+<div class="socials"><a class="soc" href="#" target="_blank" rel="noopener">Facebook [link]</a><a class="soc" href="#" target="_blank" rel="noopener">Instagram [link]</a></div>
+</div>
+<form class="form" onSubmit="{{ onSubmit }}"><p class="form-note">Preferujemy kontakt telefoniczny. Ten formularz jest pomocniczy.</p><div class="field"><label>Imię</label><input type="text" placeholder="Twoje imię" required=""></div><div class="field"><label>Telefon</label><input type="tel" placeholder="Numer telefonu" required=""></div><div class="field"><label>Wiadomość</label><textarea placeholder="W czym możemy pomóc?"></textarea></div><button type="submit" class="btn btn-cta" style="width:100%">Wyślij zapytanie</button><p class="form-note">Wysyłając formularz, akceptujesz <a href="Polityka prywatności.dc.html">politykę prywatności</a>.</p></form>
+</div></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:760}}">
+class Component extends DCLogic {
+  state = { mapOn: false };
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    return {
+      mapOn: this.state.mapOn, mapOff: !this.state.mapOn,
+      loadMap: () => this.setState({ mapOn: true }),
+      onSubmit: (e) => { e.preventDefault(); alert('Dziękujemy! To makieta poglądowa — formularz nie wysyła wiadomości. Prosimy o kontakt telefoniczny: 517 899 229.'); },
+    };
+  }
+}
+</script>
+</body>
+</html>

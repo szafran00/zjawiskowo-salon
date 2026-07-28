@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;box-sizing:border-box}
+  body{background:#8a8a8a;font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:flex-start}
+  .serif{font-family:'Playfair Display',serif}
+  /* ---------- FAVICON 512 ---------- */
+  #favicon{width:512px;height:512px;border-radius:110px;position:relative;overflow:hidden;
+    background:radial-gradient(120% 120% at 30% 20%,#FFF9EC,#F3E9D6 55%,#EBDCB6);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  #favicon .ring{position:absolute;inset:36px;border-radius:80px;border:6px solid transparent;
+    background:linear-gradient(135deg,#EBD494,#B8912F,#846514) border-box;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  #favicon .z{font-family:'Playfair Display',serif;font-weight:700;font-size:320px;line-height:1;
+    background:linear-gradient(135deg,#B8912F,#846514);-webkit-background-clip:text;background-clip:text;color:transparent;transform:translateY(-8px)}
+  #favicon .dot{position:absolute;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#EBD494,#B8912F)}
+  #favicon .dot.tr{top:70px;right:120px}#favicon .dot.bl{bottom:70px;left:120px}
+  /* ---------- OG 1200x630 ---------- */
+  #og{width:1200px;height:630px;position:relative;overflow:hidden;
+    background:radial-gradient(140% 100% at 78% 12%,#FFFDF7,#FBF7EF 46%,#F3E9D6);color:#2B2620}
+  #og .frame{position:absolute;inset:34px;border:1.5px solid rgba(132,101,20,.45);border-radius:8px;pointer-events:none}
+  #og .frame::before,#og .frame::after{content:'';position:absolute;width:70px;height:70px}
+  #og .frame::before{top:-1px;left:-1px;border-top:3px solid #B8912F;border-left:3px solid #B8912F}
+  #og .frame::after{bottom:-1px;right:-1px;border-bottom:3px solid #B8912F;border-right:3px solid #B8912F}
+  #og .inner{position:absolute;inset:34px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 90px}
+  #og .kick{font-size:19px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:#846514}
+  #og .name{font-family:'Playfair Display',serif;font-weight:700;font-size:132px;letter-spacing:.1em;line-height:1;margin:18px 0 6px;
+    background:linear-gradient(135deg,#9c7a24,#846514 40%,#c9a githdummy);}
+  #og .name{background:linear-gradient(120deg,#B8912F,#846514);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #og .rule{display:flex;align-items:center;gap:18px;margin:6px 0 24px}
+  #og .rule .ln{width:120px;height:1.5px;background:linear-gradient(90deg,transparent,#B8912F)}
+  #og .rule .ln.r{background:linear-gradient(90deg,#B8912F,transparent)}
+  #og .rule .dia{width:12px;height:12px;background:linear-gradient(135deg,#EBD494,#B8912F);transform:rotate(45deg)}
+  #og .tag{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:44px;color:#2B2620}
+  #og .pillars{display:flex;align-items:center;gap:34px;margin-top:30px}
+  #og .pillars .p{font-size:22px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#2B2620}
+  #og .pillars .sep{width:7px;height:7px;border-radius:50%;background:#B8912F}
+  #og .loc{position:absolute;left:0;right:0;bottom:52px;text-align:center;font-size:17px;letter-spacing:.24em;text-transform:uppercase;color:#846514;font-weight:600}
+</style></head>
+<body>
+  <div id="favicon"><div class="ring"></div><span class="dot tr"></span><span class="dot bl"></span><span class="z serif">Z</span></div>
+  <div id="og">
+    <div class="frame"></div>
+    <div class="inner">
+      <div class="kick">Salon kosmetyczny</div>
+      <div class="name serif">ZJAWISKOWO</div>
+      <div class="rule"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
+      <div class="tag serif">Piękno zaczyna się tutaj</div>
+      <div class="pillars"><span class="p">Kosmetyka twarzy</span><span class="sep"></span><span class="p">Depilacja laserowa</span></div>
+    </div>
+    <div class="loc">Krzeszowice</div>
+  </div>
+</body></html>

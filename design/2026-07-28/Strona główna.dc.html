@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:title" content="ZJAWISKOWO — Salon kosmetyczny · Depilacja laserowa · Krzeszowice">
+<meta property="og:description" content="Depilacja laserowa na miejscu, dostępna każdego dnia pracy salonu, oraz kosmetyka twarzy. Piękno zaczyna się tutaj.">
+<meta property="og:image" content="og-image.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="home" hint-size="100%,110px"></dc-import>
+
+<div class="promo"><b>Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem</b></div>
+
+<!-- HERO -->
+<section class="hero hero-a"><a href="Depilacja laserowa.dc.html" class="hero-tile"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-hero-laser" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: zbliżenie gładkiej skóry nóg — bez sprzętu, bez wnętrza · pion 4:5" hint-size="100%,100%"></x-import></div><div class="tile-cap">Depilacja laserowa</div></a><div class="hero-center"><div class="hero-badge"><span class="st">★★★★★</span> 5,0 · 90+ opinii w Google</div><p class="kicker">Salon kosmetyczny · Depilacja laserowa · Krzeszowice</p><h1 class="h1">Piękno zaczyna się tutaj</h1><p class="lead">Laser stoi u nas na miejscu i jest dostępny każdego dnia pracy salonu — całą serię zabiegów przechodzisz w jednym, kameralnym miejscu.</p><a href="tel:517899229" class="btn btn-cta">Umów się: 517 899 229</a></div><a href="Pielęgnacja twarzy.dc.html" class="hero-tile"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-hero-twarz" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: pielęgnacja twarzy — dłonie na skórze, bez sprzętu · pion 4:5" hint-size="100%,100%"></x-import></div><div class="tile-cap">Kosmetyka twarzy</div></a></section>
+
+<!-- STATS -->
+<section class="stats reveal"><div class="wrap" style="padding:52px 0"><div class="stat-grid"><sc-for list="{{stats}}" as="s" hint-placeholder-count="4"><div class="stat"><div class="big">{{ s.big }}</div><div class="small">{{ s.small }}</div></div></sc-for></div></div></section>
+
+<!-- DLACZEGO -->
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head" style="margin-bottom:0"><p class="kicker">Dlaczego ZJAWISKOWO</p><h2 class="h2">Kameralnie, blisko i na miejscu</h2></div><div class="why-grid"><sc-for list="{{why}}" as="w" hint-placeholder-count="4"><div class="why-card"><div class="why-num">{{ w.n }}</div><p>{{ w.t }}</p></div></sc-for></div><div class="inc-band"><sc-for list="{{incentives}}" as="i" hint-placeholder-count="2"><div class="inc"><span class="tag">{{ i.tag }}</span><div><h3>{{ i.title }}</h3><p>{{ i.text }}</p></div></div></sc-for></div></div></section>
+
+<!-- FILARY -->
+<section class="sec reveal"><div class="wrap"><div class="faq-head" style="margin-bottom:0"><p class="kicker">Zabiegi</p><h2 class="h2">Dwa filary, jedno miejsce</h2></div><div class="pillar-teasers">
+<div class="teaser"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-teaser-laser" src="https://images.pexels.com/photos/34939742/pexels-photo-34939742.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: zbliżenie gładkiej skóry — bez sprzętu · poziom 3:2" hint-size="100%,100%"></x-import></div><div class="teaser-body"><h3 class="h3">Depilacja laserowa</h3><p>Laser na miejscu, dostępny każdego dnia pracy salonu. Przed pierwszym zabiegiem — bezpłatna konsultacja i próba laserowa.</p><div class="btn-row"><a href="Depilacja laserowa.dc.html" class="btn btn-cta">Poznaj zabieg</a><a href="Cennik.dc.html#cennik-laser" class="btn btn-ghost">Zobacz ceny</a></div></div></div>
+<div class="teaser"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-teaser-twarz" src="https://images.pexels.com/photos/5240623/pexels-photo-5240623.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: pielęgnacja twarzy — dłonie na skórze, bez sprzętu · poziom 3:2" hint-size="100%,100%"></x-import></div><div class="teaser-body"><h3 class="h3">Kosmetyka twarzy</h3><p>Oczyszczanie, mikrodermabrazja, mezoterapia bezigłowa, radiofrekwencja i więcej — dobierane do potrzeb Twojej skóry.</p><div class="btn-row"><a href="Pielęgnacja twarzy.dc.html" class="btn btn-cta">Poznaj zabieg</a><a href="Cennik.dc.html#cennik-twarz" class="btn btn-ghost">Zobacz ceny</a></div></div></div>
+</div></div></section>
+
+<!-- CENNIK SKRÓT -->
+<section class="pricing sec reveal"><div class="wrap"><div class="faq-head" style="margin-bottom:8px"><p class="kicker">Cennik w skrócie</p><h2 class="h2">Najmocniejsze pakiety</h2></div><p class="pkg-lead" style="justify-content:center;text-align:center">Seria 8 zabiegów depilacji <span class="save-badge">oszczędność do 1200 zł</span></p><div class="pkg-grid" style="max-width:940px;margin:0 auto">
+<div class="pkg"><div class="pkg-name">Łydki i bikini głębokie</div><span class="gratis">pachy gratis</span><div class="pkg-price"><span class="pkg-now">550 zł</span><span class="pkg-was">700 zł</span></div><span class="pkg-save">oszczędność <b>1200 zł</b> przy serii 8 zabiegów</span></div>
+<div class="pkg"><div class="pkg-name">Plecy i kark</div><span class="gratis">pachy gratis</span><div class="pkg-price"><span class="pkg-now">500 zł</span><span class="pkg-was">650 zł</span></div><span class="pkg-save">oszczędność <b>1200 zł</b> przy serii 8 zabiegów</span></div>
+<div class="pkg"><div class="pkg-name">Pakiet na start — całe nogi i pachy</div><span class="gratis">pachy gratis</span><div class="pkg-price"><span class="pkg-now">500 zł</span><span class="pkg-was">600 zł</span></div><span class="pkg-save">dobre wejście w serię zabiegów</span></div>
+</div><div class="btn-row" style="justify-content:center;margin-top:36px"><a href="Cennik.dc.html" class="btn btn-cta">Zobacz pełny cennik</a><a href="Cennik.dc.html#cennik-twarz" class="btn btn-ghost">Pielęgnacja twarzy — ceny</a></div></div></section>
+
+<!-- VOUCHER TEASER -->
+<section class="vouchers reveal"><div class="wrap sec"><div class="vouch-grid"><div class="vouch-body"><p class="kicker">Vouchery</p><h2 class="h2">Podaruj chwilę dla siebie</h2><p class="lead">Voucher na wybrany zabieg lub kwotę to elegancki pomysł na prezent. Wystawiamy go od ręki podczas wizyty.</p><div class="btn-row"><a href="Vouchery.dc.html" class="btn btn-cta">Więcej o voucherach</a><a href="tel:517899229" class="btn btn-ghost">Zapytaj: 517 899 229</a></div></div><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="home-vouch" src="https://images.pexels.com/photos/5240623/pexels-photo-5240623.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200" fit="cover" shape="rect" placeholder="ZDJĘCIE: elegancki detal / kosmetyk w dłoni — bez sprzętu, bez wnętrza · poziom 3:2" hint-size="100%,100%"></x-import></div></div></div></section>
+
+<!-- OPINIE -->
+<section class="reviews reveal"><div class="wrap sec"><div class="rev-head"><p class="kicker">Opinie klientek</p><h2 class="h2">Co mówią klientki</h2><div class="rev-score"><span class="st">★★★★★</span><span class="num">5,0</span><span>90+ opinii w Google</span></div></div><div class="carousel"><button class="car-btn" onClick="{{ revPrev }}" aria-label="Poprzednia opinia">‹</button><div class="car-view" onTouchStart="{{ onTouchStart }}" onTouchEnd="{{ onTouchEnd }}"><div class="rev-card"><div class="stars">★★★★★</div><p class="rev-q">{{ currentReview.q }}</p><p class="rev-name">{{ currentReview.name }}</p></div></div><button class="car-btn" onClick="{{ revNext }}" aria-label="Następna opinia">›</button></div><div class="dots"><sc-for list="{{revDots}}" as="d" hint-placeholder-count="5"><button class="dot {{ d.cls }}" onClick="{{ d.go }}" aria-label="{{ d.aria }}"></button></sc-for></div><div class="google-note"><span>Opinie pochodzą z wizytówki Google</span></div></div></section>
+
+<!-- FAQ -->
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head"><p class="kicker">Najczęstsze pytania</p><h2 class="h2">FAQ</h2></div><div class="faq"><sc-for list="{{faqs}}" as="f" hint-placeholder-count="6"><div class="faq-item"><button class="faq-q" onClick="{{ f.toggle }}" aria-expanded="{{ f.expanded }}">{{ f.q }}<span class="faq-sign">{{ f.sign }}</span></button><div class="faq-a {{ f.openCls }}" dangerouslySetInnerHTML="{{ f.html }}"></div></div></sc-for></div><div class="btn-row" style="justify-content:center;margin-top:36px"><a href="Kontakt.dc.html" class="btn btn-ghost">Masz inne pytanie? Napisz do nas</a></div></div></section>
+
+<!-- GALERIA -->
+<section class="sec reveal"><div class="wrap"><div class="gal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px"><sc-for list="{{gallery}}" as="g" hint-placeholder-count="8"><div class="ph" style="height:220px"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="gal-{{ $index }}" src="{{ g.src }}" fit="cover" shape="rect" placeholder="{{ g.label }}" hint-size="100%,100%"></x-import></div></sc-for></div></div></section>
+
+<!-- PASEK Z TELEFONEM -->
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Umów wizytę</p><h2 class="h2">Zadzwoń — ustalimy dogodny termin</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+
+<sc-if value="{{ showCookie }}" hint-placeholder-val="{{ true }}"><div class="cookie"><p>Używamy plików cookies, aby strona działała poprawnie. <a href="Polityka prywatności.dc.html">Więcej</a></p><div class="c-actions"><button class="btn btn-ghost" style="border-color:rgba(244,238,226,.4);color:#F4EEE2" onClick="{{ dismissCookie }}">Tylko niezbędne</button><button class="btn btn-cta" onClick="{{ dismissCookie }}">Akceptuję</button></div></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { faqOpen: 0, revIdx: 0, cookie: true };
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+    this._tx = 0;
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    const reviews = [
+      { q: 'Kameralnie, spokojnie i bez pośpiechu. Czuję się tu naprawdę zaopiekowana.', name: 'Anna K.' },
+      { q: 'Miła obsługa, czysto i elegancko. Zawsze na czas, zawsze z uśmiechem.', name: 'Magda W.' },
+      { q: 'Pani właścicielka wszystko dokładnie tłumaczy i odpowiada na każde pytanie. Pełen profesjonalizm.', name: 'Ewelina S.' },
+      { q: 'Przyjemna atmosfera i dbałość o komfort w każdym szczególe. Chętnie wracam.', name: 'Karolina P.' },
+      { q: 'Najmilszy salon w Krzeszowicach. Zawsze wychodzę w dobrym nastroju.', name: 'Joanna R.' },
+    ];
+    const ri = ((this.state.revIdx % reviews.length) + reviews.length) % reviews.length;
+    const goRev = (d) => () => this.setState(s => ({ revIdx: s.revIdx + d }));
+
+    const faqData = [
+      { q: 'Jak umówić wizytę?', a: 'Wizyty umawiamy telefonicznie pod numerem <a href="tel:517899229">517 899 229</a>. To jedyny kanał rezerwacji — nie prowadzimy zapisów online ani przez e-mail.' },
+      { q: 'Jak wygląda pierwsza wizyta na depilacji laserowej?', a: 'Zaczynamy od bezpłatnej konsultacji i próby laserowej, podczas której omawiamy przebieg zabiegu i dobieramy jego parametry indywidualnie. Więcej znajdziesz na stronie <a href="Depilacja laserowa.dc.html">Depilacja laserowa</a>.' },
+      { q: 'Ile zabiegów obejmuje seria depilacji?', a: 'Depilacja laserowa to seria zabiegów wykonywanych w odstępach kilku tygodni, najczęściej około ośmiu. Ponieważ laser jest u nas na miejscu każdego dnia pracy, całą serię przechodzisz w jednym miejscu. Ceny serii i pakietów znajdziesz w <a href="Cennik.dc.html#cennik-laser">cenniku depilacji</a>.' },
+      { q: 'Jak przygotować się do zabiegu?', a: 'Na kilka dni przed wizytą prosimy o wygolenie okolicy oraz unikanie opalania. Szczegóły przekazujemy przy zapisie i opisujemy na stronie <a href="Depilacja laserowa.dc.html">zabiegu</a>.' },
+      { q: 'Czy mogę kupić voucher na prezent?', a: 'Tak — wystawiamy <a href="Vouchery.dc.html">vouchery podarunkowe</a> na wybrany zabieg lub kwotę, od ręki podczas wizyty.' },
+      { q: 'Jakie formy płatności akceptujecie?', a: 'Przyjmujemy płatność gotówką oraz kartą. Dostępne są także pakiety oraz vouchery podarunkowe.' },
+    ];
+
+    return {
+      stats: [
+        { big: '★ 5,0', small: 'średnia ocena w wizytówce Google' },
+        { big: '90+', small: 'opinii wystawionych przez klientki' },
+        { big: 'Laser', small: 'zawsze na miejscu' },
+        { big: '1:1', small: 'jedna klientka w danym czasie' },
+      ],
+      why: [
+        { n: '1', t: 'Kameralny salon, jedna klientka w danym czasie.' },
+        { n: '2', t: 'Laser na miejscu, dostępny każdego dnia pracy salonu.' },
+        { n: '3', t: 'Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem.' },
+        { n: '4', t: 'Dobór pielęgnacji domowej po zabiegu.' },
+      ],
+      incentives: [
+        { tag: 'Depilacja', title: 'Bezpłatna konsultacja i próba laserowa', text: 'Przed pierwszym zabiegiem depilacji spokojnie omawiamy przebieg i wykonujemy próbę laserową — bez zobowiązań.' },
+        { tag: 'Twarz', title: 'Bezpłatna konsultacja pielęgnacyjna', text: 'Przy zabiegu twarzy dobieramy plan pielęgnacji do potrzeb Twojej skóry.' },
+      ],
+      currentReview: reviews[ri],
+      revPrev: goRev(-1), revNext: goRev(1),
+      revDots: reviews.map((_, i) => ({ cls: i === ri ? 'on' : '', aria: 'Opinia ' + (i + 1), go: () => this.setState({ revIdx: i }) })),
+      onTouchStart: (e) => { this._tx = e.changedTouches[0].clientX; },
+      onTouchEnd: (e) => { const dx = e.changedTouches[0].clientX - this._tx; if (Math.abs(dx) > 40) this.setState(s => ({ revIdx: s.revIdx + (dx < 0 ? 1 : -1) })); },
+      faqs: faqData.map((f, i) => ({ q: f.q, html: { __html: f.a }, openCls: this.state.faqOpen === i ? 'open' : '', sign: this.state.faqOpen === i ? '–' : '+', expanded: this.state.faqOpen === i ? 'true' : 'false', toggle: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? null : i })) })),
+      gallery: [
+        { src: 'https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&cs=tinysrgb&w=1200', label: 'Gładka skóra nóg' },
+        { src: 'https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&cs=tinysrgb&w=1200', label: 'Pielęgnacja twarzy — zabieg' },
+        { src: 'https://images.pexels.com/photos/34939742/pexels-photo-34939742.jpeg?auto=compress&cs=tinysrgb&w=1200', label: 'Pielęgnacja — detal' },
+      ],
+      showCookie: this.state.cookie,
+      dismissCookie: () => this.setState({ cookie: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

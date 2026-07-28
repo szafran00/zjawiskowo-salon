@@ -2,6 +2,8 @@
 
 Strona salonu kosmetycznego ZJAWISKOWO (Krzeszowice). Next.js 15 (App Router) + React 19,
 treść w Sanity, panel pod `/studio`. Szczegóły wdrożenia: [DEPLOY.md](./DEPLOY.md).
+Warstwa wizualna pochodzi z projektu `design/2026-07-28/`; zmiany i decyzje opisuje
+[REDESIGN-LOG.md](./REDESIGN-LOG.md).
 
 ## Uruchomienie
 
@@ -37,9 +39,9 @@ zabiegu, „Cennik” z grup cennika oznaczonych **Pokaż w rozwijanym menu**.
 Wszystko jest edytowalne w `/studio`: ustawienia i kontakt, O mnie, cennik, vouchery,
 regulamin, zabiegi, FAQ, galeria.
 
-Typy `trustBadge` i `review` zostały w schemacie (dokumenty w bazie nie giną), ale nie są
-renderowane ani widoczne w menu panelu — klientka zrezygnowała z karuzeli opinii, opinii
-Google i osobnej sekcji „Dlaczego ZJAWISKOWO”.
+Sekcja „Dlaczego ZJAWISKOWO” buduje się z dokumentów `trustBadge`, a karuzela opinii
+z dokumentów `review` (pojedynczą opinię ukrywa przełącznik **Ukryj**). Obie sekcje da
+się wyłączyć w ustawieniach salonu.
 
 ## Przykładowa treść
 
@@ -60,7 +62,7 @@ Seed nadpisuje dokumenty o stałych ID (`siteSettings`, `aboutPage`, `pricelist`
 
 ```bash
 npm run build           # musi przejść bez błędów
-npm test                # smoke: Sanity + trasy + spójność treści (138 asercji)
+npm test                # smoke: Sanity + trasy + spójność treści (149 asercji)
 npm run test:visual     # Playwright: menu, zgoda cookies, FAQ, zrzuty ekranu
 ```
 

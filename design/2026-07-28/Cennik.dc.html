@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="cennik" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><span class="cur">Cennik</span></nav><p class="kicker">Cennik</p><h1 class="h1">Cennik zabiegów</h1><p class="lead">Ceny depilacji laserowej i kosmetyki twarzy. Najwięcej zyskujesz w pakietach i seriach — poniżej najpierw korzyści, potem pełne stawki.</p></div></section>
+
+<!-- STICKY NAWIGACJA KOTWIC -->
+<nav class="price-nav" aria-label="Sekcje cennika"><div class="price-nav-in"><a href="#cennik-laser">Depilacja laserowa</a><a href="#cennik-twarz">Pielęgnacja twarzy</a><a href="#cennik-oprawa">Oprawa oka</a><a href="#cennik-dodatki">Dodatki</a></div></nav>
+
+<section class="pricing"><div class="wrap sec" style="padding-top:56px">
+
+<!-- HIGHLIGHT KORZYŚCI -->
+<div class="inc-band" style="margin-top:0"><div class="inc"><span class="tag">Gratis</span><div><h3>Zabiegi gratis w pakietach</h3><p>W wielu pakietach depilacji dokładamy obszar gratis — np. pachy albo kark.</p></div></div><div class="inc"><span class="tag">do 1200 zł</span><div><h3>Oszczędność przy serii</h3><p>Przy serii 8 zabiegów depilacji oszczędzasz nawet do 1200 zł względem cen jednostkowych.</p></div></div><div class="inc"><span class="tag">−20%</span><div><h3>Rabat na pielęgnację</h3><p>−20% na serię 5 zabiegów twarzy (lub 6. gratis) oraz przy dwóch zabiegach na jednej wizycie.</p></div></div></div>
+
+<!-- DEPILACJA -->
+<div class="price-block" id="cennik-laser"><div class="pb-head"><h3 class="h3">Depilacja laserowa</h3><span class="pb-sub">cena za obszar na jednej wizycie</span></div><div class="price-list"><sc-for list="{{depPrices}}" as="p" hint-placeholder-count="12"><div class="prow"><span class="pn">{{ p.n }}</span><span class="dots-l"></span><span class="pp">{{ p.p }}</span></div></sc-for></div>
+<p class="pkg-lead">Pakiety depilacji <span class="save-badge">oszczędność do 1200 zł · seria 8 zabiegów</span></p><div class="pkg-grid"><sc-for list="{{depPkgs}}" as="k" hint-placeholder-count="6"><div class="pkg"><div class="pkg-name">{{ k.name }}</div><sc-if value="{{ k.hasGratis }}" hint-placeholder-val="{{ false }}"><span class="gratis">{{ k.gratis }}</span></sc-if><div class="pkg-price"><span class="pkg-now">{{ k.now }}</span><sc-if value="{{ k.hasWas }}" hint-placeholder-val="{{ false }}"><span class="pkg-was">{{ k.was }}</span></sc-if></div><sc-if value="{{ k.hasSave }}" hint-placeholder-val="{{ false }}"><span class="pkg-save">oszczędność <b>{{ k.save }}</b></span></sc-if></div></sc-for></div></div>
+
+<!-- PIELĘGNACJA TWARZY -->
+<div class="price-block" id="cennik-twarz"><div class="pb-head"><h3 class="h3">Pielęgnacja twarzy</h3><span class="pb-sub">cena i czas trwania zabiegu</span></div><div class="face-promo"><div class="fp"><span class="pct">−20%</span><p>na serię 5 zabiegów co 2–3 tygodnie — albo szósty zabieg gratis</p></div><div class="fp"><span class="pct">−20%</span><p>przy dwóch różnych zabiegach na jednej wizycie</p></div></div><div class="price-list"><sc-for list="{{facePrices}}" as="g" hint-placeholder-count="10"><div class="grp"><p class="grp-name">{{ g.g }}</p><sc-for list="{{ g.variants }}" as="v" hint-placeholder-count="2"><div class="prow"><span class="pn">{{ v.label }}</span><span class="dots-l"></span><span class="pp">{{ v.price }}</span><sc-if value="{{ v.hasTime }}" hint-placeholder-val="{{ false }}"><span class="pt">{{ v.time }}</span></sc-if></div></sc-for></div></sc-for></div></div>
+
+<!-- OPRAWA OKA -->
+<div class="price-block" id="cennik-oprawa"><div class="pb-head"><h3 class="h3">Stylizacja oprawy oka</h3><span class="pb-sub">brwi i rzęsy</span></div><div class="price-list"><sc-for list="{{oprawa}}" as="p" hint-placeholder-count="4"><div class="prow"><span class="pn">{{ p.n }}</span><span class="dots-l"></span><span class="pp">{{ p.p }}</span></div></sc-for></div></div>
+
+<!-- DODATKI -->
+<div class="price-block" id="cennik-dodatki"><div class="pb-head"><h3 class="h3">Dodatki</h3><span class="pb-sub">do zabiegów pielęgnacyjnych</span></div><div class="price-list"><sc-for list="{{dodatki}}" as="p" hint-placeholder-count="2"><div class="prow"><span class="pn">{{ p.n }}</span><span class="dots-l"></span><span class="pp">{{ p.p }}</span></div></sc-for></div></div>
+
+<p class="price-note">Ceny mają charakter orientacyjny i nie stanowią oferty handlowej w rozumieniu przepisów prawa. Ostateczny zakres i koszt zabiegu ustalamy indywidualnie podczas bezpłatnej konsultacji. Rezerwacja wyłącznie telefoniczna: <a href="tel:517899229">517 899 229</a>.</p>
+
+</div></section>
+
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Masz pytania o ceny?</p><h2 class="h2">Zadzwoń — dobierzemy pakiet</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    const depAreas = [
+      ['Łydki, stopy i palce', 250], ['Uda i kolana', 300], ['Całe nogi', 450], ['Bikini płytkie', 200],
+      ['Bikini średnie', 250], ['Bikini głębokie', 300], ['Okolice bikini', 150], ['Przestrzeń międzypośladkowa', 100],
+      ['Pośladki', 200], ['Linia biała', 100], ['Pachy', 150], ['Wąsik', 100], ['Broda', 150],
+      ['Twarz, baki i policzki', 200], ['Kark', 150], ['Plecy', 350], ['Ramiona', 200], ['Przedramiona', 200],
+      ['Dłonie i palce', 100], ['Całe ręce', 350], ['Klatka piersiowa', 250], ['Brzuch', 200],
+    ].map(([n, p]) => ({ n, p: p + ' zł' }));
+
+    const pkgRaw = [
+      { n: 'Łydki i bikini płytkie', g: 'pachy gratis', now: 450, was: 600, save: 1200 },
+      { n: 'Łydki i bikini średnie', g: 'pachy gratis', now: 500, was: 650, save: 1200 },
+      { n: 'Łydki i bikini głębokie', g: 'pachy gratis', now: 550, was: 700, save: 1200 },
+      { n: 'Pośladki i przestrzeń międzypośladkowa', now: 250, was: 300, save: 400 },
+      { n: 'Pachy — sześć zabiegów', g: 'dwa gratis', now: 150, save: 300 },
+      { n: 'Plecy', g: 'kark gratis', now: 350, was: 500, save: 1200 },
+      { n: 'Plecy i kark', g: 'pachy gratis', now: 500, was: 650, save: 1200 },
+      { n: 'Klatka piersiowa i brzuch', now: 350, was: 450, save: 800 },
+      { n: 'Wąsik i broda', now: 200, was: 250, save: 400 },
+      { n: 'Broda i twarz', g: 'wąsik gratis', now: 350, was: 450, save: 800 },
+      { n: 'Pakiet na start — całe nogi i pachy', g: 'pachy gratis', now: 500, was: 600 },
+    ];
+    const depPkgs = pkgRaw.map(k => ({ name: k.n, gratis: k.g || '', hasGratis: !!k.g, now: k.now + ' zł', was: k.was ? k.was + ' zł' : '', hasWas: !!k.was, save: k.save ? k.save + ' zł' : '', hasSave: !!k.save }));
+
+    const faceRaw = [
+      { g: 'Oczyszczanie wodorowe premium', v: [['twarz', '240 zł', '90 min'], ['twarz, szyja i dekolt', '290 zł', '120 min']] },
+      { g: 'Peeling kawitacyjny z terapią LED', v: [['twarz', '140 zł', '45 min'], ['twarz, szyja i dekolt', '170 zł', '60 min']] },
+      { g: 'Mikrodermabrazja diamentowa', v: [['twarz', '190 zł', '60 min'], ['twarz, szyja i dekolt', '230 zł', '90 min']] },
+      { g: 'Oczyszczanie manualne', v: [['', '250 zł', '120–180 min']] },
+      { g: 'Mezoterapia bezigłowa REVITAL 20+ i 30+', v: [['twarz', '280 zł', '70 min'], ['szyja i dekolt', '320 zł', '90 min']] },
+      { g: 'Mezoterapia bezigłowa — odmładzanie 40+', v: [['twarz', '280 zł', ''], ['szyja i dekolt', '320 zł', '']] },
+      { g: 'Mezoterapia bezigłowa — lifting 45+', v: [['twarz', '280 zł', ''], ['szyja i dekolt', '320 zł', '']] },
+      { g: 'Mezoterapia bezigłowa — skóra naczyniowa', v: [['', '280 zł', '']] },
+      { g: 'Mezoterapia bezigłowa — skóra skłonna do niedoskonałości', v: [['', '280 zł', '']] },
+      { g: 'Radiofrekwencja', v: [['lifting okolic oka', '120 zł', '40 min'], ['lifting twarzy', '160 zł', '60 min'], ['cała twarz', '250 zł', '70 min'], ['twarz, szyja i dekolt', '290 zł', '90 min']] },
+      { g: 'Ultradźwięki', v: [['twarz', '210 zł', '70 min'], ['twarz, szyja i dekolt', '240 zł', '90 min']] },
+      { g: 'Sonoforeza', v: [['twarz', '150 zł', '70 min'], ['twarz, szyja i dekolt', '180 zł', '90 min']] },
+    ];
+    const facePrices = faceRaw.map(f => ({ g: f.g, variants: f.v.map(([label, price, time]) => ({ label, price, time, hasTime: !!time })) }));
+
+    return {
+      depPrices: depAreas, depPkgs, facePrices,
+      oprawa: [
+        { n: 'Regulacja brwi', p: '30 zł' },
+        { n: 'Koloryzacja rzęs', p: '40 zł' },
+        { n: 'Koloryzacja brwi z peelingiem i regulacją', p: '70 zł' },
+        { n: 'Koloryzacja brwi i rzęs', p: '100 zł' },
+      ],
+      dodatki: [
+        { n: 'Ampułka', p: '30 zł' },
+        { n: 'Maska algowa', p: '20 zł' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

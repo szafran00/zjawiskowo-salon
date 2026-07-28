@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="o-mnie" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><span class="cur">O mnie</span></nav><p class="kicker">O mnie</p><h1 class="h1">Salon prowadzony osobiście</h1><p class="lead">ZJAWISKOWO to kameralny salon w Krzeszowicach, w którym przyjmuję jedną klientkę w danym czasie — spokojnie, bez pośpiechu i z pełną uwagą.</p></div></section>
+
+<section class="sec reveal"><div class="wrap"><div class="about-grid"><div class="about-media"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="about-img" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE: portret właścicielki (prawdziwe zdjęcie) · pion 4:5" hint-size="100%,100%"></x-import></div></div><div class="svc-body"><p class="kicker">Kilka słów</p><h2 class="h2">Piękno zaczyna się tutaj</h2><p class="lead">Zależy mi, żeby każda wizyta była komfortowa i bezpieczna — dlatego pracuję kameralnie, a każdy zabieg poprzedzam rozmową i konsultacją.</p><p class="placeholder-note">[O mnie — do uzupełnienia: droga zawodowa, ukończone szkolenia, od kiedy działa salon, podejście do klientek.]</p><div class="btn-row"><a href="tel:517899229" class="btn btn-cta">Umów wizytę: 517 899 229</a><a href="Zabiegi.dc.html" class="btn btn-ghost">Zobacz zabiegi</a></div></div></div></div></section>
+
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head" style="margin-bottom:0"><p class="kicker">Jak pracuję</p><h2 class="h2">Co mnie wyróżnia</h2></div><div class="why-grid"><sc-for list="{{why}}" as="w" hint-placeholder-count="4"><div class="why-card"><div class="why-num">{{ w.n }}</div><p>{{ w.t }}</p></div></sc-for></div></div></section>
+
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Poznajmy się</p><h2 class="h2">Zapraszam na bezpłatną konsultację</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    return {
+      why: [
+        { n: '1', t: 'Jedna klientka w danym czasie — kameralnie i bez pośpiechu.' },
+        { n: '2', t: 'Bezpłatna konsultacja przed każdym nowym zabiegiem.' },
+        { n: '3', t: 'Laser na miejscu, dostępny każdego dnia pracy salonu.' },
+        { n: '4', t: 'Dobór pielęgnacji domowej dopasowany do Twoich potrzeb.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

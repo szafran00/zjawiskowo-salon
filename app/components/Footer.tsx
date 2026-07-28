@@ -4,43 +4,79 @@ import CookieSettings from './CookieSettings'
 
 export default function Footer({ s }: { s: Settings }) {
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
+  const year = 2026
+
   return (
     <footer className="footer">
-      <div className="wrap footer-in">
-        <div>
-          <div className="logo">{s.salonName}</div>
-          <p className="footer-sub">
-            {s.salonSubtitle || 'Salon kosmetyczny · Depilacja laserowa'}
-          </p>
-          <p style={{ margin: '4px 0 0', fontSize: 13, opacity: 0.8 }}>Krzeszowice</p>
-          {s.address && (
-            <p style={{ margin: '6px 0 0', fontSize: 13, opacity: 0.8 }}>{s.address}</p>
+      <div className="wrap">
+        <div className="foot-grid">
+          <div className="foot-brand">
+            <Link href="/" className="logo">
+              <b>{s.salonName}</b>
+              {s.salonSubtitle && <small>{s.salonSubtitle}</small>}
+            </Link>
+            {s.footerNote && <p>{s.footerNote}</p>}
+          </div>
+
+          <div className="foot-col">
+            <h2>Nawigacja</h2>
+            <ul className="foot-links">
+              <li>
+                <Link href="/">Strona główna</Link>
+              </li>
+              <li>
+                <Link href="/o-mnie">O mnie</Link>
+              </li>
+              <li>
+                <Link href="/zabiegi">Zabiegi</Link>
+              </li>
+              <li>
+                <Link href="/cennik">Cennik</Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="foot-col">
+            <h2>Więcej</h2>
+            <ul className="foot-links">
+              <li>
+                <Link href="/vouchery">Vouchery</Link>
+              </li>
+              <li>
+                <Link href="/kontakt">Kontakt</Link>
+              </li>
+              <li>
+                <Link href="/regulamin">Regulamin</Link>
+              </li>
+              <li>
+                <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
+              </li>
+              <li>
+                <CookieSettings />
+              </li>
+            </ul>
+          </div>
+
+          <div className="foot-col">
+            <h2>Kontakt</h2>
+            <div className="foot-contact">
+              {s.phone && <a href={tel}>{s.phone}</a>}
+              {s.address && <span>{s.address}</span>}
+              {s.hours && <span>{s.hours}</span>}
+            </div>
+          </div>
+        </div>
+
+        <div className="foot-bottom">
+          <span>
+            © {year} {s.salonName}, Krzeszowice. Wszelkie prawa zastrzeżone.
+          </span>
+          {s.domain && (
+            <a href={`https://${s.domain}`} rel="noopener">
+              {s.domain}
+            </a>
           )}
         </div>
-        <nav className="footer-nav">
-          <Link href="/o-mnie">O mnie</Link>
-          <Link href="/zabiegi">Zabiegi</Link>
-          <Link href="/cennik">Cennik</Link>
-          <Link href="/vouchery">Vouchery</Link>
-          <Link href="/regulamin">Regulamin</Link>
-          <Link href="/kontakt">Kontakt</Link>
-          <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
-          <CookieSettings />
-        </nav>
-        <div style={{ fontSize: 13, lineHeight: 1.9 }}>
-          <a href={tel} style={{ textDecoration: 'none' }}>
-            {s.phone}
-          </a>
-          <br />
-          <a href={`https://${s.domain}`} style={{ textDecoration: 'none' }}>
-            {s.domain}
-          </a>
-        </div>
-      </div>
-      <div className="wrap">
-        <small>
-          © {s.salonName}, Krzeszowice. Wszelkie prawa zastrzeżone. {s.footerNote}
-        </small>
       </div>
     </footer>
   )

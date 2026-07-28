@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/fetch'
-import { TREATMENTS_QUERY } from '@/sanity/lib/queries'
-import type { Treatment } from '@/app/lib/types'
-import { fallbackTreatments, STOCK } from '@/app/lib/fallback'
+import { TREATMENTS_QUERY, SETTINGS_QUERY } from '@/sanity/lib/queries'
+import type { Settings, Treatment } from '@/app/lib/types'
+import { fallbackTreatments, fallbackSettings, STOCK } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
+import PageHead from '@/app/components/PageHead'
+import PhoneCta from '@/app/components/PhoneCta'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -15,43 +17,69 @@ export const metadata = {
 
 export default async function ZabiegiPage() {
   let treatments: Treatment[] = []
+  let settings: Settings | null = null
   try {
-    treatments = await sanityFetch<Treatment[]>(TREATMENTS_QUERY)
+    ;[treatments, settings] = await Promise.all([
+      sanityFetch<Treatment[]>(TREATMENTS_QUERY),
+      sanityFetch<Settings>(SETTINGS_QUERY),
+    ])
   } catch {
     treatments = []
+    settings = null
   }
   if (!treatments || !treatments.length) treatments = fallbackTreatments
+  const s: Settings = { ...fallbackSettings, ...(settings || {}) }
 
   return (
-    <section className="sec reveal">
-      <div className="wrap">
-        <div className="page-head">
-          <p className="kicker">Nasza oferta</p>
-          <h1 className="h2">Zabiegi</h1>
-          <p className="lead" style={{ maxWidth: 640, margin: '4px auto 0' }}>
-            Depilacja laserowa i pielęgnacja twarzy w kameralnym salonie w
-            Krzeszowicach.
-          </p>
-        </div>
-        <div className="zabieg-grid">
-          {treatments.map((t, i) => {
-            const img = imgUrl(t.image, i === 0 ? STOCK.laserWide : STOCK.face, 900)
-            return (
-              <Link href={`/zabiegi/${t.slug}`} className="zabieg-card" key={t.slug || i}>
+    <>
+      <PageHead
+        crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Zabiegi' }]}
+        kicker={s.pillarsKicker || 'Oferta salonu'}
+        title="Moje zabiegi"
+        lead={s.pillarsLead}
+      />
+
+      <section className="sec reveal">
+        <div className="wrap">
+          <div className="svc-cards">
+            {treatments.map((t, i) => (
+              <div className="svc-card" key={t.slug || i}>
                 <div className="ph">
-                  <img src={img} alt={t.title || ''} />
+                  <img
+                    src={imgUrl(t.image, i === 0 ? STOCK.laserWide : STOCK.face, 1200)}
+                    alt={t.title || ''}
+                  />
                 </div>
-                <div className="zabieg-card-body">
+                <div className="svc-card-body">
                   <p className="kicker">{t.kicker}</p>
-                  <h2 className="zabieg-card-title">{t.title}</h2>
-                  {t.excerpt && <p className="zabieg-card-ex">{t.excerpt}</p>}
-                  <span className="zabieg-more">Dowiedz się więcej →</span>
+                  <h2 className="h3">{t.title}</h2>
+                  {t.excerpt && <p>{t.excerpt}</p>}
+                  <div className="btn-row">
+                    <Link href={`/zabiegi/${t.slug}`} className="btn btn-cta">
+                      Poznaj zabieg
+                    </Link>
+                    <Link
+                      href={
+                        t.pricelistAnchor ? `/cennik#${t.pricelistAnchor}` : '/cennik'
+                      }
+                      className="btn btn-ghost"
+                    >
+                      Zobacz ceny
+                    </Link>
+                  </div>
                 </div>
-              </Link>
-            )
-          })}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <PhoneCta
+        phone={s.phone || ''}
+        kicker="Nie wiesz, co wybrać?"
+        heading="Zadzwoń — doradzę podczas konsultacji"
+        lead={s.ctaLead}
+      />
+    </>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 type Status = 'idle' | 'sending' | 'ok' | 'error'
 
@@ -63,6 +64,9 @@ export default function ContactForm({
         name="_subject"
         value="Wiadomość ze strony ZJAWISKOWO"
       />
+      <p className="form-note">
+        Preferuję kontakt telefoniczny. Ten formularz jest pomocniczy.
+      </p>
       <div className="field">
         <label>Imię</label>
         <input type="text" name="name" placeholder="Twoje imię" required />
@@ -83,6 +87,10 @@ export default function ContactForm({
       >
         {status === 'sending' ? 'Wysyłanie…' : 'Wyślij zapytanie'}
       </button>
+      <p className="form-note">
+        Wysyłając formularz, akceptujesz{' '}
+        <Link href="/polityka-prywatnosci">politykę prywatności</Link>.
+      </p>
       {status === 'ok' && (
         <p className="form-done">
           Dziękujemy! Odezwiemy się najszybciej jak to możliwe.

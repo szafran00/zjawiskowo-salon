@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="vouchery" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><span class="cur">Vouchery</span></nav><p class="kicker">Vouchery</p><h1 class="h1">Podaruj chwilę dla siebie</h1><p class="lead">Voucher podarunkowy ZJAWISKOWO to elegancki pomysł na prezent — na wybrany zabieg lub na dowolną kwotę. Wystawiamy go od ręki podczas wizyty.</p></div></section>
+
+<section class="sec reveal"><div class="wrap"><div class="vouch-grid"><div class="vouch-body"><p class="kicker">Jak to działa</p><h2 class="h2">Prezent, który sprawia radość</h2><ul class="atuty"><li>Voucher na konkretny zabieg lub na wybraną kwotę.</li><li>Wystawiamy od ręki podczas wizyty w salonie.</li><li>Elegancki, gotowy do wręczenia.</li><li>Obdarowana osoba sama wybiera dogodny termin — telefonicznie.</li></ul><div class="btn-row"><a href="tel:517899229" class="btn btn-cta">Zapytaj o voucher: 517 899 229</a><a href="Cennik.dc.html" class="btn btn-ghost">Zobacz cennik</a></div></div><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="vouch-img" src="https://images.pexels.com/photos/5240623/pexels-photo-5240623.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE: elegancki voucher / detal — bez wnętrza salonu · poziom 3:2" hint-size="100%,100%"></x-import></div></div></div></section>
+
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head" style="margin-bottom:0"><p class="kicker">Przykładowe kwoty</p><h2 class="h2">Do wyboru</h2></div><div class="vouch-tiers"><sc-for list="{{tiers}}" as="t" hint-placeholder-count="3"><div class="vt"><div class="amt">{{ t.amt }}</div><p>{{ t.desc }}</p></div></sc-for></div><p class="price-note" style="text-align:center;border:none;margin-top:26px">Wartość vouchera ustalasz dowolnie — powyższe kwoty to jedynie przykłady.</p></div></section>
+
+<section class="sec reveal"><div class="wrap"><div class="faq-head"><p class="kicker">Warunki</p><h2 class="h2">Dobrze wiedzieć</h2></div><div class="reg-cols"><div class="reg-card"><h3>Termin ważności</h3><p class="placeholder-note">[Do uzupełnienia: np. voucher ważny 6 miesięcy od daty zakupu.]</p></div><div class="reg-card"><h3>Formy płatności</h3><p>Voucher opłacisz gotówką lub kartą podczas wizyty w salonie.</p></div><div class="reg-card"><h3>Realizacja</h3><p>Termin wizyty umawiamy telefonicznie: <a href="tel:517899229">517 899 229</a>. Voucher okazujesz przy wizycie.</p></div></div></div></section>
+
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Zamów voucher</p><h2 class="h2">Zadzwoń, przygotujemy go dla Ciebie</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    return {
+      tiers: [
+        { amt: '150 zł', desc: 'Na pojedynczy zabieg pielęgnacyjny lub mniejszy obszar depilacji.' },
+        { amt: '300 zł', desc: 'Na serię pielęgnacyjną lub większy obszar depilacji laserowej.' },
+        { amt: 'Dowolna', desc: 'Ustal własną kwotę — resztę obdarowana osoba dobierze na miejscu.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

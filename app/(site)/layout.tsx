@@ -6,6 +6,7 @@ import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
 import RevealInit from '@/app/components/RevealInit'
 import CookieConsent from '@/app/components/CookieConsent'
+import CallFab from '@/app/components/CallFab'
 
 export default async function SiteLayout({
   children,
@@ -59,6 +60,7 @@ export default async function SiteLayout({
       )}
       {children}
       <Footer s={s} />
+      <CallFab phone={s.phone || ''} />
       <CookieConsent />
     </div>
   )

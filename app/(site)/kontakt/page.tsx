@@ -4,6 +4,7 @@ import type { Settings } from '@/app/lib/types'
 import { fallbackSettings } from '@/app/lib/fallback'
 import ContactForm from '@/app/components/ContactForm'
 import MapEmbed from '@/app/components/MapEmbed'
+import PageHead from '@/app/components/PageHead'
 
 export const metadata = {
   title: 'Kontakt — ZJAWISKOWO Krzeszowice',
@@ -23,60 +24,72 @@ export default async function KontaktPage() {
   const notes = s.contactNotes && s.contactNotes.length ? s.contactNotes : []
 
   return (
-    <section className="sec reveal">
-      <div className="wrap">
-        <div
-          className="page-head"
-          style={{ alignItems: 'flex-start', textAlign: 'left' }}
-        >
-          <p className="kicker">Kontakt</p>
-          <h1 className="h2">Odwiedź mnie w Krzeszowicach</h1>
-        </div>
-        <div className="contact-grid">
-          <div className="contact-info">
-            <div className="info-row">
-              <span className="lbl">Adres</span>
-              <span className="val">{s.address}</span>
-            </div>
-            <div className="info-row">
-              <span className="lbl">Telefon</span>
-              <a className="val" href={tel}>
-                {s.phone}
-              </a>
-            </div>
-            <div className="info-row">
-              <span className="lbl">Godziny otwarcia</span>
-              <span className="val">{s.hours}</span>
-            </div>
-            {notes.length > 0 && (
+    <>
+      <PageHead
+        crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Kontakt' }]}
+        kicker="Kontakt"
+        title="Odwiedź mnie w Krzeszowicach"
+        lead="Rezerwacja wyłącznie telefoniczna — zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd."
+      />
+
+      <section className="contact reveal">
+        <div className="wrap sec">
+          <div className="contact-grid">
+            <div className="contact-info">
               <div className="info-row">
-                <span className="lbl">Jak trafić</span>
-                <ul className="contact-notes">
-                  {notes.map((n, i) => (
-                    <li key={i}>{n}</li>
-                  ))}
-                </ul>
+                <span className="lbl">Adres</span>
+                <span className="val">{s.address}</span>
               </div>
-            )}
-            <div className="map">
-              <MapEmbed embedUrl={s.googleMapsEmbedUrl} />
+              <div className="info-row">
+                <span className="lbl">Telefon</span>
+                <a className="val" href={tel}>
+                  {s.phone}
+                </a>
+              </div>
+              <div className="info-row">
+                <span className="lbl">Godziny otwarcia</span>
+                <span className="val">{s.hours}</span>
+              </div>
+              {notes.length > 0 && (
+                <div className="info-row">
+                  <span className="lbl">Jak trafić</span>
+                  <ul className="contact-notes">
+                    {notes.map((n, i) => (
+                      <li key={i}>{n}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div className="map">
+                <MapEmbed embedUrl={s.googleMapsEmbedUrl} />
+              </div>
+              <div className="socials">
+                <a
+                  className="soc"
+                  href={s.facebookUrl || '#'}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Facebook
+                </a>
+                <a
+                  className="soc"
+                  href={s.instagramUrl || '#'}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Instagram
+                </a>
+              </div>
             </div>
-            <div className="socials">
-              <a className="soc" href={s.facebookUrl || '#'} target="_blank" rel="noopener">
-                Facebook
-              </a>
-              <a className="soc" href={s.instagramUrl || '#'} target="_blank" rel="noopener">
-                Instagram
-              </a>
-            </div>
+            <ContactForm
+              endpoint={s.formEndpoint}
+              email={s.contactEmail}
+              phone={s.phone}
+            />
           </div>
-          <ContactForm
-            endpoint={s.formEndpoint}
-            email={s.contactEmail}
-            phone={s.phone}
-          />
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

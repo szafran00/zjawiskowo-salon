@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="twarz" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><a href="Zabiegi.dc.html">Zabiegi</a><span class="sep">›</span><span class="cur">Pielęgnacja twarzy</span></nav><p class="kicker">Pielęgnacja twarzy</p><h1 class="h1">Kosmetyka twarzy</h1><p class="lead">Szeroki wybór zabiegów pielęgnacyjnych — od oczyszczania, przez mikrodermabrazję, po mezoterapię bezigłową, radiofrekwencję i ultradźwięki. Zawsze dobrane do potrzeb Twojej skóry.</p></div></section>
+
+<!-- INTRO -->
+<section class="sec reveal"><div class="wrap"><div class="svc"><div class="svc-media"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="twarz-hero" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: pielęgnacja twarzy — dłonie na skórze / nakładanie preparatu, bez sprzętu · pion 4:5" hint-size="100%,100%"></x-import></div></div><div class="svc-body"><p class="kicker">Na czym polega</p><h2 class="h2">Zabieg dobrany do Twojej skóry</h2><p class="lead">Podczas bezpłatnej konsultacji pielęgnacyjnej ustalamy, czego potrzebuje Twoja skóra, i dobieramy odpowiedni zabieg oraz plan pielęgnacji domowej.</p><ul class="atuty"><sc-for list="{{atuty}}" as="a" hint-placeholder-count="5"><li>{{ a }}</li></sc-for></ul><div class="btn-row"><a href="tel:517899229" class="btn btn-cta">Umów konsultację: 517 899 229</a><a href="Cennik.dc.html#cennik-twarz" class="btn btn-ghost">Zobacz cennik</a></div></div></div></div></section>
+
+<!-- ZABIEGI W SKRÓCIE -->
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head" style="margin-bottom:0"><p class="kicker">Co wykonujemy</p><h2 class="h2">Zabiegi pielęgnacyjne</h2></div><div class="why-grid"><sc-for list="{{types}}" as="t" hint-placeholder-count="4"><div class="why-card"><h3 class="h3" style="font-size:19px">{{ t.name }}</h3><p>{{ t.desc }}</p></div></sc-for></div></div></section>
+
+<!-- ROZWIJANE BLOKI -->
+<section class="sec reveal"><div class="wrap"><div class="faq-head"><p class="kicker">Przygotowanie i zalecenia</p><h2 class="h2">Zanim przyjdziesz i po zabiegu</h2></div><div class="faq"><sc-for list="{{blocks}}" as="b" hint-placeholder-count="2"><div class="faq-item"><button class="faq-q" onClick="{{ b.toggle }}" aria-expanded="{{ b.expanded }}">{{ b.q }}<span class="faq-sign">{{ b.sign }}</span></button><div class="faq-a {{ b.openCls }}" dangerouslySetInnerHTML="{{ b.html }}"></div></div></sc-for></div></div></section>
+
+<!-- FAQ ZABIEGU -->
+<section class="sec reveal" style="background:var(--bg2)"><div class="wrap"><div class="faq-head"><p class="kicker">FAQ zabiegu</p><h2 class="h2">Kosmetyka twarzy — pytania</h2></div><div class="faq"><sc-for list="{{faqs}}" as="f" hint-placeholder-count="4"><div class="faq-item"><button class="faq-q" onClick="{{ f.toggle }}" aria-expanded="{{ f.expanded }}">{{ f.q }}<span class="faq-sign">{{ f.sign }}</span></button><div class="faq-a {{ f.openCls }}" dangerouslySetInnerHTML="{{ f.html }}"></div></div></sc-for></div></div></section>
+
+<!-- CENY / PROMOCJE -->
+<section class="pricing sec reveal" id="ceny"><div class="wrap"><div class="faq-head" style="margin-bottom:8px"><p class="kicker">Ceny — pielęgnacja twarzy</p><h2 class="h2">Rabaty na serie i zabiegi łączone</h2></div><div class="face-promo"><div class="fp"><span class="pct">−20%</span><p>na serię 5 zabiegów co 2–3 tygodnie — albo szósty zabieg gratis</p></div><div class="fp"><span class="pct">−20%</span><p>przy dwóch różnych zabiegach na jednej wizycie</p></div></div><div class="btn-row" style="justify-content:center;margin-top:36px"><a href="Cennik.dc.html#cennik-twarz" class="btn btn-cta">Pełny cennik pielęgnacji twarzy</a></div></div></section>
+
+<!-- CTA -->
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Konsultacja jest bezpłatna</p><h2 class="h2">Umów wizytę i dobierzmy zabieg</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { accOpen: 0, faqOpen: null };
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() {
+    const blockData = [
+      { q: 'Przygotowanie do zabiegu', a: '<ul><li>Jeśli możesz, przyjdź bez makijażu.</li><li>Na kilka dni przed zabiegiem odstaw silne kwasy i retinol.</li><li>Poinformuj nas o kuracjach dermatologicznych i przyjmowanych lekach.</li><li>Ewentualne przeciwwskazania omawiamy podczas bezpłatnej konsultacji.</li></ul>' },
+      { q: 'Zalecenia po zabiegu', a: '<ul><li>Przez 1–2 dni unikaj słońca, sauny i intensywnego wysiłku.</li><li>Stosuj krem z filtrem SPF i nawilżaj skórę.</li><li>Trzymaj się planu pielęgnacji domowej dobranego na wizycie.</li><li>Terminy kolejnych zabiegów w serii ustalamy wspólnie.</li></ul>' },
+    ];
+    const faqData = [
+      { q: 'Jak często wykonywać zabiegi?', a: 'Zależnie od zabiegu i potrzeb skóry — najczęściej w seriach co 2–3 tygodnie. Plan ustalamy na konsultacji.' },
+      { q: 'Czy efekt jest od razu widoczny?', a: 'Odczucia i efekty są indywidualne i zależą od kondycji skóry. Podczas konsultacji realnie omawiamy, czego można się spodziewać.' },
+      { q: 'Czy można połączyć dwa zabiegi?', a: 'Tak, wybrane zabiegi łączymy na jednej wizycie — wtedy obowiązuje rabat −20%. Szczegóły w <a href="Cennik.dc.html#cennik-twarz">cenniku</a>.' },
+      { q: 'Jak umówić wizytę?', a: 'Telefonicznie pod numerem <a href="tel:517899229">517 899 229</a>. Chętnie doradzimy dobór zabiegu.' },
+    ];
+    return {
+      atuty: [
+        'Szeroki wybór zabiegów: oczyszczanie, mikrodermabrazja, mezoterapia bezigłowa, radiofrekwencja i inne.',
+        'Zabieg dobrany do potrzeb Twojej skóry.',
+        'Bezpłatna konsultacja pielęgnacyjna.',
+        'Dobór pielęgnacji domowej po zabiegu.',
+        'Rabaty na serie zabiegów oraz zabiegi łączone.',
+      ],
+      types: [
+        { name: 'Oczyszczanie', desc: 'Oczyszczanie wodorowe premium, peeling kawitacyjny z terapią LED oraz oczyszczanie manualne.' },
+        { name: 'Mikrodermabrazja', desc: 'Diamentowa mikrodermabrazja twarzy oraz twarzy, szyi i dekoltu.' },
+        { name: 'Mezoterapia bezigłowa', desc: 'Warianty dobrane do wieku i potrzeb skóry: nawilżenie, odmładzanie, lifting, skóra naczyniowa.' },
+        { name: 'Radiofrekwencja i ultradźwięki', desc: 'Zabiegi liftingujące i ujędrniające, sonoforeza oraz stylizacja oprawy oka.' },
+      ],
+      blocks: blockData.map((b, i) => ({ q: b.q, html: { __html: b.a }, openCls: this.state.accOpen === i ? 'open' : '', sign: this.state.accOpen === i ? '–' : '+', expanded: this.state.accOpen === i ? 'true' : 'false', toggle: () => this.setState(s => ({ accOpen: s.accOpen === i ? null : i })) })),
+      faqs: faqData.map((f, i) => ({ q: f.q, html: { __html: f.a }, openCls: this.state.faqOpen === i ? 'open' : '', sign: this.state.faqOpen === i ? '–' : '+', expanded: this.state.faqOpen === i ? 'true' : 'false', toggle: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? null : i })) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="./styles.css">
+</helmet>
+<div class="shell">
+<dc-import name="Naglowek" active="zabiegi" hint-size="100%,110px"></dc-import>
+
+<section class="pagehead"><div class="pagehead-deco"></div><div class="wrap pagehead-in"><nav class="crumbs" aria-label="Ścieżka"><a href="Strona główna.dc.html">Strona główna</a><span class="sep">›</span><span class="cur">Zabiegi</span></nav><p class="kicker">Zabiegi</p><h1 class="h1">Nasze zabiegi</h1><p class="lead">Dwa filary salonu ZJAWISKOWO: depilacja laserowa wykonywana na miejscu każdego dnia pracy salonu oraz kosmetyka twarzy dobierana do potrzeb Twojej skóry.</p></div></section>
+
+<section class="sec reveal"><div class="wrap"><div class="svc-cards">
+<div class="svc-card"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="zab-laser" src="https://images.pexels.com/photos/4672470/pexels-photo-4672470.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: zbliżenie gładkiej skóry nóg — bez sprzętu · poziom 4:3" hint-size="100%,100%"></x-import></div><div class="svc-card-body"><h3 class="h3">Depilacja laserowa</h3><p>Laser na miejscu, dostępny każdego dnia pracy salonu. Przed pierwszym zabiegiem — bezpłatna konsultacja i próba laserowa, a parametry dobieramy indywidualnie.</p><ul class="mini-list"><li>nogi</li><li>bikini</li><li>pachy</li><li>plecy</li><li>twarz</li><li>ręce</li></ul><div class="btn-row"><a href="Depilacja laserowa.dc.html" class="btn btn-cta">Poznaj zabieg</a><a href="Cennik.dc.html#cennik-laser" class="btn btn-ghost">Zobacz ceny</a></div></div></div>
+<div class="svc-card"><div class="ph"><x-import component-from-global-scope="image-slot" from="./image-slot.js" id="zab-twarz" src="https://images.pexels.com/photos/6187298/pexels-photo-6187298.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" fit="cover" shape="rect" placeholder="ZDJĘCIE ZABIEGU: pielęgnacja twarzy — dłonie na skórze, bez sprzętu · poziom 4:3" hint-size="100%,100%"></x-import></div><div class="svc-card-body"><h3 class="h3">Kosmetyka twarzy</h3><p>Szeroki wybór zabiegów pielęgnacyjnych — od oczyszczania, przez mikrodermabrazję, po mezoterapię bezigłową i radiofrekwencję. Zawsze dobrane do potrzeb Twojej skóry.</p><ul class="mini-list"><li>oczyszczanie</li><li>mikrodermabrazja</li><li>mezoterapia bezigłowa</li><li>radiofrekwencja</li><li>ultradźwięki</li></ul><div class="btn-row"><a href="Pielęgnacja twarzy.dc.html" class="btn btn-cta">Poznaj zabieg</a><a href="Cennik.dc.html#cennik-twarz" class="btn btn-ghost">Zobacz ceny</a></div></div></div>
+</div></div></section>
+
+<section class="phonebar reveal"><div class="wrap" style="text-align:center;padding:64px 0;display:flex;flex-direction:column;align-items:center;gap:14px"><p class="kicker">Nie wiesz, co wybrać?</p><h2 class="h2">Zadzwoń — doradzimy podczas konsultacji</h2><a href="tel:517899229" class="btn phone-num">517 899 229</a></div></section>
+
+<dc-import name="Stopka" hint-size="100%,440px"></dc-import>
+<a href="tel:517899229" class="callfab btn btn-cta">Zadzwoń: 517 899 229</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    this._io = new IntersectionObserver((es) => { es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    setTimeout(() => document.querySelectorAll('.reveal').forEach(el => this._io.observe(el)), 80);
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
