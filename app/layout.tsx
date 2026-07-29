@@ -6,11 +6,21 @@ import './globals.css'
 // w zmiennej NEXT_PUBLIC_COOKIEBOT_ID. Tryb "auto" blokuje cookies do zgody.
 const cookiebotId = process.env.NEXT_PUBLIC_COOKIEBOT_ID
 
+// Adres, względem którego budują się odnośniki w metadanych (m.in. og:image).
+// Dopóki zjawiskowo.com.pl nie jest podpięta, na Vercelu bierzemy adres bieżącego
+// wdrożenia — inaczej link wysłany do obejrzenia pokazuje podgląd z obrazkiem
+// spod domeny, która jeszcze nie działa. Po podpięciu domeny zmienna wskaże już ją.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'https://zjawiskowo.com.pl')
+
 export const metadata: Metadata = {
   title: 'ZJAWISKOWO Krzeszowice · Depilacja laserowa i salon kosmetyczny',
   description:
     'Salon kosmetyczny ZJAWISKOWO w Krzeszowicach: depilacja laserowa i pielęgnacja twarzy. Laser na miejscu, dostępny każdego dnia pracy salonu. Umów wizytę: 517 899 229.',
-  metadataBase: new URL('https://zjawiskowo.com.pl'),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: 'ZJAWISKOWO Krzeszowice · Depilacja laserowa i salon kosmetyczny',
     description:
