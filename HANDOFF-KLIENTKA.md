@@ -8,6 +8,50 @@ koniecznie, do tych, które mogą poczekać.
 którą trzeba podmienić na prawdziwą. Dopóki tego nie zrobimy, strona nie powinna być
 pokazywana klientkom ani wpięta w wizytówkę Google.
 
+## Uwagi z 28 lipca — co już naniosłem
+
+Wszystko poniżej jest już na stronie.
+
+- [x] Pasek promocji: „−10% na pakiet depilacji · zarezerwuj w sierpniu · −20% na
+      pielęgnację twarzy”
+- [x] Opis pod hasłem: „Kameralny salon, w którym zadbam o Twoją skórę i komfort
+      z pełnym profesjonalizmem.”
+- [x] Trzy nowe wyróżniki: „Zaufanie budowane efektami”, „Bezkompromisowa jakość”,
+      „Certyfikowane urządzenia”
+- [x] Depilacja: nagłówek „Trwała depilacja laserowa **każdego dnia** na miejscu
+      w Krzeszowicach”, na początku listy „Wskaźnik satysfakcji 100%”
+- [x] Pielęgnacja: nagłówek „Pielęgnacja twarzy – bezpieczne i nieinwazyjne zabiegi
+      kosmetyczne”, na początku „Kompleksowa pielęgnacja i rewitalizacja” oraz „Efekt
+      ujędrnienia i odmłodzenia”, na końcu „Nowoczesne technologie” i „Bezpłatna
+      konsultacja podczas zabiegu”
+- [x] Opinie: „Opinie klientów” zamiast „Opinie klientek”
+- [x] Kontakt: „Odwiedź ZJAWISKOWO w Krzeszowicach”
+- [x] Adres: ul. 3 Maja 4, 32-065 Krzeszowice (mapa też już wskazuje numer)
+- [x] Godziny: poniedziałek – piątek 8:00 – 20:00, sobota 9:00 – 13:00
+- [x] „Salon **K**osmetyczny” dużą literą
+
+## Uwagi z 28 lipca — cztery rzeczy do Pani decyzji
+
+Nie zrobiłem ich, bo nie zgadzają się z tym, co jest dziś na stronie. Wolę zapytać,
+niż zgadywać.
+
+- [ ] **Nagłówek pod „Opinie klientów”.** Prosiła Pani o „Dlaczego ZJAWISKOWO”, ale
+      tak nazywa się już sekcja z wyróżnikami wyżej na tej samej stronie — wyszłyby
+      dwa identyczne nagłówki. Wpisałem na razie „Co mówią klienci” (rozwiązuje to,
+      o co Pani chodziło: nie ma „o nas” ani zawężenia do kobiet). Zostawiamy tak,
+      czy zmieniamy nazwę tamtej sekcji?
+- [ ] **„Zamiast 100% zadowolonych klientów”** — takiego punktu nie ma już na stronie.
+      Był w pierwszej makiecie, którą Pani oglądała. Dopisałem „Wskaźnik satysfakcji
+      100%” na początku listy, ale **niczego nie usunąłem**. Proszę powiedzieć, czy
+      któryś z obecnych punktów ma zniknąć.
+- [ ] **„Zamiast Certyfikowany sprzęt”** — tak samo, tego punktu nie ma w obecnej
+      liście. „Nowoczesne technologie” dopisałem na końcu, nic nie kasując.
+- [ ] **„Salon Kosmetyczny” dużą literą** — ten podpis jest w jednym miejscu w panelu
+      i pokazuje się i w nagłówku strony, i w stopce. Zmieniłem w obu, żeby nie było
+      raz tak, raz tak. Jeśli duża litera ma być wyłącznie w stopce, proszę dać znać.
+
+Kwiatuszki zamiast kółeczek przy wyróżnikach zostawiam bez zmian.
+
 ## Jak wejść do panelu
 
 Panel treści jest pod adresem strony z dopiskiem `/studio`. Logujesz się kontem, na które
@@ -36,9 +80,8 @@ nieprawdę** albo pokazuje tekst roboczy.
   „[Do uzupełnienia przez Martę: dlaczego salon powstał tutaj…]”. To notatka dla Ciebie,
   a nie tekst dla klientek. Do podmiany: **O mnie → Treść** (dwa takie miejsca).
 
-- [ ] **Adres jest niepełny i widać go na każdej stronie.** W stopce wszystkich dziesięciu
-  podstron jest „ul. 3 Maja **[numer do uzupełnienia]**, 32-065 Krzeszowice”.
-  Do poprawy: **Ustawienia salonu → Kontakt → Adres**.
+- [x] ~~Adres był niepełny i widać go było na każdej stronie.~~ Uzupełniony 28 lipca:
+  ul. 3 Maja 4, 32-065 Krzeszowice.
 
 - [ ] **Regulamin jest szkicem.** Ma jedenaście miejsc w nawiasach kwadratowych:
   `[pełna nazwa działalności]`, `[adres]`, `[NIP]`, `[telefon]`, `[sposób potwierdzenia]`,
@@ -59,9 +102,9 @@ nieprawdę** albo pokazuje tekst roboczy.
 - [ ] **Wszystkie zdjęcia są ze stocka.** Na samej stronie głównej jest ich 49 odsłon.
   To zdjęcia kupione z banku, nie Twój salon i nie Twoje efekty. Szczegóły w części 4.
 
-- [ ] **Pasek promocji mówi o nieaktualnej ofercie.** Dziś głosi „Rezerwacja pakietu
-  jesiennego do końca sierpnia”. Zmień treść albo wyłącz pasek:
-  **Ustawienia salonu → Pasek promocji**.
+- [x] ~~Pasek promocji mówił o nieaktualnej ofercie.~~ Zmieniony 28 lipca na
+  „−10% na pakiet depilacji · zarezerwuj w sierpniu · −20% na pielęgnację twarzy”.
+  Po sierpniu trzeba go zmienić albo wyłączyć: **Ustawienia salonu → Pasek promocji**.
 
 - [ ] **Facebook i Instagram prowadzą donikąd.** Na stronie Kontakt są dwa przyciski,
   które nic nie robią. Wklej prawdziwe adresy albo powiedz, że mam je usunąć:
@@ -74,21 +117,20 @@ nieprawdę** albo pokazuje tekst roboczy.
 - [ ] Pełna nazwa działalności (tak jak w CEIDG)
 - [ ] NIP
 - [ ] Adres do korespondencji, jeśli inny niż salon
-- [ ] Numer budynku przy ul. 3 Maja
+- [x] ~~Numer budynku przy ul. 3 Maja~~ — podany 28 lipca (4)
 - [ ] Adres e-mail do kontaktu (potrzebny do formularza i polityki prywatności)
 
 ---
 
 ## CZĘŚĆ 3. Kontakt, godziny, dojazd
 
-- [ ] **Potwierdź godziny otwarcia.** Na stronie jest „poniedziałek – piątek 9:00 – 19:00,
-  sobota 9:00 – 14:00”. To wersja przyjęta roboczo, nie potwierdzona.
-  **Ustawienia salonu → Kontakt → Godziny otwarcia**
+- [x] ~~Potwierdź godziny otwarcia.~~ Podane 28 lipca: poniedziałek – piątek
+  8:00 – 20:00, sobota 9:00 – 13:00.
 - [ ] Sprawdź telefon: 517 899 229 (jest klikalny na każdej stronie)
 - [ ] Sprawdź wskazówki dojazdu: „Bezpłatny parking”, „Budynek przy automyjni”,
   „Wejście od strony parkingu, parter”. **Kontakt → Udogodnienia / wskazówki dojazdu**
-- [ ] **Mapa Google** wskazuje dziś ulicę bez numeru, więc pinezka jest przybliżona.
-  Po podaniu numeru budynku podepnę dokładną lokalizację.
+- [x] ~~Mapa Google wskazywała ulicę bez numeru.~~ Po podaniu numeru wskazuje
+  ul. 3 Maja 4. Proszę sprawdzić, czy pinezka stoi we właściwym miejscu.
 - [ ] Zdecyduj, czy chcesz **formularz kontaktowy**. Dziś jest na stronie, ale nie wysyła
   wiadomości — kieruje do kontaktu telefonicznego. Żeby działał, potrzebny jest darmowy
   Formspree i Twój e-mail. Jeśli wolisz wyłącznie telefon, powiedz, to formularz usunę.
@@ -223,5 +265,6 @@ Szuka nawiasów kwadratowych, zwrotów „do uzupełnienia”, „do potwierdzen
 „do ustalenia”, „przykładowa”, „roboczy”, imienia w treści, zdjęć ze stocka i martwych
 linków. Kończy się błędem, dopóki cokolwiek znajdzie, więc trudno to przeoczyć.
 
-**Stan na dziś:** 4 dokumenty z placeholderami, 49 odsłon zdjęć stockowych,
-2 martwe linki.
+**Stan po naniesieniu uwag z 28 lipca:** 3 dokumenty z placeholderami (regulamin,
+O mnie, vouchery), 49 odsłon zdjęć stockowych, 2 martwe linki (Facebook, Instagram).
+Przed uwagami były 4 dokumenty — adres w ustawieniach salonu jest już czysty.
