@@ -67,6 +67,27 @@ export const pricelist = defineType({
                   fields: [
                     defineField({ name: 'name', title: 'Nazwa', type: 'string' }),
                     defineField({ name: 'price', title: 'Cena', type: 'string' }),
+                    defineField({
+                      name: 'oldPrice',
+                      title: 'Cena przed obniżką',
+                      type: 'string',
+                      description:
+                        'Np. „600 zł”. Pokaże się przekreślona obok ceny. Puste pole = bez przekreślenia.',
+                    }),
+                    defineField({
+                      name: 'saving',
+                      title: 'Oszczędność',
+                      type: 'string',
+                      description:
+                        'Np. „1200 zł”. Pokaże się złotym drukiem po prawej stronie wiersza.',
+                    }),
+                    defineField({
+                      name: 'gratis',
+                      title: 'Gratis',
+                      type: 'string',
+                      description:
+                        'Np. „pachy gratis”. Pokaże się złotą wersalikową linijką pod nazwą.',
+                    }),
                     defineField({ name: 'note', title: 'Uwaga (opcjonalnie)', type: 'string' }),
                   ],
                   preview: { select: { title: 'name', subtitle: 'price' } },

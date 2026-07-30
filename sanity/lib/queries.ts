@@ -24,7 +24,10 @@ const treatmentProjection = `{
 
 const pricelistProjection = `{
   pageKicker, pageHeading, intro, outro, ctaKicker, ctaHeading,
-  groups[]{ title, anchor, showInMenu, note, items[]{ name, price, note } }
+  groups[]{
+    title, anchor, showInMenu, note,
+    items[]{ name, price, oldPrice, saving, gratis, note }
+  }
 }`
 
 const voucherProjection = `{

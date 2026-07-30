@@ -59,14 +59,45 @@ export default async function CennikPage() {
                 {g.note && <span className="pb-sub">{g.note}</span>}
               </div>
               <div className="price-list">
-                {g.items?.map((it, j) => (
-                  <div className="prow" key={j}>
-                    <span className="pn">{it.name}</span>
-                    <span className="dots-l" aria-hidden="true" />
-                    <span className="pp">{it.price}</span>
-                    {it.note && <span className="pt">{it.note}</span>}
-                  </div>
-                ))}
+                {g.items?.map((it, j) => {
+                  // Wiersz pakietowy: przekreślona cena wyjściowa, gratis i
+                  // oszczędność. Tak wygląda cennik zatwierdzony przez klientkę,
+                  // i to jest w nim najważniejsze.
+                  const pakiet = !!(it.oldPrice || it.saving || it.gratis)
+                  if (!pakiet) {
+                    return (
+                      <div className="prow" key={j}>
+                        <span className="pn">{it.name}</span>
+                        <span className="dots-l" aria-hidden="true" />
+                        <span className="pp">{it.price}</span>
+                        {it.note && <span className="pt">{it.note}</span>}
+                      </div>
+                    )
+                  }
+                  return (
+                    <div className="prow prow-pkg" key={j}>
+                      <span className="pn">
+                        {it.name}
+                        {it.gratis && <span className="pgr">+ {it.gratis}</span>}
+                        {it.note && <span className="pnote">{it.note}</span>}
+                      </span>
+                      <span className="pcena">
+                        <span className="pp">{it.price}</span>
+                        {it.oldPrice && (
+                          <span className="pold">
+                            <span className="sr-only">zamiast </span>
+                            {it.oldPrice}
+                          </span>
+                        )}
+                      </span>
+                      {it.saving && (
+                        <span className="psave">
+                          <span className="sr-only">oszczędność </span>−{it.saving}
+                        </span>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
             </div>
           ))}

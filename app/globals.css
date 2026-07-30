@@ -294,6 +294,23 @@ a:hover{color:var(--accent)}
 /* Uwaga przy pozycji bywa krótka („90 min”) albo długa („zamiast 600 zł…”),
    więc zamiast łamać wiersz zjeżdża pod spód, dosunięta do ceny. */
 .prow .pt{font-size:12px;color:var(--muted);line-height:1.5;margin-left:auto;text-align:right}
+
+/* ---- wiersz pakietu ---------------------------------------------------
+   Układ z cennika zatwierdzonego przez klientkę: nazwa z linijką „gratis”,
+   obok cena z przekreśloną ceną wyjściową, a po prawej oszczędność.
+   To one mają być widoczne od pierwszego spojrzenia.                     */
+.prow-pkg{display:grid;grid-template-columns:1fr auto auto;column-gap:18px;row-gap:2px;align-items:center;flex-wrap:nowrap}
+.prow-pkg .pn{display:flex;flex-direction:column;gap:3px}
+.prow-pkg .pgr{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+.prow-pkg .pnote{font-size:12px;color:var(--muted);line-height:1.5}
+.prow-pkg .pcena{display:inline-flex;align-items:baseline;gap:7px;justify-content:flex-end;white-space:nowrap}
+.prow-pkg .pp{font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:var(--text)}
+.prow-pkg .pold{font-size:12.5px;color:var(--muted);text-decoration:line-through}
+.prow-pkg .psave{font-size:12px;font-weight:700;color:var(--accent-deep);white-space:nowrap;text-align:right;min-width:66px}
+
+/* Czytane tylko przez czytnik ekranu: „450 zł 600 zł −1200 zł” bez tych
+   podpowiedzi brzmi jak trzy niepowiązane kwoty. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .price-note{margin-top:40px;font-size:13px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:20px}
 
 /* karty pakietów / skrótu cennika */
@@ -468,6 +485,12 @@ a:hover{color:var(--accent)}
   .prow .pn{grid-column:1;grid-row:1}
   .prow .pp{grid-column:2;grid-row:1;justify-self:end}
   .prow .pt{grid-column:2;grid-row:2;justify-self:end;margin-left:0}
+  /* Pakiet na wąskim ekranie: nazwa i gratis po lewej, pod nimi cena
+     z przekreśleniem i oszczędnością w jednym rzędzie po prawej. */
+  .prow-pkg{grid-template-columns:1fr auto}
+  .prow-pkg .pn{grid-column:1;grid-row:1}
+  .prow-pkg .pcena{grid-column:2;grid-row:1;justify-self:end}
+  .prow-pkg .psave{grid-column:1/-1;grid-row:2;justify-self:end;min-width:0}
   .carousel{gap:6px}
   .car-btn{width:42px;height:42px}
   .rev-card{padding:28px 20px}

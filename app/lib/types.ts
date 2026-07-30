@@ -118,6 +118,12 @@ export interface About {
 export interface PriceItem {
   name?: string
   price?: string
+  /** Cena przed obniżką, pokazywana przekreśleniem obok ceny. */
+  oldPrice?: string
+  /** Kwota oszczędności, pokazywana złotym drukiem po prawej. */
+  saving?: string
+  /** Np. „pachy gratis” — złota wersalikowa linijka pod nazwą. */
+  gratis?: string
   note?: string
 }
 
