@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import type { NavTreatment, NavPriceGroup } from '../lib/types'
-import Kwiatuszek from './Kwiatuszek'
+import Logotyp from './Logotyp'
 
 type SubLink = { href: string; label: string; active: boolean }
 type NavItem = { href: string; label: string; active: boolean; sub?: SubLink[] }
@@ -113,11 +113,7 @@ export default function Header({
     <header className="hdr">
       <div className="wrap hdr-in">
         <Link href="/" className="logo" onClick={closeAll}>
-          <Kwiatuszek size={38} />
-          <span className="logo-text">
-            <b>{salonName}</b>
-            {salonSubtitle && <small>{salonSubtitle}</small>}
-          </span>
+          <Logotyp name={salonName} subtitle={salonSubtitle} />
         </Link>
 
         <nav

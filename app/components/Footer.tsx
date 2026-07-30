@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { Settings } from '../lib/types'
 import CookieSettings from './CookieSettings'
-import Kwiatuszek from './Kwiatuszek'
+import Logotyp from './Logotyp'
 
 export default function Footer({ s }: { s: Settings }) {
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
@@ -13,12 +13,11 @@ export default function Footer({ s }: { s: Settings }) {
         <div className="foot-grid">
           <div className="foot-brand">
             <Link href="/" className="logo">
-              {/* Na ciemnym tle kontur znaku musi być jasny, inaczej znika. */}
-              <Kwiatuszek size={38} outline="#F4EEE2" />
-              <span className="logo-text">
-                <b>{s.salonName}</b>
-                {s.salonSubtitle && <small>{s.salonSubtitle}</small>}
-              </span>
+              <Logotyp
+                name={s.salonName || 'ZJAWISKOWO'}
+                subtitle={s.salonSubtitle}
+                variant="dark"
+              />
             </Link>
             {s.footerNote && <p>{s.footerNote}</p>}
           </div>
@@ -76,11 +75,18 @@ export default function Footer({ s }: { s: Settings }) {
           <span>
             © {year} {s.salonName}, Krzeszowice. Wszelkie prawa zastrzeżone.
           </span>
-          {s.domain && (
-            <a href={`https://${s.domain}`} rel="noopener">
-              {s.domain}
+          {/* Podpis wykonawcy, jak w projekcie stopki. Odnośnik do własnej
+              domeny w stopce własnej strony prowadził donikąd. */}
+          <span>
+            Strona wykonana przez{' '}
+            <a
+              href="https://www.episteme-ai.pl/"
+              target="_blank"
+              rel="noopener"
+            >
+              Franciszek Kołpanowicz · Episteme AI
             </a>
-          )}
+          </span>
         </div>
       </div>
     </footer>

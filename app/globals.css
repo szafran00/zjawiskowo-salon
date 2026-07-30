@@ -100,19 +100,29 @@ a:hover{color:var(--accent)}
 .hdr{position:sticky;top:0;z-index:60;box-shadow:0 1px 0 var(--line)}
 .hdr::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px)}
 .hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:var(--hdr-h)}
-/* Logotyp: znak graficzny obok napisu. Wersja pionowa z projektu logo jest
-   za wysoka na przyklejony pasek 70 px, więc układ jest poziomy. */
-.logo{display:inline-flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none;line-height:1}
-.logo svg{flex:none}
-/* Obie linijki centrowane względem siebie, tak jak w zatwierdzonym logotypie.
-   Przy wyrównaniu do lewej „ZJAWISKOWO” wisi krzywo nad szerszym podpisem. */
-.logo-text{display:inline-flex;flex-direction:column;align-items:center;text-align:center;line-height:1}
-.logo b{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;letter-spacing:.14em;color:var(--text)}
-/* nowrap: złamany na dwie linie podpis rozpychał pasek i rozjeżdżał logotyp */
-.logo small{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600;white-space:nowrap}
+/* ---- logotyp -----------------------------------------------------------
+   Wariant „Pozioma" z księgi znaku, wskazany tam wprost do nagłówka strony:
+   znak po lewej, obok trzy linijki wyśrodkowane względem siebie. Kroje i
+   kolory z księgi: Marcellus w logotypie, Jost w podpisach, grafit #2C2722
+   i złoto #B28A3C.                                                        */
+.logo{display:inline-flex;text-decoration:none}
+.logotyp{display:inline-flex;flex-direction:row;align-items:center;gap:12px;line-height:1}
+.logotyp svg{flex:none}
+.logotyp-text{display:inline-flex;flex-direction:column;align-items:center;text-align:center;line-height:1}
+.logotyp b{font-family:'Marcellus',serif;font-weight:400;font-size:23px;letter-spacing:.16em;color:#2C2722;white-space:nowrap}
+.logotyp small{font-family:'Jost',system-ui,sans-serif;white-space:nowrap;display:block}
+.logotyp-sub{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:#B28A3C;font-weight:500;margin-top:6px}
+/* „DEPILACJA LASEROWA" między dwiema złotymi kreskami */
+.logotyp-rule{display:flex!important;align-items:center;justify-content:center;gap:9px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#2C2722;font-weight:600;margin-top:5px}
+.logotyp-rule i{display:block;width:20px;height:1px;background:#B28A3C;flex:none}
+/* Na ciemnym tle (stopka): napis kremowy, złoto zostaje złotem. */
+.logotyp-dark b,.logotyp-dark .logotyp-rule{color:#F4EEE2}
+
 @media(max-width:1200px){
-  .hdr .logo b{font-size:21px;letter-spacing:.12em}
-  .hdr .logo small{font-size:8.5px;letter-spacing:.12em}
+  .hdr .logotyp b{font-size:20px;letter-spacing:.13em}
+  .hdr .logotyp-sub{font-size:8.5px;letter-spacing:.22em}
+  .hdr .logotyp-rule{font-size:8.5px;letter-spacing:.16em}
+  .hdr .logotyp-rule i{width:14px}
 }
 .hdr-right{display:flex;align-items:center;gap:12px}
 /* 44 px pola dotyku — hamburger to główna nawigacja na telefonie. */
@@ -398,8 +408,7 @@ a:hover{color:var(--accent)}
 
 /* ---- stopka ---- */
 .footer{background:var(--text);color:#E9E1D2;padding:60px 0 30px}
-.footer .logo b{color:#F4EEE2}
-.footer .logo small{color:rgba(233,225,210,.7)}
+/* kolory logotypu w stopce ustawia wariant .logotyp-dark */
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:36px}
 .foot-brand p{margin:14px 0 0;font-size:13px;opacity:.82;line-height:1.6;max-width:260px}
 .foot-col h2{margin:0 0 16px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#F1DFA6}
