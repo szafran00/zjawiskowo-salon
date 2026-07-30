@@ -251,11 +251,17 @@ a:hover{color:var(--accent)}
 .carousel{max-width:760px;margin:34px auto 0;display:flex;align-items:center;gap:14px}
 .car-btn{flex:none;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--accent-deep);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .car-btn:hover{border-color:var(--accent);background:var(--bg2)}
-.car-view{flex:1;overflow:hidden;display:grid}
-.rev-card{grid-area:1/1;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:38px 34px;display:flex;flex-direction:column;gap:16px;text-align:center;align-items:center;justify-content:center;min-height:220px;margin:0;box-shadow:0 10px 30px rgba(0,0,0,.05);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease,visibility .45s}
-.rev-card.is-active{opacity:1;visibility:visible;transform:none}
+/* Wysokość ustala opinia właśnie pokazywana, a nie najdłuższa z całego
+   zestawu: prawdziwe opinie z Google mają od 250 do 710 znaków i przy
+   wspólnej wysokości te krótkie tonęłyby w pustym pudle. Nieaktywne karty
+   wychodzą z układu, więc nie rozpychają kontenera. */
+.car-view{flex:1;overflow:hidden;position:relative}
+.rev-card{position:absolute;inset:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:34px 32px;display:flex;flex-direction:column;gap:14px;text-align:center;align-items:center;justify-content:center;min-height:220px;margin:0;box-shadow:0 10px 30px rgba(0,0,0,.05);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s}
+.rev-card.is-active{position:relative;inset:auto;opacity:1;visibility:visible}
 .stars{color:var(--accent);letter-spacing:3px;font-size:16px}
-.rev-q{font-family:var(--font-serif),serif;font-style:italic;font-size:clamp(18px,2.2vw,23px);line-height:1.5;color:var(--text);margin:0;quotes:none}
+/* pre-line: opinie z Google mają własne akapity i łamanie wierszy, a cytatu
+   nie wolno przepisywać, więc układ musi je unieść. */
+.rev-q{font-family:var(--font-serif),serif;font-style:italic;font-size:clamp(15.5px,1.7vw,19px);line-height:1.6;color:var(--text);margin:0;quotes:none;white-space:pre-line;max-width:62ch}
 .rev-name{font-weight:600;font-size:13px;letter-spacing:.06em;color:var(--muted);margin:0}
 /* Kropka jest mała wizualnie, ale przycisk ma 28 px, żeby dało się w niego
    trafić kciukiem. Sama kropka to pseudoelement. */

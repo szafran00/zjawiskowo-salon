@@ -18,7 +18,9 @@ const PATTERNS = [
   ['„do ustalenia”', /do ustaleni\w*/gi],
   ['„przykład/przykładow”', /przykładow\w*/gi],
   ['„roboczy/robocza”', /robocz\w*/gi],
-  ['imię wykonawcy w treści', /Mart[aęy]\b/g],
+  // Notatki adresowane do klientki („Do uzupełnienia przez Martę…") łapią już
+  // reguły wyżej. Samo imię nie może być sygnałem: prawdziwe opinie z Google
+  // wspominają „Panią Martę" kilkanaście razy i to jest treść docelowa.
   ['TODO/FIXME', /\b(TODO|FIXME|XXX)\b/g],
 ]
 
