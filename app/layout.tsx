@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { indexingAllowed } from './lib/indexing'
 import './globals.css'
 
 // Cookiebot (zgoda na cookies) — aktywuje się dopiero po ustawieniu ID domeny
@@ -39,6 +40,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: { card: 'summary_large_image' },
+  // Druga warstwa blokady indeksowania, obok app/robots.ts.
+  robots: indexingAllowed
+    ? undefined
+    : { index: false, follow: false, nocache: true },
 }
 
 export default function RootLayout({

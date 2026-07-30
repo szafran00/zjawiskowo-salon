@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="ZJAWISKOWO">
+  <title>ZJAWISKOWO</title>
+  <!-- Znak graficzny salonu, wariant B „Dwie warstwy" wybrany przez klientkę.
+       Osiem płatków zewnętrznych w grafitowym konturze, osiem wewnętrznych
+       w złocie, w środku okrąg. Kolory z projektu logo: #2c2722 i #B28A3C. -->
+  <defs>
+    <path id="petB" d="M100,74 C118,64 120,40 100,22 C80,40 82,64 100,74 Z" />
+    <path id="petBi" d="M100,76 C110,68 112,54 100,44 C88,54 90,68 100,76 Z" />
+  </defs>
+  <g fill="none" stroke="#2c2722" stroke-width="1.7" stroke-linejoin="round">
+    <use href="#petB" />
+    <use href="#petB" transform="rotate(45 100 100)" />
+    <use href="#petB" transform="rotate(90 100 100)" />
+    <use href="#petB" transform="rotate(135 100 100)" />
+    <use href="#petB" transform="rotate(180 100 100)" />
+    <use href="#petB" transform="rotate(225 100 100)" />
+    <use href="#petB" transform="rotate(270 100 100)" />
+    <use href="#petB" transform="rotate(315 100 100)" />
+  </g>
+  <g fill="none" stroke="#B28A3C" stroke-width="1.5" stroke-linejoin="round">
+    <use href="#petBi" transform="rotate(22.5 100 100)" />
+    <use href="#petBi" transform="rotate(67.5 100 100)" />
+    <use href="#petBi" transform="rotate(112.5 100 100)" />
+    <use href="#petBi" transform="rotate(157.5 100 100)" />
+    <use href="#petBi" transform="rotate(202.5 100 100)" />
+    <use href="#petBi" transform="rotate(247.5 100 100)" />
+    <use href="#petBi" transform="rotate(292.5 100 100)" />
+    <use href="#petBi" transform="rotate(337.5 100 100)" />
+  </g>
+  <circle cx="100" cy="100" r="23" fill="none" stroke="#2c2722" stroke-width="1.7" />
+</svg>

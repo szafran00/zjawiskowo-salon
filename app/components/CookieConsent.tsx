@@ -34,9 +34,9 @@ export default function CookieConsent() {
   return (
     <div className="cookie" role="dialog" aria-label="Zgoda na pliki cookies">
       <p>
-        Używamy plików cookies niezbędnych do działania strony. Mapa Google
-        wczytuje się dopiero po Twojej zgodzie.{' '}
-        <Link href="/polityka-prywatnosci">Więcej</Link>
+        Ta strona używa plików cookies, żeby działać poprawnie i wyświetlać
+        treści zewnętrzne. Szczegóły znajdziesz w{' '}
+        <Link href="/polityka-prywatnosci">polityce prywatności</Link>.
       </p>
       <div className="c-actions">
         <button className="btn btn-ghost" onClick={() => choose('necessary')}>

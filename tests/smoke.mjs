@@ -18,6 +18,17 @@ async function sanityQuery(q) {
   if (!res.ok) throw new Error(`Sanity HTTP ${res.status}`)
   return (await res.json()).result
 }
+// Widoczny tekst strony, bez znaczników i bez danych serializowanych przez React.
+// Bez tego asercje na treść przechodzą także wtedy, gdy fraza siedzi wyłącznie
+// w payloadzie w <script>, a na stronie nie widać jej wcale.
+function visibleText(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/g, ' ')
+    .replace(/<style[\s\S]*?<\/style>/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+}
+
 async function getHtml(path) {
   const res = await fetch(BASE + path, { redirect: 'manual' })
   return { status: res.status, text: await res.text(), location: res.headers.get('location') }
@@ -137,7 +148,7 @@ async function main() {
   check('home: sekcja voucherow', home.includes('id="vouchery"'))
   check('home: sekcja FAQ', home.includes('faq'))
   check('home: galeria', home.includes('class="gal"'))
-  check('home: bezplatna konsultacja jako zachet', /bezpłatn/i.test(home))
+  check('home: bezplatna konsultacja jako zachet', /bezpłatn/i.test(visibleText(home)))
 
   const reviewsLive = await sanityQuery(`count(*[_type=="review" && hidden != true])`)
   check('Sanity: sa opinie do pokazania', typeof reviewsLive === 'number' && reviewsLive > 0, `${reviewsLive}`)

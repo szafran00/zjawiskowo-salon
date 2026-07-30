@@ -1,5 +1,8 @@
-// Numerowane karty wyróżników („Dlaczego ZJAWISKOWO” na stronie głównej,
-// „Co mnie wyróżnia” na stronie O mnie). Treść zawsze z panelu.
+import Kwiatuszek from './Kwiatuszek'
+
+// Karty wyróżników („Dlaczego ZJAWISKOWO” na stronie głównej, „Co mnie
+// wyróżnia” na stronie O mnie). Zamiast numerów znak graficzny salonu.
+// Treść zawsze z panelu.
 export default function WhySection({
   kicker,
   heading,
@@ -24,8 +27,8 @@ export default function WhySection({
         <div className="why-grid">
           {items.map((text, i) => (
             <div className="why-card" key={i}>
-              <div className="why-num" aria-hidden="true">
-                {i + 1}
+              <div className="why-num">
+                <Kwiatuszek size={44} />
               </div>
               <p>{text}</p>
             </div>

@@ -100,9 +100,18 @@ a:hover{color:var(--accent)}
 .hdr{position:sticky;top:0;z-index:60;box-shadow:0 1px 0 var(--line)}
 .hdr::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px)}
 .hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:var(--hdr-h)}
-.logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:1}
+/* Logotyp: znak graficzny obok napisu. Wersja pionowa z projektu logo jest
+   za wysoka na przyklejony pasek 70 px, więc układ jest poziomy. */
+.logo{display:inline-flex;flex-direction:row;align-items:center;gap:11px;text-decoration:none;line-height:1}
+.logo svg{flex:none}
+.logo-text{display:inline-flex;flex-direction:column;line-height:1}
 .logo b{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;letter-spacing:.14em;color:var(--text)}
-.logo small{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
+/* nowrap: złamany na dwie linie podpis rozpychał pasek i rozjeżdżał logotyp */
+.logo small{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600;white-space:nowrap}
+@media(max-width:1200px){
+  .hdr .logo b{font-size:21px;letter-spacing:.12em}
+  .hdr .logo small{font-size:8.5px;letter-spacing:.12em}
+}
 .hdr-right{display:flex;align-items:center;gap:12px}
 /* 44 px pola dotyku — hamburger to główna nawigacja na telefonie. */
 .burger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;width:44px;height:44px;padding:0;margin-right:-8px}
@@ -182,7 +191,9 @@ a:hover{color:var(--accent)}
 .why{background:var(--bg2)}
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:44px}
 .why-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;gap:14px}
-.why-num{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-deep);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;flex:none}
+/* Znak graficzny zamiast numeru: kwiatuszek ma własny kształt, więc obwódka
+   kółka byłaby drugą ramką wokół tej samej rzeczy. */
+.why-num{display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex:none}
 .why-card h3{margin:0}
 .why-card p{margin:0;font-size:14.5px;line-height:1.55;color:var(--text)}
 

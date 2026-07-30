@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Settings } from '../lib/types'
 import CookieSettings from './CookieSettings'
+import Kwiatuszek from './Kwiatuszek'
 
 export default function Footer({ s }: { s: Settings }) {
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
@@ -12,8 +13,12 @@ export default function Footer({ s }: { s: Settings }) {
         <div className="foot-grid">
           <div className="foot-brand">
             <Link href="/" className="logo">
-              <b>{s.salonName}</b>
-              {s.salonSubtitle && <small>{s.salonSubtitle}</small>}
+              {/* Na ciemnym tle kontur znaku musi być jasny, inaczej znika. */}
+              <Kwiatuszek size={38} outline="#F4EEE2" />
+              <span className="logo-text">
+                <b>{s.salonName}</b>
+                {s.salonSubtitle && <small>{s.salonSubtitle}</small>}
+              </span>
             </Link>
             {s.footerNote && <p>{s.footerNote}</p>}
           </div>

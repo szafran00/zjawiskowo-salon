@@ -50,7 +50,7 @@ export default function MapEmbed({ embedUrl }: { embedUrl?: string }) {
   if (!show) {
     return (
       <button type="button" className="ph mapbtn" onClick={() => setShow(true)}>
-        <span>Mapa Google — kliknij, aby wczytać (zgoda na treść zewnętrzną)</span>
+        <span>Kliknij, aby wczytać mapę Google</span>
       </button>
     )
   }
