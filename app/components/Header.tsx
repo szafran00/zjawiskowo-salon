@@ -41,8 +41,14 @@ export default function Header({
   }
 
   // Zmiana trasy zamyka menu — inaczej panel zostaje otwarty nad nową stroną.
+  //
+  // Samo wyzerowanie stanu nie wystarcza: po kliknięciu pozycji z rozwijanej
+  // listy przeglądarka zostawia fokus na tym odnośniku, a reguła :focus-within
+  // trzyma listę otwartą nad treścią strony, na którą właśnie weszliśmy.
   useEffect(() => {
     closeAll()
+    const aktywny = document.activeElement as HTMLElement | null
+    if (aktywny && navRef.current?.contains(aktywny)) aktywny.blur()
   }, [pathname])
 
   // Escape zamyka, klik poza nagłówkiem zwija rozwiniętą listę.

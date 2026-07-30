@@ -93,6 +93,9 @@ export default async function HomePage() {
                   <img
                     src={imgUrl(t.image, i === 0 ? STOCK.laserWide : STOCK.face, 1200)}
                     alt={t.title || ''}
+                  
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="teaser-body">
@@ -175,7 +178,10 @@ export default async function HomePage() {
                 <img
                   src={imgUrl(voucher.image, STOCK.voucher)}
                   alt={voucher.heading || 'Vouchery'}
-                />
+                
+                    loading="lazy"
+                    decoding="async"
+                  />
               </div>
             </div>
           </div>
@@ -222,7 +228,10 @@ export default async function HomePage() {
                   </div>
                 ) : (
                   <div className="ph" key={i}>
-                    <img src={g.src} alt={g.cap || ''} />
+                    <img src={g.src} alt={g.cap || ''} 
+                    loading="lazy"
+                    decoding="async"
+                  />
                   </div>
                 )
               )}

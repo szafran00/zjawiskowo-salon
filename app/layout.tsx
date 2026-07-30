@@ -1,7 +1,41 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { Playfair_Display, Montserrat, Marcellus, Jost } from 'next/font/google'
 import { indexingAllowed } from './lib/indexing'
 import './globals.css'
+
+// Fonty serwowane z własnej domeny zamiast z fonts.googleapis.com. Cztery
+// rodziny wczytywane arkuszem z zewnątrz blokowały renderowanie na blisko
+// trzy sekundy (Lighthouse mobile), a przy okazji łączyły przeglądarkę
+// z serwerami Google zanim ktokolwiek kliknął zgodę na cookies.
+//
+// „latin-ext" jest obowiązkowy: bez niego ą, ę, ł, ś i ż lecą na font zastępczy.
+const playfair = Playfair_Display({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['500', '600', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-serif',
+})
+const montserrat = Montserrat({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-sans',
+})
+// Kroje zastrzeżone dla logotypu (księga znaku).
+const marcellus = Marcellus({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400'],
+  display: 'swap',
+  variable: '--font-logo',
+})
+const jost = Jost({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+  variable: '--font-logo-sans',
+})
 
 // Cookiebot (zgoda na cookies) — aktywuje się dopiero po ustawieniu ID domeny
 // w zmiennej NEXT_PUBLIC_COOKIEBOT_ID. Tryb "auto" blokuje cookies do zgody.
@@ -51,9 +85,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const fonty = `${playfair.variable} ${montserrat.variable} ${marcellus.variable} ${jost.variable}`
   return (
-    <html lang="pl">
-      <head>
+    // Bez ręcznego <head>: Next sam wstrzykuje tam arkusze stylów, a własny
+    // <head> w układzie głównym powodował, że w buildzie produkcyjnym nie
+    // trafiał do dokumentu ani jeden <link rel="stylesheet"> i strona
+    // renderowała się zupełnie bez stylów.
+    <html lang="pl" className={fonty}>
+      <body>
         {cookiebotId && (
           <Script
             id="Cookiebot"
@@ -63,17 +102,8 @@ export default function RootLayout({
             strategy="beforeInteractive"
           />
         )}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* Marcellus i Jost wyłącznie na logotyp — tak jest w księdze znaku
-            (Logo.pdf: „Marcellus w logotypie, Jost w podpisach”). Reszta strony
-            zostaje na Playfair Display i Montserrat. */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@400;500;600;700&family=Marcellus&family=Jost:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>{children}</body>
+        {children}
+      </body>
     </html>
   )
 }

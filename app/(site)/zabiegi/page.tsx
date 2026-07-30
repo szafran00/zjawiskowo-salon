@@ -48,6 +48,9 @@ export default async function ZabiegiPage() {
                   <img
                     src={imgUrl(t.image, i === 0 ? STOCK.laserWide : STOCK.face, 1200)}
                     alt={t.title || ''}
+                  
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="svc-card-body">

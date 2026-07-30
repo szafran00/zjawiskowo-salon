@@ -107,11 +107,13 @@ export default function Hero({
   }
 
   // Złota elegancja — wariant zaakceptowany przez klientkę.
+  // Kadry hero to element, po którym liczony jest czas załadowania strony
+  // (LCP), więc pobierają się z wysokim priorytetem i bez leniwego ładowania.
   return (
     <section className="hero hero-a">
       <Link href={laserHref} className="hero-tile">
         <div className="ph">
-          <img src={laserImg} alt={laserCap} />
+          <img src={laserImg} alt={laserCap} fetchPriority="high" />
         </div>
         <div className="tile-cap">{laserCap}</div>
       </Link>
@@ -123,7 +125,7 @@ export default function Hero({
       </div>
       <Link href={twarzHref} className="hero-tile">
         <div className="ph">
-          <img src={faceImg} alt={twarzCap} />
+          <img src={faceImg} alt={twarzCap} fetchPriority="high" />
         </div>
         <div className="tile-cap">{twarzCap}</div>
       </Link>
