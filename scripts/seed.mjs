@@ -138,6 +138,39 @@ if (!token) {
   process.exit(1)
 }
 
+// Zabezpieczenie przed skasowaniem pracy klientki.
+//
+// Ten skrypt używa createOrReplace, więc na zapełnionym zbiorze danych nadpisuje
+// każdy dokument o tym samym identyfikatorze. Poprawki klientki wchodzą skryptami
+// migracji prosto do panelu, a nie przez ten plik, więc jedno bezmyślne
+// uruchomienie cofa je wszystkie naraz i nie zostawia po tym śladu.
+//
+// Dlatego: na pustym zbiorze działa jak dotąd, na zapełnionym wymaga świadomej
+// zgody. Zanim ją dasz, uruchom `npm run check:seed` — pokaże, co zostanie cofnięte.
+const ileJuzJest = await fetch(
+  `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodeURIComponent(
+    'count(*[!(_id in path("drafts.**"))])'
+  )}`
+)
+  .then((r) => r.json())
+  .then((d) => d.result ?? 0)
+  .catch(() => 0)
+
+if (ileJuzJest > 0 && !process.argv.includes('--nadpisz')) {
+  console.error(
+    `\nZbiór ${projectId}/${dataset} ma już ${ileJuzJest} dokumentów, a ten skrypt je NADPISZE.\n\n` +
+      'Treść w panelu jest źródłem prawdy: poprawki klientki wchodzą tam skryptami\n' +
+      'migracji, nie przez ten plik. Zasianie od nowa cofnie je wszystkie.\n\n' +
+      'Co zrobić:\n' +
+      '  npm run check:seed                  — pokaże, co się rozjechało z panelem\n' +
+      '  node scripts/synchronizuj-seed.mjs  — przeniesie treść z panelu do repozytorium\n' +
+      '  npm run seed -- --dry               — wypisze, co zostałoby zapisane\n\n' +
+      'Jeśli naprawdę chcesz nadpisać panel treścią z repozytorium:\n' +
+      '  npm run seed -- --nadpisz\n'
+  )
+  process.exit(1)
+}
+
 const mutations = documents.map((doc) => ({ createOrReplace: doc }))
 
 const res = await fetch(

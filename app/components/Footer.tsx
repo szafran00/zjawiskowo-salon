@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Settings } from '../lib/types'
 import CookieSettings from './CookieSettings'
 import Logotyp from './Logotyp'
+import { plSep } from '@/app/lib/typografia'
 
 export default function Footer({ s }: { s: Settings }) {
   const tel = 'tel:' + (s.phone || '').replace(/\s/g, '')
@@ -66,7 +67,7 @@ export default function Footer({ s }: { s: Settings }) {
             <div className="foot-contact">
               {s.phone && <a href={tel}>{s.phone}</a>}
               {s.address && <span>{s.address}</span>}
-              {s.hours && <span>{s.hours}</span>}
+              {s.hours && <span>{plSep(s.hours)}</span>}
             </div>
           </div>
         </div>

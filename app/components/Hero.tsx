@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { imgUrl } from '../lib/img'
 import { STOCK } from '../lib/fallback'
 import type { Settings, Treatment } from '../lib/types'
-import { pl } from '@/app/lib/typografia'
+import { pl, plSep } from '@/app/lib/typografia'
 
 /* eslint-disable @next/next/no-img-element */
 export default function Hero({
@@ -55,7 +55,7 @@ export default function Hero({
         </div>
         <div className="hero-overlay">
           <div className="wrap">
-            <p className="kicker">{s.heroKicker}</p>
+            <p className="kicker">{plSep(s.heroKicker)}</p>
             <h1 className="h1">{s.tagline}</h1>
             <p className="lead">{pl(s.heroLead)}</p>
             {phoneBtn}
@@ -83,7 +83,7 @@ export default function Hero({
             <img src={mainImg} alt={s.salonName || 'Salon'} />
           </div>
           <div className="hero-c-body">
-            <p className="kicker">{s.heroKicker}</p>
+            <p className="kicker">{plSep(s.heroKicker)}</p>
             <h1 className="h1">{s.tagline}</h1>
             <p className="lead">{pl(s.heroLead)}</p>
             {phoneBtn}
@@ -119,7 +119,7 @@ export default function Hero({
         <div className="tile-cap">{laserCap}</div>
       </Link>
       <div className="hero-center">
-        <p className="kicker">{s.heroKicker}</p>
+        <p className="kicker">{plSep(s.heroKicker)}</p>
         <h1 className="h1">{s.tagline}</h1>
         <p className="lead">{pl(s.heroLead)}</p>
         {phoneBtn}

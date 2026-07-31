@@ -115,3 +115,37 @@ test('duży przycisk telefonu prowadzi do numeru', async ({ page }) => {
   await expect(phone).toBeVisible()
   await expect(phone).toHaveAttribute('href', /^tel:\d+$/)
 })
+
+// Klientka: „na starcie na mobile sa pod soba dwa butony do tego samego, ktore
+// na siebie nachodza". Przyklejony przycisk telefonu ma sie chowac, dopoki na
+// ekranie widac inny numer, i wracac, gdy zaden nie jest widoczny.
+test('przyklejony telefon nie nachodzi na przycisk z sekcji powitalnej', async ({
+  page,
+}, info) => {
+  test.skip(info.project.name !== 'mobile', 'przycisk jest wylacznie na waskich ekranach')
+
+  await page.goto('/', { waitUntil: 'load' })
+  const fab = page.locator('a.callfab')
+  const heroCta = page.locator('.hero a[href^="tel:"]').first()
+
+  // 1. Na samej gorze widac przycisk z sekcji powitalnej, a przyklejony jest schowany.
+  await expect(heroCta).toBeInViewport()
+  await expect(fab).toHaveCSS('opacity', '0')
+  await expect(fab).toHaveAttribute('aria-hidden', 'true')
+
+  // Schowany nie moze lapac dotkniec ani stac w kolejce klawisza Tab.
+  await expect(fab).toHaveCSS('pointer-events', 'none')
+  await expect(fab).toHaveAttribute('tabindex', '-1')
+
+  // 2. Po zjechaniu ponizej sekcji powitalnej przycisk sie pojawia.
+  await page.evaluate(() => window.scrollTo(0, 2000))
+  await expect(fab).toHaveCSS('opacity', '1')
+  await expect(fab).toHaveAttribute('aria-hidden', 'false')
+  await page.screenshot({ path: `${DIR}/${info.project.name}-callfab-po-zjechaniu.png` })
+
+  // 3. Przy zlotym pasku z telefonem na dole znowu sie chowa: dwa razy ten sam
+  //    numer obok siebie to dokladnie to, na co klientka zwrocila uwage.
+  await page.locator('a.btn-phone').first().scrollIntoViewIfNeeded()
+  await expect(page.locator('a.btn-phone').first()).toBeInViewport()
+  await expect(fab).toHaveCSS('opacity', '0')
+})

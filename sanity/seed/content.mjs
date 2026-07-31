@@ -57,16 +57,16 @@ export const settings = {
   pillarsLead:
     'Depilacja laserowa i pielęgnacja twarzy. Dwie ścieżki, które prowadzę osobno albo łączę, zależnie od tego, czego potrzebuje Twoja skóra.',
   galleryKicker: 'Galeria',
-  galleryHeading: 'Wnętrze salonu',
+  galleryHeading: 'Zabiegi i efekty',
   showGallery: true,
   showFaq: true,
   ctaHeading: 'Umów wizytę',
   ctaLead:
     'Najprościej zadzwonić. Porozmawiamy o Twojej skórze, dobierzemy zabieg i znajdziemy termin, który Ci pasuje.',
   showPromo: true,
-  promoText: 'Rezerwacja pakietu jesiennego do końca sierpnia',
+  promoText: '−10% na pakiet depilacji i −20% na pielęgnację twarzy (zarezerwuj w sierpniu)',
   address: 'ul. 3 Maja [numer do uzupełnienia], 32-065 Krzeszowice',
-  hours: 'poniedziałek – piątek 9:00 – 19:00 · sobota 9:00 – 14:00',
+  hours: 'poniedziałek – piątek 8:00 – 20:00 · sobota 9:00 – 13:00',
   contactNotes: [
     'Bezpłatny parking',
     'Budynek przy automyjni',
@@ -139,15 +139,16 @@ export const treatments = [
     navLabel: 'Depilacja laserowa',
     slug: 'depilacja-laserowa',
     excerpt:
-      'Trwała redukcja owłosienia w serii około ośmiu zabiegów. Laser na miejscu w Krzeszowicach, dostępny każdego dnia pracy salonu, więc terminy układamy pod Twój kalendarz.',
+      'Trwała redukcja owłosienia w serii około ośmiu zabiegów. Laser na miejscu w Krzeszowicach, dostępny każdego dnia pracy salonu, więc terminy ustalam pod Twój kalendarz.',
     featured: true,
     ctaLabel: 'Umów wizytę',
     pricelistAnchor: 'depilacja-laserowa',
     order: 0,
     atuty: [
+      'Wskaźnik satysfakcji 100%',
       'Laser na miejscu w Krzeszowicach, dostępny każdego dnia pracy salonu',
       'Kolejne zabiegi serii w dogodnym terminie, bez przerw wymuszonych dostępnością sprzętu',
-      'Pełna seria to zwykle około ośmiu zabiegów, z odstępami dobranymi do partii ciała',
+      'Pełna seria to zwykle około ośmiu zabiegów, w odstępach zazwyczaj pięciu tygodni',
       'Bezpłatna konsultacja i próba laserowa na niewielkim obszarze przed pierwszym zabiegiem',
       'Pakiety obejmujące kilka partii, z ceną niższą niż suma pojedynczych zabiegów',
       'Zapomnij o maszynce i wosku między wizytami: między zabiegami wolno golić',
@@ -160,17 +161,21 @@ export const treatments = [
     navLabel: 'Pielęgnacja twarzy',
     slug: 'pielegnacja-twarzy',
     excerpt:
-      'Oczyszczanie wodorowe, peeling kawitacyjny z LED, mikrodermabrazja, oczyszczanie manualne, mezoterapia bezigłowa, radiofrekwencja i sonoforeza. Protokół układam pod bieżący stan skóry.',
+      'Oczyszczanie wodorowe, peeling kawitacyjny z LED, mikrodermabrazja diamentowa, oczyszczanie manualne, mezoterapia bezigłowa, radiofrekwencja, ultradźwięki i sonoforeza. Protokół układam pod bieżący stan skóry.',
     featured: true,
     ctaLabel: 'Umów wizytę',
     pricelistAnchor: 'pielegnacja-twarzy',
     order: 1,
     atuty: [
+      'Kompleksowa pielęgnacja i rewitalizacja',
+      'Efekt ujędrnienia i odmłodzenia',
       'Bezpłatna konsultacja i ocena skóry przed każdym zabiegiem',
       'Protokół dobierany pod bieżący stan cery, nie pod nazwę usługi z cennika',
       'Zabiegi oczyszczające, złuszczające, nawilżające i ujędrniające',
       'Rabat na serię pięciu zabiegów oraz na dwa zabiegi podczas jednej wizyty',
       'Dobór pielęgnacji domowej, żeby efekt wizyty utrzymał się dłużej',
+      'Nowoczesne technologie',
+      'Bezpłatna konsultacja podczas zabiegu',
     ],
     description: twarzDescription,
   },
@@ -237,7 +242,7 @@ export const pricelist = {
       title: 'Pielęgnacja twarzy',
       anchor: 'pielegnacja-twarzy',
       showInMenu: true,
-      note: 'Rabat 20 procent na serię pięciu zabiegów albo szósty zabieg gratis. Rabat 20 procent przy dwóch zabiegach wykonanych podczas jednej wizyty.',
+      note: 'Rabat 20% na serię pięciu zabiegów albo szósty zabieg gratis. Rabat 20% przy dwóch różnych zabiegach wykonanych podczas jednej wizyty.',
       items: [
         { name: 'Oczyszczanie wodorowe premium, twarz', price: '240 zł', note: '90 min' },
         { name: 'Oczyszczanie wodorowe premium, twarz, szyja i dekolt', price: '290 zł', note: '120 min' },
@@ -271,6 +276,7 @@ export const pricelist = {
     {
       title: 'Dodatki do zabiegów',
       anchor: 'dodatki',
+      note: 'Gratis maska i peeling przy każdym zabiegu.',
       showInMenu: false,
       items: [
         { name: 'Ampułka', price: '30 zł' },
@@ -284,14 +290,19 @@ export const pricelist = {
 
 export const faqs = [
   {
+    question: 'Kiedy należy rozpocząć serię depilacji laserowej?',
+    answer:
+      'Bardzo ważne, aby serię rozpocząć wczesną jesienią, żeby całą zdążyć wykonać do maja. Jeśli rozpoczniesz serię później, oczywiście jest to możliwe w każdym czasie, ale latem będzie trzeba zrobić przerwę ze względu na mocne promieniowanie słoneczne i dokończyć ją kolejnej jesieni, a wtedy do serii trzeba dołożyć jeden lub dwa zabiegi. Dlatego pamiętaj, aby nie przegapić odpowiedniego momentu.',
+  },
+  {
     question: 'Ile zabiegów depilacji laserowej potrzeba?',
     answer:
       'U większości osób pełna seria to około ośmiu zabiegów. Laser działa skutecznie tylko na włosy w fazie aktywnego wzrostu, a w danym momencie jest w niej jedynie część owłosienia, więc kolejne wizyty obejmują te włosy, które w międzyczasie weszły w tę fazę. Ostateczną liczbę ustalamy po konsultacji, bo zależy od partii ciała, koloru i grubości włosa oraz uwarunkowań hormonalnych.',
   },
   {
-    question: 'Co ile tygodni umawiamy kolejne zabiegi?',
+    question: 'Co ile tygodni umawiamy kolejne zabiegi depilacji?',
     answer:
-      'Odstęp dobieram do partii ciała: dla twarzy jest zwykle najkrótszy, dla nóg i pleców najdłuższy, bo włos rośnie tam wolniej. Zbyt krótka przerwa oznacza pracę na włosach poza fazą wzrostu, zbyt długa pozwala części mieszków przejść pełny cykl. Laser mam na miejscu i jest dostępny każdego dnia pracy salonu, więc termin dopasowujemy do Twojego kalendarza, a nie do dostępności sprzętu.',
+      'Odstęp pomiędzy kolejnymi zabiegami wynosi zazwyczaj pięć tygodni. Zbyt krótka przerwa oznacza pracę na włosach poza fazą wzrostu, zbyt długa pozwala części mieszków przejść pełny cykl. Laser mam na miejscu i jest dostępny każdego dnia pracy salonu, więc termin dopasowuję do Twojego kalendarza, a nie do dostępności sprzętu.',
   },
   {
     question: 'Jak przygotować się do depilacji laserowej?',
@@ -299,24 +310,34 @@ export const faqs = [
       'Obszar zabiegu wygol maszynką na 12 do 24 godzin przed wizytą. Na co najmniej cztery tygodnie wcześniej odstaw wosk, pastę cukrową, depilator i pęsetę, bo laser potrzebuje włosa w mieszku. Na dwa do czterech tygodni przed zabiegiem zrezygnuj z opalania i solarium, a samoopalacz zmyj całkowicie. Kwasy i retinol warto odstawić około miesiąca wcześniej. Na zabieg przyjdź ze skórą czystą, bez balsamu i dezodorantu.',
   },
   {
-    question: 'Czy zabieg boli?',
+    question: 'Czy zabieg depilacji boli?',
     answer:
       'W trakcie odczuwa się zwykle ciepło i delikatne ukłucia, wyraźniej w partiach wrażliwych, takich jak bikini czy twarz, oraz przy grubym, ciemnym włosie. Po zabiegu skóra bywa zaczerwieniona i rozgrzana. U większości osób ta reakcja ustępuje w ciągu jednego do trzech dni, choć wrażliwość jest sprawą indywidualną.',
   },
   {
-    question: 'Jakie są przeciwwskazania?',
+    question: 'Jakie są przeciwwskazania do depilacji?',
     answer:
       'Do najczęstszych należą ciąża i karmienie piersią, świeża opalenizna oraz samoopalacz na skórze, aktywne infekcje i zmiany skórne w miejscu zabiegu, przyjmowanie retinoidów i leków fotouczulających, padaczka, rozrusznik serca i choroby nowotworowe. Ta lista ma charakter orientacyjny. Przed pierwszą wizytą przeprowadzam wywiad, a część stanów zdrowia wymaga wcześniejszej konsultacji lekarskiej. Nigdy nie odstawiaj leków samodzielnie, decyzję podejmuje Twój lekarz.',
   },
   {
-    question: 'Jak dbać o skórę po zabiegu?',
+    question: 'Jak dbać o skórę po zabiegu depilacji?',
     answer:
       'Przez kilka dni odpuść saunę, gorące kąpiele, basen i intensywny wysiłek. Skórę myj łagodnie i nawilżaj, a odsłonięte partie chroń wysokim filtrem przez cały czas trwania serii, bo to zmniejsza ryzyko przebarwień. Między zabiegami wolno wyłącznie golić. Potraktowane włosy wypadają stopniowo przez kilka do kilkunastu dni, co bywa mylone z odrastaniem.',
   },
   {
     question: 'Który zabieg na twarz wybrać?',
     answer:
-      'Nie musisz wybierać przed wizytą. Zaczynamy od rozmowy i oceny skóry, a zabieg dobieram do jej bieżącego stanu. Skóra zanieczyszczona i matowa zwykle korzysta z oczyszczania, skóra odwodniona z zabiegów wprowadzających substancje aktywne, a skóra z obniżoną jędrnością z radiofrekwencji. Większość zabiegów pracuje najlepiej w serii, z zachowaniem odstępów.',
+      'Nie musisz wybierać przed wizytą. Zaczynamy od rozmowy i oceny skóry, a zabieg dobieram do jej bieżącego stanu. Skóra zanieczyszczona i matowa zwykle korzysta z oczyszczania, skóra odwodniona z zabiegów wprowadzających substancje aktywne, a skóra z obniżoną jędrnością z zabiegów liftingujących, takich jak radiofrekwencja. Większość zabiegów pracuje najlepiej w serii, z zachowaniem odstępów.',
+  },
+  {
+    question: 'Dlaczego warto robić serię zabiegów na twarz?',
+    answer:
+      'To sposób na widoczną i trwałą poprawę stanu skóry. Jednorazowy zabieg przynosi najczęściej tzw. efekt bankietowy: skóra jest odświeżona i napięta na kilka dni lub tygodni. Natomiast każdy kolejny zabieg z serii, w odstępach dwóch do trzech tygodni, nadbudowuje efekt poprzedniego, głęboko regenerując i zagęszczając tkankę od wewnątrz.',
+  },
+  {
+    question: 'Kiedy oczyszczanie wodorowe przynosi efekty?',
+    answer:
+      'Tylko wtedy, kiedy urządzenie posiada generator wodoru. To podstawa. Salon ZJAWISKOWO posiada taki sprzęt. Ponadto w moim salonie otrzymujesz ten zabieg w wersji PREMIUM, co oznacza, że oprócz podstawowej wersji zabiegowej dostajesz dodatkowo w gratisie infuzję wodorową, która intensywnie nawilża i liftinguje skórę pod wpływem ciśnienia, wymiatając z niej niekorzystne wolne rodniki.',
   },
   {
     question: 'Czy mogę kupić voucher na zabieg?',
@@ -430,10 +451,14 @@ export const terms = {
 /* ── Dlaczego ZJAWISKOWO ─────────────────────────────────────────────── */
 
 export const badges = [
-  { text: 'Kameralny salon, jedna klientka w danym czasie', order: 1 },
-  { text: 'Laser na miejscu, dostępny każdego dnia pracy salonu', order: 2 },
-  { text: 'Bezpłatna konsultacja i próba laserowa przed pierwszym zabiegiem', order: 3 },
-  { text: 'Dobór pielęgnacji domowej po zabiegu', order: 4 },
+  { text: '100% zadowolonych klientów', order: 1 },
+  { text: 'Najwyżej oceniany, największa liczba rekomendacji', order: 2 },
+  { text: 'I miejsce w rankingu pozytywnych opinii', order: 3 },
+  { text: 'Nominacja do plebiscytu „Mistrzowie Urody”', order: 4 },
+  { text: 'Zaufanie budowane efektami', order: 5 },
+  { text: 'Bezkompromisowa jakość', order: 6 },
+  { text: 'Certyfikowane urządzenia', order: 7 },
+  { text: 'Wiedza, która tworzy piękno', order: 8 },
 ]
 
 /* ── Opinie ──────────────────────────────────────────────────────────────

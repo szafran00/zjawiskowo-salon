@@ -15,10 +15,19 @@ import type { PortableBlock } from './types'
 //   * kopiowanie tekstu wynosi twarde spacje do innych systemów.
 //
 // Dlatego stosujemy to WYŁĄCZNIE do tekstu ciągłego: leady, akapity,
-// odpowiedzi FAQ, cytaty opinii i treść z edytora. Nigdy do tytułów,
-// nagłówków, nadtytułów, etykiet menu, nazw pozycji cennika ani promocji.
+// odpowiedzi FAQ, cytaty opinii i treść z edytora, oraz do paska promocji
+// (patrz niżej). Nigdy do tytułów, nagłówków, etykiet menu ani nazw pozycji
+// cennika.
+//
+// Pasek promocji jest wyjątkiem dopisanym później: klientka zgłosiła dokładnie
+// ten defekt („kropeczka po sierpniu spada na dół"). Wiązanie robimy przy
+// renderowaniu, a nie w treści w panelu, żeby w polu edycyjnym nie siedziały
+// niewidoczne znaki, których klientka nie odtworzy, przepisując tekst ręcznie.
+// Test w tests/smoke.mjs porównuje wartość z panelu z HTML po znormalizowaniu
+// twardych spacji, więc sprawdza to, o co mu chodzi (czy treść z panelu jest
+// widoczna), a nie zgodność bajt w bajt.
 const JEDNOLITEROWE = 'aiouwzAIOUWZ'
-const NBSP = ' '
+const NBSP = '\u00A0'
 const WZORZEC = new RegExp(`(^|[\\s(„”"'${NBSP}])([${JEDNOLITEROWE}])[ \\t]+`, 'g')
 
 export function pl(text: string): string
@@ -34,6 +43,24 @@ export function pl(text: string | undefined | null): string | undefined {
     wynik = wynik.replace(WZORZEC, `$1$2${NBSP}`)
   } while (wynik !== poprzedni)
   return wynik
+}
+
+/**
+ * Wiąże kropkę rozdzielającą (·) z poprzedzającym słowem.
+ *
+ * To ten sam defekt, co jednoliterowe słowo, tylko od drugiej strony: przy
+ * zawijaniu wiersza separator potrafi zjechać na początek następnej linii
+ * i wygląda tam jak śmieć. Klientka zgłosiła to wprost w pasku promocji, ale
+ * dotyczy tak samo nadtytułu i godzin otwarcia.
+ *
+ * Robimy to przy renderowaniu, nie w treści w panelu — z tego samego powodu,
+ * co przy pl(): pole edycyjne ma zostać zwykłym tekstem.
+ */
+export function plSep(text: string): string
+export function plSep(text: string | undefined | null): string | undefined
+export function plSep(text: string | undefined | null): string | undefined {
+  if (!text) return text ?? undefined
+  return text.replace(/[ \t]+·/g, `${NBSP}·`)
 }
 
 // Style blokowe, których nie ruszamy: to śródtytuły. Regulamin wylicza z nich

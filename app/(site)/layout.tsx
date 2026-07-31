@@ -7,6 +7,7 @@ import Footer from '@/app/components/Footer'
 import RevealInit from '@/app/components/RevealInit'
 import CookieConsent from '@/app/components/CookieConsent'
 import CallFab from '@/app/components/CallFab'
+import { pl, plSep } from '@/app/lib/typografia'
 
 export default async function SiteLayout({
   children,
@@ -59,7 +60,7 @@ export default async function SiteLayout({
       />
       {s.showPromo && s.promoText && (
         <div className="promo">
-          <b>{s.promoText}</b>
+          <b>{plSep(pl(s.promoText))}</b>
         </div>
       )}
       <main id="tresc">{children}</main>

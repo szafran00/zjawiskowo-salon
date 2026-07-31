@@ -5,7 +5,7 @@ import { fallbackSettings } from '@/app/lib/fallback'
 import ContactForm from '@/app/components/ContactForm'
 import MapEmbed from '@/app/components/MapEmbed'
 import PageHead from '@/app/components/PageHead'
-import { pl } from '@/app/lib/typografia'
+import { pl, plSep } from '@/app/lib/typografia'
 
 export const metadata = {
   title: 'Kontakt — ZJAWISKOWO Krzeszowice',
@@ -52,7 +52,7 @@ export default async function KontaktPage() {
               </div>
               <div className="info-row">
                 <span className="lbl">Godziny otwarcia</span>
-                <span className="val">{s.hours}</span>
+                <span className="val">{plSep(s.hours)}</span>
               </div>
               {notes.length > 0 && (
                 <div className="info-row">

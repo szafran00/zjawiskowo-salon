@@ -29,6 +29,15 @@ function visibleText(html) {
     .replace(/\s+/g, ' ')
 }
 
+// Porownanie tekstu bez rozrozniania rodzaju spacji.
+//
+// Strona wiaze jednoliterowe slowa i separatory twarda spacja przy renderowaniu
+// (app/lib/typografia.ts), wiec HTML rozni sie od wartosci w panelu o same
+// U+00A0. Asercja ma sprawdzic, czy tresc z panelu jest widoczna na stronie,
+// a nie czy zgadza sie bajt w bajt, bo to drugie kazaloby wpisywac niewidoczne
+// znaki do pol edycyjnych.
+const bezNbsp = (s) => (s || '').replace(/\u00a0/g, ' ')
+
 async function getHtml(path) {
   const res = await fetch(BASE + path, { redirect: 'manual' })
   return { status: res.status, text: await res.text(), location: res.headers.get('location') }
@@ -107,7 +116,7 @@ async function main() {
   const head = headMatch ? headMatch[0] : ''
   const hasBoth = (s) => /depilacj/i.test(s) && /salon kosmetyczn/i.test(s)
   check('home: podpis pod logo ma depilacje laserowa i salon kosmetyczny', hasBoth(head))
-  check('home: nadtytul hero ma depilacje laserowa', settings.heroKicker ? /depilacj/i.test(settings.heroKicker) && home.includes(settings.heroKicker) : false)
+  check('home: nadtytul hero ma depilacje laserowa', settings.heroKicker ? /depilacj/i.test(settings.heroKicker) && bezNbsp(home).includes(bezNbsp(settings.heroKicker)) : false)
   check('home: tytul strony ma depilacje laserowa', /<title>[^<]*depilacj/i.test(home))
 
   const navMatch = home.match(/<nav[\s\S]*?<\/nav>/)
@@ -159,7 +168,7 @@ async function main() {
 
   console.log('\n=== 6. Spojnosc Sanity <-> strona ===')
   if (settings.showPromo && settings.promoText) {
-    check('home pokazuje promoText z Sanity', home.includes(settings.promoText), settings.promoText)
+    check('home pokazuje promoText z Sanity', bezNbsp(home).includes(bezNbsp(settings.promoText)), settings.promoText)
   }
   check('home: duzy przycisk telefonu', home.includes('btn-phone') && home.includes(settings.phone))
   for (const s of services) {

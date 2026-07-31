@@ -353,3 +353,137 @@ edytować i usunąć w panelu jak każdy inny.
 
 **Bez podmiany zdjęć** — zgodnie z ustaleniem. Pozostałe punkty z listy uwag
 (1, 3, 5–8, 10–17) czekają na osobną decyzję.
+
+---
+
+## 2026-07-31 — uwagi klientki: pozostałe punkty (1, 3, 5–8, 10–17)
+
+Punkty 2, 4 i 9 poszły wcześniej. Tutaj reszta listy.
+
+### Treść z panelu (skrypt `scripts/uwagi-marty-3-2026-07-31.mjs`, tryb `--dry`)
+
+| Pkt | Co się zmieniło |
+|---|---|
+| 1 | Pasek promocji: bez kropek, „zarezerwuj w sierpniu" w nawiasie |
+| 5 | Depilacja laserowa: „terminy układamy" → „terminy ustalam" |
+| 6 | Pielęgnacja twarzy: „mikrodermabrazja diamentowa", dopisane „ultradźwięki" |
+| 7 | Cennik, grupa Pielęgnacja twarzy: „20 procent" → „20%" (dwa razy), „przy dwóch różnych zabiegach" |
+| 8 | Cennik, grupa Dodatki: nowy opis „Gratis maska i peeling przy każdym zabiegu." |
+| 10 | Nowe pytanie FAQ na pierwszym miejscu: kiedy rozpocząć serię |
+| 11 | „Co ile tygodni umawiamy kolejne zabiegi depilacji?", nowe pierwsze zdanie odpowiedzi, „dopasowuję" |
+| 12–14 | Dopisane słowo „depilacji" w trzech pytaniach |
+| 15 | „…z obniżoną jędrnością z zabiegów liftingujących, takich jak radiofrekwencja." |
+| 16 | Nowe pytanie zaraz po „Który zabieg na twarz wybrać?" |
+| 17 | Nowe pytanie jako przedostatnie: oczyszczanie wodorowe |
+
+Kolejność FAQ po zmianie (11 pytań): start serii, liczba zabiegów, odstępy,
+przygotowanie, ból, przeciwwskazania, pielęgnacja po zabiegu, wybór zabiegu na
+twarz, seria zabiegów na twarz, oczyszczanie wodorowe, voucher.
+
+### Zdjęcia zastępcze (`app/lib/fallback.ts`, punkt 3)
+
+- Ciemny kadr dłoni (Pexels 6187298) → dłonie kosmetyczki nad twarzą (37229294).
+  Klientka: „dłonie kojarzą mi się z męskimi dłońmi".
+- Butelki z widoczną nazwą obcej marki „WHITEWOOD" (34939742) → serum z pipetą
+  bez oznaczeń (33794143).
+- Przy okazji: kafel „Pielęgnacja twarzy" i drugie zdjęcie w galerii pokazywały
+  ten sam kadr. Galeria dostała własny (37229301).
+
+Oba stare identyfikatory nie występują już nigdzie w kodzie ani w HTML.
+
+### Gdzie odstąpiłem od dosłownej treści
+
+- **Punkt 1.** Poza usunięciem kropek i nawiasem skróciłem hasło. Realnym
+  problemem było zawijanie paska na telefonie, a nie same kropki: przy jej
+  wariancie „usuń kropki + nawias" pasek nadal miałby tę samą długość.
+  Nowa wersja mieści się w dwóch wierszach na 375 px, bez sieroty na końcu
+  pierwszego (jednoliterowe „i" oraz „w" związane twardą spacją).
+- **Punkt 15.** Napisała „dodać", ale po słowie „jędrnością" stała już
+  „radiofrekwencja", więc dosłowne dopisanie dałoby „jędrnością z zabiegów
+  liftingujących z radiofrekwencji". Zostawiłem radiofrekwencję jako przykład.
+- **Punkty 10 i 16.** Cyfry w tekście ciągłym zapisane słownie („jeden lub dwa",
+  „dwóch do trzech"), poprawione przecinki, myślnik zastąpiony przecinkiem
+  (myślnik jest w tym vaulcie zakazany). Treść merytoryczna bez zmian.
+- **Punkt 17.** „Salon Zjawiskowo" zapisane wersalikami jak w identyfikacji.
+
+### Do rozstrzygnięcia z klientką
+
+- **Punkt 8 kłóci się z cennikiem.** Opis grupy mówi „Gratis maska i peeling
+  przy każdym zabiegu", a w tej samej grupie stoi pozycja „Maska algowa 20 zł".
+  Prawdopodobnie chodzi o to, że gratis jest maska prosta, a algowa to dopłata,
+  ale tak jak jest teraz, czyta się to jak sprzeczność.
+- **Nagłówek galerii to „Wnętrze salonu", a zdjęcia nie pokazują wnętrza.**
+  Nie mogą, bo obowiązuje reguła „bez wnętrz cudzych salonów". Albo nagłówek
+  do zmiany, albo galeria czeka na jej własne zdjęcia.
+- **Punkt 9 niedokończony:** czeka na zdjęcie jej vouchera.
+
+Testy po zmianach: `npm test` 149 PASS / 0 FAIL, Playwright 33 passed, `tsc` czysty.
+
+### Poprawki po kontroli krzyżowej (skrypt `uwagi-marty-4-2026-07-31.mjs`)
+
+Weryfikację 17 punktów puściłem przez niezależnych kontrolerów, osobno dla
+każdej grupy uwag, plus sceptyka, którego zadaniem było obalać ich werdykty.
+Sceptyk miał rację w dwóch miejscach: poprzednia runda ruszyła stronę główną,
+a nie podstrony.
+
+- **Punkt 11 żył dalej na `/zabiegi/depilacja-laserowa`.** Zdanie, które
+  klientka kazała usunąć („Odstęp ustalamy indywidualnie, zwykle jest krótszy
+  dla twarzy i dłuższy dla nóg i pleców"), stało w sekcji „Laser na miejscu,
+  terminy bez przerw" i w wyliczeniu atutów. Strona główna mówiła
+  „zazwyczaj pięć tygodni", podstrona co innego. Ujednolicone.
+- **Punkt 5, ta sama podstrona:** „kolejne wizyty umawiamy" → „umawiam",
+  zgodnie z „układamy" → „ustalam" i „dopasowujemy" → „dopasowuję".
+- **Twarde spacje wypadły z treści w panelu.** Wpisane wprost do pola
+  `promoText` zostawiały klientce w edytorze niewidoczne znaki. Wiązanie robi
+  teraz kod przy renderowaniu (`pl()` i nowe `plSep()`), a test porównuje
+  treść po znormalizowaniu odstępów, więc sprawdza widoczność treści, a nie
+  zgodność bajt w bajt. Przy okazji separator „·" nie może już zaczynać
+  wiersza w nadtytule ani w godzinach otwarcia.
+- **Zdublowane zdjęcia.** Kafel voucherów i piąty kadr galerii pokazywały ten
+  sam kosmetyk; galeria dostała własny.
+- **Nagłówek galerii.** „Wnętrze salonu" nad zdjęciami, które wnętrza nie
+  pokazują i z założenia nie mogą (reguła doboru zakazuje wnętrz cudzych
+  salonów). Zmieniony na „Zabiegi i efekty". Gdy klientka wgra własne zdjęcia
+  salonu, wraca do poprzedniej nazwy jednym polem w panelu.
+
+### Rozjazd seeda z panelem (znalezisko krytyka kompletności)
+
+`sanity/seed/content.mjs` miał starą treść, a `npm run seed` używa
+`createOrReplace`. Jedno uruchomienie cofnęłoby wszystkie uwagi klientki i nie
+zostawiło po tym śladu. Rozjazd sięgał godzin otwarcia (seed: 9–19, panel:
+8–20), całego FAQ i punktów wyróżniających.
+
+Trzy rzeczy naraz:
+- `npm run check:seed` — wypisuje różnice między repozytorium a panelem,
+  kończy się kodem 1, więc nadaje się do kontroli przed wydaniem;
+- `node scripts/synchronizuj-seed.mjs` — przenosi treść z panelu do
+  repozytorium (kierunek tylko taki, panel jest źródłem prawdy);
+- `npm run seed` odmawia teraz uruchomienia na zapełnionym zbiorze bez
+  jawnego `-- --nadpisz`, z instrukcją, co zrobić zamiast tego.
+
+### Zgoda na cookies
+
+- **Odmowa była mniej widoczna niż zgoda.** „Tylko niezbędne" miało sam obrys,
+  „Akceptuję" pełne złoto. Wytyczne EROD 3/2022 o zwodniczych wzorcach traktują
+  taką nierówność jako podpowiadanie wyboru. Oba przyciski są teraz wypełnione,
+  tej samej wielkości i o zbliżonym kontraście.
+- **Treść nie mówiła, na co się zgadzasz.** „Treści zewnętrzne" zastąpione
+  wprost mapą Google, bo to jedyna rzecz na tej stronie wymagająca zgody.
+- **Zgoda nie wygasała.** Wygasa po dwunastu miesiącach, data trzymana
+  w osobnym kluczu, żeby nie zmieniać formatu odczytywanego przez mapę.
+
+### Przyklejony przycisk telefonu
+
+Na telefonie na starcie stały pod sobą dwa przyciski do tego samego numeru,
+częściowo na siebie nachodząc. Przycisk chowa się teraz, dopóki na ekranie
+widać inny numer, i wraca, gdy żadnego nie widać — więc znika też przy złotym
+pasku na dole strony. Schowany nie łapie dotknięć ani nie stoi w kolejce
+klawisza Tab. Test regresji: `tests/visual.spec.ts`, wariant mobilny.
+
+### Naprawiony `npm run lint`
+
+Nie uruchamiał się od pierwszego commita: `eslint.config.mjs` importował
+`eslint-config-next` tak, jakby dawał tablice płaskiej konfiguracji, a on nadal
+zwraca obiekty w starym formacie. Przełożone na `FlatCompat`. Katalog `design/`
+(rozpakowany projekt graficzny, wygenerowany kod cudzego narzędzia) wyłączony
+z kontroli. Kod strony przechodzi bez ostrzeżeń.

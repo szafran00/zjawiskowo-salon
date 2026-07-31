@@ -430,6 +430,12 @@ a:hover{color:var(--accent)}
 
 /* ---- przyklejony przycisk telefonu na telefonie ---- */
 .callfab{position:fixed;left:16px;right:16px;bottom:16px;z-index:58;display:none;font-size:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+/* Przycisk startuje schowany i wchodzi dopiero wtedy, gdy na ekranie nie ma
+   innego numeru (logika w CallFab.tsx). Bez pointer-events:none schowany
+   przycisk łapałby dotknięcia mimo zerowej przezroczystości. */
+.callfab{opacity:0;transform:translateY(120%);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.callfab.is-widoczny{opacity:1;transform:none;pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.callfab{transition:none}}
 
 /* ---- pojawianie się sekcji ----------------------------------------------
    Klasę reveal-ready dokłada skrypt; bez JS treść po prostu jest widoczna. */
@@ -442,8 +448,12 @@ a:hover{color:var(--accent)}
 .cookie a{color:#F1DFA6}
 .cookie .c-actions{display:flex;gap:10px;flex-wrap:wrap}
 .cookie .btn{padding:12px 22px}
-.cookie .btn-ghost{color:#F4EEE2;border-color:rgba(244,238,226,.45)}
-.cookie .btn-ghost:hover{border-color:var(--accent);color:#fff}
+/* Odmowa ma być równie łatwa i równie widoczna jak zgoda (EROD, wytyczne
+   3/2022 o zwodniczych wzorcach). Obrys kontra wypełnione złoto czytał się
+   jak podpowiedź, którą opcję wybrać, więc oba przyciski są teraz
+   wypełnione, tej samej wielkości i o zbliżonym kontraście. */
+.cookie .btn-ghost{background:#F4EEE2;color:#2B2620;border-color:#F4EEE2}
+.cookie .btn-ghost:hover{background:#fff;border-color:#fff;color:#2B2620}
 
 /* ============================ responsywność ============================ */
 @media(max-width:1040px){

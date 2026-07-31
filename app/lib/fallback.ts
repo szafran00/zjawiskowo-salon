@@ -32,13 +32,21 @@ const px = (id: number, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`
 
 const SKIN_LEGS = 4672470 // gładka skóra nóg — efekt depilacji
-const FACE_HANDS = 6187298 // zabieg twarzy, dłonie na skórze
+// Poprzedni kadr (6187298) klientka odrzuciła: ciemne ujęcie, w którym dłonie
+// czytały się jako męskie. Ten pokazuje dłonie kosmetyczki nad twarzą klientki,
+// jasno i bez wątpliwości, kto wykonuje zabieg.
+const FACE_HANDS = 37229294 // dłonie kosmetyczki nad twarzą klientki
 const FACE_MASK = 3762564 // pielęgnacja twarzy — maska, portret
 const FACE_MASK_2 = 3762553 // pielęgnacja twarzy — maska, oczy zamknięte
 const FACE_CREAM = 16574941 // nakładanie kosmetyku na twarz
 const FACE_RELAX = 6663388 // maska i opaska — relaks
 const COSMETICS = 5240623 // kosmetyki / serum
-const COSMETICS_2 = 34939742 // balsam i serum — kadr z góry
+// Poprzedni kadr (34939742) pokazywał butelki z czytelną nazwą obcej marki
+// („WHITEWOOD") na tle ściany, więc wyglądał jak wnętrze cudzego salonu.
+const COSMETICS_2 = 33794143 // serum z pipetą, bez obcych oznaczeń
+// Osobny kadr wyłącznie do galerii. Wcześniej stało tu to samo zdjęcie, co na
+// kaflu „Pielęgnacja twarzy”, więc na jednej stronie wychodziło dwa razy.
+const FACE_BRUSH = 37229301 // nakładanie maski pędzlem
 
 export const STOCK: {
   face: string
@@ -63,10 +71,12 @@ export const STOCK: {
   voucher: px(COSMETICS),
   gal: [
     px(SKIN_LEGS, 900),
-    px(FACE_HANDS, 900),
+    px(FACE_BRUSH, 900),
     px(COSMETICS_2, 900),
     px(FACE_MASK, 900),
-    px(COSMETICS, 900),
+    // Nie COSMETICS: ten kadr stoi już na kaflu „Vouchery podarunkowe”,
+    // a galeria jest na tej samej stronie kilka sekcji niżej.
+    px(FACE_MASK_2, 900),
     px(FACE_RELAX, 900),
     px(FACE_MASK_2, 900),
     px(FACE_CREAM, 900),
