@@ -1,3 +1,5 @@
+import { pl } from '@/app/lib/typografia'
+
 // Złoty pasek z numerem — główne wezwanie do działania, zamyka każdą podstronę.
 // Klientka umawia wizyty telefonicznie, więc numer ma być trudny do przeoczenia.
 export default function PhoneCta({
@@ -19,11 +21,11 @@ export default function PhoneCta({
       <div className="wrap phonebar-in">
         {kicker && <p className="kicker">{kicker}</p>}
         <h2 className="h2">{heading}</h2>
-        {lead && <p className="lead">{lead}</p>}
+        {lead && <p className="lead">{pl(lead)}</p>}
         <a href={tel} className="btn btn-phone">
           <span className="tel-num">{phone}</span>
         </a>
-        {hint && <p className="phone-hint">{hint}</p>}
+        {hint && <p className="phone-hint">{pl(hint)}</p>}
       </div>
     </section>
   )

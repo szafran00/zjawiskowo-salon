@@ -7,6 +7,7 @@ import { fallbackVoucher, fallbackSettings, STOCK } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
 import PageHead from '@/app/components/PageHead'
 import PhoneCta from '@/app/components/PhoneCta'
+import { pl, plBloki } from '@/app/lib/typografia'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -53,7 +54,7 @@ export default async function VoucheryPage() {
               {voucher.bullets && voucher.bullets.length > 0 && (
                 <ul className="atuty">
                   {voucher.bullets.map((b, i) => (
-                    <li key={i}>{b}</li>
+                    <li key={i}>{pl(b)}</li>
                   ))}
                 </ul>
               )}
@@ -85,7 +86,7 @@ export default async function VoucheryPage() {
             </div>
             <div className="prose" style={{ margin: '0 auto' }}>
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              <PortableText value={voucher.body as any} />
+              <PortableText value={plBloki(voucher.body) as any} />
             </div>
           </div>
         </section>

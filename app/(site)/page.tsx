@@ -19,6 +19,7 @@ import Faq from '@/app/components/Faq'
 import PhoneCta from '@/app/components/PhoneCta'
 import ReviewsCarousel from '@/app/components/ReviewsCarousel'
 import WhySection from '@/app/components/WhySection'
+import { pl as plTekst } from '@/app/lib/typografia'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -82,7 +83,7 @@ export default async function HomePage() {
             <h2 className="h2">{s.pillarsHeading}</h2>
             {s.pillarsLead && (
               <p className="lead" style={{ maxWidth: 640 }}>
-                {s.pillarsLead}
+                {plTekst(s.pillarsLead)}
               </p>
             )}
           </div>
@@ -100,7 +101,7 @@ export default async function HomePage() {
                 </div>
                 <div className="teaser-body">
                   <h3 className="h3">{t.title}</h3>
-                  {t.excerpt && <p>{t.excerpt}</p>}
+                  {t.excerpt && <p>{plTekst(t.excerpt)}</p>}
                   <div className="btn-row">
                     <Link href={`/zabiegi/${t.slug}`} className="btn btn-cta">
                       Poznaj zabieg
@@ -130,7 +131,7 @@ export default async function HomePage() {
               <h2 className="h2">{s.priceTeaserHeading || 'Ceny i pakiety'}</h2>
               {pl.intro && (
                 <p className="lead" style={{ maxWidth: 660 }}>
-                  {pl.intro}
+                  {plTekst(pl.intro)}
                 </p>
               )}
             </div>
@@ -138,7 +139,7 @@ export default async function HomePage() {
               {priceGroups.map((g, i) => (
                 <div className="pkg" key={g.anchor || i}>
                   <h3 className="pkg-name">{g.title}</h3>
-                  {g.note && <p className="pkg-note">{g.note}</p>}
+                  {g.note && <p className="pkg-note">{plTekst(g.note)}</p>}
                   <Link href={`/cennik#${g.anchor}`} className="pkg-link">
                     Zobacz ceny →
                   </Link>
@@ -164,7 +165,7 @@ export default async function HomePage() {
               <div className="vouch-body">
                 <p className="kicker">{voucher.kicker}</p>
                 <h2 className="h2">{voucher.heading}</h2>
-                {voucher.lead && <p className="lead">{voucher.lead}</p>}
+                {voucher.lead && <p className="lead">{plTekst(voucher.lead)}</p>}
                 <div className="btn-row">
                   <Link href="/vouchery" className="btn btn-cta">
                     {voucher.ctaLabel || 'Zapytaj o voucher'}

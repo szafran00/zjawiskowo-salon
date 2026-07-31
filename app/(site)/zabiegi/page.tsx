@@ -6,6 +6,7 @@ import { fallbackTreatments, fallbackSettings, STOCK } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
 import PageHead from '@/app/components/PageHead'
 import PhoneCta from '@/app/components/PhoneCta'
+import { pl } from '@/app/lib/typografia'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -56,7 +57,7 @@ export default async function ZabiegiPage() {
                 <div className="svc-card-body">
                   <p className="kicker">{t.kicker}</p>
                   <h2 className="h3">{t.title}</h2>
-                  {t.excerpt && <p>{t.excerpt}</p>}
+                  {t.excerpt && <p>{pl(t.excerpt)}</p>}
                   <div className="btn-row">
                     <Link href={`/zabiegi/${t.slug}`} className="btn btn-cta">
                       Poznaj zabieg

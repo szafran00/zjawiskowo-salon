@@ -5,6 +5,7 @@ import { fallbackSettings } from '@/app/lib/fallback'
 import ContactForm from '@/app/components/ContactForm'
 import MapEmbed from '@/app/components/MapEmbed'
 import PageHead from '@/app/components/PageHead'
+import { pl } from '@/app/lib/typografia'
 
 export const metadata = {
   title: 'Kontakt — ZJAWISKOWO Krzeszowice',
@@ -58,7 +59,7 @@ export default async function KontaktPage() {
                   <span className="lbl">Jak trafić</span>
                   <ul className="contact-notes">
                     {notes.map((n, i) => (
-                      <li key={i}>{n}</li>
+                      <li key={i}>{pl(n)}</li>
                     ))}
                   </ul>
                 </div>

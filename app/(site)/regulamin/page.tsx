@@ -5,6 +5,7 @@ import { TERMS_QUERY } from '@/sanity/lib/queries'
 import type { PortableBlock, Terms } from '@/app/lib/types'
 import { fallbackTerms } from '@/app/lib/fallback'
 import PageHead from '@/app/components/PageHead'
+import { plBloki } from '@/app/lib/typografia'
 
 export const metadata = {
   title: 'Regulamin — ZJAWISKOWO Krzeszowice',
@@ -87,7 +88,7 @@ export default async function RegulaminPage() {
             {body.length > 0 ? (
               <PortableText
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                value={body as any}
+                value={plBloki(body) as any}
                 components={{
                   block: {
                     // Nagłówki regulaminu to sekcje najwyższego poziomu tego

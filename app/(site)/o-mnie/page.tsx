@@ -13,6 +13,7 @@ import { imgUrl } from '@/app/lib/img'
 import PageHead from '@/app/components/PageHead'
 import PhoneCta from '@/app/components/PhoneCta'
 import WhySection from '@/app/components/WhySection'
+import { plBloki } from '@/app/lib/typografia'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -62,7 +63,7 @@ export default async function AboutPage() {
               <div className="prose">
                 {hasBody ? (
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  <PortableText value={a.body as any} />
+                  <PortableText value={plBloki(a.body) as any} />
                 ) : (
                   <p>{fallbackAboutBody}</p>
                 )}

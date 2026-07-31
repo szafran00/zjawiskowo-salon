@@ -8,6 +8,7 @@ import { fallbackTreatments, fallbackSettings, STOCK } from '@/app/lib/fallback'
 import { imgUrl } from '@/app/lib/img'
 import PageHead from '@/app/components/PageHead'
 import PhoneCta from '@/app/components/PhoneCta'
+import { pl, plBloki } from '@/app/lib/typografia'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -88,7 +89,7 @@ export default async function TreatmentPage({
               {t.atuty && t.atuty.length > 0 && (
                 <ul className="atuty">
                   {t.atuty.map((a, j) => (
-                    <li key={j}>{a}</li>
+                    <li key={j}>{pl(a)}</li>
                   ))}
                 </ul>
               )}
@@ -117,7 +118,7 @@ export default async function TreatmentPage({
             </div>
             <div className="prose" style={{ margin: '0 auto' }}>
               {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              <PortableText value={t.description as any} />
+              <PortableText value={plBloki(t.description) as any} />
             </div>
           </div>
         </section>

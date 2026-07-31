@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
+import { pl } from '../lib/typografia'
 
 export type Crumb = { label: string; href?: string }
 
@@ -39,8 +40,10 @@ export default function PageHead({
           ))}
         </nav>
         {kicker && <p className="kicker">{kicker}</p>}
+        {/* Tytuł bez twardych spacji: „O mnie" zaczyna się od jednoliterowego
+            słowa, a ten napis jest porównywany znak w znak w testach i w menu. */}
         <h1 className="h1">{title}</h1>
-        {lead && <p className="lead">{lead}</p>}
+        {lead && <p className="lead">{pl(lead)}</p>}
       </div>
     </section>
   )

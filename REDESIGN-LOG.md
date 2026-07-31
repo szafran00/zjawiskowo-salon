@@ -309,3 +309,47 @@ przemianowane, więc dotychczasowe dokumenty w bazie działają bez migracji.
 
 Plik `Zjawiskowo salon kosmetyczny.zip` w katalogu głównym został rozpakowany do
 `design/2026-07-28/` i celowo nie trafił do repozytorium (to samo w dwóch miejscach).
+
+---
+
+## 2026-07-31 — uwagi klientki: punkty 2, 9 i 4
+
+### Punkty 2 i 9: „literkę o trzeba dać na dół", „słowo i lepiej dać na dół"
+
+To nie były dwa błędy w dwóch zdaniach. Polska zasada łamania wierszy mówi, że
+jednoliterowe słowo nie zostaje na końcu wiersza, a tekst z panelu łamie się
+inaczej na każdej szerokości ekranu. Poprawienie tych dwóch miejsc ręcznie nic
+by nie dało, bo przy innej szerokości sierotą zostaje inne słowo.
+
+Nowy plik `app/lib/typografia.ts`: `pl()` wiąże jednoliterowe słowo z następnym
+twardą spacją (U+00A0), `plBloki()` robi to samo dla treści z edytora.
+
+**Zakres jest celowo wąski.** Zanim to weszło, sprawdziłem, co twarda spacja
+psuje, gdyby wpuścić ją wszędzie:
+
+| Ryzyko | Skutek |
+|---|---|
+| Testy porównują wartość z Sanity ze znakami w HTML | poległoby ok. 20 z 149 asercji — nazwy pozycji cennika ze spójnikiem („Uda i kolana", „twarz, szyja i dekolt") i pasek promocji „w sierpniu" |
+| „O mnie" w menu i w nagłówku | zaczyna się od jednoliterowego słowa |
+| Ctrl+F w przeglądarce | przestaje znajdować frazy przechodzące przez związaną parę |
+| Kopiowanie tekstu | wynosi twarde spacje do Worda i maili |
+| Kotwice regulaminu | identyfikatory liczone ze śródtytułów rozjechałyby się ze spisem treści |
+
+Dlatego `pl()` obejmuje **wyłącznie tekst ciągły**: leady, akapity, odpowiedzi
+FAQ, cytaty opinii, punkty wyliczeń i treść z edytora. Nie dotyka tytułów,
+nagłówków, nadtytułów, etykiet menu, nazw pozycji cennika ani paska promocji.
+`plBloki()` dodatkowo pomija bloki o stylu `h1`–`h6`, żeby kotwice regulaminu
+zostały bez zmian (zweryfikowane: 10 odnośników ze spisu treści, 10 celów).
+
+Po zmianie: `npm test` 149 PASS / 0 FAIL, Playwright 33 passed, `tsc` czysty.
+
+### Punkt 4: ósmy punkt w „Dlaczego ZJAWISKOWO"
+
+Siatka to `repeat(4,1fr)`, więc siedem punktów układało się 4+3 i ostatni wiersz
+zostawał niedomknięty. Ósmy punkt „Wiedza, która tworzy piękno" zamyka siatkę
+do 4+4. Dodany jako dokument `badge-8` skryptem
+`scripts/badge-8-2026-07-31.mjs` (z trybem `--dry`), więc klientka może go
+edytować i usunąć w panelu jak każdy inny.
+
+**Bez podmiany zdjęć** — zgodnie z ustaleniem. Pozostałe punkty z listy uwag
+(1, 3, 5–8, 10–17) czekają na osobną decyzję.

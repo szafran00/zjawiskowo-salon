@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import type { Faq as FaqType } from '../lib/types'
+import { pl } from '@/app/lib/typografia'
 
 export default function Faq({
   faqs,
@@ -59,7 +60,7 @@ export default function Faq({
                   aria-labelledby={btnId}
                   className={`faq-a ${isOpen ? 'open' : ''}`}
                 >
-                  {f.answer}
+                  {pl(f.answer)}
                 </div>
               </div>
             )

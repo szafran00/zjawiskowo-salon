@@ -1,4 +1,5 @@
 import Kwiatuszek from './Kwiatuszek'
+import { pl } from '@/app/lib/typografia'
 
 // Karty wyróżników („Dlaczego ZJAWISKOWO” na stronie głównej, „Co mnie
 // wyróżnia” na stronie O mnie). Zamiast numerów znak graficzny salonu.
@@ -30,7 +31,7 @@ export default function WhySection({
               <div className="why-num">
                 <Kwiatuszek size={44} />
               </div>
-              <p>{text}</p>
+              <p>{pl(text)}</p>
             </div>
           ))}
         </div>

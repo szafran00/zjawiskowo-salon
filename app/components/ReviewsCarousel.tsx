@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react'
 import type { Review } from '../lib/types'
+import { pl } from '@/app/lib/typografia'
 
 // Karuzela opinii: przesuwa się pojedynczo (strzałki, kropki, gest na ekranie
 // dotykowym). Pojedyncze opinie ukrywa się w panelu — odfiltrowuje je zapytanie
@@ -77,7 +78,7 @@ export default function ReviewsCarousel({
                 <div className="stars" aria-label={`Ocena ${r.rating || 5} na 5`}>
                   {'★'.repeat(r.rating || 5)}
                 </div>
-                <blockquote className="rev-q">{r.quote}</blockquote>
+                <blockquote className="rev-q">{pl(r.quote)}</blockquote>
                 {r.author && <figcaption className="rev-name">{r.author}</figcaption>}
               </figure>
             ))}
