@@ -43,11 +43,14 @@ export default async function RegulaminPage() {
   const body = (Array.isArray(terms.body) ? terms.body : []) as PortableBlock[]
 
   // Spis treści budujemy z nagłówków w treści z panelu — nie z osobnego pola.
+  // Numer zdejmujemy z etykiety, bo listę numeruje już <ol>. Bez tego wychodzi
+  // „1. 1. Postanowienia ogólne”. Kotwica dalej liczy się z pełnego tekstu
+  // nagłówka, więc odnośnik trafia tam, gdzie trafiał.
   const toc = body
     .filter((b) => b._type === 'block' && b.style === 'h3')
     .map((b) => {
       const text = blockText(b)
-      return { text, id: slugifyPl(text) }
+      return { text: text.replace(/^\s*\d+[.)]\s*/, ''), id: slugifyPl(text) }
     })
     .filter((h) => h.text)
 
