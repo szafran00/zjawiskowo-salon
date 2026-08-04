@@ -25,7 +25,8 @@ Zmienne w `.env.local` (projectId/dataset są też domyślne w kodzie, więc bui
 2. Framework: Next.js (wykryje sam). **Zmienne env nie są wymagane** (projectId/dataset są w kodzie; dataset publiczny).
 3. Deploy. Strona: `https://zjawiskowo-salon.vercel.app`, panel: `.../studio`.
 4. Domeny Vercel (`*.vercel.app`) i `zjawiskowo.com.pl` są już dodane do CORS Sanity, więc panel zadziała od razu.
-5. Docelowa domena: podpiąć `zjawiskowo.com.pl` (Marta ma ją u Piotra Wszołka, tel. 664772094) — w Vercel Domains + rekord DNS.
+5. Docelowa domena: `zjawiskowo.com.pl`. Dane kontaktowe informatyka klientki
+   trzymamy w vaulcie, nie w tym pliku: repozytorium jest publiczne.
 
 ## Do dokończenia
 - [ ] Deploy na Vercel (krok wyżej — wymaga logowania Franka do Vercel).
