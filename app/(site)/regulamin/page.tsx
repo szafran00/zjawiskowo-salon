@@ -44,13 +44,15 @@ export default async function RegulaminPage() {
 
   // Spis treści budujemy z nagłówków w treści z panelu — nie z osobnego pola.
   // Numer zdejmujemy z etykiety, bo listę numeruje już <ol>. Bez tego wychodzi
-  // „1. 1. Postanowienia ogólne”. Kotwica dalej liczy się z pełnego tekstu
-  // nagłówka, więc odnośnik trafia tam, gdzie trafiał.
+  // „1. 1. Postanowienia ogólne”. Znak paragrafu łapiemy razem z numerem, bo
+  // regulamin klientki ma nagłówki w formie „§ 1 Postanowienia ogólne” i bez
+  // tego wychodziłoby „1. § 1 Postanowienia ogólne”. Kotwica dalej liczy się
+  // z pełnego tekstu nagłówka, więc odnośnik trafia tam, gdzie trafiał.
   const toc = body
     .filter((b) => b._type === 'block' && b.style === 'h3')
     .map((b) => {
       const text = blockText(b)
-      return { text: text.replace(/^\s*\d+[.)]\s*/, ''), id: slugifyPl(text) }
+      return { text: text.replace(/^\s*(?:§\s*)?\d+[.)]?\s*/, ''), id: slugifyPl(text) }
     })
     .filter((h) => h.text)
 
