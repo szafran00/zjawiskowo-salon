@@ -11,7 +11,13 @@ test('zgoda cookies realnie steruje mapą Google', async ({ page }) => {
 
   // 1. Świeże wejście: pasek widoczny, mapa ZABLOKOWANA (brak iframe Google)
   await expect(banner).toBeVisible()
-  await expect(page.locator('.mapbtn')).toBeVisible()
+  await expect(page.locator('.mapcard')).toBeVisible()
+  // Kafel przed zgodą ma być użyteczny sam w sobie: adres i odnośnik do Map
+  // Google, który nie potrzebuje żadnej zgody.
+  await expect(page.locator('.mapcard-adres')).toContainText('Krzeszowice')
+  await expect(
+    page.locator('.mapcard a[href*="google.com/maps"]')
+  ).toBeVisible()
   await expect(googleMap).toHaveCount(0)
 
   // 2. „Tylko niezbędne" → pasek znika, mapa NADAL zablokowana

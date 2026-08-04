@@ -2,9 +2,9 @@ import { sanityFetch } from '@/sanity/lib/fetch'
 import { SETTINGS_QUERY } from '@/sanity/lib/queries'
 import type { Settings } from '@/app/lib/types'
 import { fallbackSettings } from '@/app/lib/fallback'
-import ContactForm from '@/app/components/ContactForm'
 import MapEmbed from '@/app/components/MapEmbed'
 import PageHead from '@/app/components/PageHead'
+import PhoneCta from '@/app/components/PhoneCta'
 import { pl, plSep } from '@/app/lib/typografia'
 
 export const metadata = {
@@ -30,15 +30,20 @@ export default async function KontaktPage() {
         crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Kontakt' }]}
         kicker={s.contactKicker || 'Kontakt'}
         title={s.contactHeading || 'Odwiedź mnie w Krzeszowicach'}
+        wiazTytul
         lead={
           s.contactLead ||
-          'Rezerwacja wyłącznie telefoniczna — zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd.'
+          'Rezerwacja wyłącznie telefoniczna. Zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd.'
         }
       />
 
+      {/* Jedna kolumna, bez formularza. Klientka wycofała go 1 sierpnia: „to
+          usuńmy formularz, bo nie chcę korespondencji mailowej", wcześniej
+          „nie nie, tylko telefon proszę". Jedyną drogą kontaktu jest numer,
+          więc strona kończy się paskiem z telefonem. */}
       <section className="contact reveal">
         <div className="wrap sec">
-          <div className="contact-grid">
+          <div className="contact-grid contact-grid-solo">
             <div className="contact-info">
               <div className="info-row">
                 <span className="lbl">Adres</span>
@@ -65,7 +70,7 @@ export default async function KontaktPage() {
                 </div>
               )}
               <div className="map">
-                <MapEmbed embedUrl={s.googleMapsEmbedUrl} />
+                <MapEmbed embedUrl={s.googleMapsEmbedUrl} address={s.address} />
               </div>
               <div className="socials">
                 <a
@@ -86,15 +91,17 @@ export default async function KontaktPage() {
                 </a>
               </div>
             </div>
-            <ContactForm
-              endpoint={s.formEndpoint}
-              email={s.contactEmail}
-              phone={s.phone}
-              note={s.formNote}
-            />
           </div>
         </div>
       </section>
+
+      <PhoneCta
+        phone={s.phone || ''}
+        kicker={s.ctaKicker || 'Rezerwacja tylko telefoniczna'}
+        heading={s.ctaHeading || 'Umów wizytę'}
+        lead={s.ctaLead}
+        hint={s.ctaHint ?? 'Nie odbieram, gdy trwa zabieg. Oddzwonię, gdy tylko skończę.'}
+      />
     </>
   )
 }

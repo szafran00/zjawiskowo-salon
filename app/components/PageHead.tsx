@@ -11,11 +11,14 @@ export default function PageHead({
   kicker,
   title,
   lead,
+  wiazTytul = false,
 }: {
   crumbs: Crumb[]
   kicker?: string
   title: string
   lead?: string
+  /** Wiąże w tytule jednoliterowe słowa z następnym wyrazem (zob. niżej). */
+  wiazTytul?: boolean
 }) {
   return (
     <section className="pagehead">
@@ -40,9 +43,12 @@ export default function PageHead({
           ))}
         </nav>
         {kicker && <p className="kicker">{kicker}</p>}
-        {/* Tytuł bez twardych spacji: „O mnie" zaczyna się od jednoliterowego
-            słowa, a ten napis jest porównywany znak w znak w testach i w menu. */}
-        <h1 className="h1">{title}</h1>
+        {/* Tytuł domyślnie bez twardych spacji: „O mnie" zaczyna się od
+            jednoliterowego słowa, a ten napis jest porównywany znak w znak
+            w testach i w menu. Strona, której tytuł łamie się brzydko, włącza
+            wiązanie sama — tak jest na Kontakcie, gdzie klientka poprosiła
+            o zejście „w" razem z „Krzeszowicach" do drugiej linijki. */}
+        <h1 className="h1">{wiazTytul ? pl(title) : title}</h1>
         {lead && <p className="lead">{pl(lead)}</p>}
       </div>
     </section>

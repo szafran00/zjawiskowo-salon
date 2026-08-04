@@ -10,9 +10,9 @@ const settingsProjection = `{
   priceTeaserKicker, priceTeaserHeading,
   ctaKicker, ctaHeading, ctaLead, ctaHint,
   treatmentsHeading, treatmentsCtaKicker, treatmentsCtaHeading,
-  contactKicker, contactHeading, contactLead, formNote,
+  contactKicker, contactHeading, contactLead,
   showPromo, promoText, address, hours, contactNotes, facebookUrl, instagramUrl,
-  googleMapsEmbedUrl, contactEmail, formEndpoint, domain, footerNote,
+  googleMapsEmbedUrl, domain, footerNote,
   heroFaceImage, heroLaserImage, heroMainImage, heroSlides
 }`
 

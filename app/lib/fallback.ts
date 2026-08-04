@@ -47,6 +47,11 @@ const COSMETICS_2 = 33794143 // serum z pipetą, bez obcych oznaczeń
 // Osobny kadr wyłącznie do galerii. Wcześniej stało tu to samo zdjęcie, co na
 // kaflu „Pielęgnacja twarzy”, więc na jednej stronie wychodziło dwa razy.
 const FACE_BRUSH = 37229301 // nakładanie maski pędzlem
+// Gładka skóra przedramienia. Wskazana przez klientkę luka w galerii: „fajnie
+// byłoby dołożyć jeszcze chociaż jedno zdjęcie dot. depilacji innej partii
+// ciała" — do tej pory jedynym kadrem depilacyjnym były nogi, choć cennik
+// obejmuje też ręce, pachy i plecy.
+const SKIN_ARM = 6810872 // gładka skóra przedramienia
 
 export const STOCK: {
   face: string
@@ -60,7 +65,10 @@ export const STOCK: {
   voucher: string
   gal: string[]
 } = {
-  face: px(FACE_HANDS),
+  // Kadr wskazany przez klientkę 2 sierpnia: „na stronie głównej zamiast tego
+  // zdjęcia w Pielęgnacja twarzy chciałabym prosić to przesłane poniżej"
+  // (odesłała dokładnie ten kadr, który stał wtedy w galerii).
+  face: px(FACE_MASK_2),
   laser: px(SKIN_LEGS),
   laserWide: px(SKIN_LEGS),
   slide1: px(SKIN_LEGS, 1400),
@@ -74,11 +82,13 @@ export const STOCK: {
     px(FACE_BRUSH, 900),
     px(COSMETICS_2, 900),
     px(FACE_MASK, 900),
+    // Tu stał kadr, który od 2 sierpnia jest kaflem „Pielęgnacja twarzy”.
+    // Klientka poprosiła, żeby zniknął z galerii („bo ono już będzie przy
+    // pielęgnacji”), a jego miejsce zajęła druga partia ciała przy depilacji.
     // Nie COSMETICS: ten kadr stoi już na kaflu „Vouchery podarunkowe”,
     // a galeria jest na tej samej stronie kilka sekcji niżej.
-    px(FACE_MASK_2, 900),
+    px(SKIN_ARM, 900),
     px(FACE_RELAX, 900),
-    px(FACE_MASK_2, 900),
     px(FACE_CREAM, 900),
   ],
 }

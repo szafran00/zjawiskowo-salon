@@ -41,7 +41,6 @@ export interface Settings {
   contactKicker?: string
   contactHeading?: string
   contactLead?: string
-  formNote?: string
   showPromo?: boolean
   promoText?: string
   address?: string

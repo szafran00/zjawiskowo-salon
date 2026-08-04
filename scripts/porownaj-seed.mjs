@@ -37,17 +37,48 @@ const porownaj = (etykieta, wSeedzie, wPanelu) => {
   }
 }
 
-const [settings, uslugi, cennik, faqs, badges] = await Promise.all([
-  pytaj(`*[_type=="siteSettings"][0]{promoText,galleryHeading,heroKicker,tagline,hours}`),
-  pytaj(`*[_type=="service"]|order(order asc){"slug":slug.current,title,excerpt,atuty}`),
-  pytaj(`*[_type=="pricelist"][0].groups[]{anchor,title,note}`),
+const [settings, uslugi, cennik, faqs, badges, voucher] = await Promise.all([
+  pytaj(
+    `*[_type=="siteSettings"][0]{promoText,galleryHeading,heroKicker,tagline,hours,contactNotes}`
+  ),
+  pytaj(
+    `*[_type=="service"]|order(order asc){"slug":slug.current,title,excerpt,atuty,description}`
+  ),
+  pytaj(`*[_type=="pricelist"][0].groups[]{anchor,title,note,items[]{name,price,oldPrice,saving,gratis,note}}`),
   pytaj(`*[_type=="faqItem"]|order(order asc){question,answer}`),
   pytaj(`*[_type=="trustBadge"]|order(order asc){text}`),
+  pytaj(`*[_type=="voucherPage"][0]{bullets,body}`),
 ])
+
+// Portable Text sprowadzamy do jednej linii „styl|znaczniki|tekst" — porównanie
+// ma wychwycić zmianę treści i układu, a nie różnicę w kluczach bloków.
+const plasko = (bloki) =>
+  (bloki || [])
+    .map((b) => {
+      const marks = (b.children?.[0]?.marks || []).filter((m) => m === 'strong')
+      const rodzaj = b.listItem ? `•${b.style || 'normal'}` : b.style || 'normal'
+      const zn = marks.length ? `[${marks.join(',')}]` : ''
+      return `${rodzaj}${zn}|${norm((b.children || []).map((c) => c.text).join(''))}`
+    })
+    .join('\n')
+
+const pozycjeTekstem = (items) =>
+  (items || [])
+    .map((it) =>
+      [it.name, it.price, it.oldPrice, it.saving, it.gratis, it.note]
+        .map((v) => norm(v) ?? '')
+        .join(' | ')
+    )
+    .join('\n')
 
 for (const pole of ['promoText', 'galleryHeading', 'heroKicker', 'tagline', 'hours']) {
   porownaj(`settings.${pole}`, seed.settings?.[pole], settings?.[pole])
 }
+porownaj(
+  'settings.contactNotes',
+  (seed.settings?.contactNotes || []).join(' | '),
+  (settings?.contactNotes || []).join(' | ')
+)
 
 for (const u of uslugi || []) {
   const s = (seed.treatments || []).find((x) => x.slug === u.slug)
@@ -57,12 +88,21 @@ for (const u of uslugi || []) {
   }
   porownaj(`service ${u.slug}.excerpt`, s.excerpt, u.excerpt)
   porownaj(`service ${u.slug}.atuty`, (s.atuty || []).join(' | '), (u.atuty || []).join(' | '))
+  porownaj(`service ${u.slug}.description`, plasko(s.description), plasko(u.description))
 }
 
 for (const g of cennik || []) {
   const s = (seed.pricelist?.groups || []).find((x) => x.anchor === g.anchor)
   porownaj(`cennik ${g.anchor}.note`, s?.note ?? '', g.note ?? '')
+  porownaj(`cennik ${g.anchor}.items`, pozycjeTekstem(s?.items), pozycjeTekstem(g.items))
 }
+
+porownaj(
+  'voucher.bullets',
+  (seed.voucher?.bullets || []).join(' | '),
+  (voucher?.bullets || []).join(' | ')
+)
+porownaj('voucher.body', plasko(seed.voucher?.body), plasko(voucher?.body))
 
 // FAQ porównujemy najpierw jako listę pytań w kolejności (bo kolejność jest
 // wymogiem klientki), a dopiero potem odpowiedź przy każdym wspólnym pytaniu.

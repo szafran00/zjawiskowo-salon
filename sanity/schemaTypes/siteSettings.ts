@@ -335,14 +335,6 @@ export const siteSettings = defineType({
         'Rezerwacja wyłącznie telefoniczna — zadzwoń, a wspólnie ustalimy dogodny termin. Poniżej znajdziesz adres, godziny i dojazd.',
     }),
     defineField({
-      name: 'formNote',
-      title: 'Kontakt — dopisek nad formularzem',
-      type: 'string',
-      group: 'contact',
-      description: 'Puste pole ukrywa dopisek.',
-      initialValue: 'Preferuję kontakt telefoniczny. Ten formularz jest pomocniczy.',
-    }),
-    defineField({
       name: 'phone',
       title: 'Telefon',
       type: 'string',
@@ -387,20 +379,11 @@ export const siteSettings = defineType({
       type: 'url',
       group: 'contact',
     }),
-    defineField({
-      name: 'contactEmail',
-      title: 'E-mail kontaktowy (na który idą wiadomości z formularza)',
-      type: 'string',
-      group: 'contact',
-    }),
-    defineField({
-      name: 'formEndpoint',
-      title: 'Formularz — adres Formspree',
-      type: 'url',
-      description:
-        'Załóż darmowy formularz na formspree.io (przekierowany na e-mail powyżej) i wklej tu adres, np. https://formspree.io/f/xxxxxx. Pusty = formularz kieruje do kontaktu telefonicznego.',
-      group: 'contact',
-    }),
+    // Pola formularza (adres Formspree, e-mail kontaktowy, dopisek nad
+    // formularzem) zniknęły 4 sierpnia razem z samym formularzem — klientka
+    // nie chce korespondencji mailowej, jedyną drogą kontaktu jest telefon.
+    // Wartości zostają w zbiorze danych, ale nie ma ich już w panelu ani
+    // w zapytaniu, żeby nie sugerowały funkcji, której strona nie ma.
     defineField({
       name: 'domain',
       title: 'Domena',

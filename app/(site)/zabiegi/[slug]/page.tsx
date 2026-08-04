@@ -85,7 +85,12 @@ export default async function TreatmentPage({
               </div>
             </div>
             <div className="svc-body">
-              <h2 className="h2">{t.introHeading || 'Na czym polega'}</h2>
+              {/* Wiązanie jednoliterowych słów: „Pielęgnacja twarzy –
+                  bezpieczne i nieinwazyjne zabiegi kosmetyczne" łamało się
+                  z osieroconym „i" na końcu wiersza. Ten nagłówek nie jest
+                  celem żadnej kotwicy ani pozycją menu, więc twarda spacja
+                  niczego tu nie psuje. */}
+              <h2 className="h2">{pl(t.introHeading || 'Na czym polega')}</h2>
               {t.atuty && t.atuty.length > 0 && (
                 <ul className="atuty">
                   {t.atuty.map((a, j) => (
