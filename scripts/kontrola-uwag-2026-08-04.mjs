@@ -200,15 +200,15 @@ for (const [nr, nazwa, czas] of [
 }
 
 console.log('\nOPINIE (Messenger, sob 01.08 21:43)')
-const css = await fetch(BASE + '/kontakt')
-  .then((r) => r.text())
-  .then((h) => {
-    const m = h.match(/href="([^"]+\.css[^"]*)"/)
-    return m ? fetch(BASE + m[1]).then((r) => r.text()) : ''
-  })
+// Wydanie produkcyjne rozbija style na kilka arkuszy, więc czytamy wszystkie:
+// definicja zmiennej i uzycie moga wyladowac w roznych plikach.
+const arkusze = [...kontakt.matchAll(/href="([^"]+\.css[^"]*)"/g)].map((m) => m[1])
+const css = (
+  await Promise.all(arkusze.map((a) => fetch(BASE + a).then((r) => r.text())))
+).join('\n')
 sprawdz(
   '01.08 21:43',
-  'kroje z emotikonami stoją w stosie fontów przed rodziną ogólną',
+  `kroje z emotikonami stoją w stosie fontów przed rodziną ogólną (${arkusze.length} arkusze)`,
   /Segoe UI Emoji/.test(css) && /var\(--emoji\),\s*serif/.test(css)
 )
 
