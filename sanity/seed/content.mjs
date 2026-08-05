@@ -523,6 +523,7 @@ export const pricelist = {
     {
       title: 'Pielęgnacja twarzy',
       anchor: 'pielegnacja-twarzy',
+      noteAfter: 'Gratis maska i peeling przy każdym zabiegu.',
       showInMenu: true,
       note: 'Rabat 20% na serię pięciu zabiegów albo szósty zabieg gratis. Rabat 20% przy dwóch różnych zabiegach wykonanych podczas jednej wizyty.',
       items: [
@@ -559,7 +560,6 @@ export const pricelist = {
     {
       title: 'Dodatki do zabiegów',
       anchor: 'dodatki',
-      note: 'Gratis maska i peeling przy każdym zabiegu.',
       showInMenu: false,
       items: [
         { name: 'Ampułka', price: '30 zł' },

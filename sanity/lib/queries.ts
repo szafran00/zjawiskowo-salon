@@ -25,7 +25,7 @@ const treatmentProjection = `{
 const pricelistProjection = `{
   pageKicker, pageHeading, intro, outro, ctaKicker, ctaHeading,
   groups[]{
-    title, anchor, showInMenu, note,
+    title, anchor, showInMenu, note, noteAfter,
     items[]{ name, price, oldPrice, saving, gratis, note }
   }
 }`

@@ -56,6 +56,14 @@ export const pricelist = defineType({
               description: 'Np. informacja o promocji na serię zabiegów.',
             }),
             defineField({
+              name: 'noteAfter',
+              title: 'Adnotacja pod pozycjami grupy',
+              type: 'text',
+              rows: 2,
+              description:
+                'To samo co wyżej, tylko na końcu grupy, pod ostatnią ceną. Do zdań, które mają domykać listę, a nie ją zapowiadać (np. „Gratis maska i peeling przy każdym zabiegu”).',
+            }),
+            defineField({
               name: 'items',
               title: 'Pozycje',
               type: 'array',

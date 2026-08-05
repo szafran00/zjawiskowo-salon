@@ -43,7 +43,7 @@ const [settings, uslugi, cennik, faqs, badges, voucher] = await Promise.all([
   pytaj(
     `*[_type=="service"]|order(order asc){"slug":slug.current,excerpt,atuty,description}`
   ),
-  pytaj(`*[_type=="pricelist"][0].groups[]{anchor,note,items[]{name,price,oldPrice,saving,gratis,note}}`),
+  pytaj(`*[_type=="pricelist"][0].groups[]{anchor,note,noteAfter,items[]{name,price,oldPrice,saving,gratis,note}}`),
   pytaj(`*[_type=="faqItem"]|order(order asc){question,answer}`),
   pytaj(`*[_type=="trustBadge"]|order(order asc){text}`),
   pytaj(`*[_type=="voucherPage"][0]{bullets,body}`),
@@ -161,25 +161,51 @@ for (const u of uslugi) {
 }
 
 // --- cennik: opisy grup i pozycje ------------------------------------------
+
+/**
+ * Adnotacja grupy cennika (`note` nad pozycjami, `noteAfter` pod nimi).
+ * Obsługuje trzy przypadki, bo panel bywa uboższy od pliku: podmiana,
+ * dopisanie brakującego pola i skasowanie pola, którego w panelu już nie ma.
+ * Bez tego trzeciego przypadku skasowanie adnotacji w panelu zostawiało ją
+ * w kopii zapasowej i wracała przy `npm run seed`.
+ */
+function adnotacjaGrupy(nazwa, wartosc, anchor, znacznik, od, doPozycji) {
+  const zakres = tekst.slice(od, doPozycji)
+  const wzor = new RegExp(`\\n\\s*${nazwa}:\\s*(?:\\n\\s*)?'(?:[^'\\\\]|\\\\.)*',?`)
+  const m = zakres.match(wzor)
+  if (wartosc) {
+    if (m) {
+      polePlaskie(nazwa, wartosc, od, doPozycji)
+      return
+    }
+    const linia = tekst.slice(0, od).lastIndexOf('\n')
+    const wciecie = tekst.slice(linia + 1, od).match(/^\s*/)[0]
+    tekst =
+      tekst.slice(0, od + znacznik.length + 1) +
+      `\n${wciecie}${nazwa}: ${cytat(wartosc)},` +
+      tekst.slice(od + znacznik.length + 1)
+    zmiany.push(`${nazwa} (${anchor}, dopisane)`)
+    return
+  }
+  if (m) {
+    tekst = tekst.slice(0, od + m.index) + tekst.slice(od + m.index + m[0].length)
+    zmiany.push(`${nazwa} (${anchor}, usunięte)`)
+  }
+}
+
 for (const g of cennik) {
   const znacznik = `anchor: '${g.anchor}'`
   const od = tekst.indexOf(znacznik)
   if (od === -1) throw new Error(`Nie znalazłem grupy ${g.anchor}`)
-  const doPozycji = tekst.indexOf('items: [', od)
-  if (g.note) {
-    try {
-      polePlaskie('note', g.note, od, doPozycji)
-    } catch {
-      // Grupa „Dodatki” nie miała dotąd opisu — dopisujemy go po kotwicy.
-      const linia = tekst.slice(0, od).lastIndexOf('\n')
-      const wciecie = tekst.slice(linia + 1, od).match(/^\s*/)[0]
-      tekst =
-        tekst.slice(0, od + znacznik.length + 1) +
-        `\n${wciecie}note: ${cytat(g.note)},` +
-        tekst.slice(od + znacznik.length + 1)
-      zmiany.push(`note (${g.anchor}, dopisane)`)
-    }
-  }
+  adnotacjaGrupy('note', g.note, g.anchor, znacznik, od, tekst.indexOf('items: [', od))
+  adnotacjaGrupy(
+    'noteAfter',
+    g.noteAfter,
+    g.anchor,
+    znacznik,
+    tekst.indexOf(znacznik),
+    tekst.indexOf('items: [', tekst.indexOf(znacznik))
+  )
   // Koniec grupy: kotwica następnej albo koniec cennika.
   const odSwiezy = tekst.indexOf(znacznik)
   const nastepna = tekst.indexOf("anchor: '", odSwiezy + znacznik.length)

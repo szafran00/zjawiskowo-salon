@@ -131,6 +131,7 @@ export interface PriceGroup {
   anchor?: string
   showInMenu?: boolean
   note?: string
+  noteAfter?: string
   items?: PriceItem[]
 }
 

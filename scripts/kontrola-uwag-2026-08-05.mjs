@@ -221,6 +221,51 @@ sprawdz(
   oMnie.indexOf('Marta Pikul') > oMnie.indexOf('dobranie najlepszych efektów zabiegowych')
 )
 
+console.log('\nCENNIK, GRATIS POD ZABIEGAMI (Messenger, wieczorem 5.08)')
+const cennikHtml = await strona('/cennik')
+const GRATIS = 'Gratis maska i peeling przy każdym zabiegu.'
+const iGratis = cennik.indexOf(GRATIS)
+// „Dodatki do zabiegów” pada na stronie dwa razy: raz jako odnośnik w przyklejonej
+// nawigacji kotwic na górze, raz jako nagłówek grupy. Kolejność w cenniku
+// rozstrzyga to drugie wystąpienie.
+const iDodatki = cennik.lastIndexOf('Dodatki do zabiegów')
+const iOstatniZabieg = cennik.indexOf('Koloryzacja brwi i rzęs z peelingiem i regulacją brwi')
+sprawdz(
+  '5.08 wieczór',
+  'zdanie o gratisie jest na stronie dokładnie raz',
+  iGratis !== -1 && cennik.indexOf(GRATIS, iGratis + 1) === -1
+)
+sprawdz(
+  '5.08 wieczór',
+  'stoi pod ostatnią pozycją pielęgnacji twarzy',
+  iOstatniZabieg !== -1 && iGratis > iOstatniZabieg
+)
+sprawdz(
+  '5.08 wieczór',
+  'stoi przed nagłówkiem „Dodatki do zabiegów", nie w środku dodatków',
+  iDodatki !== -1 && iGratis < iDodatki
+)
+sprawdz(
+  '5.08 wieczór',
+  'między nagłówkiem dodatków a „Ampułka" nie ma już żadnej obietnicy gratisu',
+  !/gratis/i.test(cennik.slice(iDodatki, cennik.indexOf('Ampułka')))
+)
+sprawdz(
+  '5.08 wieczór',
+  'zdanie renderuje się jako adnotacja domykająca grupę (klasa pb-foot)',
+  /class="pb-foot"[^>]*>Gratis maska/.test(cennikHtml)
+)
+sprawdz(
+  '5.08 wieczór (zabezpieczenie)',
+  'rabaty nad listą pielęgnacji zostały nietknięte',
+  cennik.includes('Rabat 20% na serię pięciu zabiegów albo szósty zabieg gratis')
+)
+sprawdz(
+  '5.08 wieczór (zabezpieczenie)',
+  'obie pozycje dodatków bez zmian w cenie',
+  /Ampułka[^0-9]*30 zł/.test(cennik) && /Maska algowa[^0-9]*20 zł/.test(cennik)
+)
+
 console.log('\nCZEGO TA RUNDA NIE MIAŁA RUSZYĆ (zabezpieczenia)')
 sprawdz(
   'runda 4.08',

@@ -44,7 +44,7 @@ const [settings, uslugi, cennik, faqs, badges, voucher] = await Promise.all([
   pytaj(
     `*[_type=="service"]|order(order asc){"slug":slug.current,title,excerpt,atuty,description}`
   ),
-  pytaj(`*[_type=="pricelist"][0].groups[]{anchor,title,note,items[]{name,price,oldPrice,saving,gratis,note}}`),
+  pytaj(`*[_type=="pricelist"][0].groups[]{anchor,title,note,noteAfter,items[]{name,price,oldPrice,saving,gratis,note}}`),
   pytaj(`*[_type=="faqItem"]|order(order asc){question,answer}`),
   pytaj(`*[_type=="trustBadge"]|order(order asc){text}`),
   pytaj(`*[_type=="voucherPage"][0]{bullets,body}`),
@@ -94,6 +94,7 @@ for (const u of uslugi || []) {
 for (const g of cennik || []) {
   const s = (seed.pricelist?.groups || []).find((x) => x.anchor === g.anchor)
   porownaj(`cennik ${g.anchor}.note`, s?.note ?? '', g.note ?? '')
+  porownaj(`cennik ${g.anchor}.noteAfter`, s?.noteAfter ?? '', g.noteAfter ?? '')
   porownaj(`cennik ${g.anchor}.items`, pozycjeTekstem(s?.items), pozycjeTekstem(g.items))
 }
 

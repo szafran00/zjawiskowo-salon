@@ -99,6 +99,11 @@ export default async function CennikPage() {
                   )
                 })}
               </div>
+              {/* Adnotacja domykająca grupę. Powstała, bo zdanie o gratisowej
+                  masce stało nad płatną maską algową w „Dodatkach” i czytało
+                  się jak zapowiedź cennika dodatków. Klientka poprosiła
+                  5 sierpnia, żeby wisiało pod zabiegami, których dotyczy. */}
+              {g.noteAfter && <p className="pb-foot">{g.noteAfter}</p>}
             </div>
           ))}
 
