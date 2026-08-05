@@ -1,7 +1,12 @@
 # Strona ZJAWISKOWO — co trzeba zrobić po Waszej stronie
 
-Dokument dla informatyka prowadzącego serwer klientki. Wszystko sprawdzone
-4 sierpnia 2026 na działającym wdrożeniu.
+Dokument dla informatyka prowadzącego serwer klientki.
+
+Stan na **6 sierpnia 2026**, gałąź `redesign-2026-07-28`. Cała ścieżka opisana
+niżej (świeży `git clone`, `npm ci`, build z flagą indeksowania, `npm start`)
+została tego dnia przejechana od zera na czystym katalogu, na Node 20.15:
+strona wstaje, `robots.txt` wychodzi bez `Disallow: /`, panel `/studio`
+odpowiada, a testy treści przechodzą tak samo jak na wdrożeniu podglądowym.
 
 ## W skrócie
 
