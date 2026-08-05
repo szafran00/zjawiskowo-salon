@@ -168,7 +168,15 @@ async function main() {
 
   console.log('\n=== 6. Spojnosc Sanity <-> strona ===')
   if (settings.showPromo && settings.promoText) {
-    check('home pokazuje promoText z Sanity', bezNbsp(home).includes(bezNbsp(settings.promoText)), settings.promoText)
+    // Pasek wyroznia kwoty i procenty osobnym znacznikiem (prosba klientki
+    // z 6.08), wiec w surowym HTML tresc z panelu nie jest juz ciagla.
+    // Porownujemy widoczny tekst, po sprowadzeniu odstepow do jednej spacji.
+    const odstepy = (s) => bezNbsp(s).replace(/\s+/g, ' ').trim()
+    check(
+      'home pokazuje promoText z Sanity',
+      odstepy(visibleText(home)).includes(odstepy(settings.promoText)),
+      settings.promoText
+    )
   }
   check('home: duzy przycisk telefonu', home.includes('btn-phone') && home.includes(settings.phone))
   for (const s of services) {

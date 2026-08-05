@@ -162,6 +162,9 @@ a:hover{color:var(--accent)}
 /* ---- pasek promocji ---- */
 .promo{background:linear-gradient(135deg,var(--accent-deep),var(--accent));color:#FFF9EC;text-align:center;font-weight:600;font-size:14px;letter-spacing:.03em;padding:12px 20px}
 .promo b{font-family:var(--font-serif),var(--emoji),serif;font-weight:600}
+/* Kwoty i procenty oczko większe i grubsze niż reszta paska (prośba klientki
+   z 6.08: „powiększyć ciut to 1200 zł", „te 20% też ciut"). */
+.promo .promo-kwota{font-size:1.15em;font-weight:800}
 
 /* ---- wspólny nagłówek podstrony ---- */
 .pagehead{position:relative;background:var(--bg2);border-bottom:1px solid var(--line);overflow:hidden}
@@ -316,7 +319,7 @@ a:hover{color:var(--accent)}
 .pb-head .pb-sub{font-size:13px;color:var(--muted);max-width:520px;line-height:1.5}
 /* Adnotacja domykająca grupę. Ma trzymać się listy nad sobą, a nie nagłówka
    następnej grupy, stąd kreska u góry i odstęp tylko od strony pozycji. */
-.pb-foot{font-size:13px;color:var(--muted);max-width:520px;line-height:1.5;margin:0;padding-top:12px}
+.pb-foot{font-size:13px;color:var(--text);font-weight:700;max-width:520px;line-height:1.5;margin:0;padding-top:12px}
 .price-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
 .prow{display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .prow .pn{font-size:14.5px;color:var(--text)}

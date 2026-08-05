@@ -73,7 +73,7 @@ export const settings = {
   ctaLead:
     'Najprościej zadzwonić. Porozmawiamy o Twojej skórze, dobierzemy zabieg i znajdziemy termin, który Ci pasuje.',
   showPromo: true,
-  promoText: 'Do 1200 zł oszczędności przy pakietach depilacji · −20% na pielęgnację twarzy · Sprawdzaj inne promocje na FB ZJAWISKOWO',
+  promoText: 'Nawet 1200 zł oszczędności przy pakietach depilacji · −20% na pielęgnację twarzy · Sprawdzaj inne promocje na FB ZJAWISKOWO',
   address: 'ul. 3 Maja [numer do uzupełnienia], 32-065 Krzeszowice',
   hours: 'poniedziałek – piątek 8:00 – 20:00 · sobota 9:00 – 13:00',
   contactNotes: [

@@ -267,10 +267,13 @@ sprawdz(
 )
 
 console.log('\nCZEGO TA RUNDA NIE MIAŁA RUSZYĆ (zabezpieczenia)')
+// Początek zdania zmieniła 6 sierpnia na „Nawet 1200 zł", więc tutaj zostaje
+// tylko to, czego tamta zmiana nie miała ruszyć: kwota, procent i odesłanie
+// na Facebooka.
 sprawdz(
   'runda 4.08',
   'pasek promocji nadal w wersji ustalonej przez klientkę',
-  home.includes('Do 1200 zł oszczędności przy pakietach depilacji') &&
+  home.includes('1200 zł oszczędności przy pakietach depilacji') &&
     home.includes('20% na pielęgnację twarzy') &&
     home.includes('Sprawdzaj inne promocje na FB ZJAWISKOWO')
 )

@@ -244,10 +244,13 @@ sprawdz(
 )
 
 console.log('\nPASEK PROMOCJI (Messenger, nd 02.08 19:17)')
+// Początek zdania zmieniła 6 sierpnia („Do 1200 zł" na „Nawet 1200 zł"), więc
+// tamta runda pilnuje już tylko trzech punktów i ich kolejności. Brzmienia
+// początku pilnuje kontrola z 6 sierpnia.
 sprawdz(
   '02.08 19:17',
   'trzy punkty w ostatecznym brzmieniu',
-  home.includes('Do 1200 zł oszczędności przy pakietach depilacji') &&
+  home.includes('1200 zł oszczędności przy pakietach depilacji') &&
     home.includes('20% na pielęgnację twarzy') &&
     home.includes('Sprawdzaj inne promocje na FB ZJAWISKOWO')
 )
