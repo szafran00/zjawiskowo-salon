@@ -52,11 +52,6 @@ export default async function PrivacyPage() {
             </Link>
           </div>
 
-          <p className="legal-notice">
-            [Dokument roboczy — do weryfikacji prawnej przed publikacją. Uzupełnij
-            pola w nawiasach.]
-          </p>
-
           <nav className="legal-toc" aria-label="Spis treści">
             <strong>Spis treści</strong>
             <ol>
@@ -71,26 +66,27 @@ export default async function PrivacyPage() {
           <div className="prose">
             <h3 id="administrator">1. Administrator danych</h3>
             <p>
-              Administratorem danych jest Salon Kosmetyczny ZJAWISKOWO, [pełna nazwa
-              i adres], NIP [NIP], e-mail [e-mail], tel.{' '}
+              Administratorem danych jest Salon Kosmetyczny ZJAWISKOWO Marta Pikul,
+              ul. 3 Maja 4, 32-065 Krzeszowice, NIP 676-207-35-90, tel.{' '}
               <a href="tel:517899229">517 899 229</a>.
             </p>
 
             <h3 id="zakres">2. Jakie dane zbieramy i w jakim celu</h3>
             <p>
-              Jeśli korzystasz z formularza kontaktowego, przetwarzamy podane przez
-              Ciebie dane (imię, numer telefonu oraz treść wiadomości) wyłącznie w
-              celu udzielenia odpowiedzi na zapytanie i umówienia wizyty. Podstawą
-              przetwarzania jest nasz prawnie uzasadniony interes oraz podjęcie
-              działań na Twoje żądanie (art. 6 ust. 1 lit. b i f RODO).
+              Jeśli umawiasz się telefonicznie, przetwarzamy podane przez Ciebie dane
+              (imię, numer telefonu oraz informacje potrzebne do umówienia i
+              wykonania zabiegu) wyłącznie w celu obsługi wizyty. Podstawą
+              przetwarzania jest podjęcie działań na Twoje żądanie oraz nasz prawnie
+              uzasadniony interes (art. 6 ust. 1 lit. b i f RODO).
             </p>
 
             <h3 id="odbiorcy">3. Odbiorcy danych</h3>
             <p>
-              Wiadomości z formularza obsługuje dostawca usługi Formspree (Formspree,
-              Inc.), który w naszym imieniu przekazuje treść zgłoszenia na nasz adres
-              e-mail. Stronę utrzymuje dostawca hostingu. Podmioty te przetwarzają
-              dane wyłącznie w zakresie niezbędnym do świadczenia usługi.
+              Danych podanych przy umawianiu wizyty nie udostępniamy osobom trzecim.
+              Samą stronę internetową utrzymuje dostawca hostingu, a jej treść
+              dostawca systemu zarządzania treścią; podmioty te przetwarzają
+              wyłącznie dane techniczne niezbędne do wyświetlenia strony. Osadzona
+              mapa Google uruchamia się dopiero po wyrażeniu przez Ciebie zgody.
             </p>
 
             <h3 id="cookies">4. Pliki cookies</h3>
@@ -119,8 +115,8 @@ export default async function PrivacyPage() {
 
             <h3 id="kontakt">7. Kontakt</h3>
             <p>
-              W sprawach dotyczących danych osobowych napisz na [e-mail] lub zadzwoń
-              pod numer <a href="tel:517899229">517 899 229</a>.
+              W sprawach dotyczących danych osobowych zadzwoń pod numer{' '}
+              <a href="tel:517899229">517 899 229</a>.
             </p>
           </div>
         </div>
