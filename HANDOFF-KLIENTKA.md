@@ -1,5 +1,13 @@
 # ZJAWISKOWO — co uzupełnić i sprawdzić przed publikacją
 
+> **Dokument historyczny, nie do wdrażania klientki.** To lista sprzed publikacji, ze stanu
+> na 28 lipca 2026. Klientka domknęła treść 6 sierpnia, więc większość punktów niżej jest
+> nieaktualna: opinie są prawdziwe z wizytówki Google, imię zniknęło z notatek w treści,
+> adnotacja o dokumencie roboczym została zdjęta, a formularz kontaktowy usunięto na jej
+> wyraźne żądanie. Do nauki obsługi panelu służy jednostronicowa ściąga:
+> `ZJAWISKOWO - panel tresci - sciaga.pdf` w folderze klientki na Dysku
+> (generuje ją `scripts/sciaga-panel-marty.mjs`).
+
 Lista powstała ze skanu prawdziwej treści strony (`npm run check:tresc`), nie z pamięci.
 Stan na 28 lipca 2026. Odhaczaj po kolei — kolejność jest od rzeczy, które trzeba zrobić
 koniecznie, do tych, które mogą poczekać.
